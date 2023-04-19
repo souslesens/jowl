@@ -4,6 +4,9 @@ public class reasonerExtractTriples {
 	private String subject;
 	private String property;
 	private String object;
+		public reasonerExtractTriples() {
+		
+		}
 		public reasonerExtractTriples(String subject,String property,String object) {
 			// TODO Auto-generated constructor stub
 			this.setSubject(subject);

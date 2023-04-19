@@ -1,9 +1,9 @@
 package com.souslesens.Jowl.model;
 
 public class reasonerOutput {
-    private boolean myBoolean;
+    private reasonerConsistency myBoolean;
     private reasonerUnsatisfaisability Unsatisfaisable;
-    private reasonerExtractTriples triples;
+    private reasonerExtractTriples triplesInference;
 
     public reasonerOutput() {
     	
@@ -11,34 +11,34 @@ public class reasonerOutput {
     public reasonerOutput(reasonerUnsatisfaisability Unsatisfaisable) {
     	this.Unsatisfaisable=Unsatisfaisable;
     }
-    public reasonerOutput(boolean myBoolean) {
+    public reasonerOutput(reasonerConsistency myBoolean) {
         this.myBoolean = myBoolean;
     }
     
-    public reasonerOutput(reasonerExtractTriples triples) {
-        this.triples = triples;
+    public reasonerOutput(reasonerExtractTriples triplesInference) {
+        this.triplesInference = triplesInference;
     }
     
-    public reasonerOutput(boolean myBoolean, reasonerUnsatisfaisability Unsatisfaisable, reasonerExtractTriples triples) {
+    public reasonerOutput(reasonerConsistency myBoolean, reasonerUnsatisfaisability Unsatisfaisable, reasonerExtractTriples triplesInference) {
         this.myBoolean = myBoolean;
         this.Unsatisfaisable = Unsatisfaisable;
-        this.triples = triples;
+        this.triplesInference = triplesInference;
     }
 
-    public boolean isMyBoolean() {
+    public reasonerConsistency isMyBoolean() {
         return myBoolean;
     }
 
-    public void setMyBoolean(boolean myBoolean) {
+    public void setMyBoolean(reasonerConsistency myBoolean) {
         this.myBoolean = myBoolean;
     }
 
 	public reasonerExtractTriples getTriples() {
-		return triples;
+		return triplesInference;
 	}
 
-	public void setTriples(reasonerExtractTriples triples) {
-		this.triples = triples;
+	public void setTriples(reasonerExtractTriples triplesInference) {
+		this.triplesInference = triplesInference;
 	}
 
 	public reasonerUnsatisfaisability getUnsatisfaisable() {
