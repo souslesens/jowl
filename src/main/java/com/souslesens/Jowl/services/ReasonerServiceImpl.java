@@ -86,6 +86,7 @@ public class ReasonerServiceImpl implements ReasonerService{
 	         myData.setConsistency(consistency);
 //	         ObjectMapper objectMapper = new ObjectMapper();
 //	         String json = objectMapper.writeValueAsString(myData.getConsistency());
+//
 	         JSONObject jsonObject = new JSONObject();
 	         jsonObject.put("consistency", myData.getConsistency());
 
