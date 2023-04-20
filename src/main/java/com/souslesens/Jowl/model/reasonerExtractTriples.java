@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class reasonerExtractTriples {
     private String subject;
-    private String property;
+    private String predicate;
     private String object;
 
     public reasonerExtractTriples() {
     }
 
-    public reasonerExtractTriples(String subject, String property, String object) {
+    public reasonerExtractTriples(String subject,String predicate, String object ) {
         this.subject = subject;
-        this.property = property;
+        this.predicate = predicate;
         this.object = object;
     }
 
@@ -24,12 +24,12 @@ public class reasonerExtractTriples {
         this.subject = subject;
     }
 
-    public String getProperty() {
-        return property;
+    public String getPredicate() {
+        return predicate;
     }
 
-    public void setProperty(String property) {
-        this.property = property;
+    public void setPredicate(String predicate) {
+        this.predicate = predicate;
     }
 
     public String getObject() {
@@ -44,7 +44,7 @@ public class reasonerExtractTriples {
     public String toString() {
         return "{" +
                 "\"subject\":\"" + subject + "\"," +
-                "\"property\":\"" + property + "\"," +
+                "\"predicate\":\"" + predicate + "\"," +
                 "\"object\":\"" + object + "\"" +
                 "}";
     }
