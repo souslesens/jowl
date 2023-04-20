@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Set;
 
+import org.json.JSONObject;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
@@ -77,6 +78,18 @@ public class ReasonerController {
     		@RequestParam String operation) {
         try {
             String result = reasonerService.getUnsatisfaisableClasses(filePath, operation);
+            
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+    @GetMapping("/consistency")
+    public ResponseEntity<?> getConsistency(@RequestParam String filePath,
+    		@RequestParam String operation) {
+        try {
+            String result = reasonerService.getConsistency(filePath, operation);
+            
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
@@ -155,47 +168,47 @@ public class ReasonerController {
 //		    return ResponseEntity.status(HttpStatus.ACCEPTED).body(json);
 //		}
 
-    
-
-@RequestMapping("/reasoner/consistency")
-public ResponseEntity<?> reasonerCon(@RequestParam(value = "filePath", defaultValue = "https://protege.stanford.edu/ontologies/pizza/pizza.owl") String filePath, @RequestParam(value = "operation", defaultValue = "consistency") String operation) throws OWLOntologyCreationException, JsonProcessingException {
-    OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-//    OWLOntology ontology;
-    if (filePath.startsWith("http") || filePath.startsWith("ftp")) {
-    	OWLOntology ontology = manager.loadOntologyFromOntologyDocument(IRI.create(filePath));
-        PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
-        OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
-        reasonerConsistency myData = new reasonerConsistency();
-        boolean consistency = reasoner.isConsistent();
-        System.out.println(consistency);
-        myData.setConsistency(consistency);
-        ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(myData.getConsistency());
-        if (consistency) {
-        	return ResponseEntity.status(HttpStatus.ACCEPTED).body("Consistency of the ontology : " + json);
-        }else {
-        	return ResponseEntity.status(HttpStatus.ACCEPTED).body("Consistency of the ontology : " + json);
-        }
-        
-        
-	} else {
-		OWLOntology	ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
-		PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
-        OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
-        reasonerConsistency myData = new reasonerConsistency();
-        boolean consistency = reasoner.isConsistent();
-        System.out.println(consistency);
-        myData.setConsistency(consistency);
-        ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(myData.getConsistency());
-        if (consistency) {
-        	return ResponseEntity.status(HttpStatus.ACCEPTED).body("Consistency of the ontology : " + json);
-        }else {
-        	return ResponseEntity.status(HttpStatus.ACCEPTED).body("Consistency of the ontology : " + json);
-        }
-	}
-
-}
+//    
+//
+//@RequestMapping("/reasoner/consistency")
+//public ResponseEntity<?> reasonerCon(@RequestParam String filePath, @RequestParam String operation) throws OWLOntologyCreationException, JsonProcessingException {
+//    OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+////    OWLOntology ontology;
+//    if (filePath.startsWith("http") || filePath.startsWith("ftp")) {
+//    	OWLOntology ontology = manager.loadOntologyFromOntologyDocument(IRI.create(filePath));
+//        PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
+//        OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
+//        reasonerConsistency myData = new reasonerConsistency();
+//        boolean consistency = reasoner.isConsistent();
+//        System.out.println(consistency);
+//        myData.setConsistency(consistency);
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String json = objectMapper.writeValueAsString(myData.getConsistency());
+//        if (consistency) {
+//        	return ResponseEntity.status(HttpStatus.ACCEPTED).body("Consistency of the ontology : " + json);
+//        }else {
+//        	return ResponseEntity.status(HttpStatus.ACCEPTED).body("Consistency of the ontology : " + json);
+//        }
+//        
+//        
+//	} else {
+//		OWLOntology	ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
+//		PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
+//        OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
+//        reasonerConsistency myData = new reasonerConsistency();
+//        boolean consistency = reasoner.isConsistent();
+//        System.out.println(consistency);
+//        myData.setConsistency(consistency);
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String json = objectMapper.writeValueAsString(myData.getConsistency());
+//        if (consistency) {
+//        	return ResponseEntity.status(HttpStatus.ACCEPTED).body("Consistency of the ontology : " + json);
+//        }else {
+//        	return ResponseEntity.status(HttpStatus.ACCEPTED).body("Consistency of the ontology : " + json);
+//        }
+//	}
+//
+//}
 @RequestMapping("/reasoner/inference")
 public ResponseEntity<?> reasonerInf(@RequestParam(value = "filePath", defaultValue = "https://protege.stanford.edu/ontologies/pizza/pizza.owl") String filePath, @RequestParam(value = "operation", defaultValue = "precomputeinference") String operation) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException {
     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
