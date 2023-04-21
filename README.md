@@ -4,7 +4,9 @@
 checking consistency / satisfaisability and computeinference.
 we used Pellet and OWLAPI for developement of this application.</summary>
 This application will be in docker and we will provide a full documentation to run it.
+
 ### To Build The application Via Docker
+
 ```
 docker build -t jowl .
 ```
