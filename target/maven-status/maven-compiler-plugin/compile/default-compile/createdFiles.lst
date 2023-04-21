@@ -1,0 +1,9 @@
+com\souslesens\Jowl\JowlApplication.class
+com\souslesens\Jowl\model\reasonerUnsatisfaisability.class
+com\souslesens\Jowl\model\reasonerOutput.class
+com\souslesens\Jowl\model\reasonerExtractTriples.class
+com\souslesens\Jowl\model\reasonerInput.class
+com\souslesens\Jowl\services\ReasonerService.class
+com\souslesens\Jowl\Controller\ReasonerController.class
+com\souslesens\Jowl\services\ReasonerServiceImpl.class
+com\souslesens\Jowl\model\reasonerConsistency.class
