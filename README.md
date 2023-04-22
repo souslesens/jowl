@@ -12,7 +12,7 @@ docker build -t jowl .
 ```
 ### To Run The Application
 ```
-docker run -p 8080:8080 jowl
+docker run -p 8080:8080 -v C:\:/usr/src/app/dir-in-container jowl
 ```
 ### One Command : To Build && Run The application Via Docker-Compose
 ```
