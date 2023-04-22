@@ -29,12 +29,19 @@ public class ReasonerController {
     public ResponseEntity<?> getUnsatisfaisableClasses(@RequestParam String filePath,
     		@RequestParam String url) {
         if (url != null && !url.isEmpty() && filePath == null) {
+        	if (url.startsWith("http") || url.startsWith("ftp")) {
             try {
                 String result = reasonerService.getUnsatisfaisableClasses(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().build();
             }
+            }
+        	else {
+            	return ResponseEntity.badRequest().build();
+            }
+            
+            
         } else if (url == null && !filePath.isEmpty() && filePath != null) {
             try {
                 String result = reasonerService.getUnsatisfaisableClasses(filePath, url);
@@ -50,11 +57,16 @@ public class ReasonerController {
     public ResponseEntity<?> getConsistency(@RequestParam(required = false) String filePath,
             @RequestParam(required = false) String url) {
         if (url != null && !url.isEmpty() && filePath == null) {
+        	if (url.startsWith("http") || url.startsWith("ftp")) {
             try {
                 String result = reasonerService.getConsistency(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().build();
+            }
+            }
+        	else {
+            	return ResponseEntity.badRequest().build();
             }
         } else if (url == null && !filePath.isEmpty() && filePath != null) {
             try {
@@ -71,11 +83,16 @@ public class ReasonerController {
     public ResponseEntity<?> getInference(@RequestParam(required = false) String filePath,
                                            @RequestParam(required = false) String url) {
         if (url != null && !url.isEmpty() && filePath == null) {
+        	if (url.startsWith("http") || url.startsWith("ftp")) {
             try {
-                List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url);
+            	List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().build();
+            }
+            }
+        	else {
+            	return ResponseEntity.badRequest().build();
             }
         } else if (url == null && !filePath.isEmpty() && filePath != null) {
             try {
