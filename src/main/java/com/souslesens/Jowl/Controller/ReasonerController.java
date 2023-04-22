@@ -27,43 +27,65 @@ public class ReasonerController {
 
     @GetMapping("/unsatisfiable")
     public ResponseEntity<?> getUnsatisfaisableClasses(@RequestParam String filePath,
-    		@RequestParam String operation) {
-    	if (operation.equalsIgnoreCase("unsatisfaisability")) {
-        try {
-            String result = reasonerService.getUnsatisfaisableClasses(filePath, operation);
-            
-            return ResponseEntity.ok(result);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-    	}return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-    }
-    @GetMapping("/consistency")
-    public ResponseEntity<?> getConsistency(@RequestParam String filePath,
-    		@RequestParam String operation) {
-    	if (operation.equalsIgnoreCase("consistency")) {
-        try {
-            String result = reasonerService.getConsistency(filePath, operation);
-            
-            return ResponseEntity.ok(result);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-        
-    	}return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-    }
-    @GetMapping("/unference")
-    public ResponseEntity<?> getInference(@RequestParam String filePath,
-    		@RequestParam String operation) {
-    	if (operation.equalsIgnoreCase("computeinference")) {
+    		@RequestParam String url) {
+        if (url != null && !url.isEmpty() && filePath == null) {
             try {
-                List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, operation);
-                
+                String result = reasonerService.getUnsatisfaisableClasses(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().build();
-            }	
-    	}return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-
+            }
+        } else if (url == null && !filePath.isEmpty() && filePath != null) {
+            try {
+                String result = reasonerService.getUnsatisfaisableClasses(filePath, url);
+                return ResponseEntity.ok(result);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().build();
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+    @GetMapping("/consistency")
+    public ResponseEntity<?> getConsistency(@RequestParam(required = false) String filePath,
+            @RequestParam(required = false) String url) {
+        if (url != null && !url.isEmpty() && filePath == null) {
+            try {
+                String result = reasonerService.getConsistency(filePath, url);
+                return ResponseEntity.ok(result);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().build();
+            }
+        } else if (url == null && !filePath.isEmpty() && filePath != null) {
+            try {
+                String result = reasonerService.getConsistency(filePath, url);
+                return ResponseEntity.ok(result);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().build();
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+    @GetMapping("/inference")
+    public ResponseEntity<?> getInference(@RequestParam(required = false) String filePath,
+                                           @RequestParam(required = false) String url) {
+        if (url != null && !url.isEmpty() && filePath == null) {
+            try {
+                List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url);
+                return ResponseEntity.ok(result);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().build();
+            }
+        } else if (url == null && !filePath.isEmpty() && filePath != null) {
+            try {
+                List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url);
+                return ResponseEntity.ok(result);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().build();
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
 }

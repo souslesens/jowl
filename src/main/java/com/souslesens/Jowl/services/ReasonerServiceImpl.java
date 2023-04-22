@@ -46,15 +46,19 @@ import com.souslesens.Jowl.model.reasonerUnsatisfaisability;
 @Service
 public class ReasonerServiceImpl implements ReasonerService{
 	 @Override
-	public String getUnsatisfaisableClasses(String filePath, String operation) throws Exception {
+	public String getUnsatisfaisableClasses(String filePath, String Url) throws Exception {
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 
-        OWLOntology ontology;
-        if (filePath.startsWith("http") || filePath.startsWith("ftp")) {
-            ontology = manager.loadOntologyFromOntologyDocument(IRI.create(filePath));
-        } else {
-            ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
-        }
+	     OWLOntology ontology = null ;
+	        if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+	        	
+	        	ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
+	        } else if(filePath.isEmpty() == false && Url == null) {
+	        	
+	            ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
+	        } else {
+	        	return null;
+	        }
 
         PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
         OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
@@ -83,13 +87,17 @@ public class ReasonerServiceImpl implements ReasonerService{
         return jsonString;
     }
 	 @Override
-	 public String getConsistency(String filePath, String operation) throws OWLOntologyCreationException, JsonProcessingException,Exception {
+	 public String getConsistency(String filePath, String Url) throws OWLOntologyCreationException, JsonProcessingException,Exception {
 	     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-	     OWLOntology ontology;
-	        if (filePath.startsWith("http") || filePath.startsWith("ftp")) {
-	            ontology = manager.loadOntologyFromOntologyDocument(IRI.create(filePath));
-	        } else {
+	     OWLOntology ontology = null ;
+	        if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+	        	
+	        	ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
+	        } else if(filePath.isEmpty() == false && Url == null) {
+	        	
 	            ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
+	        } else {
+	        	return null;
 	        }
 	         PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 	         OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
@@ -105,13 +113,17 @@ public class ReasonerServiceImpl implements ReasonerService{
 	         
 	 	}
 	 @Override
-	 public List<reasonerExtractTriples> getInferences(String filePath, String operation) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
+	 public List<reasonerExtractTriples> getInferences(String filePath, String url) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
 	     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-	     OWLOntology ontology;
-	        if (filePath.startsWith("http") || filePath.startsWith("ftp")) {
-	            ontology = manager.loadOntologyFromOntologyDocument(IRI.create(filePath));
-	        } else {
+	     OWLOntology ontology = null ;
+	        if (filePath == null && url.isEmpty() == false && (url.startsWith("http") || url.startsWith("ftp"))) {
+	        	
+	        	ontology = manager.loadOntologyFromOntologyDocument(IRI.create(url));
+	        } else if(filePath.isEmpty() == false && url == null) {
+	        	
 	            ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
+	        } else {
+	        	return null;
 	        }
 	        PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 	        OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
