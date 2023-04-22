@@ -14,5 +14,9 @@ docker build -t jowl .
 ```
 docker run -p 8080:8080 jowl
 ```
+### One Command : To Build && Run The application Via Docker-Compose
+```
+docker-compose up
+```
 ### If you don't have docker installed
 Visist https://www.docker.com/products/docker-desktop/
