@@ -1,12 +1,24 @@
 package com.souslesens.Jowl.services;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import org.json.JSONObject;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.formats.TurtleDocumentFormat;
+import org.semanticweb.owlapi.io.StringDocumentSource;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLAxiom;
@@ -37,14 +49,19 @@ import org.semanticweb.owlapi.util.InferredOntologyGenerator;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.WritableResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.souslesens.Jowl.model.reasonerConsistency;
 import com.souslesens.Jowl.model.reasonerExtractTriples;
 import com.souslesens.Jowl.model.reasonerUnsatisfaisability;
 @Service
+
 public class ReasonerServiceImpl implements ReasonerService{
+    private static final int TEMP_FILE_EXPIRATION_TIME_MINUTES = 1;
 	 @Override
 	public String getUnsatisfaisableClasses(String filePath, String Url) throws Exception {
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -86,17 +103,37 @@ public class ReasonerServiceImpl implements ReasonerService{
         String jsonString = jsonObject.toString();
         return jsonString;
     }
-	 @Override
-	 public String getConsistency(String filePath, String Url) throws OWLOntologyCreationException, JsonProcessingException,Exception {
+	 public String getConsistency(String filePath, String Url, MultipartFile ontologyFile) throws OWLOntologyCreationException, JsonProcessingException,Exception {
 	     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 	     OWLOntology ontology = null ;
-	        if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+ 		File inputOntology = null;
+ 		Path tempFile = null;
+         if (ontologyFile != null) {
+             try {
+                 inputOntology = convertMultipartFileToFile(ontologyFile);
+                 filePath = inputOntology.getAbsolutePath();
+                 System.out.println(filePath);
+                 tempFile = Files.createTempFile("ontology-", ".owl");
+                 System.out.println(tempFile);
+                 tempFile.toFile().deleteOnExit();
+                 Files.copy(inputOntology.toPath(), tempFile, StandardCopyOption.REPLACE_EXISTING);
+                 filePath = tempFile.toAbsolutePath().toString();
+                 scheduleTempFileDeletion(tempFile);
+                 System.out.println(filePath);
+             } catch (Exception e) {
+                 return null;
+             }
+         }
+	     
+	        if ( filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
 	        	
 	        	ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
-	        } else if(filePath.isEmpty() == false && Url == null) {
+	        } else if(filePath.isEmpty() == false && Url == null ) {
 	        	
-	            ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
-	        } else {
+	            ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));}
+	        else {
+	        	
+	        
 	        	return null;
 	        }
 	         PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
@@ -112,6 +149,8 @@ public class ReasonerServiceImpl implements ReasonerService{
 	         
 	         
 	 	}
+
+	 
 	 @Override
 	 public List<reasonerExtractTriples> getInferences(String filePath, String url) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
 	     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -284,6 +323,23 @@ public class ReasonerServiceImpl implements ReasonerService{
 	 	}
 			return null;
 	 }
+	 private void scheduleTempFileDeletion(Path tempFile) {
+	        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+	        executorService.schedule(() -> {
+	            try {
+	                Files.delete(tempFile);
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }, TEMP_FILE_EXPIRATION_TIME_MINUTES, TimeUnit.MINUTES);
+	        executorService.shutdown();
+	    }
+
+	 private File convertMultipartFileToFile(MultipartFile file) throws IOException {
+		    File convertedFile = new File(file.getOriginalFilename());
+		    file.transferTo(convertedFile);
+		    return convertedFile;
+		}
 }
 
 
