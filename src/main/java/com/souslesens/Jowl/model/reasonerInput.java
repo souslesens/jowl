@@ -7,9 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class reasonerInput {
 	private String filePath;
 	private String url;
-	private MultipartFile ontologyContent;
+	private String ontologyContent;
 	
-	public reasonerInput(String filePath , String url, MultipartFile ontologyContent) {
+	public reasonerInput(String filePath , String url, String ontologyContent) {
 		this.filePath = filePath;
 		this.url = url;
 		this.ontologyContent = ontologyContent;
@@ -22,7 +22,7 @@ public class reasonerInput {
 		return url;
 	}
 	
-	public MultipartFile getOntologyContent() {
+	public String getOntologyContent() {
 		return ontologyContent;
 	}
 

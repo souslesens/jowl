@@ -1,4 +1,5 @@
 package com.souslesens.Jowl.services;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -7,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.Duration;
 import java.time.Instant;
@@ -107,6 +109,47 @@ public class ReasonerServiceImpl implements ReasonerService{
 	        String jsonString = jsonObject.toString();
 	        return jsonString;
 	    }
+	 // TEST
+	 @Override
+	 public String getConsistencyTest(String filePath, String Url,String ontologyContentDecoded64) throws OWLOntologyCreationException, JsonProcessingException,Exception {
+	     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+	     OWLOntology ontology = null ;
+	     if ( ontologyContentDecoded64.isEmpty() == false) {
+	    	 System.out.println("From HERe \n"+ontologyContentDecoded64);
+	    	 InputStream ontologyStream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
+//	    	 try {
+//	    		    Files.copy(ontologyStream, Paths.get("output.owl"), StandardCopyOption.REPLACE_EXISTING);
+//	    		    filePath = "output.owl";
+//	    		} catch (IOException e) {
+//	    		    e.printStackTrace();
+//	    		}
+	    	  ontology = manager.loadOntologyFromOntologyDocument(ontologyStream);
+
+	    	
+	     }
+	        if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+	        	
+	        	ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
+	        } else if(filePath.isEmpty() == false && Url == null) {
+	        	
+	            ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
+	        } else {
+	        	return null;
+	        }
+	         PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
+	         OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
+	         reasonerConsistency myData = new reasonerConsistency();
+	         boolean consistency = reasoner.isConsistent();
+	         System.out.println(consistency);
+	         myData.setConsistency(consistency);
+	         JSONObject jsonObject = new JSONObject();
+	         jsonObject.put("consistency", myData.getConsistency());
+	         String jsonString = jsonObject.toString();
+	         return jsonString;
+	         
+	         
+	 	}
+	 // END
 		 @Override
 		 public String getConsistency(String filePath, String Url) throws OWLOntologyCreationException, JsonProcessingException,Exception {
 		     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -687,6 +730,7 @@ public class ReasonerServiceImpl implements ReasonerService{
 		    file.transferTo(convertedFile);
 		    return convertedFile;
 		}
+
 }
 
 
