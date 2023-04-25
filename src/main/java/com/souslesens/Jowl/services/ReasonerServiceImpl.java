@@ -194,24 +194,38 @@ public class ReasonerServiceImpl implements ReasonerService{
 	        OWLDataFactory dataFactory = manager.getOWLDataFactory();
 	        iog.fillOntology(dataFactory, inferredOntology);
 	        Path tempFileInfer = null;
-	        Resource resource = new FileSystemResource(fileName);
-	        if (resource instanceof WritableResource) {
-	            try (OutputStream outputStream =((WritableResource) resource).getOutputStream()) {
-	            manager.saveOntology(inferredOntology, IRI.create(resource.getURI()));
-	            
-	            System.out.println("New file created: " + fileName);
+//	        Resource resource = new FileSystemResource(fileName);
+//	        if (resource instanceof WritableResource) {
+//	            try (OutputStream outputStream =((WritableResource) resource).getOutputStream()) {
+//	            manager.saveOntology(inferredOntology, IRI.create(resource.getURI()));
+//	            
+//	            System.out.println("New file created: " + fileName);
+//	        } catch (IOException e) {
+//	            System.out.println("An error occurred: " + e.getMessage());
+//	            e.printStackTrace();
+//	        }
+//	        String filePathInfer = resource.getFile().getAbsolutePath();
+//	        tempFileInfer = Files.createTempFile("ontology-inferred", ".owl");
+//            System.out.println(tempFileInfer);
+//            Files.copy(resource.getFile().toPath(), tempFileInfer, StandardCopyOption.REPLACE_EXISTING);
+//            filePathInfer = tempFileInfer.toAbsolutePath().toString();
+//            String tempDirectoryPath = System.getProperty("java.io.tmpdir");
+//            deleteFilesStartingWithOntologyAndAreOneDayOld(tempDirectoryPath);
+//            System.out.println("TEMP"+tempDirectoryPath);
+	        try {
+	            tempFileInfer = Files.createTempFile("ontology-inferred", ".owl");
+	            manager.saveOntology(inferredOntology, IRI.create(tempFileInfer.toFile()));
+
+	            System.out.println("New file created: " + tempFileInfer);
 	        } catch (IOException e) {
 	            System.out.println("An error occurred: " + e.getMessage());
 	            e.printStackTrace();
 	        }
-	        String filePathInfer = resource.getFile().getAbsolutePath();
-	        tempFileInfer = Files.createTempFile("ontology-inferred", ".owl");
-            System.out.println(tempFileInfer);
-            Files.copy(resource.getFile().toPath(), tempFileInfer, StandardCopyOption.REPLACE_EXISTING);
-            filePathInfer = tempFileInfer.toAbsolutePath().toString();
-            String tempDirectoryPath = System.getProperty("java.io.tmpdir");
-            deleteFilesStartingWithOntologyAndAreOneDayOld(tempDirectoryPath);
-            System.out.println("TEMP"+tempDirectoryPath);
+
+	        String filePathInfer = tempFileInfer.toAbsolutePath().toString();
+	        String tempDirectoryPath = System.getProperty("java.io.tmpdir");
+	        deleteFilesStartingWithOntologyAndAreOneDayOld(tempDirectoryPath);
+	        System.out.println("TEMP: " + tempDirectoryPath);
 	        // Load the ontology from the file
 	        ontology = manager.loadOntologyFromOntologyDocument(new File(filePathInfer));
 	        
@@ -349,8 +363,8 @@ public class ReasonerServiceImpl implements ReasonerService{
 	        }
 	        return triplesList;
 	         
-	 	}
-			return null;
+	 	
+			
 	 }
 	 
 	 // ******************* Executors && Thread *******************
