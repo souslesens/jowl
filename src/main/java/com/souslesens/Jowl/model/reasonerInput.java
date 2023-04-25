@@ -7,12 +7,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class reasonerInput {
 	private String filePath;
 	private String url;
-	private String ontologyContent;
+	private String ontologyContentEncoded64;
 	
-	public reasonerInput(String filePath , String url, String ontologyContent) {
+	public reasonerInput(String filePath , String url, String ontologyContentEncoded64) {
 		this.filePath = filePath;
 		this.url = url;
-		this.ontologyContent = ontologyContent;
+		this.ontologyContentEncoded64 = ontologyContentEncoded64;
 	}
 	public String getFilePath() {
 		return filePath;
@@ -22,8 +22,8 @@ public class reasonerInput {
 		return url;
 	}
 	
-	public String getOntologyContent() {
-		return ontologyContent;
+	public String getOntologyContentEncoded64() {
+		return ontologyContentEncoded64;
 	}
 
 }
