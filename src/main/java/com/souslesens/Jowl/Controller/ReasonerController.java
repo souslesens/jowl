@@ -82,7 +82,7 @@ public class ReasonerController {
         if (url != null && !url.isEmpty() && filePath == null) {
         	if (url.startsWith("http") || url.startsWith("ftp")) {
             try {
-            	List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url);
+            	List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url,null);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().build();
@@ -93,7 +93,7 @@ public class ReasonerController {
             }
         } else if (url == null && !filePath.isEmpty() && filePath != null) {
             try {
-                List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url);
+            	List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url,null);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().build();
@@ -103,6 +103,7 @@ public class ReasonerController {
         }
     }
 
+    // POST API to expose consistency
     @PostMapping("/consistency")
     public ResponseEntity<?> postConsistency(@RequestParam(required = false) MultipartFile ontologyFile,
             @RequestParam(required = false) String filePath,
@@ -117,7 +118,25 @@ public class ReasonerController {
                 String result = reasonerService.getConsistency(filePath, url,ontologyFile);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().build();
+                return ResponseEntity.badRequest().body("Error");
+            }
+        }
+    // POST API to expose inference
+    @PostMapping("/inference")
+    public ResponseEntity<?> postInference(@RequestParam(required = false) MultipartFile ontologyFile,
+            @RequestParam(required = false) String filePath,
+            @RequestParam(required = false) String url) { 
+    	int parametersCount = countParams(ontologyFile, filePath, url);
+        if (parametersCount == 0) {
+            return ResponseEntity.badRequest().body("At least one of params should be provided");
+        } else if (parametersCount > 1) {
+            return ResponseEntity.badRequest().body("Only one of params should be provided");
+        }
+            try {
+                List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url,ontologyFile);
+                return ResponseEntity.ok(result);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body("Error");
             }
         }
     private int countParams(Object... parameters) {

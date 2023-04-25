@@ -8,6 +8,8 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -61,7 +63,6 @@ import com.souslesens.Jowl.model.reasonerUnsatisfaisability;
 @Service
 
 public class ReasonerServiceImpl implements ReasonerService{
-    private static final int TEMP_FILE_EXPIRATION_TIME_MINUTES = 1;
 	 @Override
 	public String getUnsatisfaisableClasses(String filePath, String Url) throws Exception {
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -106,26 +107,28 @@ public class ReasonerServiceImpl implements ReasonerService{
 	 public String getConsistency(String filePath, String Url, MultipartFile ontologyFile) throws OWLOntologyCreationException, JsonProcessingException,Exception {
 	     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 	     OWLOntology ontology = null ;
- 		File inputOntology = null;
- 		Path tempFile = null;
+ 		 File inputOntology = null;
+ 		 Path tempFile = null;
          if (ontologyFile != null) {
              try {
                  inputOntology = convertMultipartFileToFile(ontologyFile);
+                 inputOntology.setLastModified(System.currentTimeMillis());
                  filePath = inputOntology.getAbsolutePath();
                  System.out.println(filePath);
                  tempFile = Files.createTempFile("ontology-", ".owl");
+                 
                  System.out.println(tempFile);
-                 tempFile.toFile().deleteOnExit();
                  Files.copy(inputOntology.toPath(), tempFile, StandardCopyOption.REPLACE_EXISTING);
                  filePath = tempFile.toAbsolutePath().toString();
-                 scheduleTempFileDeletion(tempFile);
-                 System.out.println(filePath);
+                 
+                 String tempDirectoryPath = System.getProperty("java.io.tmpdir");
+                 deleteFilesStartingWithOntologyAndAreOneDayOld(tempDirectoryPath);
              } catch (Exception e) {
                  return null;
              }
          }
 	     
-	        if ( filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+	     if ( filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
 	        	
 	        	ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
 	        } else if(filePath.isEmpty() == false && Url == null ) {
@@ -152,9 +155,27 @@ public class ReasonerServiceImpl implements ReasonerService{
 
 	 
 	 @Override
-	 public List<reasonerExtractTriples> getInferences(String filePath, String url) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
+	 public List<reasonerExtractTriples> getInferences(String filePath, String url,MultipartFile ontologyFile ) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
 	     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 	     OWLOntology ontology = null ;
+ 		 File inputOntology = null;
+ 		 Path tempFile = null;
+         if (ontologyFile != null) {
+             try {
+                 inputOntology = convertMultipartFileToFile(ontologyFile);
+                 
+                 filePath = inputOntology.getAbsolutePath();
+                 System.out.println(filePath);
+                 tempFile = Files.createTempFile("ontology-ontology", ".owl");
+                 System.out.println(tempFile);
+                 Files.copy(inputOntology.toPath(), tempFile, StandardCopyOption.REPLACE_EXISTING);
+                 filePath = tempFile.toAbsolutePath().toString();
+                 
+                 System.out.println("dir from infe"+filePath);
+             } catch (Exception e) {
+                 return null;
+             }
+         }
 	        if (filePath == null && url.isEmpty() == false && (url.startsWith("http") || url.startsWith("ftp"))) {
 	        	
 	        	ontology = manager.loadOntologyFromOntologyDocument(IRI.create(url));
@@ -172,19 +193,27 @@ public class ReasonerServiceImpl implements ReasonerService{
 	        OWLOntology inferredOntology = manager.createOntology();
 	        OWLDataFactory dataFactory = manager.getOWLDataFactory();
 	        iog.fillOntology(dataFactory, inferredOntology);
-
+	        Path tempFileInfer = null;
 	        Resource resource = new FileSystemResource(fileName);
 	        if (resource instanceof WritableResource) {
 	            try (OutputStream outputStream =((WritableResource) resource).getOutputStream()) {
 	            manager.saveOntology(inferredOntology, IRI.create(resource.getURI()));
+	            
 	            System.out.println("New file created: " + fileName);
 	        } catch (IOException e) {
 	            System.out.println("An error occurred: " + e.getMessage());
 	            e.printStackTrace();
 	        }
-	            
+	        String filePathInfer = resource.getFile().getAbsolutePath();
+	        tempFileInfer = Files.createTempFile("ontology-inferred", ".owl");
+            System.out.println(tempFileInfer);
+            Files.copy(resource.getFile().toPath(), tempFileInfer, StandardCopyOption.REPLACE_EXISTING);
+            filePathInfer = tempFileInfer.toAbsolutePath().toString();
+            String tempDirectoryPath = System.getProperty("java.io.tmpdir");
+            deleteFilesStartingWithOntologyAndAreOneDayOld(tempDirectoryPath);
+            System.out.println("TEMP"+tempDirectoryPath);
 	        // Load the ontology from the file
-	        ontology = manager.loadOntologyFromOntologyDocument(resource.getFile());
+	        ontology = manager.loadOntologyFromOntologyDocument(new File(filePathInfer));
 	        
 	     // Print the inferred axioms
 	        for (OWLAxiom axiom : inferredOntology.getAxioms()) {
@@ -323,18 +352,60 @@ public class ReasonerServiceImpl implements ReasonerService{
 	 	}
 			return null;
 	 }
-	 private void scheduleTempFileDeletion(Path tempFile) {
-	        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-	        executorService.schedule(() -> {
-	            try {
-	                Files.delete(tempFile);
-	            } catch (IOException e) {
-	                e.printStackTrace();
+	 
+	 // ******************* Executors && Thread *******************
+//	 private void scheduleTempFileDeletion(Path tempFile) {
+//	        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(2);
+//	        executorService.schedule(() -> {
+//	            try {
+//	                Files.delete(tempFile);
+//	            } catch (IOException e) {
+//	                e.printStackTrace();
+//	            }
+//	        }, TEMP_FILE_EXPIRATION_TIME_MINUTES, TimeUnit.MINUTES);
+//	        executorService.shutdown();
+//	    }
+	    public void deleteIfOneMinuteOld(String filePath) {
+	        File file = new File(filePath);
+	        long creationTime = file.lastModified();
+	        long currentTime = System.currentTimeMillis();
+	        Duration timeDifference = Duration.between(Instant.ofEpochMilli(creationTime), Instant.ofEpochMilli(currentTime));
+	        if (timeDifference.equals(Duration.ofMinutes(1))) {
+	            boolean deleted = file.delete();
+	            if (deleted) {
+	                System.out.println("File " + filePath + " deleted new meth successfully.");
+	            } else {
+	                System.out.println("Failed to delete file " + filePath);
 	            }
-	        }, TEMP_FILE_EXPIRATION_TIME_MINUTES, TimeUnit.MINUTES);
-	        executorService.shutdown();
+	        }
 	    }
-
+	    public void deleteFilesStartingWithOntologyAndAreOneDayOld(String directoryPath) {
+	        File directory = new File(directoryPath);
+	        System.out.println("Dir Path"+directoryPath );
+	        File[] files = directory.listFiles();
+	        long currentTime = System.currentTimeMillis();
+	        System.out.println("Current Time"+currentTime);
+	        
+	        if (files != null) {
+	            for (File file : files) {
+	                if (file.getName().startsWith("ontology") ) {
+	                    long createTime = file.lastModified();
+	                    long diffInMilliseconds = currentTime - createTime;
+	                    System.out.println("Difference in milliseconds"+diffInMilliseconds);
+	                    long diffInSeconds = diffInMilliseconds / 1000;
+	                    System.out.println("Difference in seconds"+diffInSeconds);
+	                    if (diffInSeconds >= 60) {
+	                        boolean deleted = file.delete();
+	                        if (deleted) {
+	                            System.out.println("File " + file.getName() + " deleted successfully.");
+	                        } else {
+	                            System.out.println("Failed to delete file " + file.getName());
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	    }
 	 private File convertMultipartFileToFile(MultipartFile file) throws IOException {
 		    File convertedFile = new File(file.getOriginalFilename());
 		    file.transferTo(convertedFile);
