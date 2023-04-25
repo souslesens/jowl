@@ -108,7 +108,44 @@ public class ReasonerController {
                 return ResponseEntity.badRequest().body("Error");
             }
         }
-    
+    //Post API For STRING
+    @PostMapping("/inference")
+    public ResponseEntity<?> postInference(@RequestParam(required = false) String filePath,@RequestParam(required = false) String url,@RequestParam(required = false) String ontologyContentEncoded64) { 
+        byte[] ontologyContentDecoded64Bytes = Base64.getMimeDecoder().decode(ontologyContentEncoded64);
+    	String ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
+    	System.out.println("Inference"+ontologyContentDecoded64);
+    	int parametersCount = countParams(ontologyContentDecoded64, filePath, url);
+        if (parametersCount == 0) {
+            return ResponseEntity.badRequest().body("At least one of params should be provided");
+        } else if (parametersCount > 1) {
+            return ResponseEntity.badRequest().body("Only one of params should be provided");
+        }
+            try {
+                List<reasonerExtractTriples> result = reasonerService.getInferencesTest(filePath, url,ontologyContentDecoded64);
+                return ResponseEntity.ok(result);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body("Error");
+            }
+        }
+    //Post API For STRING
+    @PostMapping("/unsatisfiable")
+    public ResponseEntity<?> postUnsatisfiable(@RequestParam(required = false) String filePath,@RequestParam(required = false) String url,@RequestParam(required = false) String ontologyContentEncoded64) { 
+        byte[] ontologyContentDecoded64Bytes = Base64.getMimeDecoder().decode(ontologyContentEncoded64);
+    	String ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
+    	System.out.println("EYYYYYYYYYYY"+ontologyContentDecoded64);
+    	int parametersCount = countParams(ontologyContentDecoded64, filePath, url);
+        if (parametersCount == 0) {
+            return ResponseEntity.badRequest().body("At least one of params should be provided");
+        } else if (parametersCount > 1) {
+            return ResponseEntity.badRequest().body("Only one of params should be provided");
+        }
+            try {
+                String result = reasonerService.getConsistencyTest(filePath, url,ontologyContentDecoded64);
+                return ResponseEntity.ok(result);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body("Error");
+            }
+        }
        // ALTERNATIVE TO INPUT
     // POST API to expose consistency
     @PostMapping("/consistencyAlt")

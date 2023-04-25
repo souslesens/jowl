@@ -5,8 +5,7 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:example="http://acrab.ics.muni.cz/ontologies/example.owl#">
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <Ontology/>
     
 
@@ -22,19 +21,136 @@
     
 
 
-    <!-- http://acrab.ics.muni.cz/ontologies/example.owl#hasKnowledgeOf -->
+    <!-- http://www.xfront.com/owl/ontologies/camera/#body -->
 
-    <ObjectProperty rdf:about="http://acrab.ics.muni.cz/ontologies/example.owl#hasKnowledgeOf">
+    <ObjectProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#body">
+        <rdfs:subPropertyOf rdf:resource="http://www.xfront.com/owl/ontologies/camera/#part"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#compatibleWith -->
+
+    <ObjectProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#compatibleWith">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     </ObjectProperty>
     
 
 
-    <!-- http://acrab.ics.muni.cz/ontologies/example.owl#speaksLanguage -->
+    <!-- http://www.xfront.com/owl/ontologies/camera/#cost -->
 
-    <ObjectProperty rdf:about="http://acrab.ics.muni.cz/ontologies/example.owl#speaksLanguage">
+    <ObjectProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#cost">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     </ObjectProperty>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#lens -->
+
+    <ObjectProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#lens">
+        <rdfs:subPropertyOf rdf:resource="http://www.xfront.com/owl/ontologies/camera/#part"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#part -->
+
+    <ObjectProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#part">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#shutter-speed -->
+
+    <ObjectProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#shutter-speed">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#viewFinder -->
+
+    <ObjectProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#viewFinder">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#aperture -->
+
+    <DatatypeProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#aperture">
+        <equivalentProperty rdf:resource="http://www.xfront.com/owl/ontologies/camera/#f-stop"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#currency -->
+
+    <DatatypeProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#currency">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#f-stop -->
+
+    <DatatypeProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#f-stop">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#focal-length -->
+
+    <DatatypeProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#focal-length">
+        <equivalentProperty rdf:resource="http://www.xfront.com/owl/ontologies/camera/#size"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#max -->
+
+    <DatatypeProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#max">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#min -->
+
+    <DatatypeProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#min">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#size -->
+
+    <DatatypeProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#size">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#units -->
+
+    <DatatypeProperty rdf:about="http://www.xfront.com/owl/ontologies/camera/#units">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </DatatypeProperty>
     
 
 
@@ -49,25 +165,97 @@
     
 
 
-    <!-- http://acrab.ics.muni.cz/ontologies/example.owl#EnglishProgrammer -->
+    <!-- http://www.xfront.com/owl/ontologies/camera/#Body -->
 
-    <Class rdf:about="http://acrab.ics.muni.cz/ontologies/example.owl#EnglishProgrammer">
-        <rdfs:subClassOf rdf:resource="http://acrab.ics.muni.cz/ontologies/example.owl#Person"/>
+    <Class rdf:about="http://www.xfront.com/owl/ontologies/camera/#Body">
+        <rdfs:subClassOf rdf:resource="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
     </Class>
     
 
 
-    <!-- http://acrab.ics.muni.cz/ontologies/example.owl#Man -->
+    <!-- http://www.xfront.com/owl/ontologies/camera/#BodyWithNonAdjustableShutterSpeed -->
 
-    <Class rdf:about="http://acrab.ics.muni.cz/ontologies/example.owl#Man">
-        <rdfs:subClassOf rdf:resource="http://acrab.ics.muni.cz/ontologies/example.owl#Person"/>
+    <Class rdf:about="http://www.xfront.com/owl/ontologies/camera/#BodyWithNonAdjustableShutterSpeed">
+        <rdfs:subClassOf rdf:resource="http://www.xfront.com/owl/ontologies/camera/#Body"/>
     </Class>
     
 
 
-    <!-- http://acrab.ics.muni.cz/ontologies/example.owl#Person -->
+    <!-- http://www.xfront.com/owl/ontologies/camera/#Camera -->
 
-    <Class rdf:about="http://acrab.ics.muni.cz/ontologies/example.owl#Person">
+    <Class rdf:about="http://www.xfront.com/owl/ontologies/camera/#Camera">
+        <rdfs:subClassOf rdf:resource="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+    </Class>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#Digital -->
+
+    <Class rdf:about="http://www.xfront.com/owl/ontologies/camera/#Digital">
+        <rdfs:subClassOf rdf:resource="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+    </Class>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#Large-Format -->
+
+    <Class rdf:about="http://www.xfront.com/owl/ontologies/camera/#Large-Format">
+        <rdfs:subClassOf rdf:resource="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+    </Class>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#Lens -->
+
+    <Class rdf:about="http://www.xfront.com/owl/ontologies/camera/#Lens">
+        <rdfs:subClassOf rdf:resource="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+    </Class>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#Money -->
+
+    <Class rdf:about="http://www.xfront.com/owl/ontologies/camera/#Money">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem -->
+
+    <Class rdf:about="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#Range -->
+
+    <Class rdf:about="http://www.xfront.com/owl/ontologies/camera/#Range">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#SLR -->
+
+    <Class rdf:about="http://www.xfront.com/owl/ontologies/camera/#SLR">
+        <rdfs:subClassOf rdf:resource="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+    </Class>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#Viewer -->
+
+    <Class rdf:about="http://www.xfront.com/owl/ontologies/camera/#Viewer">
+        <rdfs:subClassOf rdf:resource="http://www.xfront.com/owl/ontologies/camera/#Window"/>
+    </Class>
+    
+
+
+    <!-- http://www.xfront.com/owl/ontologies/camera/#Window -->
+
+    <Class rdf:about="http://www.xfront.com/owl/ontologies/camera/#Window">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     </Class>
     
@@ -84,30 +272,22 @@
     
 
 
-    <!-- http://acrab.ics.muni.cz/ontologies/example.owl#Computer-Programming -->
+    <!-- http://www.xfront.com/owl/ontologies/camera/#ThroughTheLens -->
 
-    <Thing rdf:about="http://acrab.ics.muni.cz/ontologies/example.owl#Computer-Programming">
+    <Thing rdf:about="http://www.xfront.com/owl/ontologies/camera/#ThroughTheLens">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        <rdf:type rdf:resource="http://www.xfront.com/owl/ontologies/camera/#Window"/>
     </Thing>
     
 
 
-    <!-- http://acrab.ics.muni.cz/ontologies/example.owl#English -->
+    <!-- http://www.xfront.com/owl/ontologies/camera/#WindowOnTopOfCamera -->
 
-    <Thing rdf:about="http://acrab.ics.muni.cz/ontologies/example.owl#English">
+    <Thing rdf:about="http://www.xfront.com/owl/ontologies/camera/#WindowOnTopOfCamera">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-    </Thing>
-    
-
-
-    <!-- http://acrab.ics.muni.cz/ontologies/example.owl#John -->
-
-    <Thing rdf:about="http://acrab.ics.muni.cz/ontologies/example.owl#John">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-        <rdf:type rdf:resource="http://acrab.ics.muni.cz/ontologies/example.owl#EnglishProgrammer"/>
-        <rdf:type rdf:resource="http://acrab.ics.muni.cz/ontologies/example.owl#Person"/>
-        <example:hasKnowledgeOf rdf:resource="http://acrab.ics.muni.cz/ontologies/example.owl#Computer-Programming"/>
-        <example:speaksLanguage rdf:resource="http://acrab.ics.muni.cz/ontologies/example.owl#English"/>
+        <rdf:type rdf:resource="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        <rdf:type rdf:resource="http://www.xfront.com/owl/ontologies/camera/#Window"/>
     </Thing>
 </rdf:RDF>
 

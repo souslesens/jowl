@@ -22,7 +22,8 @@ public interface ReasonerService {
     String getConsistencyAlt(String filePath, String Url,MultipartFile ontologyFile) throws OWLOntologyCreationException, JsonProcessingException, Exception;
     List<reasonerExtractTriples> getInferencesAlt(String filePath, String Url,MultipartFile ontologyFile) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
 	String getConsistencyTest(String filePath, String url, String ontologyContentDecoded64) throws OWLOntologyCreationException, JsonProcessingException, Exception;
-
+	List<reasonerExtractTriples> getInferencesTest(String filePath, String Url, String ontologyContentDecoded64) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
+	String getUnsatisfaisableClassesTest(String filePath, String Url, String ontologyContentDecoded64) throws Exception;
     
     
 }
