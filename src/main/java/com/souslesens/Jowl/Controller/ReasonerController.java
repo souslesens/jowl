@@ -29,33 +29,22 @@ public class ReasonerController {
 
 
     @GetMapping("/unsatisfiable")
-    public ResponseEntity<?> getUnsatisfaisableClasses(@RequestParam String filePath,
-    		@RequestParam String url) {
-        if (url != null && !url.isEmpty() && filePath == null) {
-        	if (url.startsWith("http") || url.startsWith("ftp")) {
-            try {
-                String result = reasonerService.getUnsatisfaisableClasses(filePath, url);
-                return ResponseEntity.ok(result);
-            } catch (Exception e) {
-                return ResponseEntity.badRequest().build();
-            }
-            }
-        	else {
-            	return ResponseEntity.badRequest().build();
-            }
-            
-            
-        } else if (url == null && !filePath.isEmpty() && filePath != null) {
-            try {
-                String result = reasonerService.getUnsatisfaisableClasses(filePath, url);
-                return ResponseEntity.ok(result);
-            } catch (Exception e) {
-                return ResponseEntity.badRequest().build();
-            }
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    public ResponseEntity<?> getUnsatisfaisableClasses(
+            @RequestParam(required = false) String filePath,
+            @RequestParam(required = false) String url) { 
+    	int parametersCount = countParams( filePath, url);
+        if (parametersCount == 0) {
+            return ResponseEntity.badRequest().body("At least one of params should be provided");
+        } else if (parametersCount > 1) {
+            return ResponseEntity.badRequest().body("Only one of params should be provided");
         }
-    }
+            try {
+                String result = reasonerService.getUnsatisfaisableClasses(filePath, url,null);
+                return ResponseEntity.ok(result);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body("Error");
+            }
+        }
     @GetMapping("/consistency")
     public ResponseEntity<?> getConsistency(@RequestParam(required = false) String filePath,
             @RequestParam(required = false) String url) {
@@ -134,6 +123,24 @@ public class ReasonerController {
         }
             try {
                 List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url,ontologyFile);
+                return ResponseEntity.ok(result);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body("Error");
+            }
+        }
+   
+    @PostMapping("/unsatisfiable")
+    public ResponseEntity<?> postUnsatisfaisableClasses(@RequestParam(required = false) MultipartFile ontologyFile,
+            @RequestParam(required = false) String filePath,
+            @RequestParam(required = false) String url) { 
+    	int parametersCount = countParams(ontologyFile, filePath, url);
+        if (parametersCount == 0) {
+            return ResponseEntity.badRequest().body("At least one of params should be provided");
+        } else if (parametersCount > 1) {
+            return ResponseEntity.badRequest().body("Only one of params should be provided");
+        }
+            try {
+                String result = reasonerService.getUnsatisfaisableClasses(filePath, url,ontologyFile);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body("Error");

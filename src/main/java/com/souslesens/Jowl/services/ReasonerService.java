@@ -12,7 +12,7 @@ import com.souslesens.Jowl.model.reasonerExtractTriples;
 
 
 public interface ReasonerService {
-    String getUnsatisfaisableClasses(String filePath, String Url) throws Exception;
+    String getUnsatisfaisableClasses(String filePath, String Url,MultipartFile ontologyFile) throws Exception;
     String getConsistency(String filePath, String Url,MultipartFile ontologyFile) throws OWLOntologyCreationException, JsonProcessingException, Exception;
     List<reasonerExtractTriples> getInferences(String filePath, String Url,MultipartFile ontologyFile) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
 }
