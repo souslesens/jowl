@@ -64,10 +64,29 @@ import com.souslesens.Jowl.model.reasonerUnsatisfaisability;
 
 public class ReasonerServiceImpl implements ReasonerService{
 	 @Override
-	public String getUnsatisfaisableClasses(String filePath, String Url) throws Exception {
+	public String getUnsatisfaisableClasses(String filePath, String Url, MultipartFile ontologyFile) throws Exception {
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-
-	     OWLOntology ontology = null ;
+	    OWLOntology ontology = null ;
+ 		File inputOntology = null;
+ 		Path tempFile = null;
+        if (ontologyFile != null) {
+             try {
+                 inputOntology = convertMultipartFileToFile(ontologyFile);
+                 inputOntology.setLastModified(System.currentTimeMillis());
+                 filePath = inputOntology.getAbsolutePath();
+                 System.out.println(filePath);
+                 tempFile = Files.createTempFile("ontology-unsat", ".owl");
+                 
+                 System.out.println(tempFile);
+                 Files.copy(inputOntology.toPath(), tempFile, StandardCopyOption.REPLACE_EXISTING);
+                 filePath = tempFile.toAbsolutePath().toString();
+                 
+                 String tempDirectoryPath = System.getProperty("java.io.tmpdir");
+                 deleteFilesStartingWithOntologyAndAreOneDayOld(tempDirectoryPath);
+             } catch (Exception e) {
+                 return null;
+             }
+         }
 	        if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
 	        	
 	        	ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
