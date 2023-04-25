@@ -39,7 +39,7 @@ public class ReasonerController {
             return ResponseEntity.badRequest().body("Only one of params should be provided");
         }
             try {
-                String result = reasonerService.getUnsatisfaisableClasses(filePath, url,null);
+                String result = reasonerService.getUnsatisfaisableClasses(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body("Error");
@@ -56,7 +56,7 @@ public class ReasonerController {
             	return ResponseEntity.badRequest().body("Only one of params should be provided");
         	}
             try {
-                String result = reasonerService.getConsistency(filePath, url,null);
+                String result = reasonerService.getConsistency(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body("ERROR");
@@ -71,7 +71,7 @@ public class ReasonerController {
         if (url != null && !url.isEmpty() && filePath == null) {
         	if (url.startsWith("http") || url.startsWith("ftp")) {
             try {
-            	List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url,null);
+            	List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().build();
@@ -82,7 +82,7 @@ public class ReasonerController {
             }
         } else if (url == null && !filePath.isEmpty() && filePath != null) {
             try {
-            	List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url,null);
+            	List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().build();
@@ -92,9 +92,11 @@ public class ReasonerController {
         }
     }
 
+    
+       // ALTERNATIVE TO INPUT
     // POST API to expose consistency
-    @PostMapping("/consistency")
-    public ResponseEntity<?> postConsistency(@RequestParam(required = false) MultipartFile ontologyFile,
+    @PostMapping("/consistencyAlt")
+    public ResponseEntity<?> postConsistencyAlt(@RequestParam(required = false) MultipartFile ontologyFile,
             @RequestParam(required = false) String filePath,
             @RequestParam(required = false) String url) { 
     	int parametersCount = countParams(ontologyFile, filePath, url);
@@ -104,15 +106,20 @@ public class ReasonerController {
             return ResponseEntity.badRequest().body("Only one of params should be provided");
         }
             try {
-                String result = reasonerService.getConsistency(filePath, url,ontologyFile);
+                String result = reasonerService.getConsistencyAlt(filePath, url,ontologyFile);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body("Error");
             }
         }
-    // POST API to expose inference
-    @PostMapping("/inference")
-    public ResponseEntity<?> postInference(@RequestParam(required = false) MultipartFile ontologyFile,
+    
+    //Post API For STRING
+    
+    
+    
+    // POST API Alternative solution to expose inference
+    @PostMapping("/inferenceAlt")
+    public ResponseEntity<?> postInferenceAlt(@RequestParam(required = false) MultipartFile ontologyFile,
             @RequestParam(required = false) String filePath,
             @RequestParam(required = false) String url) { 
     	int parametersCount = countParams(ontologyFile, filePath, url);
@@ -122,15 +129,15 @@ public class ReasonerController {
             return ResponseEntity.badRequest().body("Only one of params should be provided");
         }
             try {
-                List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url,ontologyFile);
+                List<reasonerExtractTriples> result = reasonerService.getInferencesAlt(filePath, url,ontologyFile);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body("Error");
             }
         }
    
-    @PostMapping("/unsatisfiable")
-    public ResponseEntity<?> postUnsatisfaisableClasses(@RequestParam(required = false) MultipartFile ontologyFile,
+    @PostMapping("/unsatisfiableAlt")
+    public ResponseEntity<?> postUnsatisfaisableClassesAlt(@RequestParam(required = false) MultipartFile ontologyFile,
             @RequestParam(required = false) String filePath,
             @RequestParam(required = false) String url) { 
     	int parametersCount = countParams(ontologyFile, filePath, url);
@@ -140,7 +147,7 @@ public class ReasonerController {
             return ResponseEntity.badRequest().body("Only one of params should be provided");
         }
             try {
-                String result = reasonerService.getUnsatisfaisableClasses(filePath, url,ontologyFile);
+                String result = reasonerService.getUnsatisfaisableClassesAlt(filePath, url,ontologyFile);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body("Error");
