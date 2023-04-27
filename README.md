@@ -11,7 +11,7 @@ This application will be in docker and we will provide a full documentation to r
 ```
 docker build -t jowl .
 ```
-----------------
+
 ### To Run The Application
 ```
 docker run -p 8080:8080 jowl
@@ -21,6 +21,7 @@ docker run -p 8080:8080 jowl
 ```
 docker run -d -p 8080:8080 jowl
 ```
+----------------
 ### One Command : To Build && Run The application Via Docker-Compose
 ```
 docker-compose up
