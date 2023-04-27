@@ -16,6 +16,11 @@ docker build -t jowl .
 ```
 docker run -p 8080:8080 jowl
 ```
+----------------
+### To Run The Application in the background
+```
+docker run -d -p 8080:8080 jowl
+```
 ### One Command : To Build && Run The application Via Docker-Compose
 ```
 docker-compose up
