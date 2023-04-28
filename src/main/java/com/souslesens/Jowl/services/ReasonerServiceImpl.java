@@ -10,8 +10,11 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLAxiom;
@@ -23,18 +26,31 @@ import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLDatatype;
 import org.semanticweb.owlapi.model.OWLDeclarationAxiom;
+import org.semanticweb.owlapi.model.OWLDisjointClassesAxiom;
 import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
 import org.semanticweb.owlapi.model.OWLFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
+import org.semanticweb.owlapi.model.OWLObjectComplementOf;
+import org.semanticweb.owlapi.model.OWLObjectExactCardinality;
+import org.semanticweb.owlapi.model.OWLObjectHasSelf;
+import org.semanticweb.owlapi.model.OWLObjectHasValue;
+import org.semanticweb.owlapi.model.OWLObjectIntersectionOf;
+import org.semanticweb.owlapi.model.OWLObjectMaxCardinality;
+import org.semanticweb.owlapi.model.OWLObjectMinCardinality;
+import org.semanticweb.owlapi.model.OWLObjectOneOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObjectPropertyDomainAxiom;
 import org.semanticweb.owlapi.model.OWLObjectPropertyRangeAxiom;
+import org.semanticweb.owlapi.model.OWLObjectSomeValuesFrom;
+import org.semanticweb.owlapi.model.OWLObjectUnionOf;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
+import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
@@ -143,18 +159,70 @@ public class ReasonerServiceImpl implements ReasonerService{
 	        // Load the ontology from the file
 	        ontology = manager.loadOntologyFromOntologyDocument(resource.getFile());
 	        
-	        StringBuilder sb = new StringBuilder();
-	        // Add the inferred axioms to the list
-	        for (OWLAxiom axiom : inferredOntology.getAxioms()) {
-	        	sb.append(axiom.toString());
-	            
-	        }
-	        String axiomsString = sb.toString();
+	     // Extract the specified axioms and expressions
 	        JSONObject jsonObject = new JSONObject();
-	        jsonObject.put("inference", axiomsString);
-	         String jsonString = jsonObject.toString();
-	         return jsonString;
-	    }
+	        for (AxiomType<?> axiomType : AxiomType.AXIOM_TYPES) {
+	            Set<? extends OWLAxiom> axioms = inferredOntology.getAxioms(axiomType);
+	            if (!axioms.isEmpty()) {
+	                jsonObject.put(axiomType.toString(), convertAxiomSetToJSONArray(axioms));
+	            }
+	        }
+
+	        // Extract the specified expressions
+	        JSONArray expressionsArray = new JSONArray();
+	        for (OWLClassExpression classExpression : ontology.getClassesInSignature()) {
+	            if (classExpression instanceof OWLObjectIntersectionOf ||
+	                classExpression instanceof OWLObjectUnionOf ||
+	                classExpression instanceof OWLObjectSomeValuesFrom ||
+	                classExpression instanceof OWLObjectAllValuesFrom ||
+	                classExpression instanceof OWLObjectHasValue ||
+	                classExpression instanceof OWLObjectMinCardinality ||
+	                classExpression instanceof OWLObjectExactCardinality ||
+	                classExpression instanceof OWLObjectMaxCardinality ||
+	                classExpression instanceof OWLObjectComplementOf ||
+	                classExpression instanceof OWLObjectHasSelf ||
+	                classExpression instanceof OWLObjectOneOf) {
+	                expressionsArray.put(classExpression.toString());
+	            }
+	        }
+	        jsonObject.put("expressions", expressionsArray);
+
+	        // Extract individuals' information
+	        JSONArray individualsArray = new JSONArray();
+	        for (OWLNamedIndividual individual : ontology.getIndividualsInSignature()) {
+	            JSONObject individualInfo = new JSONObject();
+	            individualInfo.put("name", individual.toString());
+
+	            // Get object property assertions
+	            JSONArray objectPropertyAssertions = new JSONArray();
+	            for (OWLObjectPropertyAssertionAxiom opa : ontology.getObjectPropertyAssertionAxioms(individual)) {
+	                objectPropertyAssertions.put(opa.toString());
+	            }
+	            individualInfo.put("objectPropertyAssertions", objectPropertyAssertions);
+
+	            // Get data property assertions
+	            JSONArray dataPropertyAssertions = new JSONArray();
+	            for (OWLDataPropertyAssertionAxiom dpa : ontology.getDataPropertyAssertionAxioms(individual)) {
+	                dataPropertyAssertions.put(dpa.toString());
+	            }
+	            individualInfo.put("dataPropertyAssertions", dataPropertyAssertions);
+
+	            individualsArray.put(individualInfo);
+	        }
+	        jsonObject.put("individuals", individualsArray);
+
+	        String jsonString = jsonObject.toString();
+	        System.out.println(jsonString);
+	        return jsonString;
+	        }
+
+	        private static JSONArray convertAxiomSetToJSONArray(Set<? extends OWLAxiom> axiomSet) {
+	            JSONArray jsonArray = new JSONArray();
+	            for (OWLAxiom axiom : axiomSet) {
+	                jsonArray.put(axiom.toString());
+	            }
+	            return jsonArray;
+	        }
 	 
 //	        System.out.println("Ontology ComputeInference Completed");
 //	        Set<OWLAxiom> axioms = ontology.getAxioms();
@@ -407,6 +475,22 @@ public class ReasonerServiceImpl implements ReasonerService{
 	        }
 	        // Load the ontology from the file
 	        ontology = manager.loadOntologyFromOntologyDocument(resource.getFile());
+	        
+	        List<OWLAxiom> axioms = new ArrayList<>();
+	        for (OWLAxiom axiom : inferredOntology.getAxioms()) {
+	            if (axiom instanceof OWLSubClassOfAxiom ||
+	                axiom instanceof OWLDisjointClassesAxiom ||
+	                axiom instanceof OWLEquivalentClassesAxiom ||
+	                axiom instanceof OWLSubObjectPropertyOfAxiom ||
+	                axiom instanceof OWLObjectPropertyDomainAxiom ||
+	                axiom instanceof OWLObjectPropertyRangeAxiom ||
+	                axiom instanceof OWLObjectPropertyAssertionAxiom ||
+	                axiom instanceof OWLClassAssertionAxiom ||
+	                axiom instanceof OWLDataPropertyAssertionAxiom) {
+	                axioms.add(axiom);
+	            }
+	        }
+	        
 	        
 	        StringBuilder sb = new StringBuilder();
 	        // Add the inferred axioms to the list

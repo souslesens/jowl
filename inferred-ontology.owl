@@ -21,72 +21,579 @@
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#hasBase -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/activityBoundOf -->
 
-    <ObjectProperty rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#hasBase">
-        <rdfs:subPropertyOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#hasIngredient"/>
-        <inverseOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#isBaseOf"/>
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/activityBoundOf">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/activityPartOf"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityBound"/>
     </ObjectProperty>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#hasCountryOfOrigin -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/activityPartOf -->
 
-    <ObjectProperty rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#hasCountryOfOrigin">
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/activityPartOf">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/partOf"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityPart"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/after -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/after">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/occursRelativeTo"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/before"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/approvedBy -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/approvedBy">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/interestOf"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/approves"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/approves -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/approves">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasInterestIn"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/arrangedPartOf -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/arrangedPartOf">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/partOf"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasArrangedPart"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/assembledPartOf -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/assembledPartOf">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/arrangedPartOf"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasAssembledPart"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/before -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/before">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/occursRelativeTo"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/begins -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/begins">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/activityBoundOf"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasBeginning"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/causedBy -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/causedBy">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/after"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/causes"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/causes -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/causes">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/before"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/concretizedBy -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/concretizedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/concretizes"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/concretizes -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/concretizes">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     </ObjectProperty>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#hasIngredient -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/connectedTo -->
 
-    <ObjectProperty rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#hasIngredient">
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/connectedTo">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#isIngredientOf"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/connectedTo"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
     </ObjectProperty>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#hasSpiciness -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/containedBy -->
 
-    <ObjectProperty rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#hasSpiciness">
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/containedBy">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/contains"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/contains -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/contains">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/createdBy -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/createdBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/creates"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/creates -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/creates">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     </ObjectProperty>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#hasTopping -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/datumUOM -->
 
-    <ObjectProperty rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#hasTopping">
-        <rdfs:subPropertyOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#hasIngredient"/>
-        <inverseOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#isToppingOf"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#isBaseOf -->
-
-    <ObjectProperty rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#isBaseOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#isIngredientOf"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#isIngredientOf -->
-
-    <ObjectProperty rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#isIngredientOf">
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/datumUOM">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
     </ObjectProperty>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#isToppingOf -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/directlyConnectedTo -->
 
-    <ObjectProperty rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#isToppingOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#isIngredientOf"/>
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/directlyConnectedTo">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/connectedTo"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/directlyConnectedTo"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
     </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/dispositionOf -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/dispositionOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasDisposition"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/ends -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/ends">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/activityBoundOf"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasEnding"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/featureOf -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/featureOf">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/arrangedPartOf"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasFeature"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/functionOf -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/functionOf">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/dispositionOf"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasFunction"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/functionalPartOf -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/functionalPartOf">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/partOf"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasFunctionalPart"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityBound -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityBound">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityPart"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityPart -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityPart">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasPart"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasArrangedPart -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasArrangedPart">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasPart"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasAssembledPart -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasAssembledPart">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasArrangedPart"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasBeginning -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasBeginning">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityBound"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasDisposition -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasDisposition">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasEnding -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasEnding">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityBound"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasFeature -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasFeature">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasArrangedPart"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasFunction -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasFunction">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasDisposition"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasFunctionalPart -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasFunctionalPart">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasPart"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasInstalled -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasInstalled">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/installedAs"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasInterestIn -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasInterestIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/interestOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasPart -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasPart">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/partOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasParticipant -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasParticipant">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/participantIn"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasPhysicalQuantity -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasPhysicalQuantity">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasQuality"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/physicalQuantityOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasQuality -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasQuality">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasResident -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasResident">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/residesIn"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasRole -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasRole">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/roleOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasSubLocation -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasSubLocation">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasPart"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/subLocationOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/installedAs -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/installedAs">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/interestOf -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/interestOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/isAbout -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/isAbout">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/representedIn"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/occursRelativeTo -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/occursRelativeTo">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/occursRelativeTo"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/partOf -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/partOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/participantIn -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/participantIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/physicalQuantityOf -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/physicalQuantityOf">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/qualityOf -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/qualityOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/representedIn"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/quantifiesQuality"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/quantifiesQuality -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/quantifiesQuality">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/isAbout"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/realizedIn -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/realizedIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/realizes"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/realizes -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/realizes">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/representedBy -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/representedBy">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/representedIn"/>
+        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/represents"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/representedIn -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/representedIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/represents -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/represents">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/isAbout"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/residesIn -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/residesIn">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/roleOf -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/roleOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/subLocationOf -->
+
+    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/subLocationOf">
+        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/partOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/approvedOn -->
+
+    <DatatypeProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/approvedOn">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/datumValue -->
+
+    <DatatypeProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/datumValue">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantityValue -->
+
+    <DatatypeProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantityValue">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </DatatypeProperty>
     
 
 
@@ -101,961 +608,276 @@
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#American -->
+    <!-- http://data.15926.org/rdl/RDS2222021 -->
 
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#American">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#AmericanHot -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#AmericanHot">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyPizzaEquivalent"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#AnchoviesTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#AnchoviesTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#FishTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#ArtichokeTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#ArtichokeTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#AsparagusTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#AsparagusTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Cajun -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Cajun">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NonVegetarianPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyPizzaEquivalent"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#CajunSpiceTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#CajunSpiceTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#HerbSpiceTopping"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#CaperTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#CaperTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Capricciosa -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Capricciosa">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Caprina -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Caprina">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent1"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent2"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Pizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyVegetableTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyVegetableTopping">
-        <equivalentClass rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#IceCream"/>
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#IceCream -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#IceCream">
-        <equivalentClass rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
-    </Class>
-    
-
-
-    <!-- http://www.w3.org/2002/07/owl#Nothing -->
-
-    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#Nothing"/>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#ChickenTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#ChickenTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Country -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Country">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#DomainConcept"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#DeepPanBase -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#DeepPanBase">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#PizzaBase"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#DomainConcept -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#DomainConcept">
+    <Class rdf:about="http://data.15926.org/rdl/RDS2222021">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     </Class>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Fiorentina -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Activity -->
 
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Fiorentina">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent1"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent2"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#FishTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#FishTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#PizzaTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Food -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Food">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#DomainConcept"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#FourCheesesTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#FourCheesesTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#FourSeasons -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#FourSeasons">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#FruitTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#FruitTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#FruttiDiMare -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#FruttiDiMare">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NonVegetarianPizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#GarlicTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#GarlicTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Giardiniera -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Giardiniera">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent1"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent2"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#GoatsCheeseTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#GoatsCheeseTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#GorgonzolaTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#GorgonzolaTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#GreenPepperTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#GreenPepperTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#PepperTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#HamTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#HamTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#HerbSpiceTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#HerbSpiceTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Hot -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Hot">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Spiciness"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#HotGreenPepperTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#HotGreenPepperTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#GreenPepperTopping"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#HotSpicedBeefTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#HotSpicedBeefTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatTopping"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#IceCream -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#IceCream">
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Pizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#JalapenoPepperTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#JalapenoPepperTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#PepperTopping"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#LaReine -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#LaReine">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#LeekTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#LeekTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Margherita -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Margherita">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent1"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent2"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#PizzaTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatyPizza -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatyPizza">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NonVegetarianPizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Medium -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Medium">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Spiciness"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Mild -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Mild">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Spiciness"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#MixedSeafoodTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#MixedSeafoodTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#FishTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#MozzarellaTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#MozzarellaTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Mushroom -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Mushroom">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent1"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent2"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#MushroomTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#MushroomTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Pizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Napoletana -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Napoletana">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NonVegetarianPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#RealItalianPizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#NonVegetarianPizza -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#NonVegetarianPizza">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Pizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#NutTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#NutTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#OliveTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#OliveTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#OnionTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#OnionTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#ParmaHamTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#ParmaHamTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#HamTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Parmense -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Parmense">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#ParmesanTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#ParmesanTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#PeperonataTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#PeperonataTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#PepperTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#PeperoniSausageTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#PeperoniSausageTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#PepperTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#PepperTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#PetitPoisTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#PetitPoisTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#PineKernels -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#PineKernels">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NutTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Pizza -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Pizza">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Food"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#PizzaBase -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#PizzaBase">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Food"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#PizzaTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#PizzaTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Food"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#PolloAdAstra -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#PolloAdAstra">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyPizzaEquivalent"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#PrawnsTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#PrawnsTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#FishTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#PrinceCarlo -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#PrinceCarlo">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent1"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent2"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#QuattroFormaggi -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#QuattroFormaggi">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent1"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent2"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#RealItalianPizza -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#RealItalianPizza">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#ThinAndCrispyPizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#RedOnionTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#RedOnionTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#OnionTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#RocketTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#RocketTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Rosa -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Rosa">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent1"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent2"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#RosemaryTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#RosemaryTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#HerbSpiceTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#SauceTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#SauceTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Siciliana -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Siciliana">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#SlicedTomatoTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#SlicedTomatoTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#TomatoTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#SloppyGiuseppe -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#SloppyGiuseppe">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#MeatyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyPizzaEquivalent"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Soho -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Soho">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent1"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent2"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Spiciness -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Spiciness">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#ValuePartition"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyPizza -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyPizza">
-        <equivalentClass rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyPizzaEquivalent"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Pizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyPizzaEquivalent -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyPizzaEquivalent">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Pizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#PizzaTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#SpinachTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpinachTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#SultanaTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#SultanaTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#FruitTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#SundriedTomatoTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#SundriedTomatoTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#TomatoTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#SweetPepperTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#SweetPepperTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#PepperTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#ThinAndCrispyBase -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#ThinAndCrispyBase">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#PizzaBase"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#ThinAndCrispyPizza -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#ThinAndCrispyPizza">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Pizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#TobascoPepperSauce -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#TobascoPepperSauce">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SauceTopping"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#SpicyTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#TomatoTopping -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#TomatoTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#UnclosedPizza -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#UnclosedPizza">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-    </Class>
-    
-
-
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#ValuePartition -->
-
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#ValuePartition">
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Activity">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     </Class>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Aspect -->
 
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetableTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianTopping"/>
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Aspect">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     </Class>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizza -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Compound -->
 
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizza">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Pizza"/>
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Compound">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject"/>
     </Class>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent1 -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Disposition -->
 
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent1">
-        <equivalentClass rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent2"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizza"/>
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Disposition">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/RealizableEntity"/>
     </Class>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent2 -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Event -->
 
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent2">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizza"/>
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Event">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Activity"/>
     </Class>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianTopping -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Feature -->
 
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianTopping">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#PizzaTopping"/>
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Feature">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject"/>
     </Class>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Veneziana -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Function -->
 
-    <Class rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Veneziana">
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#CheeseyPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#InterestingPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#NamedPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#RealItalianPizza"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent1"/>
-        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#VegetarianPizzaEquivalent2"/>
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Function">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Disposition"/>
     </Class>
     
 
 
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Individuals
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/FunctionalObject -->
 
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/FunctionalObject">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Object"/>
+    </Class>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#America -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/InanimatePhysicalObject -->
 
-    <Thing rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#America">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-        <rdf:type rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Country"/>
-        <rdf:type rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#DomainConcept"/>
-    </Thing>
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/InanimatePhysicalObject">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject"/>
+    </Class>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#England -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject -->
 
-    <Thing rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#England">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-        <rdf:type rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Country"/>
-        <rdf:type rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#DomainConcept"/>
-    </Thing>
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Object"/>
+    </Class>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#France -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Location -->
 
-    <Thing rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#France">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-        <rdf:type rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Country"/>
-        <rdf:type rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#DomainConcept"/>
-    </Thing>
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Location">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Object"/>
+    </Class>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Germany -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Object -->
 
-    <Thing rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Germany">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-        <rdf:type rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Country"/>
-        <rdf:type rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#DomainConcept"/>
-    </Thing>
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Object">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </Class>
     
 
 
-    <!-- http://www.co-ode.org/ontologies/pizza/pizza.owl#Italy -->
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Organism -->
 
-    <Thing rdf:about="http://www.co-ode.org/ontologies/pizza/pizza.owl#Italy">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-        <rdf:type rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#Country"/>
-        <rdf:type rdf:resource="http://www.co-ode.org/ontologies/pizza/pizza.owl#DomainConcept"/>
-    </Thing>
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Organism">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Organization -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Organization">
+        <rdfs:subClassOf rdf:resource="http://data.15926.org/rdl/RDS2222021"/>
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Object"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PeriodInTime -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PeriodInTime">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Activity"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Person -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Person">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Organism"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Phase -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Phase">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InanimatePhysicalObject"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Object"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Quality"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PointInSpace -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PointInSpace">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/SpatialLocation"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PointInTime -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PointInTime">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Event"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Quality -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Quality">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Aspect"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/QuantityDatum -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/QuantityDatum">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/RealizableEntity -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/RealizableEntity">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Aspect"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/RegionInSpace -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/RegionInSpace">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/SpatialLocation"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Role -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Role">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/RealizableEntity"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/ScalarQuantityDatum -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/ScalarQuantityDatum">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/QuantityDatum"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Scale -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Scale">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/UnitOfMeasure"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Site -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Site">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Location"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/SpatialLocation -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/SpatialLocation">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Location"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Stream -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Stream">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InanimatePhysicalObject"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/System -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/System">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/FunctionalObject"/>
+    </Class>
+    
+
+
+    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/UnitOfMeasure -->
+
+    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/UnitOfMeasure">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
+    </Class>
 </rdf:RDF>
 
 
