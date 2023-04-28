@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.souslesens.Jowl.model.reasonerExtractTriples;
+import com.souslesens.Jowl.model.reasonerInference;
 import com.souslesens.Jowl.model.reasonerInput;
 import com.souslesens.Jowl.services.ReasonerService;
 
@@ -80,7 +81,7 @@ public class ReasonerController {
             	return ResponseEntity.badRequest().body("Only one of params should be provided");
         	}
             try {
-                List<reasonerExtractTriples> result = reasonerService.getInferences(filePath, url);
+                String result = reasonerService.getInferences(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body("ERROR");
@@ -140,7 +141,7 @@ public class ReasonerController {
             return ResponseEntity.badRequest().body("Only one of params should be provided");
         }
             try {
-                List<reasonerExtractTriples> result = reasonerService.postInferences(filePath, url,ontologyContentDecoded64);
+                String result = reasonerService.postInferences(filePath, url,ontologyContentDecoded64);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body("Error");
