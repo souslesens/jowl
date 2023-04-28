@@ -17,9 +17,23 @@ public interface ReasonerService {
     String getConsistency(String filePath, String Url) throws OWLOntologyCreationException, JsonProcessingException, Exception;
     String getInferences(String filePath, String Url) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
 	// POST API METHODS
-	String postConsistency(String filePath, String url, String ontologyContentDecoded64) throws OWLOntologyCreationException, JsonProcessingException, Exception;
-	String postInferences(String filePath, String Url, String ontologyContentDecoded64) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
-	String postUnsatisfaisableClasses(String filePath, String Url, String ontologyContentDecoded64) throws Exception;
+	
+	
+	String postUnsatisfaisableClassesContent(String ontologyContentDecoded64) throws Exception;
+	
+	String postInferencesContent(String ontologyContentDecoded64)
+			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
+	
+	String postConsistencyContent(String ontologyContentDecoded64)
+			throws OWLOntologyCreationException, JsonProcessingException, Exception;
+	
+	String postInferences(String filePath, String url)
+			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
+	
+	String postConsistency(String filePath, String Url)
+			throws OWLOntologyCreationException, JsonProcessingException, Exception;
+	
+	String postUnsatisfaisableClasses( String filePath, String Url) throws Exception;
     
     
 }

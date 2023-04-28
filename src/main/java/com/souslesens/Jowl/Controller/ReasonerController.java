@@ -104,9 +104,6 @@ public class ReasonerController {
     	 ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
     	System.out.println("Inference"+ontologyContentDecoded64);
     	}
-    	ontologyContentDecoded64Bytes = Base64.getMimeDecoder().decode(ontologyContentEncoded64);
-    	ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
-    	System.out.println("EYYYYYYYYYYY"+ontologyContentDecoded64);
     	int parametersCount = countParams(ontologyContentDecoded64, filePath, url);
         if (parametersCount == 0) {
             return ResponseEntity.badRequest().body("At least one of params should be provided");
@@ -114,7 +111,14 @@ public class ReasonerController {
             return ResponseEntity.badRequest().body("Only one of params should be provided");
         }
             try {
-                String result = reasonerService.postConsistency(filePath, url,ontologyContentDecoded64);
+            	String result ;
+            	if (!(filePath == null) || !(url == null) ) {
+                result = reasonerService.postConsistency(filePath, url);
+                System.out.println("here");
+            	}else {
+            	result = reasonerService.postConsistencyContent(ontologyContentDecoded64);
+            	System.out.println("here2");
+            	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body("Error");
@@ -141,7 +145,14 @@ public class ReasonerController {
             return ResponseEntity.badRequest().body("Only one of params should be provided");
         }
             try {
-                String result = reasonerService.postInferences(filePath, url,ontologyContentDecoded64);
+            	String result ;
+            	if (!(filePath == null) || !(url == null) ) {
+                result = reasonerService.postInferences(filePath, url);
+                System.out.println("here2");
+            	}else {
+            	result = reasonerService.postInferencesContent(ontologyContentDecoded64);
+            	System.out.println("herfdsfse2");
+            	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body("Error");
@@ -161,9 +172,6 @@ public class ReasonerController {
     	 ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
     	System.out.println("Inference"+ontologyContentDecoded64);
     	}
-    	ontologyContentDecoded64Bytes = Base64.getMimeDecoder().decode(ontologyContentEncoded64);
-    	ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
-    	System.out.println("EYYYYYYYYYYY"+ontologyContentDecoded64);
     	int parametersCount = countParams(ontologyContentDecoded64, filePath, url);
         if (parametersCount == 0) {
             return ResponseEntity.badRequest().body("At least one of params should be provided");
@@ -171,7 +179,12 @@ public class ReasonerController {
             return ResponseEntity.badRequest().body("Only one of params should be provided");
         }
             try {
-                String result = reasonerService.postConsistency(filePath, url,ontologyContentDecoded64);
+            	String result ;
+            	if (!(filePath == null) || !(url == null) ) {
+                result = reasonerService.postUnsatisfaisableClasses(filePath, url);
+            	}else {
+            	result = reasonerService.postUnsatisfaisableClassesContent(ontologyContentDecoded64);
+            	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body("Error");
