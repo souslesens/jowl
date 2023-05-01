@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +36,9 @@ import org.semanticweb.owlapi.model.OWLDisjointClassesAxiom;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
 import org.semanticweb.owlapi.model.OWLFunctionalObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLHasKeyAxiom;
 import org.semanticweb.owlapi.model.OWLIndividual;
+import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectComplementOf;
@@ -49,6 +52,7 @@ import org.semanticweb.owlapi.model.OWLObjectOneOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObjectPropertyDomainAxiom;
+import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
 import org.semanticweb.owlapi.model.OWLObjectPropertyRangeAxiom;
 import org.semanticweb.owlapi.model.OWLObjectSomeValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectUnionOf;
@@ -56,6 +60,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+import org.semanticweb.owlapi.model.OWLPropertyExpression;
 import org.semanticweb.owlapi.model.OWLSameIndividualAxiom;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
@@ -64,11 +69,18 @@ import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.util.InferredAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredClassAssertionAxiomGenerator;
 import org.semanticweb.owlapi.util.InferredClassAxiomGenerator;
 import org.semanticweb.owlapi.util.InferredEntityAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredEquivalentClassAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredEquivalentDataPropertiesAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredEquivalentObjectPropertyAxiomGenerator;
 import org.semanticweb.owlapi.util.InferredIndividualAxiomGenerator;
 import org.semanticweb.owlapi.util.InferredInverseObjectPropertiesAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredObjectPropertyAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredObjectPropertyCharacteristicAxiomGenerator;
 import org.semanticweb.owlapi.util.InferredOntologyGenerator;
+import org.semanticweb.owlapi.util.InferredPropertyAssertionGenerator;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -165,6 +177,17 @@ public class ReasonerServiceImpl implements ReasonerService{
 	        iog.addGenerator(new InferredIntersectionOfAxiomGenerator());
 	        iog.addGenerator(new InferredUnionOfAxiomGenerator());
 	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
+	        iog.addGenerator(new InferredSomeValuesFromAxiomGenerator ());
+	        iog.addGenerator(new InferredHasValueAxiomGenerator());
+	        iog.addGenerator(new InferredInverseObjectPropertiesAxiomGenerator() );
+	        iog.addGenerator(new InferredAllValuesFromAxiomGenerator());
+	        // Can be deleted
+	        iog.addGenerator(new InferredClassAssertionAxiomGenerator());
+	        iog.addGenerator(new InferredEquivalentDataPropertiesAxiomGenerator());
+	        iog.addGenerator(new InferredObjectPropertyCharacteristicAxiomGenerator());
+	        iog.addGenerator(new InferredEquivalentObjectPropertyAxiomGenerator());
+	        iog.addGenerator(new InferredPropertyAssertionGenerator());
+	        // Can be deleted
 	        OWLDataFactory dataFactory = manager.getOWLDataFactory();
 	        iog.fillOntology(dataFactory, inferredOntology);
 	        manager.saveOntology(inferredOntology, new OWLXMLOntologyFormat(), IRI.create(new File("inferred.owl")));
@@ -681,6 +704,109 @@ public class ReasonerServiceImpl implements ReasonerService{
 		            return "Disjoint classes";
 		        }
 		    }
+		    
+		    public class InferredSomeValuesFromAxiomGenerator extends InferredClassAxiomGenerator<OWLSubClassOfAxiom> {
+
+		        @Override
+		        protected void addAxioms(OWLClass cls, OWLReasoner reasoner, OWLDataFactory dataFactory, Set<OWLSubClassOfAxiom> result) {
+		            for (OWLClassExpression superClass : reasoner.getEquivalentClasses(cls).getEntities()) {
+		                if (superClass.isAnonymous() && superClass instanceof OWLObjectSomeValuesFrom) {
+		                    OWLObjectSomeValuesFrom someValuesFrom = (OWLObjectSomeValuesFrom) superClass;
+		                    OWLClassExpression filler = someValuesFrom.getFiller();
+		                    if (!filler.isAnonymous()) {
+		                        OWLSubClassOfAxiom axiom = dataFactory.getOWLSubClassOfAxiom(cls, someValuesFrom);
+		                        result.add(axiom);
+		                    }
+		                }
+		            }
+		        }
+
+		        public Set<InferredAxiomGenerator<?>> getInferredAxiomGenerators() {
+		            return Collections.emptySet(); // No nested inferred axiom generators
+		        }
+
+		        @Override
+		        public String getLabel() {
+		            return "Some values from";
+		        }
+		    }
+		    
+		    public class InferredHasValueAxiomGenerator extends InferredClassAxiomGenerator<OWLSubClassOfAxiom> {
+
+		        @Override
+		        protected void addAxioms(OWLClass cls, OWLReasoner reasoner, OWLDataFactory dataFactory, Set<OWLSubClassOfAxiom> result) {
+		            for (OWLClassExpression equivalentClass : reasoner.getEquivalentClasses(cls).getEntities()) {
+		                if (equivalentClass.isAnonymous() && equivalentClass instanceof OWLObjectHasValue) {
+		                    OWLObjectHasValue hasValue = (OWLObjectHasValue) equivalentClass;
+		                    OWLSubClassOfAxiom axiom = dataFactory.getOWLSubClassOfAxiom(cls, hasValue);
+		                    result.add(axiom);
+		                }
+		            }
+		        }
+
+		        public Set<InferredAxiomGenerator<?>> getInferredAxiomGenerators() {
+		            return Collections.emptySet(); // No nested inferred axiom generators
+		        }
+
+		        @Override
+		        public String getLabel() {
+		            return "Has value";
+		        }
+		    }
+		    
+		    public class InferredInverseObjectPropertiesAxiomGenerator implements InferredAxiomGenerator<OWLInverseObjectPropertiesAxiom> {
+
+		        @Override
+		        public Set<OWLInverseObjectPropertiesAxiom> createAxioms(OWLDataFactory dataFactory, OWLReasoner reasoner) {
+		            Set<OWLInverseObjectPropertiesAxiom> result = new HashSet<>();
+		            for (OWLObjectProperty objectProperty : reasoner.getRootOntology().getObjectPropertiesInSignature()) {
+		                addAxioms(objectProperty, reasoner, dataFactory, result);
+		            }
+		            return result;
+		        }
+
+		        protected void addAxioms(OWLObjectProperty entity, OWLReasoner reasoner, OWLDataFactory dataFactory, Set<OWLInverseObjectPropertiesAxiom> result) {
+		            for (OWLObjectPropertyExpression inverse : reasoner.getInverseObjectProperties(entity).getEntities()) {
+		                if (!inverse.equals(entity)) {
+		                    result.add(dataFactory.getOWLInverseObjectPropertiesAxiom(entity, inverse));
+		                }
+		            }
+		        }
+
+		        @Override
+		        public String getLabel() {
+		            return "Inverse object properties";
+		        }
+		    }
+		    
+		    public class InferredAllValuesFromAxiomGenerator implements InferredAxiomGenerator<OWLSubClassOfAxiom> {
+
+		        @Override
+		        public Set<OWLSubClassOfAxiom> createAxioms(OWLDataFactory dataFactory, OWLReasoner reasoner) {
+		            Set<OWLSubClassOfAxiom> result = new HashSet<>();
+		            for (OWLClass owlClass : reasoner.getRootOntology().getClassesInSignature()) {
+		                addAxioms(owlClass, reasoner, dataFactory, result);
+		            }
+		            return result;
+		        }
+
+		        protected void addAxioms(OWLClass entity, OWLReasoner reasoner, OWLDataFactory dataFactory, Set<OWLSubClassOfAxiom> result) {
+		            for (OWLObjectProperty objectProperty : reasoner.getRootOntology().getObjectPropertiesInSignature()) {
+		                NodeSet<OWLClass> possibleRanges = reasoner.getObjectPropertyRanges(objectProperty, true);
+		                if (!possibleRanges.isEmpty()) {
+		                    OWLClassExpression allValuesFrom = dataFactory.getOWLObjectAllValuesFrom(objectProperty, possibleRanges.getFlattened().iterator().next());
+		                    OWLSubClassOfAxiom axiom = dataFactory.getOWLSubClassOfAxiom(entity, allValuesFrom);
+		                    result.add(axiom);
+		                }
+		            }
+		        }
+
+		        @Override
+		        public String getLabel() {
+		            return "All values from";
+		        }
+		    }
+		    
 }
 //		        System.out.println("Ontology ComputeInference Completed");
 //		        Set<OWLAxiom> axioms = ontology.getAxioms();
