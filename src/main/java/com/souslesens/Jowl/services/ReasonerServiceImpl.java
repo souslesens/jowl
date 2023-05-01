@@ -39,6 +39,7 @@ import org.semanticweb.owlapi.model.OWLFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLHasKeyAxiom;
 import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
+import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectComplementOf;
@@ -177,10 +178,10 @@ public class ReasonerServiceImpl implements ReasonerService{
 	        iog.addGenerator(new InferredIntersectionOfAxiomGenerator());
 	        iog.addGenerator(new InferredUnionOfAxiomGenerator());
 	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
-	        iog.addGenerator(new InferredSomeValuesFromAxiomGenerator ());
 	        iog.addGenerator(new InferredHasValueAxiomGenerator());
 	        iog.addGenerator(new InferredInverseObjectPropertiesAxiomGenerator() );
 	        iog.addGenerator(new InferredAllValuesFromAxiomGenerator());
+	        iog.addGenerator(new InferredSameValueSomeValuesFromAxiomGenerator());
 	        // Can be deleted
 	        iog.addGenerator(new InferredClassAssertionAxiomGenerator());
 	        iog.addGenerator(new InferredEquivalentDataPropertiesAxiomGenerator());
@@ -807,6 +808,37 @@ public class ReasonerServiceImpl implements ReasonerService{
 		        }
 		    }
 		    
+		    public class InferredSameValueSomeValuesFromAxiomGenerator extends InferredClassAxiomGenerator<OWLSubClassOfAxiom> {
+
+		        @Override
+		        protected void addAxioms(OWLClass entity, OWLReasoner reasoner, OWLDataFactory dataFactory, Set<OWLSubClassOfAxiom> result) {
+		            for (OWLNamedIndividual individual : reasoner.getRootOntology().getIndividualsInSignature()) {
+		                for (OWLDataProperty dataProperty : reasoner.getRootOntology().getDataPropertiesInSignature()) {
+		                    Set<OWLLiteral> literals = reasoner.getDataPropertyValues(individual, dataProperty);
+		                    for (OWLLiteral literal : literals) {
+		                        OWLClassExpression someValuesFrom = dataFactory.getOWLDataHasValue(dataProperty, literal);
+		                        OWLSubClassOfAxiom axiom = dataFactory.getOWLSubClassOfAxiom(entity, someValuesFrom);
+		                        result.add(axiom);
+		                    }
+		                }
+		                for (OWLObjectProperty objectProperty : reasoner.getRootOntology().getObjectPropertiesInSignature()) {
+		                    for (OWLNamedIndividual value : reasoner.getObjectPropertyValues(individual, objectProperty).getFlattened()) {
+		                        OWLClassExpression someValuesFrom = dataFactory.getOWLObjectHasValue(objectProperty, value);
+		                        OWLSubClassOfAxiom axiom = dataFactory.getOWLSubClassOfAxiom(entity, someValuesFrom);
+		                        result.add(axiom);
+		                    }
+		                }
+		            }
+		        }
+
+		        @Override
+		        public String getLabel() {
+		            return "Same value implies some values from";
+		        }
+		    }
+
+		   
+
 }
 //		        System.out.println("Ontology ComputeInference Completed");
 //		        Set<OWLAxiom> axioms = ontology.getAxioms();
