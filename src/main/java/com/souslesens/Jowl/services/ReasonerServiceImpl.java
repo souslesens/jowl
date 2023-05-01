@@ -32,6 +32,7 @@ import org.semanticweb.owlapi.model.OWLDatatype;
 import org.semanticweb.owlapi.model.OWLDeclarationAxiom;
 import org.semanticweb.owlapi.model.OWLDifferentIndividualsAxiom;
 import org.semanticweb.owlapi.model.OWLDisjointClassesAxiom;
+import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
 import org.semanticweb.owlapi.model.OWLFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLIndividual;
@@ -158,9 +159,12 @@ public class ReasonerServiceImpl implements ReasonerService{
 	        reasoner.precomputeInferences(InferenceType.values());
 	        OWLOntology inferredOntology = manager.createOntology();
 	        InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner);
+	        iog.addGenerator(new InferredEquivalentClassesAxiomGenerator());
 	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
 	        iog.addGenerator(new InferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
 	        iog.addGenerator(new InferredIntersectionOfAxiomGenerator());
+	        iog.addGenerator(new InferredUnionOfAxiomGenerator());
+	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
 	        OWLDataFactory dataFactory = manager.getOWLDataFactory();
 	        iog.fillOntology(dataFactory, inferredOntology);
 	        manager.saveOntology(inferredOntology, new OWLXMLOntologyFormat(), IRI.create(new File("inferred.owl")));
@@ -567,6 +571,23 @@ public class ReasonerServiceImpl implements ReasonerService{
 					return "Same individual axioms";
 				}
 		    }
+		    
+		    public class InferredEquivalentClassesAxiomGenerator extends InferredClassAxiomGenerator<OWLEquivalentClassesAxiom> {
+
+		        @Override
+		        protected void addAxioms(OWLClass entity, OWLReasoner reasoner, OWLDataFactory dataFactory, Set<OWLEquivalentClassesAxiom> result) {
+		            Set<OWLClass> equivalentClasses = reasoner.getEquivalentClasses(entity).getEntities();
+		            if (equivalentClasses.size() > 1) {
+		                result.add(dataFactory.getOWLEquivalentClassesAxiom(equivalentClasses));
+		            }
+		        }
+
+		        @Override
+		        public String getLabel() {
+		            return "Equivalent classes";
+		        }
+		    }
+		    
 		    public class InferredDifferentIndividualAxiomGenerator extends InferredIndividualAxiomGenerator<OWLDifferentIndividualsAxiom> {
 
 		        @Override
@@ -610,7 +631,56 @@ public class ReasonerServiceImpl implements ReasonerService{
 		            return "Inferred Intersection Of";
 		        }
 		    }
+		    
+		    public class InferredUnionOfAxiomGenerator extends InferredClassAxiomGenerator<OWLSubClassOfAxiom> {
+		        @Override
+		        protected void addAxioms(OWLClass entity, OWLReasoner reasoner, OWLDataFactory dataFactory, Set<OWLSubClassOfAxiom> result) {
+		            Set<OWLClass> directSuperclasses = reasoner.getSuperClasses(entity, true).getFlattened();
+		            if (directSuperclasses.size() > 1) {
+		                result.add(dataFactory.getOWLSubClassOfAxiom(entity, dataFactory.getOWLObjectUnionOf(directSuperclasses)));
+		            }
+		        }
 
+		        @Override
+		        public String getLabel() {
+		            return "Inferred Union Of";
+		        }
+		    }
+		    
+
+		    public class InferredDisjointClassesAxiomGenerator extends InferredClassAxiomGenerator<OWLDisjointClassesAxiom> {
+
+		        @Override
+		        protected void addAxioms(OWLClass entity, OWLReasoner reasoner, OWLDataFactory dataFactory, Set<OWLDisjointClassesAxiom> result) {
+		            Set<OWLClass> allClasses = reasoner.getRootOntology().getClassesInSignature();
+		            for (OWLClass cls : allClasses) {
+		                if (!cls.equals(entity)) {
+		                	System.out.println(entity);
+		                	Set<OWLClass> theEQ = reasoner.getEquivalentClasses(entity).getEntities();
+		                	System.out.println("COME ONNNNNN "+theEQ);
+		                    NodeSet<OWLClass> disjointClasses = reasoner.getDisjointClasses(entity);
+		                    System.out.println(disjointClasses);
+		                    if (disjointClasses.containsEntity(cls)) {
+		                    	
+		                        Set<OWLClass> equivalentClasses1 = reasoner.getEquivalentClasses(entity).getEntities();
+		                        Set<OWLClass> equivalentClasses2 = reasoner.getEquivalentClasses(cls).getEntities();
+		                        for (OWLClass eqClass1 : equivalentClasses1) {
+		                            for (OWLClass eqClass2 : equivalentClasses2) {
+		                                if (!eqClass1.equals(eqClass2)) {
+		                                    result.add(dataFactory.getOWLDisjointClassesAxiom(eqClass1, eqClass2));
+		                                }
+		                            }
+		                        }
+		                    }
+		                }
+		            }
+		        }
+
+		        @Override
+		        public String getLabel() {
+		            return "Disjoint classes";
+		        }
+		    }
 }
 //		        System.out.println("Ontology ComputeInference Completed");
 //		        Set<OWLAxiom> axioms = ontology.getAxioms();
