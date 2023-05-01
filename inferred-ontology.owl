@@ -21,579 +21,11 @@
     
 
 
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/activityBoundOf -->
+    <!-- http://example.org/hasWarmBlood -->
 
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/activityBoundOf">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/activityPartOf"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityBound"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/activityPartOf -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/activityPartOf">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/partOf"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityPart"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/after -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/after">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/occursRelativeTo"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/before"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/approvedBy -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/approvedBy">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/interestOf"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/approves"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/approves -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/approves">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasInterestIn"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/arrangedPartOf -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/arrangedPartOf">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/partOf"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasArrangedPart"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/assembledPartOf -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/assembledPartOf">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/arrangedPartOf"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasAssembledPart"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/before -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/before">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/occursRelativeTo"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/begins -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/begins">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/activityBoundOf"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasBeginning"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/causedBy -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/causedBy">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/after"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/causes"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/causes -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/causes">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/before"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/concretizedBy -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/concretizedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/concretizes"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/concretizes -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/concretizes">
+    <ObjectProperty rdf:about="http://example.org/hasWarmBlood">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/connectedTo -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/connectedTo">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/connectedTo"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/containedBy -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/containedBy">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/contains"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/contains -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/contains">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/createdBy -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/createdBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/creates"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/creates -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/creates">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/datumUOM -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/datumUOM">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/directlyConnectedTo -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/directlyConnectedTo">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/connectedTo"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/directlyConnectedTo"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/dispositionOf -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/dispositionOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasDisposition"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/ends -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/ends">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/activityBoundOf"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasEnding"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/featureOf -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/featureOf">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/arrangedPartOf"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasFeature"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/functionOf -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/functionOf">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/dispositionOf"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasFunction"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/functionalPartOf -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/functionalPartOf">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/partOf"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasFunctionalPart"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityBound -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityBound">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityPart"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityPart -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityPart">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasPart"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasArrangedPart -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasArrangedPart">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasPart"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasAssembledPart -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasAssembledPart">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasArrangedPart"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasBeginning -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasBeginning">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityBound"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasDisposition -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasDisposition">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasEnding -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasEnding">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasActivityBound"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasFeature -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasFeature">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasArrangedPart"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasFunction -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasFunction">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasDisposition"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasFunctionalPart -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasFunctionalPart">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasPart"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasInstalled -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasInstalled">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/installedAs"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasInterestIn -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasInterestIn">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/interestOf"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasPart -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasPart">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/partOf"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasParticipant -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasParticipant">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/participantIn"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasPhysicalQuantity -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasPhysicalQuantity">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasQuality"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/physicalQuantityOf"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasQuality -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasQuality">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityOf"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasResident -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasResident">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/residesIn"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasRole -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasRole">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/roleOf"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/hasSubLocation -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/hasSubLocation">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/hasPart"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/subLocationOf"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/installedAs -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/installedAs">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/interestOf -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/interestOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/isAbout -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/isAbout">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/representedIn"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/occursRelativeTo -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/occursRelativeTo">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/occursRelativeTo"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/partOf -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/partOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/participantIn -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/participantIn">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/physicalQuantityOf -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/physicalQuantityOf">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/qualityOf"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/qualityOf -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/qualityOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantifiedAs">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/representedIn"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/quantifiesQuality"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/quantifiesQuality -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/quantifiesQuality">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/isAbout"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/realizedIn -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/realizedIn">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/realizes"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/realizes -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/realizes">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/representedBy -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/representedBy">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/representedIn"/>
-        <inverseOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/represents"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/representedIn -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/representedIn">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/represents -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/represents">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/isAbout"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/residesIn -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/residesIn">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/locatedRelativeTo"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/roleOf -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/roleOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </ObjectProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/subLocationOf -->
-
-    <ObjectProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/subLocationOf">
-        <rdfs:subPropertyOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/partOf"/>
-    </ObjectProperty>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Data properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/approvedOn -->
-
-    <DatatypeProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/approvedOn">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-    </DatatypeProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/datumValue -->
-
-    <DatatypeProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/datumValue">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-    </DatatypeProperty>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantityValue -->
-
-    <DatatypeProperty rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/qualityQuantityValue">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-    </DatatypeProperty>
     
 
 
@@ -608,276 +40,93 @@
     
 
 
-    <!-- http://data.15926.org/rdl/RDS2222021 -->
+    <!-- http://example.org/Cat -->
 
-    <Class rdf:about="http://data.15926.org/rdl/RDS2222021">
+    <Class rdf:about="http://example.org/Cat">
+        <equivalentClass rdf:resource="http://example.org/Feline"/>
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     </Class>
     
 
 
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Activity -->
+    <!-- http://example.org/Dog -->
 
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Activity">
+    <Class rdf:about="http://example.org/Dog">
+        <rdfs:subClassOf rdf:resource="http://example.org/Mammal"/>
+    </Class>
+    
+
+
+    <!-- http://example.org/Feline -->
+
+    <Class rdf:about="http://example.org/Feline">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     </Class>
     
 
 
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Aspect -->
+    <!-- http://example.org/Mammal -->
 
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Aspect">
+    <Class rdf:about="http://example.org/Mammal">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     </Class>
     
 
 
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Compound -->
+    <!-- http://example.org/Reptile -->
 
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Compound">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Disposition -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Disposition">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/RealizableEntity"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Event -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Event">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Activity"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Feature -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Feature">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Function -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Function">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Disposition"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/FunctionalObject -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/FunctionalObject">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Object"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/InanimatePhysicalObject -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/InanimatePhysicalObject">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Object"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Location -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Location">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Object"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Object -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Object">
+    <Class rdf:about="http://example.org/Reptile">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     </Class>
     
 
 
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Organism -->
+    <!-- http://example.org/WarmBlood -->
 
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Organism">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject"/>
+    <Class rdf:about="http://example.org/WarmBlood">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     </Class>
     
 
 
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Organization -->
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
 
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Organization">
-        <rdfs:subClassOf rdf:resource="http://data.15926.org/rdl/RDS2222021"/>
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Object"/>
-    </Class>
     
 
 
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PeriodInTime -->
+    <!-- http://example.org/buddy -->
 
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PeriodInTime">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Activity"/>
-    </Class>
+    <Thing rdf:about="http://example.org/buddy">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://example.org/Dog"/>
+        <rdf:type rdf:resource="http://example.org/Mammal"/>
+    </Thing>
     
 
 
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Person -->
+    <!-- http://example.org/fido -->
 
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Person">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Organism"/>
-    </Class>
+    <Thing rdf:about="http://example.org/fido">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://example.org/Dog"/>
+        <rdf:type rdf:resource="http://example.org/Mammal"/>
+    </Thing>
     
 
 
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Phase -->
+    <!-- http://example.org/ronaldo -->
 
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Phase">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InanimatePhysicalObject"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalObject">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Object"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PhysicalQuantity">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Quality"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PointInSpace -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PointInSpace">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/SpatialLocation"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/PointInTime -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/PointInTime">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Event"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Quality -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Quality">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Aspect"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/QuantityDatum -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/QuantityDatum">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/RealizableEntity -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/RealizableEntity">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Aspect"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/RegionInSpace -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/RegionInSpace">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/SpatialLocation"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Role -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Role">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/RealizableEntity"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/ScalarQuantityDatum -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/ScalarQuantityDatum">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/QuantityDatum"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Scale -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Scale">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/UnitOfMeasure"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Site -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Site">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Location"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/SpatialLocation -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/SpatialLocation">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Location"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/Stream -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/Stream">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InanimatePhysicalObject"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/System -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/System">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/FunctionalObject"/>
-    </Class>
-    
-
-
-    <!-- http://rds.posccaesar.org/ontology/lis14/rdl/UnitOfMeasure -->
-
-    <Class rdf:about="http://rds.posccaesar.org/ontology/lis14/rdl/UnitOfMeasure">
-        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
-    </Class>
+    <Thing rdf:about="http://example.org/ronaldo">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://example.org/Dog"/>
+        <rdf:type rdf:resource="http://example.org/Mammal"/>
+    </Thing>
 </rdf:RDF>
 
 
