@@ -52,6 +52,7 @@ import org.semanticweb.owlapi.model.OWLObjectMinCardinality;
 import org.semanticweb.owlapi.model.OWLObjectOneOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
+import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLObjectPropertyDomainAxiom;
 import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
 import org.semanticweb.owlapi.model.OWLObjectPropertyRangeAxiom;
@@ -182,6 +183,7 @@ public class ReasonerServiceImpl implements ReasonerService{
 	        iog.addGenerator(new InferredInverseObjectPropertiesAxiomGenerator() );
 	        iog.addGenerator(new InferredAllValuesFromAxiomGenerator());
 	        iog.addGenerator(new InferredSameValueSomeValuesFromAxiomGenerator());
+	        iog.addGenerator(new InferredDomainAndRangeAxiomGenerator());
 	        // Can be deleted
 	        iog.addGenerator(new InferredClassAssertionAxiomGenerator());
 	        iog.addGenerator(new InferredEquivalentDataPropertiesAxiomGenerator());
@@ -628,7 +630,7 @@ public class ReasonerServiceImpl implements ReasonerService{
 		            return "Different individuals";
 		        }
 		    }
-		    
+		    	
 		    public class InferredIntersectionOfAxiomGenerator extends InferredClassAxiomGenerator<OWLEquivalentClassesAxiom> {
 
 		        @Override
@@ -834,6 +836,33 @@ public class ReasonerServiceImpl implements ReasonerService{
 		        @Override
 		        public String getLabel() {
 		            return "Same value implies some values from";
+		        }
+		    }
+		    
+		    public class InferredDomainAndRangeAxiomGenerator implements InferredAxiomGenerator<OWLObjectPropertyAxiom> {
+
+		        @Override
+		        public Set<OWLObjectPropertyAxiom> createAxioms(OWLDataFactory dataFactory, OWLReasoner reasoner) {
+		            Set<OWLObjectPropertyAxiom> result = new HashSet<>();
+
+		            for (OWLObjectProperty property : reasoner.getRootOntology().getObjectPropertiesInSignature()) {
+		                // Add inferred domain axioms
+		                for (OWLClass domain : reasoner.getObjectPropertyDomains(property, true).getFlattened()) {
+		                    result.add(dataFactory.getOWLObjectPropertyDomainAxiom(property, domain));
+		                }
+
+		                // Add inferred range axioms
+		                for (OWLClass range : reasoner.getObjectPropertyRanges(property, true).getFlattened()) {
+		                    result.add(dataFactory.getOWLObjectPropertyRangeAxiom(property, range));
+		                }
+		            }
+
+		            return result;
+		        }
+
+		        @Override
+		        public String getLabel() {
+		            return "Inferred domains and ranges";
 		        }
 		    }
 

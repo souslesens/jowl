@@ -11,217 +11,925 @@
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Declaration>
-        <Class IRI="http://example.org/CatLover"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Window"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://example.org/alice"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://example.org/fido"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#SLR"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://example.org/whiskers"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
     </Declaration>
     <Declaration>
-        <Class IRI="http://example.org/DogLover"/>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#size"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://example.org/charlie"/>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
     </Declaration>
     <Declaration>
-        <Class IRI="http://example.org/Cat"/>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#units"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="http://example.org/hasPet"/>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#min"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://example.org/bob"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Large-Format"/>
     </Declaration>
     <Declaration>
-        <Class IRI="http://example.org/Person"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
     </Declaration>
     <Declaration>
-        <Class IRI="http://example.org/Dog"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#f-stop"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.xfront.com/owl/ontologies/camera/#ThroughTheLens"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#BodyWithNonAdjustableShutterSpeed"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#aperture"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.xfront.com/owl/ontologies/camera/#WindowOnTopOfCamera"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#max"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#currency"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#focal-length"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Digital"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
     </Declaration>
     <SubClassOf>
-        <Class IRI="http://example.org/Cat"/>
         <Class IRI="Thing"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="http://example.org/Cat"/>
+        <Class IRI="Thing"/>
         <ObjectAllValuesFrom>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Thing"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Thing"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Thing"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
             <Class IRI="Thing"/>
         </ObjectAllValuesFrom>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="http://example.org/Cat"/>
-        <ObjectHasValue>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
-            <NamedIndividual IRI="http://example.org/fido"/>
-        </ObjectHasValue>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://example.org/Cat"/>
-        <ObjectHasValue>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
-            <NamedIndividual IRI="http://example.org/whiskers"/>
-        </ObjectHasValue>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://example.org/CatLover"/>
         <Class IRI="Thing"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        </ObjectAllValuesFrom>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="http://example.org/CatLover"/>
+        <Class IRI="Thing"/>
         <ObjectAllValuesFrom>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
             <Class IRI="Thing"/>
         </ObjectAllValuesFrom>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="http://example.org/CatLover"/>
-        <ObjectHasValue>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
-            <NamedIndividual IRI="http://example.org/fido"/>
-        </ObjectHasValue>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://example.org/CatLover"/>
-        <ObjectHasValue>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
-            <NamedIndividual IRI="http://example.org/whiskers"/>
-        </ObjectHasValue>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://example.org/Dog"/>
-        <Class IRI="Thing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://example.org/Dog"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
         <ObjectAllValuesFrom>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#BodyWithNonAdjustableShutterSpeed"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#BodyWithNonAdjustableShutterSpeed"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#BodyWithNonAdjustableShutterSpeed"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#BodyWithNonAdjustableShutterSpeed"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#BodyWithNonAdjustableShutterSpeed"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#BodyWithNonAdjustableShutterSpeed"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
             <Class IRI="Thing"/>
         </ObjectAllValuesFrom>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="http://example.org/Dog"/>
-        <ObjectHasValue>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
-            <NamedIndividual IRI="http://example.org/fido"/>
-        </ObjectHasValue>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://example.org/Dog"/>
-        <ObjectHasValue>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
-            <NamedIndividual IRI="http://example.org/whiskers"/>
-        </ObjectHasValue>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://example.org/DogLover"/>
-        <Class IRI="Thing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://example.org/DogLover"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#BodyWithNonAdjustableShutterSpeed"/>
         <ObjectAllValuesFrom>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#BodyWithNonAdjustableShutterSpeed"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
             <Class IRI="Thing"/>
         </ObjectAllValuesFrom>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="http://example.org/DogLover"/>
-        <ObjectHasValue>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
-            <NamedIndividual IRI="http://example.org/fido"/>
-        </ObjectHasValue>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://example.org/DogLover"/>
-        <ObjectHasValue>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
-            <NamedIndividual IRI="http://example.org/whiskers"/>
-        </ObjectHasValue>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://example.org/Person"/>
-        <Class IRI="Thing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://example.org/Person"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
         <ObjectAllValuesFrom>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Digital"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Digital"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Digital"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Digital"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Digital"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Digital"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
             <Class IRI="Thing"/>
         </ObjectAllValuesFrom>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="http://example.org/Person"/>
-        <ObjectHasValue>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
-            <NamedIndividual IRI="http://example.org/fido"/>
-        </ObjectHasValue>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Digital"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        </ObjectAllValuesFrom>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="http://example.org/Person"/>
-        <ObjectHasValue>
-            <ObjectProperty IRI="http://example.org/hasPet"/>
-            <NamedIndividual IRI="http://example.org/whiskers"/>
-        </ObjectHasValue>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Digital"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Large-Format"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Large-Format"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Large-Format"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Large-Format"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Large-Format"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Large-Format"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+            <Class IRI="Thing"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Large-Format"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Large-Format"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+            <Class IRI="Thing"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        <Class IRI="Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+            <Class IRI="Thing"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+        <Class IRI="Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+            <Class IRI="Thing"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        <Class IRI="Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+            <Class IRI="Thing"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#SLR"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#SLR"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#SLR"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#SLR"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#SLR"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#SLR"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+            <Class IRI="Thing"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#SLR"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#SLR"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Window"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+            <Class IRI="Thing"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Window"/>
+        <Class IRI="Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Window"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Window"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Window"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Window"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Window"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+            <Class IRI="Thing"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Window"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Window"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+            <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        </ObjectAllValuesFrom>
     </SubClassOf>
     <ClassAssertion>
-        <Class IRI="http://example.org/Person"/>
-        <NamedIndividual IRI="http://example.org/alice"/>
+        <Class IRI="Thing"/>
+        <NamedIndividual IRI="http://www.xfront.com/owl/ontologies/camera/#ThroughTheLens"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        <NamedIndividual IRI="http://www.xfront.com/owl/ontologies/camera/#ThroughTheLens"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Window"/>
+        <NamedIndividual IRI="http://www.xfront.com/owl/ontologies/camera/#ThroughTheLens"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="Thing"/>
-        <NamedIndividual IRI="http://example.org/alice"/>
+        <NamedIndividual IRI="http://www.xfront.com/owl/ontologies/camera/#WindowOnTopOfCamera"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="http://example.org/CatLover"/>
-        <NamedIndividual IRI="http://example.org/bob"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+        <NamedIndividual IRI="http://www.xfront.com/owl/ontologies/camera/#WindowOnTopOfCamera"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="Thing"/>
-        <NamedIndividual IRI="http://example.org/bob"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Window"/>
+        <NamedIndividual IRI="http://www.xfront.com/owl/ontologies/camera/#WindowOnTopOfCamera"/>
     </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="http://example.org/DogLover"/>
-        <NamedIndividual IRI="http://example.org/charlie"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="Thing"/>
-        <NamedIndividual IRI="http://example.org/charlie"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="http://example.org/Dog"/>
-        <NamedIndividual IRI="http://example.org/fido"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="Thing"/>
-        <NamedIndividual IRI="http://example.org/fido"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="http://example.org/Cat"/>
-        <NamedIndividual IRI="http://example.org/whiskers"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="Thing"/>
-        <NamedIndividual IRI="http://example.org/whiskers"/>
-    </ClassAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://example.org/hasPet"/>
-        <NamedIndividual IRI="http://example.org/bob"/>
-        <NamedIndividual IRI="http://example.org/whiskers"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://example.org/hasPet"/>
-        <NamedIndividual IRI="http://example.org/charlie"/>
-        <NamedIndividual IRI="http://example.org/fido"/>
-    </ObjectPropertyAssertion>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="http://example.org/hasPet"/>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
         <ObjectProperty IRI="topObjectProperty"/>
     </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+        <ObjectProperty IRI="topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+        <ObjectProperty IRI="topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+        <ObjectProperty IRI="topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+        <ObjectProperty IRI="topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#PurchaseableItem"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+        <Class IRI="Thing"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Camera"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#body"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#compatibleWith"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Body"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#cost"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Money"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#lens"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Lens"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#part"/>
+        <Class IRI="Thing"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#shutter-speed"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Range"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="http://www.xfront.com/owl/ontologies/camera/#viewFinder"/>
+        <Class IRI="http://www.xfront.com/owl/ontologies/camera/#Viewer"/>
+    </ObjectPropertyRange>
+    <EquivalentDataProperties>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#aperture"/>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#f-stop"/>
+    </EquivalentDataProperties>
+    <EquivalentDataProperties>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#focal-length"/>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#size"/>
+    </EquivalentDataProperties>
+    <SubDataPropertyOf>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#aperture"/>
+        <DataProperty IRI="topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#currency"/>
+        <DataProperty IRI="topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#f-stop"/>
+        <DataProperty IRI="topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#focal-length"/>
+        <DataProperty IRI="topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#max"/>
+        <DataProperty IRI="topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#min"/>
+        <DataProperty IRI="topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#size"/>
+        <DataProperty IRI="topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="http://www.xfront.com/owl/ontologies/camera/#units"/>
+        <DataProperty IRI="topDataProperty"/>
+    </SubDataPropertyOf>
 </Ontology>
 
 
