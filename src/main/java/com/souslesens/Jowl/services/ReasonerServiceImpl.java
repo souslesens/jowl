@@ -1,6 +1,7 @@
 package com.souslesens.Jowl.services;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -158,14 +159,23 @@ public class ReasonerServiceImpl implements ReasonerService{
 	    		    e.printStackTrace();
 	    		}
 	    	  ontology = manager.loadOntologyFromOntologyDocument(ontologyStream);
+		     	if(filePath.isEmpty() == false) {
+		        	
+		            ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
+		        }
 	    	
 	     }
-	     	if(filePath.isEmpty() == false) {
-	        	
-	            ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
-	        } else {
+	     	else {
 	        	return null;
 	        }
+	     	 try {
+	             File file = new File(filePath);
+	             FileWriter writer = new FileWriter(file);
+	             writer.write("");
+	             writer.close();
+	         } catch (IOException e) {
+	             e.printStackTrace();
+	         }
 	        PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 	        OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
 	        String fileName = "inferred-ontology.owl";
@@ -193,7 +203,6 @@ public class ReasonerServiceImpl implements ReasonerService{
 	        // Can be deleted
 	        OWLDataFactory dataFactory = manager.getOWLDataFactory();
 	        iog.fillOntology(dataFactory, inferredOntology);
-	        manager.saveOntology(inferredOntology, new OWLXMLOntologyFormat(), IRI.create(new File("inferred.owl")));
 	        System.out.println("Infered Ontologie \n"+inferredOntology);
 	        //////////////////////// TEST 
 
