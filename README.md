@@ -49,7 +49,7 @@ __Base URL__ : https://localhost:8080
 | _POST_ | /reasoner/consistency | Checking if the passed ontology file is consistent or not : can work with any input  (File , URL , Text) |
 | _POST_ | /reasoner/unsatisfiable | Checking if the passed ontology file has an unsatifiable classes : can work with any input  (File , URL , Text) |
 | _POST_ | /reasoner/inference | Generating Inferences : : can work with any input  (File , URL , Text) |
-| _POST_ | /jena/rdftriple | Jena Triple Parsedr : : can work with any input and any file format  (File , URL , Text) |
+| _POST_ | /jena/rdftriple | Jena Triple Parsedr : : can work and support any format (NQUADS,N3,SHACLC,RDFJSON,NTRIPLES,JSONLD,TURTLE,RDFXML,OWL) and can work with any input type  (File , URL , Text) |
 
 ----------------
 ### Example Of An API Use
