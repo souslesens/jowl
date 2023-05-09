@@ -5,12 +5,6 @@ HELP.md
 /bin/
 /target/
 
-# Maven files
-/.m2/
-/.mvn/
-mvnw
-mvnw.cmd
-
 # Log files
 /log/
 
