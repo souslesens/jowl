@@ -1,8 +1,24 @@
 HELP.md
-target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+/bin/
+/target/
+
+# Maven files
+/.m2/
+/.mvn/
+mvnw
+mvnw.cmd
+
+# Log files
+/log/
+
+# Miscellaneous
+*.class
+*.jar
+*.war
+*.ear
 
 ### STS ###
 .apt_generated
@@ -31,3 +47,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# Temporary files
+*.log*
+*.tmp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
