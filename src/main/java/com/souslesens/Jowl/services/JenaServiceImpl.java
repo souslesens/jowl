@@ -26,7 +26,7 @@ public class JenaServiceImpl implements JenaService {
 	@Override
 	public List<jenaTripleParser> getTriples(String filePath, String url,
 			String ontologyContentEncoded64) {
-		System.out.println(filePath+""+url+""+ontologyContentEncoded64);
+		
 		ArrayList<jenaTripleParser> tripleParser = new ArrayList<>();
 		Model m = ModelFactory.createDefaultModel();
 		
