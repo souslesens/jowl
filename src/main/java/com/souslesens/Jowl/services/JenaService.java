@@ -7,5 +7,5 @@ import com.souslesens.Jowl.model.jenaTripleParser;
 public interface JenaService {
 
 	
-	List<jenaTripleParser> getTriples(String filePath, String Url,String ontologyContentDecoded64 );
+	List<jenaTripleParser> getTriples(String filePath, String Url,String ontologyContentEncoded64 );
 }
