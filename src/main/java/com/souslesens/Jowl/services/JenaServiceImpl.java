@@ -39,10 +39,43 @@ public class JenaServiceImpl implements JenaService {
             } else if (ontologyContentEncoded64 != null && filePath == null && url == null) {
                 byte[] ontologyBytes =  Base64.getMimeDecoder().decode(ontologyContentEncoded64);
                 try (InputStream inputStream = new ByteArrayInputStream(ontologyBytes)) {
-                	System.out.println(inputStream); // debugging 
-                	 m.read(inputStream, null);
+                    RDFDataMgr.read(m, inputStream, null, RDFLanguages.RDFXML); //  RDF/XML  and OWL )
+                } catch (Exception e) {
+                    try (InputStream inputStream = new ByteArrayInputStream(ontologyBytes)) {
+                        RDFDataMgr.read(m, inputStream, null, RDFLanguages.TURTLE); // Turtle and OWL
+                    } catch (Exception e2) {
+                        try (InputStream inputStream = new ByteArrayInputStream(ontologyBytes)) {
+                        	RDFDataMgr.read(m, inputStream, null, RDFLanguages.JSONLD); // JSONLD
+                        }catch (Exception e3){
+                            try (InputStream inputStream = new ByteArrayInputStream(ontologyBytes)) {
+                            	RDFDataMgr.read(m, inputStream, null, RDFLanguages.NTRIPLES);  // NTRIPLES
+                            }
+                            catch (Exception e4){
+                                try (InputStream inputStream = new ByteArrayInputStream(ontologyBytes)) {
+                                	RDFDataMgr.read(m, inputStream, null, RDFLanguages.RDFJSON);  // RDFJSON
+                                }catch (Exception e5) {
+                                    try (InputStream inputStream = new ByteArrayInputStream(ontologyBytes)) {
+                                    	RDFDataMgr.read(m, inputStream, null, RDFLanguages.SHACLC);  // SHACLC
+                                    }catch (Exception e6) {
+                                        try (InputStream inputStream = new ByteArrayInputStream(ontologyBytes)) {
+                                        	RDFDataMgr.read(m, inputStream, null, RDFLanguages.N3);  // N3
+                                        }catch (Exception e7) {
+                                            try (InputStream inputStream = new ByteArrayInputStream(ontologyBytes)) {
+                                            	RDFDataMgr.read(m, inputStream, null, RDFLanguages.NQUADS);
+                                        }catch (Exception e8) {
+                                        	e8.printStackTrace();
+                                            return null;
+                                        }
+                                        }
+                                    }
+                                }
+                            }
+                        	}
+
+                    }
                 }
-            } else {
+            }
+             else {
                 return null;
             }
             	 
