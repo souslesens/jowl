@@ -136,7 +136,7 @@ public class ReasonerController {
     	if (ontologyContentEncoded64 != null && !ontologyContentEncoded64.isEmpty()) {
     	 ontologyContentDecoded64Bytes = Base64.getMimeDecoder().decode(ontologyContentEncoded64);
     	 ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
-    	System.out.println("Inference"+ontologyContentDecoded64);
+    	System.out.println("Ontologie de base"+ontologyContentDecoded64);
     	}
     	int parametersCount = countParams(ontologyContentDecoded64, filePath, url);
         if (parametersCount == 0) {
