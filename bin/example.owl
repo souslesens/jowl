@@ -1,0 +1,47 @@
+Prefix(:=<http://acrab.ics.muni.cz/ontologies/example.owl#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://acrab.ics.muni.cz/ontologies/example.owl>
+
+Declaration(Class(:EnglishProgrammer))
+Declaration(Class(:Man))
+Declaration(Class(:Person))
+Declaration(ObjectProperty(:hasKnowledgeOf))
+Declaration(ObjectProperty(:speaksLanguage))
+Declaration(NamedIndividual(:Computer-Programming))
+Declaration(NamedIndividual(:English))
+Declaration(NamedIndividual(:John))
+
+
+
+############################
+#   Classes
+############################
+
+# Class: :EnglishProgrammer (:EnglishProgrammer)
+
+EquivalentClasses(:EnglishProgrammer ObjectIntersectionOf(:Person ObjectHasValue(:hasKnowledgeOf :Computer-Programming) ObjectHasValue(:speaksLanguage :English)))
+
+# Class: :Man (:Man)
+
+SubClassOf(Annotation(rdfs:comment "States that every man is a person."^^xsd:string) :Man :Person)
+
+
+############################
+#   Named Individuals
+############################
+
+# Individual: :John (:John)
+
+ClassAssertion(:Person :John)
+ObjectPropertyAssertion(:hasKnowledgeOf :John :Computer-Programming)
+ObjectPropertyAssertion(:speaksLanguage :John :English)
+
+
+DLSafeRule(Body(ClassAtom(:Person Variable(<urn:swrl#x>)) ObjectPropertyAtom(:speaksLanguage Variable(<urn:swrl#x>) :English) ObjectPropertyAtom(:hasKnowledgeOf Variable(<urn:swrl#x>) :Computer-Programming))Head(ClassAtom(:EnglishProgrammer Variable(<urn:swrl#x>))))
+)
