@@ -1,0 +1,1687 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ns1:	<http://data.total.com/resource/tsf/ontology/gaia-test/bag/> .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ns3:	<http://data.total.com/resource/tsf/ontology/gaia-test/> .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+@prefix xsd:	<http://www.w3.org/2001/XMLSchema#> .
+@prefix ns6:	<http://purl.org/dc/terms/> .
+@prefix ns7:	<http://rds.posccaesar.org/ontology/lis14/rdl/> .
+@prefix ns8:	<https://www.dublincore.org/specifications/bibo/bibo/bibo.rdf.xml#> .
+@prefix ns9:	<http://souslesens.org/resource/vocabulary/> .
+@prefix skos:	<http://www.w3.org/2004/02/skos/core#> .
+@prefix ns11:	<http://souslesens.org/resource/linkedData_mappings/> .
+@prefix ns12:	<http://souslesens.org/resource/styles/> .
+@prefix ns13:	<http://souslesens.org/resource/linkedData_mappings//> .
+@prefix ns14:	<http://resource.geosciml.org/classifierScheme/cgi/2016.01/> .
+@prefix ns15:	<http://resource.geosciml.org/classifier/cgi/faulttype/> .
+@prefix ns16:	<http://resource.geosciml.org/classifierscheme/cgi/2016.01/> .
+@prefix ns17:	<http://souslesens.org/vocab#> .
+@prefix ns18:	<https://wiki.aapg.org/Category:> .
+@prefix ns19:	<https://petrowiki.spe.org/Category:> .
+@prefix ns20:	<http://resource.geosciml.org/classifier/cgi/lithology/> .
+@prefix ns21:	<http://data.souslesens.org/property#> .
+ns1:test	rdf:type	rdf:Bag .
+ns1:test	rdfs:label	"test" .
+ns3:iiii	rdf:type	owl:Class .
+ns3:iiii	ns6:created	"2023-03-15T11:07:27"^^xsd:dateTime ;
+	rdfs:label	"JJJK"@en ,
+		"ZZZ"@br ,
+		"JJJ"@en ,
+		"ZZZ"@fr .
+ns3:iiii	rdfs:subClassOf	ns7:QuantityDatum ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" .
+ns3:iiii	ns8:status	"draft" .
+<>	rdfs:member	ns3:Test4 .
+ns3:abc685bd46	rdf:type	owl:Class .
+ns3:abc685bd46	rdf:type	ns9:TopConcept ;
+	rdfs:label	"Source rock" ;
+	rdfs:subClassOf	<b8835fcbbe0> ,
+		ns7:Disposition .
+ns3:c6c6e1144a	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:participantIn ;
+	rdfs:label	"hasGeologicalAge" .
+ns3:af9bf2ddf5	rdf:type	owl:Class ;
+	rdfs:label	"Well objective" ;
+	rdfs:subClassOf	<b0216b42a64> ,
+		ns7:RealizableEntity .
+<http://data.total.com/resource/tsf/ontology/gaia-test/0b16568bd6>	rdf:type	owl:Class ;
+	rdfs:label	"Geochemistry" ;
+	rdfs:subClassOf	ns3:f8f4a29312 .
+<http://data.total.com/resource/tsf/ontology/gaia-test/240ba55799>	rdf:type	owl:Class ,
+		ns9:TopConcept ;
+	rdfs:label	"Geological object" ;
+	rdfs:subClassOf	ns7:PhysicalObject .
+<http://data.total.com/resource/tsf/ontology/gaia-test/1a4be9509b>	rdf:type	owl:Class ;
+	rdfs:label	"Fault" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/240ba55799> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/12f13a12e6>	rdf:type	owl:Class ;
+	rdfs:label	"Stratotype" ;
+	rdfs:isDefinedBy	"Stratotype" ;
+	rdfs:subClassOf	ns7:PhysicalObject ,
+		<b0386010f33> ,
+		<be4274b1d47> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/4f2ef422f1>	rdf:type	owl:Class ;
+	rdfs:label	"Orogenesis" ;
+	rdfs:subClassOf	ns3:f53d0b0e40 .
+<http://data.total.com/resource/tsf/ontology/gaia-test/17e9eeae8c>	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:hasInterestIn ;
+	rdfs:label	"evaluates" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/7a103349dd>	rdf:type	owl:Class ;
+	rdfs:label	"Log type" ;
+	rdfs:subClassOf	<b06540e08ef> ,
+		ns7:Quality .
+<http://data.total.com/resource/tsf/ontology/gaia-test/194d634594>	rdf:type	owl:Class ,
+		ns9:TopConcept ;
+	rdfs:label	"Cuttings" ;
+	rdfs:subClassOf	ns7:PhysicalObject .
+<http://data.total.com/resource/tsf/ontology/gaia-test/4d3c6cc502>	rdf:type	owl:Class ,
+		ns9:TopConcept ;
+	rdfs:label	"Fluid" ;
+	rdfs:subClassOf	ns7:PhysicalObject .
+ns3:d934bdab91	rdf:type	owl:Class ,
+		ns9:TopConcept ;
+	rdfs:label	"Petroleum system" ;
+	rdfs:subClassOf	<b1422160fe9> ,
+		ns7:Disposition .
+ns3:c1be349ad7	rdf:type	owl:Class ;
+	rdfs:label	"Geochemistry laboratory" ;
+	rdfs:subClassOf	<b586d990e34> ,
+		<http://data.total.com/resource/tsf/ontology/gaia-test/14dc678158> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/0356ebfaac>	rdf:type	owl:Class ;
+	rdfs:label	"Geochemisty study" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/7ad91eb840>	rdf:type	owl:Class ;
+	rdfs:label	"Organic Geochemisty study" ;
+	rdfs:subClassOf	<b0ff5783d06> ,
+		<http://data.total.com/resource/tsf/ontology/gaia-test/0356ebfaac> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/02b7fa3d3c>	rdf:type	owl:Class ;
+	rdfs:label	"Mineral geochemisty study" ;
+	rdfs:subClassOf	<b327d62aa6b> ,
+		<http://data.total.com/resource/tsf/ontology/gaia-test/0356ebfaac> ,
+		<bd1ecbaff59> ,
+		<b8b7230e093> .
+ns3:ebc8e3ae5b	rdf:type	owl:Class ;
+	rdfs:label	"Trap type" ;
+	rdfs:subClassOf	<bea3c1fdf7d> ,
+		ns7:Disposition .
+<http://data.total.com/resource/tsf/ontology/gaia-test/317d7ea4e0>	rdf:type	owl:Class ,
+		ns9:TopConcept ;
+	rdfs:label	"Play" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/317d7ea4e0>	skos:definition	"A named area that likely contains a combination of certain geological factors making it prospective for mineral exploration. It is often considered to be a set of prospects with a common set of characteristics" ;
+	rdfs:subClassOf	<bffbd0fab15> ,
+		<bf99b46946a> ,
+		ns7:RealizableEntity .
+<http://data.total.com/resource/tsf/ontology/gaia-test/68f663c9be>	rdf:type	owl:Class ;
+	rdfs:label	"Prospect" ;
+	rdfs:subClassOf	<b7dcdd07440> ,
+		<bb0bf25d427> ,
+		<b41abd7c08c> ,
+		<b2effcf9c02> ,
+		<b904c9e3759> ,
+		ns7:RealizableEntity .
+<http://data.total.com/resource/tsf/ontology/gaia-test/66dea73978>	rdf:type	owl:Class ,
+		ns9:TopConcept ;
+	rdfs:label	"Well" ;
+	rdfs:subClassOf	<bb041968b11> ,
+		ns7:FunctionalObject .
+<http://data.total.com/resource/tsf/ontology/gaia-test/66dea73978>	ns11:hasColumnMapping	<http://souslesens.org/resource/linkedData_mappings/86757d9a26> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/8de9d78c14>	rdf:type	owl:Class ;
+	rdfs:label	"Core description" ;
+	rdfs:subClassOf	<b0dd27e47a7> ,
+		ns7:InformationObject .
+ns3:Open_area	rdf:type	owl:Class ;
+	ns6:created	"2022-08-01T16:21:12"^^xsd:dateTime ;
+	rdfs:label	"Open area" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/40f16fab15> ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns3:Company	rdf:type	owl:Class ;
+	ns6:created	"2022-08-01T16:22:32"^^xsd:dateTime ;
+	rdfs:label	"Company" ;
+	rdfs:subClassOf	<b039e9f7284> ,
+		ns7:Organization ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns3:Participation	rdf:type	owl:Class ;
+	ns6:created	"2022-08-01T16:25:44"^^xsd:dateTime ;
+	rdfs:label	"Participation" ;
+	rdfs:subClassOf	<b12270df2b0> ,
+		ns7:Quality ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/99a84631d0>	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:hasInterestIn ;
+	rdfs:label	"ownes" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/8a72bd91ae>	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:hasParticipant ;
+	rdfs:label	"claude" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/1c407e4ba6>	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:representedBy ;
+	rdfs:label	"describes" .
+ns3:undefined	rdf:type	owl:Class ;
+	ns6:created	"2022-10-12T16:05:48"^^xsd:dateTime ;
+	rdfs:label	"SSS" ;
+	rdfs:subClassOf	ns3:f53d0b0e40 ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns1:Exploration	rdf:type	ns7:Activity ,
+		rdf:Bag ;
+	rdfs:label	"Exploration" ;
+	rdfs:member	<http://data.total.com/resource/tsf/ontology/gaia-test/386b11cdb6> ,
+		ns1:Fields ,
+		ns1:Acquisition ,
+		ns1:Geophysics ,
+		ns1:Exploration ,
+		ns1:Geology ,
+		ns1:Petroleum_evaluation .
+ns1:Geology	rdf:type	rdf:Bag ;
+	rdfs:label	"Geology" ;
+	rdfs:member	ns1:Structural_Geology .
+ns1:Geophysics	rdf:type	rdf:Bag ;
+	rdfs:label	"Geophysics" ;
+	rdfs:member	ns1:Gravimetry ,
+		ns1:Seismics .
+ns1:Geophysics	ns12:hasStyle	<http://souslesens.org/resource/styles/362430b280> .
+ns1:Structural_Geology	rdf:type	rdf:Bag ;
+	rdfs:label	"Structural Geology" ;
+	rdfs:subClassOf	<b0276971b84> ;
+	rdfs:member	<http://data.total.com/resource/tsf/ontology/gaia-test/2bf1d252d3> ,
+		ns3:cc7b582c0f ,
+		ns3:Seep ,
+		ns3:Company .
+ns1:Acquisition	rdf:type	rdf:Bag ;
+	rdfs:label	"Acquisition" ;
+	rdfs:member	<http://data.total.com/resource/tsf/ontology/gaia-test/57521c5f20> ,
+		<http://data.total.com/resource/tsf/ontology/gaia-test/2580264383> .
+ns1:Seismics	rdf:type	rdf:Bag ;
+	rdfs:label	"Seismics" ;
+	rdfs:member	ns3:Seismic_line ;
+	ns12:hasStyle	<http://souslesens.org/resource/styles/362430b280> .
+ns1:Gravimetry	rdf:type	rdf:Bag ;
+	rdfs:label	"Gravimetry" .
+ns1:Fields	rdf:type	ns7:PhysicalObject ,
+		rdf:Bag ;
+	rdfs:label	"Fields" ;
+	rdfs:member	<http://data.total.com/resource/tsf/ontology/gaia-test/8dcbadccd2> .
+ns1:Petroleum_evaluation	rdf:type	rdf:Bag ;
+	rdfs:label	"Petroleum evaluation" ;
+	rdfs:member	ns3:abc685bd46 ,
+		ns3:d934bdab91 ,
+		ns3:ebc8e3ae5b ,
+		ns3:cc7b582c0f ,
+		ns1:Organic_Geochemistry ,
+		<http://data.total.com/resource/tsf/ontology/gaia-test/5c1a97c410> ,
+		ns3:Seep .
+ns1:test6	rdf:type	rdf:Bag ;
+	rdfs:label	"test6" ;
+	rdfs:member	ns3:Deformation_Style ,
+		<http://data.total.com/resource/tsf/ontology/gaia-test/8dcbadccd2> .
+ns3:aaaa	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:dispositionOf ;
+	rdfs:label	"aaaa" .
+ns3:testAen	rdf:type	owl:Class ;
+	ns6:created	"2023-03-22T17:07:48"^^xsd:dateTime ;
+	rdfs:label	"testA"@en ;
+	rdfs:subClassOf	owl:Thing ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns3:cc7b582c0f	rdf:type	owl:Class ,
+		ns9:TopConcept ;
+	rdfs:label	"Basin" ;
+	rdfs:subClassOf	ns7:RegionInSpace ,
+		<b8de32d4256> .
+ns3:de62adbf1d	rdf:type	owl:Class ,
+		ns9:TopConcept ;
+	rdfs:label	"Wellbore" ;
+	rdfs:subClassOf	<b79ae328c41> ,
+		<b21bd044823> ,
+		<b2138f0563d> ,
+		<b586727b34e> ,
+		ns7:PhysicalObject ,
+		<bd0c82bd160> ,
+		<b3ded34f8e6> ,
+		<b2a19e70e82> ,
+		<b3104a424f2> ;
+	ns11:hasColumnMapping	<http://souslesens.org/resource/linkedData_mappings/11da74d0bd> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/8dcbadccd2>	rdf:type	owl:Class ,
+		ns9:TopConcept ;
+	rdfs:label	"Field" ;
+	rdfs:subClassOf	<b2ceebc6d5a> ,
+		<b5dc4720285> ,
+		<bad3c86474f> ,
+		<b1629e3e2a9> ,
+		ns7:RegionInSpace ,
+		<b0d2d9af764> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/57521c5f20>	rdf:type	owl:Class ;
+	rdfs:label	"Core" ;
+	rdfs:subClassOf	<be35ec5db5d> ,
+		ns7:PhysicalObject .
+<http://data.total.com/resource/tsf/ontology/gaia-test/57521c5f20>	ns13:hasColumnMapping	ns11:e76b2ed0c2 .
+ns3:bfbda1c8f9	rdf:type	owl:Class ;
+	rdfs:label	"Lithostratigraphic description" ;
+	rdfs:subClassOf	<b5554ce0e02> ,
+		ns7:InformationObject ,
+		<bc18889ba98> ,
+		<b66570453c4> ,
+		<bc99a3ba853> ,
+		<bec09d7fa44> ;
+	ns11:hasColumnMapping	<http://souslesens.org/resource/linkedData_mappings/1e97930562> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/386b11cdb6>	rdf:type	owl:Class ;
+	rdfs:label	"Petrophysic characteristics" ;
+	rdfs:subClassOf	<bcc6e4d9a73> ,
+		ns7:Quality .
+ns3:b8763fc1bd	rdf:type	owl:Class ;
+	rdfs:label	"Geographical coordinates" ;
+	rdfs:subClassOf	ns7:PointInSpace .
+<http://data.total.com/resource/tsf/ontology/gaia-test/14dc678158>	rdf:type	owl:Class ;
+	rdfs:label	"Laboratories" ;
+	rdfs:subClassOf	ns3:f8f4a29312 .
+<http://data.total.com/resource/tsf/ontology/gaia-test/723fc76f12>	rdf:type	owl:Class ;
+	rdfs:label	"Petrophysic laboratory" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/14dc678158> .
+ns3:f8f4a29312	rdf:type	owl:Class ,
+		ns9:TopConcept ;
+	rdfs:label	"Discipline" ;
+	rdfs:subClassOf	ns7:Activity .
+ns3:faa184342d	rdf:type	owl:Class ;
+	rdfs:label	"Reservoir rock" ;
+	rdfs:subClassOf	ns7:Disposition ,
+		<bb7cc5baeb4> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/928a5fd4a7>	rdf:type	owl:Class ;
+	rdfs:label	"Cap rock" ;
+	rdfs:subClassOf	ns7:Disposition ,
+		<bf3cb76d44d> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/0e85e5fd6a>	rdf:type	owl:Class ;
+	rdfs:label	"Gas" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/5c1a97c410> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/6a55df9075>	rdf:type	owl:Class ,
+		ns9:TopConcept ;
+	rdfs:label	"Geological age" ;
+	rdfs:subClassOf	ns7:PeriodInTime .
+<http://data.total.com/resource/tsf/ontology/gaia-test/1029e6bf3c>	rdf:type	owl:Class ,
+		ns9:TopConcept ;
+	rdfs:label	"Structural unit" ;
+	rdfs:subClassOf	<b92817fa18f> ,
+		ns7:RegionInSpace .
+<http://data.total.com/resource/tsf/ontology/gaia-test/738e98d5f8>	rdf:type	owl:Class ;
+	rdfs:label	"Rock type" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/738e98d5f8>	owl:sameAs	ns14:simplelithology ;
+	rdfs:subClassOf	ns7:Quality .
+ns3:d2c4658680	rdf:type	owl:Class ;
+	rdfs:label	"Outcrop" ;
+	rdfs:subClassOf	ns7:PhysicalObject ,
+		<b37e1710afd> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/045c8a28ac>	rdf:type	owl:Class ;
+	rdfs:label	"Chronostratigraphic description" ;
+	rdfs:subClassOf	ns7:InformationObject ,
+		<b3f698e2d47> ,
+		<b94cda1d500> ,
+		<b72f443e712> ,
+		<b841aaa5be2> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/31d60c5c63>	rdf:type	owl:Class ;
+	rdfs:label	"Log" ;
+	rdfs:subClassOf	ns7:InformationObject ,
+		<b0f84cd0c11> .
+ns3:cb4ff83244	rdf:type	owl:Class ;
+	rdfs:label	"Drilling log" ;
+	rdfs:subClassOf	<b2a0aa24b11> ,
+		<be52d29956a> ,
+		<http://data.total.com/resource/tsf/ontology/gaia-test/31d60c5c63> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/7facb561fa>	rdf:type	owl:Class ;
+	rdfs:label	"Final well log" ;
+	rdfs:subClassOf	<b7a57365f8c> ,
+		<ba8cbf10577> ,
+		<b5ab4624a84> ,
+		<b481d16e3e5> ,
+		<http://data.total.com/resource/tsf/ontology/gaia-test/31d60c5c63> .
+ns3:c9dc85188c	rdf:type	owl:Class ;
+	rdfs:label	"Electric log" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/31d60c5c63> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/5c1a97c410>	rdf:type	owl:Class ;
+	rdfs:label	"Fluid type" ;
+	rdfs:subClassOf	ns7:Quality ,
+		<b250420a710> ,
+		<b1e3db0700f> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/24f6402783>	rdf:type	owl:Class ;
+	rdfs:label	"Water" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/5c1a97c410> .
+ns3:cd8917561d	rdf:type	owl:Class ;
+	rdfs:label	"Oil" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/5c1a97c410> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/0d8ef71523>	rdf:type	owl:Class ;
+	rdfs:label	"Structural unit type" ;
+	rdfs:subClassOf	ns7:Quality ,
+		<bcea591a67d> .
+ns3:f404503c42	rdf:type	owl:Class ;
+	rdfs:label	"Porosity" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/386b11cdb6> .
+ns3:a46ad1d94e	rdf:type	owl:Class ;
+	rdfs:label	"Permeability" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/386b11cdb6> .
+ns3:aca52d1bce	rdf:type	owl:Class ;
+	rdfs:label	"Horizontal permeability" ;
+	rdfs:subClassOf	ns3:a46ad1d94e .
+<http://data.total.com/resource/tsf/ontology/gaia-test/62a437d122>	rdf:type	owl:Class ;
+	rdfs:label	"Verical permeability" ;
+	rdfs:subClassOf	ns3:a46ad1d94e .
+<http://data.total.com/resource/tsf/ontology/gaia-test/7d636c5bd6>	rdf:type	owl:Class ;
+	rdfs:label	"Hydrocarbon accumulation" ;
+	rdfs:subClassOf	ns7:Disposition .
+<http://data.total.com/resource/tsf/ontology/gaia-test/8b2e3a41be>	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:locatedRelativeTo ;
+	rdfs:label	"containedBy" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/52744d1a92>	rdf:type	owl:Class ;
+	rdfs:label	"Hydrocarbon reserves" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/7d636c5bd6> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/2580264383>	rdf:type	owl:Class ;
+	rdfs:label	"Clab" ;
+	rdfs:subClassOf	ns7:PhysicalObject .
+ns3:b9bc0b6764	rdf:type	owl:Class ;
+	rdfs:label	"Area" ;
+	rdfs:subClassOf	ns7:RegionInSpace .
+<http://data.total.com/resource/tsf/ontology/gaia-test/2bf1d252d3>	rdf:type	owl:Class ;
+	rdfs:label	"Fault" ;
+	rdfs:subClassOf	ns7:PhysicalObject ,
+		ns7:RegionInSpace .
+ns3:ab3b80a3a7	rdf:type	owl:Class ;
+	rdfs:label	"Exploration Block" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/1f07114f85> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/26601fc18e>	rdf:type	owl:Class ;
+	rdfs:label	"Lease Coordinates" ;
+	rdfs:subClassOf	ns7:Quality ,
+		<b3ff22533d8> ,
+		<b84d89c6e70> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/3ebcc1b8f2>	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:hasPart ;
+	rdfs:label	"setOf" .
+ns3:Deformation_Style	rdf:type	owl:Class ;
+	ns6:created	"2022-09-10T6:55:30"^^xsd:dateTime ;
+	rdfs:label	"Deformation Style" ;
+	rdfs:isDefinedBy	"Deformation style" ;
+	rdfs:comment	"is a deformation style node" ;
+	rdfs:subClassOf	ns7:Quality ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns15:detachment_fault	rdf:type	owl:Class ,
+		skos:Concept ,
+		ns15:low_angle_normal_fault ;
+	skos:definition	"A regional-scale, large displacement, low-angle normal fault." ;
+	rdfs:subClassOf	ns15:low_angle_normal_fault ;
+	skos:broader	ns15:low_angle_normal_fault .
+ns15:detachment_fault	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"detachment fault" ;
+	ns6:source	"this vocabulary" .
+ns15:dextral_strike_slip_fault	rdf:type	owl:Class ,
+		skos:Concept ,
+		ns15:strike_slip_fault ;
+	skos:definition	"Fault with right-lateral strike-parallel displacement component of slip vector more than 10 times the dip-parallel component of the slip vector at at least one location along the fault, and right-lateral displacement over more than half the mapped trace of the fault." ;
+	rdfs:subClassOf	ns15:strike_slip_fault ;
+	skos:broader	ns15:strike_slip_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"dextral strike slip fault" ;
+	ns6:source	"this vocabulary" .
+ns15:extraction_fault	rdf:type	owl:Class ,
+		skos:Concept ;
+	skos:definition	"A fault whose two sides have approached each other substantially in the direction perpendicular to the fault." ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/19bbe45904> ;
+	skos:broader	ns15:fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"extraction fault" ;
+	ns6:source	"Froitzheim, N., Pleuger, J. and Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395." ,
+		"Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395." ;
+	skos:narrower	ns15:pure_extraction_fault ,
+		ns15:mixed_extraction_fault .
+ns15:fault	rdf:type	skos:Concept ,
+		<http://data.total.com/resource/tsf/ontology/gaia-test/19bbe45904> ;
+	skos:definition	"A discrete surface, or zone of discrete surfaces, with some thickness, separating two rock masses across which one mass has slid past the other and characterized by brittle deformation." ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"fault" ;
+	skos:topConceptOf	ns16:faulttype .
+ns15:fault	ns17:wikimedia-category	ns18:Evaluating_top_and_fault_seal ,
+		ns18:Predicting_the_occurrence_of_oil_and_gas_traps ,
+		<https://petrowiki.spe.org/Category:1.6_Drilling_operations> .
+ns15:fault	ns17:wikimedia-category	ns19:NR ,
+		<https://petrowiki.spe.org/Category:1.6.7_Directional_drilling> ;
+	ns6:source	"this vocabulary" ;
+	skos:narrower	ns15:reverse_fault ,
+		ns15:scissor_fault ,
+		ns15:strike_slip_fault ,
+		ns15:low_angle_fault ,
+		ns15:normal_fault ,
+		ns15:oblique_slip_fault ,
+		ns15:extraction_fault ,
+		ns15:high_angle_fault .
+ns15:high_angle_fault	rdf:type	owl:Class ,
+		skos:Concept ;
+	skos:definition	"Fault that dips at least 45 degrees over more than half of its recognized extent, for which slip or separation is not explicitly specified." ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/19bbe45904> ;
+	skos:broader	ns15:fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"high angle fault" ;
+	ns6:source	"this vocabulary" ;
+	skos:narrower	ns15:wrench_fault ,
+		ns15:high_angle_normal_fault ,
+		ns15:high_angle_reverse .
+ns15:high_angle_normal_fault	rdf:type	owl:Class ,
+		ns15:normal_fault ,
+		skos:Concept ;
+	skos:definition	"Fault that dips at least 45 degrees over more than half of the recognized extent of the fault with the hanging wall displaced from a structurally higher position relative to footwall rocks." ;
+	rdfs:subClassOf	ns15:normal_fault ;
+	skos:broader	ns15:normal_fault ,
+		ns15:high_angle_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"high angle normal fault" ;
+	ns6:source	"this vocabulary" .
+ns15:high_angle_reverse	rdf:type	owl:Class ,
+		skos:Concept ,
+		ns15:reverse_fault ;
+	skos:definition	"Reverse fault that dips at least 45 degrees over more than half of its recognized extent, for which slip or separation is not explicitly specified." ;
+	rdfs:subClassOf	ns15:reverse_fault ;
+	skos:broader	ns15:high_angle_fault ,
+		ns15:reverse_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"high angle reverse" ;
+	ns6:source	"this vocabulary" .
+ns15:horizontal_fault	rdf:type	owl:Class ,
+		skos:Concept ,
+		ns15:low_angle_fault ;
+	skos:definition	"Fault that dips less than 10 degrees over more than half the recognized extent of the fault." ;
+	rdfs:subClassOf	ns15:low_angle_fault ;
+	skos:broader	ns15:low_angle_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"horizontal fault" ;
+	ns6:source	"GGIC vocabularies working group -Australia-" ,
+		"GGIC vocabularies working group (Australia)" .
+ns15:left_normal_fault	rdf:type	owl:Class ,
+		skos:Concept ,
+		ns15:oblique_slip_fault ;
+	skos:definition	"High angle fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace, with left-lateral strike-parallel component and normal dip-parallel component over at least half the mapped trace of the fault." ;
+	rdfs:subClassOf	ns15:oblique_slip_fault ;
+	skos:broader	ns15:oblique_slip_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"left normal fault" ;
+	ns6:source	"this vocabulary" .
+ns15:left_reverse_fault	rdf:type	owl:Class ,
+		ns15:oblique_slip_fault ,
+		skos:Concept ;
+	skos:definition	"High angle fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace, with left-lateral strike-parallel component and reverse dip-parallel component over at least half the mapped trace of the fault." ;
+	rdfs:subClassOf	ns15:oblique_slip_fault ;
+	skos:broader	ns15:oblique_slip_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"left reverse fault" ;
+	ns6:source	"this vocabulary" .
+ns15:low_angle_fault	rdf:type	owl:Class ,
+		skos:Concept ;
+	skos:definition	"Fault that dips less than 45 degrees over more than half of the recognized extent of the fault." ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/19bbe45904> ;
+	skos:broader	ns15:fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"low angle fault" ;
+	ns6:source	"this vocabulary" ;
+	skos:narrower	ns15:low_angle_normal_fault ,
+		ns15:horizontal_fault ,
+		ns15:thrust_fault .
+ns15:low_angle_normal_fault	rdf:type	owl:Class ,
+		skos:Concept ,
+		ns15:normal_fault ;
+	skos:definition	"Fault that dips less than 45 degrees over more than half of the recognized extent of the fault with the hanging wall displaced from a structurally higher position relative to footwall rocks." ;
+	rdfs:subClassOf	ns15:normal_fault ;
+	skos:broader	ns15:low_angle_fault ,
+		ns15:normal_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"low angle normal fault" ;
+	ns17:wikimedia-category	ns18:Exploring_for_structural_traps ;
+	ns6:source	"this vocabulary" ;
+	skos:narrower	ns15:detachment_fault .
+ns15:mixed_extraction_fault	rdf:type	owl:Class ,
+		skos:Concept ,
+		ns15:extraction_fault ;
+	skos:definition	"An extraction fault with some displacement within the fault plane." ;
+	rdfs:subClassOf	ns15:extraction_fault ;
+	skos:broader	ns15:extraction_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"mixed extraction fault" ;
+	ns6:source	"Froitzheim, N., Pleuger, J. and Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395." ,
+		"Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395." .
+ns15:normal_fault	rdf:type	owl:Class ,
+		skos:Concept ;
+	skos:definition	"Fault with dip-parallel displacement component of slip vector more than 10 times the strike-parallel component of the slip vector over more than half recognized extent of the fault, and for which the fault dips consistently in the same direction, and for which the hanging wall has been displaced down relative to the footwall." ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/19bbe45904> ;
+	skos:broader	ns15:fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"normal fault" ;
+	ns17:wikimedia-category	ns18:Exploring_for_structural_traps ,
+		ns19:YR ,
+		<https://petrowiki.spe.org/Category:5.6.2_Core_analysis> ;
+	ns6:source	"this vocabulary" ;
+	skos:narrower	ns15:high_angle_normal_fault ,
+		ns15:low_angle_normal_fault .
+ns15:oblique_slip_fault	rdf:type	owl:Class ,
+		skos:Concept ;
+	skos:definition	"Fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace of the fault." ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/19bbe45904> ;
+	skos:broader	ns15:fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"oblique slip fault" ;
+	ns6:source	"this vocabulary" ;
+	skos:narrower	ns15:left_normal_fault ,
+		ns15:left_reverse_fault ,
+		ns15:right_normal_fault ,
+		ns15:right_reverse_fault .
+ns15:pure_extraction_fault	rdf:type	owl:Class ,
+		ns15:extraction_fault ,
+		skos:Concept ;
+	skos:definition	"An extraction fault with no discernible displacement within the fault plane." ;
+	rdfs:subClassOf	ns15:extraction_fault ;
+	skos:broader	ns15:extraction_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"pure extraction fault" ;
+	ns6:source	"Froitzheim, N., Pleuger, J. and Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395." ,
+		"Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395." .
+ns15:reverse_fault	rdf:type	owl:Class ,
+		skos:Concept ;
+	skos:definition	"Fault with dip-parallel displacement component of slip vector more than 10 times the strike-parallel component of the slip vector at at least one location along the mapped trace of the fault, and the fault dips consistently in the same direction with the hanging wall displaced up relative to the footwall over at least half the mapped trace of the fault." ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/19bbe45904> ;
+	skos:broader	ns15:fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"reverse fault" ;
+	ns17:wikimedia-category	ns18:Classification_of_exploration_traps ,
+		<https://wiki.aapg.org/Category:Traps,_trap_types,_and_the_petroleum_system> ;
+	ns6:source	"this vocabulary" ;
+	skos:narrower	ns15:thrust_fault ,
+		ns15:high_angle_reverse .
+ns15:right_normal_fault	rdf:type	owl:Class ,
+		ns15:oblique_slip_fault ,
+		skos:Concept ;
+	skos:definition	"High angle fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace, with right-lateral strike-parallel component and normal dip-parallel component of slip over at least half the mapped trace of the fault" ;
+	rdfs:subClassOf	ns15:oblique_slip_fault ;
+	skos:broader	ns15:oblique_slip_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"right normal fault" ;
+	ns6:source	"this vocabulary" .
+ns15:right_reverse_fault	rdf:type	owl:Class ,
+		ns15:oblique_slip_fault ,
+		skos:Concept ;
+	skos:definition	"High angle fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace, with a right-lateral strike-parallel component and reverse dip-parallel component of slip over at least half the mapped trace of the fault." ;
+	rdfs:subClassOf	ns15:oblique_slip_fault ;
+	skos:broader	ns15:oblique_slip_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"right reverse fault" ;
+	ns6:source	"this vocabulary" .
+ns15:scissor_fault	rdf:type	owl:Class ,
+		skos:Concept ;
+	skos:definition	"A fault on which there is increasing offset or separation along the strike from an initial point of no offset, with the opposite sense of offset in the opposite direction." ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/19bbe45904> ;
+	skos:broader	ns15:fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"scissor fault" ;
+	ns6:source	"Neuendorf et al 2005" .
+ns15:sinistral_strike_slip_fault	rdf:type	owl:Class ,
+		skos:Concept ,
+		ns15:strike_slip_fault ;
+	skos:definition	"Fault with left-lateral strike-parallel displacement component of slip vector more than 10 times the dip-parallel component of the slip vector at at least one location along the fault, and left-lateral displacement over more than half the mapped trace of the fault." ;
+	rdfs:subClassOf	ns15:strike_slip_fault ;
+	skos:broader	ns15:strike_slip_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"sinistral strike slip fault" ;
+	ns6:source	"this vocabulary" .
+ns15:strike_slip_fault	rdf:type	owl:Class ,
+		skos:Concept ;
+	skos:definition	"Fault with strike-parallel displacement component of slip vector more than 10 times the dip-parallel component of the slip vector at at least one location along the mapped trace of the fault." ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/19bbe45904> ;
+	skos:broader	ns15:fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"strike slip fault" ;
+	ns6:source	"this vocabulary" ;
+	skos:narrower	ns15:sinistral_strike_slip_fault ,
+		ns15:wrench_fault ,
+		ns15:dextral_strike_slip_fault .
+ns15:thrust_fault	rdf:type	owl:Class ,
+		skos:Concept ,
+		ns15:reverse_fault ;
+	skos:definition	"Fault that dips less than 45 degrees over more than half of the recognized extent of the fault, with a hanging wall displaced from a structurally deeper position relative to footwall rocks." ;
+	rdfs:subClassOf	ns15:reverse_fault ;
+	skos:broader	ns15:low_angle_fault ,
+		ns15:reverse_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"thrust fault" ;
+	ns17:wikimedia-category	ns18:Classification_of_exploration_traps ,
+		<https://wiki.aapg.org/Category:Traps,_trap_types,_and_the_petroleum_system> ;
+	ns6:source	"this vocabulary" .
+ns15:wrench_fault	rdf:type	owl:Class ,
+		ns15:strike_slip_fault ,
+		skos:Concept ;
+	skos:definition	"A strike slip fault in which the fault plane dips at least 45 degrees over more than half of the recognized extent of the fault." ;
+	rdfs:subClassOf	ns15:strike_slip_fault ;
+	skos:broader	ns15:strike_slip_fault ,
+		ns15:high_angle_fault ;
+	skos:inScheme	ns16:faulttype ;
+	skos:prefLabel	"wrench fault" ;
+	ns17:wikimedia-category	ns18:Classification_of_exploration_traps ,
+		<https://wiki.aapg.org/Category:Traps,_trap_types,_and_the_petroleum_system> ;
+	ns6:source	"GGIC vocabularies working group -Australia-" ,
+		"GGIC vocabularies working group (Australia)" .
+ns14:simplelithology	rdf:type	skos:ConceptScheme ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/738e98d5f8> ;
+	ns6:creator	"CGI Geoscience Terminology Working Group" ;
+	ns6:description	"This scheme specifies the concept space for Simple Lithology concepts, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. By extension, it includes all concepts in this conceptScheme, as well as concepts in any previous versions of the scheme. This vocabulary is not designed to be a comprehensive list of all lithology terms." ;
+	ns6:title	"Simple Lithology" .
+ns14:simplelithology	skos:hasTopConcept	ns20:compound_material ;
+	skos:prefLabel	"Simple Lithology" ;
+	ns6:date	"2012-11-24" ;
+	skos:changeNote	"2012-02-27 SMR add skosexactMatch relating concept URI in this vocabulary with URI in 201012 version." ,
+		"2010-07-25 fix xml language notation on preferred name, update history notes to reflect that this is trunk version." ,
+		"Vocabulary maintenence changed to SKOS with Protege v4 as tool of choice, Sept 2009" ,
+		"2012-02-07 SMR update URI to replace numeric final token with English-language string as in original URN scheme." ,
+		"2009-12-14 SMR change ID and pref label from exotic alkalic igneous rock to kalsilitic igneous rock to avoid confusion with exotic alkaline rock based on OGE recommendation." ,
+		"Fix language labels for alkali feldspar trachytic rock and for cobble gravel size sediment. Change broader link on acidic igneous material from granitoid to igneous material to fix circular links in hierarchy. SMR 2010-08-27" ,
+		"2012-11-24 SMR Update to 201211 version; add collection entity, check all pref labels are lower case, remove owlNamedIndividual and OwlThing rdftypes." ,
+		"2016-07-22 OLR Reformat SKOS-RDF for migration into new vocabulary server." ,
+		"Additional revisions and updates Dec 2009, Jan 2010 based on review and comment by OneGeology Europe WP3 committee." ,
+		"2010-11-27 SMR. URIs converted to http URI using CGI uri scheme." ,
+		"2010-02-11 Add narrower relationship links by adding skosnarrower link in Protege, defining skosnarrower as inverse of skosbroader, calculating with Pellet reasoner to add inferred axioms, and using file/Export inferred axioms as ontology in Protege." ;
+	skos:editorialNote	"Start file produced from excel spreadsheet version of SimpleLithology200811, comment period July to September 2009. Revisions in spreadsheet discussed and approved at IWG face to face, Quebec CA, Sept. 2009." .
+<http://data.total.com/resource/tsf/ontology/gaia-test/62589a6b76>	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:hasParticipant ;
+	rdfs:label	"produces" .
+ns3:Geological_well_report	rdf:type	owl:Class ;
+	ns6:created	"2022-07-28T7:42:40"^^xsd:dateTime ;
+	rdfs:label	"Geological well report" ;
+	rdfs:subClassOf	ns3:Well_report ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns3:d6e4659fad	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:hasInterestIn ;
+	rdfs:label	"expects" .
+ns3:Sedimentology	rdf:type	owl:Class ;
+	ns6:created	"2022-08-01T16:47:41"^^xsd:dateTime ;
+	rdfs:label	"Sedimentology" ;
+	rdfs:subClassOf	ns3:f8f4a29312 ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns3:Seismics	rdf:type	owl:Class ;
+	ns6:created	"2022-08-01T16:48:50"^^xsd:dateTime ;
+	rdfs:label	"Seismics" ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns3:Well_seismics	rdf:type	owl:Class ;
+	ns6:created	"2022-08-01T16:49:24"^^xsd:dateTime ;
+	rdfs:label	"Well seismics" ;
+	rdfs:subClassOf	ns3:Seismics ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns3:Tectonics	rdf:type	owl:Class ;
+	ns6:created	"2022-08-01T16:50:20"^^xsd:dateTime ;
+	rdfs:label	"Tectonics" ;
+	rdfs:subClassOf	ns3:f8f4a29312 ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns3:Seismic_campain	rdf:type	owl:Class ;
+	ns6:created	"2022-08-01T16:51:32"^^xsd:dateTime ;
+	rdfs:label	"Seismic campain" ;
+	rdfs:subClassOf	ns7:InformationObject ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns3:Seismic_line	rdf:type	owl:Class ;
+	ns6:created	"2022-08-01T16:52:16"^^xsd:dateTime ;
+	rdfs:label	"Seismic line" ;
+	rdfs:subClassOf	<b3d1415b754> ,
+		ns7:InformationObject ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns3:Well_test	rdf:type	owl:Class ;
+	ns6:created	"2022-08-01T17:02:12"^^xsd:dateTime ;
+	rdfs:label	"Well test" ;
+	rdfs:subClassOf	<bec503f56fc> ,
+		ns7:InformationObject ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns3:Seep	rdf:type	owl:Class ;
+	ns6:created	"2022-08-01T17:08:10"^^xsd:dateTime ;
+	rdfs:label	"Seep" ;
+	rdfs:subClassOf	ns7:RegionInSpace ,
+		<bfdf6bc7f5a> ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" ;
+	ns11:hasColumnMapping	<http://souslesens.org/resource/linkedData_mappings/5ebecf791c> .
+ns3:LithologicDescription	rdf:type	owl:Class ;
+	ns6:created	"2022-11-14T15:17:31"^^xsd:dateTime ;
+	rdfs:label	"LithologicDescription" ;
+	rdfs:subClassOf	ns7:InformationObject ,
+		<be5847bbcd0> ,
+		<b8b69a64bf4> ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/4babaa9eb9>	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:locatedRelativeTo ;
+	rdfs:label	"intervalHasLithology" .
+ns3:e04c80f390	rdf:type	owl:Class ;
+	rdfs:label	"Skills" ;
+	rdfs:subClassOf	ns7:Disposition ,
+		<b7ad71cf344> .
+ns3:dea801d896	rdf:type	ns9:TopConcept ,
+		owl:Class ;
+	rdfs:label	"Geological event" ;
+	rdfs:subClassOf	ns7:Event .
+ns3:f53d0b0e40	rdf:type	owl:Class ;
+	rdfs:label	"Tectonic Event" ;
+	rdfs:subClassOf	ns3:dea801d896 .
+<http://data.total.com/resource/tsf/ontology/gaia-test/3c1dcb21f1>	rdf:type	owl:Class ;
+	rdfs:label	"Structural deformation" ;
+	rdfs:subClassOf	ns3:f53d0b0e40 ,
+		<b83a07e87ba> ,
+		<b42cb18c273> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/03ebb29ca3>	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:hasParticipant ;
+	rdfs:label	"generates" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/19bbe45904>	rdf:type	skos:Collection ,
+		owl:Class ;
+	rdfs:label	"Fault type" ;
+	owl:sameAs	ns15:fault ;
+	rdfs:subClassOf	<bcd601cfcdd> ,
+		ns7:Quality .
+ns3:e044177e20	rdf:type	owl:Class ;
+	rdfs:label	"Subsidence" ;
+	rdfs:subClassOf	ns3:dea801d896 ,
+		<be2912742dc> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/285c802b91>	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:hasResident ;
+	rdfs:label	"contains" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/9ef56bb860>	rdf:type	owl:Class ;
+	rdfs:label	"Lithostratigraphic unit" ;
+	rdfs:subClassOf	ns7:RegionInSpace ,
+		<b9d6230ef67> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/5ac2bd3e5f>	rdf:type	owl:Class ;
+	rdfs:label	"Lithostratigraphic unit type" ;
+	rdfs:subClassOf	ns7:Quality .
+ns3:dc010a5210	rdf:type	owl:Class ;
+	rdfs:label	"Country" ;
+	rdfs:subClassOf	ns7:RegionInSpace ;
+	skos:altLabel	"Country" ;
+	skos:prefLabel	"Country" .
+ns3:Report	rdf:type	owl:Class ;
+	ns6:created	"2022-07-28T7:36:46"^^xsd:dateTime ;
+	rdfs:label	"Report" ;
+	rdfs:subClassOf	ns7:InformationObject ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns3:Well_report	rdf:type	owl:Class ;
+	ns6:created	"2022-07-28T7:40:48"^^xsd:dateTime ;
+	rdfs:label	"Well report" ;
+	rdfs:subClassOf	<b86381627d9> ,
+		ns3:Report ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns3:Final_well_report	rdf:type	owl:Class ;
+	ns6:created	"2022-07-28T7:42:13"^^xsd:dateTime ;
+	rdfs:label	"Final well report" ;
+	rdfs:subClassOf	ns3:Well_report ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+ns1:Organic_Geochemistry	rdf:type	rdf:Bag ;
+	rdfs:label	"Organic Geochemistry" ;
+	rdfs:member	ns3:abc685bd46 .
+ns3:Test4	rdf:type	rdf:Bag ;
+	rdfs:label	"Test4" ;
+	rdfs:member	ns3:Test4 ,
+		ns1:test6 .
+ns3:Test5	rdf:type	rdf:Bag ;
+	rdfs:label	"Test5" ;
+	rdfs:member	<http://data.total.com/resource/tsf/ontology/gaia-test/8de9d78c14> ,
+		ns3:Test5 ,
+		<http://data.total.com/resource/tsf/ontology/gaia-test/2580264383> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/523a1d5d25>	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:isAbout ;
+	rdfs:label	"describes" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/7f5c31eccf>	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:residesIn ;
+	rdfs:label	"hasGeographicalCoordinates" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/4b951e0a06>	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:dispositionOf ;
+	rdfs:label	"constituantOf" .
+<http://data.total.com/resource/tsf/ontology/gaia-test/40f16fab15>	rdf:type	owl:Class ;
+	rdfs:label	"Lease" ;
+	rdfs:subClassOf	<bba6807540a> ,
+		ns7:RegionInSpace .
+<http://data.total.com/resource/tsf/ontology/gaia-test/1f07114f85>	rdf:type	owl:Class ;
+	rdfs:label	"Exploration lease" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/40f16fab15> .
+<http://data.total.com/resource/tsf/ontology/gaia-test/8b9ccbdac9>	rdf:type	owl:Class ;
+	rdfs:label	"Production lease" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/40f16fab15> .
+ns3:ffff	rdf:type	owl:ObjectProperty ;
+	rdfs:subPropertyOf	ns7:qualityOf ;
+	rdfs:label	"ffff" .
+ns3:aaa	rdf:type	owl:Class ;
+	ns6:created	"2023-03-12T9:34:15"^^xsd:dateTime ,
+		"2023-03-12T9:34:28"^^xsd:dateTime ;
+	rdfs:label	"aaa" ;
+	rdfs:comment	"sdfsgsdsdfgsf" ;
+	rdfs:subClassOf	<http://data.total.com/resource/tsf/ontology/gaia-test/045c8a28ac> ,
+		owl:Thing ;
+	ns6:creator	"admin" ;
+	ns6:source	"Lineage_addNode" ;
+	ns8:status	"draft" .
+<b21bd044823>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-06-23T18:32:45"^^xsd:dateTime ;
+	owl:onProperty	ns7:residesIn ;
+	owl:someValuesFrom	ns3:cc7b582c0f ;
+	ns6:creator	"admin" .
+<b21bd044823>	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<be35ec5db5d>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-06-23T22:21:38"^^xsd:dateTime ;
+	owl:onProperty	ns7:containedBy ;
+	owl:someValuesFrom	ns3:de62adbf1d ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b4542365371>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-06-23T22:22:01"^^xsd:dateTime ;
+	owl:onProperty	ns7:represents ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/57521c5f20> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bc92ba5c0a2>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-06-23T22:23:47"^^xsd:dateTime ;
+	owl:onProperty	ns7:represents ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/194d634594> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b79ae328c41>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-06-23T22:25:45"^^xsd:dateTime ;
+	owl:onProperty	ns7:contains ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/4d3c6cc502> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b8b7230e093>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-06-23T22:51:15"^^xsd:dateTime ;
+	owl:onProperty	ns7:isAbout ;
+	owl:someValuesFrom	ns3:faa184342d ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b2ceebc6d5a>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-06-23T22:56:09"^^xsd:dateTime ;
+	owl:onProperty	ns7:subLocationOf ;
+	owl:someValuesFrom	ns3:cc7b582c0f ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b92817fa18f>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-06-24T18:18:55"^^xsd:dateTime ;
+	owl:onProperty	ns7:subLocationOf ;
+	owl:someValuesFrom	ns3:cc7b582c0f ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b1629e3e2a9>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-06-24T18:19:47"^^xsd:dateTime ;
+	owl:onProperty	ns7:subLocationOf ;
+	owl:someValuesFrom	ns3:cc7b582c0f ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bd1140b0f06>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-06-24T18:20:06"^^xsd:dateTime ;
+	owl:onProperty	ns7:subLocationOf ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/8dcbadccd2> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bcc6e4d9a73>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-06-24T18:21:13"^^xsd:dateTime ;
+	owl:onProperty	ns7:qualityOf ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bd0c82bd160>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-06-26T11:01:19"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/7f5c31eccf> ;
+	owl:someValuesFrom	ns3:b8763fc1bd ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b586d990e34>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-06-27T16:17:50"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/62589a6b76> ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/0356ebfaac> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bf7d2c95d5c>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-01T6:25:11"^^xsd:dateTime ;
+	owl:onProperty	ns7:dispositionOf ;
+	owl:someValuesFrom	ns3:d934bdab91 ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b904c9e3759>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-01T7:14:01"^^xsd:dateTime ;
+	owl:onProperty	ns7:locatedRelativeTo ;
+	owl:someValuesFrom	ns3:cc7b582c0f ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b7ad71cf344>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-01T10:38:10"^^xsd:dateTime ;
+	owl:onProperty	ns7:realizedIn ;
+	owl:someValuesFrom	ns3:f8f4a29312 ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b42cb18c273>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-04T16:06:57"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/03ebb29ca3> ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/1a4be9509b> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b83a07e87ba>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-04T16:23:50"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/03ebb29ca3> ;
+	owl:someValuesFrom	ns3:cc7b582c0f ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bcd601cfcdd>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-04T16:25:14"^^xsd:dateTime ;
+	owl:onProperty	ns7:qualityOf ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/1a4be9509b> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<be2912742dc>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-04T17:06:53"^^xsd:dateTime ;
+	owl:onProperty	ns7:hasParticipant ;
+	owl:someValuesFrom	ns3:cc7b582c0f ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b8de32d4256>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-05T17:23:37"^^xsd:dateTime ;
+	owl:onProperty	ns7:hasResident ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/4d3c6cc502> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b8b9e4ff1b9>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-06T5:49:25"^^xsd:dateTime ;
+	owl:onProperty	ns7:isAbout ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/738e98d5f8> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bc90971cacc>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-06T5:52:08"^^xsd:dateTime ;
+	owl:onProperty	ns7:isAbout ;
+	owl:someValuesFrom	ns3:d2c4658680 ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b841aaa5be2>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-06T6:18:31"^^xsd:dateTime ;
+	owl:onProperty	ns7:represents ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/57521c5f20> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b7a57365f8c>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-06T6:25:13"^^xsd:dateTime ;
+	owl:onProperty	ns7:represents ;
+	owl:someValuesFrom	ns3:c9dc85188c ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<ba8cbf10577>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-06T6:25:30"^^xsd:dateTime ;
+	owl:onProperty	ns7:represents ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/045c8a28ac> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b5ab4624a84>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-06T6:25:54"^^xsd:dateTime ;
+	owl:onProperty	ns7:represents ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b481d16e3e5>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-06T6:26:04"^^xsd:dateTime ;
+	owl:onProperty	ns7:represents ;
+	owl:someValuesFrom	ns3:bfbda1c8f9 ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b2a0aa24b11>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-06T6:26:54"^^xsd:dateTime ;
+	owl:onProperty	ns7:represents ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<be52d29956a>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-06T6:27:08"^^xsd:dateTime ;
+	owl:onProperty	ns7:represents ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/194d634594> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bc18889ba98>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-06T9:16:37"^^xsd:dateTime ;
+	owl:onProperty	ns7:represents ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/9ef56bb860> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b72f443e712>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-06T9:18:41"^^xsd:dateTime ;
+	owl:onProperty	ns7:isAbout ;
+	owl:someValuesFrom	ns3:d2c4658680 ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b9d6230ef67>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-14T19:27:32"^^xsd:dateTime ;
+	owl:onProperty	ns7:hasQuality ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/5ac2bd3e5f> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b37e1710afd>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-15T12:04:17"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/7f5c31eccf> ;
+	owl:someValuesFrom	ns3:b8763fc1bd ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b0386010f33>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-15T12:06:19"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/7f5c31eccf> ;
+	owl:someValuesFrom	ns3:b8763fc1bd ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<be4274b1d47>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-15T12:08:33"^^xsd:dateTime ;
+	owl:onProperty	ns3:c6c6e1144a ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/6a55df9075> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b66570453c4>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-15T17:53:46"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/523a1d5d25> ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/57521c5f20> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bc99a3ba853>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-15T17:54:12"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/523a1d5d25> ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/194d634594> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b3f698e2d47>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-15T17:56:55"^^xsd:dateTime ;
+	owl:onProperty	ns3:c6c6e1144a ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/6a55df9075> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b94cda1d500>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-15T17:57:57"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/523a1d5d25> ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/194d634594> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b2effcf9c02>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T8:43:47"^^xsd:dateTime ;
+	owl:onProperty	ns7:partOf ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/317d7ea4e0> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b1422160fe9>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T8:47:53"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/4b951e0a06> ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/317d7ea4e0> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b8835fcbbe0>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T8:55:38"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/4b951e0a06> ;
+	owl:someValuesFrom	ns3:d934bdab91 ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bb7cc5baeb4>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T8:59:25"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/4b951e0a06> ;
+	owl:someValuesFrom	ns3:d934bdab91 ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bf3cb76d44d>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T9:53:19"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/4b951e0a06> ;
+	owl:someValuesFrom	ns3:d934bdab91 ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bea3c1fdf7d>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T10:01:55"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/4b951e0a06> ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/317d7ea4e0> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b327d62aa6b>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T17:11:59"^^xsd:dateTime ;
+	owl:onProperty	ns7:isAbout ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/928a5fd4a7> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b0ff5783d06>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T17:12:21"^^xsd:dateTime ;
+	owl:onProperty	ns7:isAbout ;
+	owl:someValuesFrom	ns3:abc685bd46 ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b3104a424f2>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T17:24:42"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/17e9eeae8c> ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/68f663c9be> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b1e3db0700f>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T17:26:44"^^xsd:dateTime ;
+	owl:onProperty	ns7:qualityOf ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/4d3c6cc502> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bcea591a67d>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T18:12:16"^^xsd:dateTime ;
+	owl:onProperty	ns7:qualityOf ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/1029e6bf3c> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b0dd27e47a7>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T18:16:52"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/523a1d5d25> ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/57521c5f20> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b0f84cd0c11>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T18:17:44"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/523a1d5d25> ;
+	owl:someValuesFrom	ns3:de62adbf1d ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bd207012f10>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T18:56:04"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/285c802b91> ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/4d3c6cc502> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b988b4df9b6>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T19:04:02"^^xsd:dateTime ;
+	owl:onProperty	ns7:hasDisposition ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/7d636c5bd6> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b250420a710>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-17T19:10:13"^^xsd:dateTime ;
+	owl:onProperty	ns7:qualityOf ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/7d636c5bd6> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bec09d7fa44>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-18T9:52:49"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/523a1d5d25> ;
+	owl:someValuesFrom	ns3:d2c4658680 ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b3ded34f8e6>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-18T16:57:27"^^xsd:dateTime ;
+	owl:onProperty	ns7:contains ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/194d634594> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b2a19e70e82>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-18T16:58:10"^^xsd:dateTime ;
+	owl:onProperty	ns7:contains ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/2580264383> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b586727b34e>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-19T10:11:02"^^xsd:dateTime ;
+	owl:onProperty	ns7:locatedRelativeTo ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/8dcbadccd2> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b06540e08ef>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-20T15:20:12"^^xsd:dateTime ;
+	owl:onProperty	ns7:qualityOf ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/31d60c5c63> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b2138f0563d>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-20T19:29:35"^^xsd:dateTime ;
+	owl:onProperty	ns7:residesIn ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/40f16fab15> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bad3c86474f>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-20T19:30:00"^^xsd:dateTime ;
+	owl:onProperty	ns7:locatedRelativeTo ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/40f16fab15> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b3ff22533d8>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-20T19:31:34"^^xsd:dateTime ;
+	owl:onProperty	ns7:qualityOf ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/40f16fab15> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b84d89c6e70>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-20T19:33:45"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/3ebcc1b8f2> ;
+	owl:someValuesFrom	ns3:b8763fc1bd ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bd1ecbaff59>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-22T16:42:44"^^xsd:dateTime ;
+	owl:someValuesFrom	ns3:c1be349ad7 ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bf99b46946a>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-28T7:30:45"^^xsd:dateTime ;
+	owl:onProperty	ns7:locatedRelativeTo ;
+	owl:someValuesFrom	ns3:b8763fc1bd ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b7dcdd07440>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-28T7:31:00"^^xsd:dateTime ;
+	owl:onProperty	ns7:locatedRelativeTo ;
+	owl:someValuesFrom	ns3:b8763fc1bd ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b0216b42a64>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-28T7:31:55"^^xsd:dateTime ;
+	owl:onProperty	ns7:interestOf ;
+	owl:someValuesFrom	ns3:de62adbf1d ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bb041968b11>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-28T7:34:13"^^xsd:dateTime ;
+	owl:onProperty	ns7:arrangedPartOf ;
+	owl:someValuesFrom	ns3:de62adbf1d ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b86381627d9>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-07-28T7:44:43"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/523a1d5d25> ;
+	owl:someValuesFrom	ns3:de62adbf1d ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b039e9f7284>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-08-01T16:32:33"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/99a84631d0> ;
+	owl:someValuesFrom	ns3:Participation ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bba6807540a>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-08-01T16:33:37"^^xsd:dateTime ;
+	owl:onProperty	ns7:interestOf ;
+	owl:someValuesFrom	ns3:Participation ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b5dc4720285>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-08-01T16:33:49"^^xsd:dateTime ;
+	owl:onProperty	ns7:interestOf ;
+	owl:someValuesFrom	ns3:Participation ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bffbd0fab15>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-08-01T16:39:55"^^xsd:dateTime ;
+	owl:onProperty	ns3:c6c6e1144a ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/6a55df9075> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bb0bf25d427>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-08-01T16:41:51"^^xsd:dateTime ;
+	owl:onProperty	ns3:c6c6e1144a ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/6a55df9075> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bb848468043>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-08-01T16:42:04"^^xsd:dateTime ;
+	owl:onProperty	ns3:c6c6e1144a ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/6a55df9075> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b41abd7c08c>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-08-01T16:45:46"^^xsd:dateTime ;
+	owl:onProperty	ns3:d6e4659fad ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b3d1415b754>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-08-01T16:56:40"^^xsd:dateTime ;
+	owl:onProperty	ns7:partOf ;
+	owl:someValuesFrom	ns3:Seismic_campain ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bec503f56fc>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-08-01T17:03:50"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/17e9eeae8c> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b0d2d9af764>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-09-13T10:07:01"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/17e9eeae8c> ;
+	owl:someValuesFrom	ns3:faa184342d ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b5bf1cc0959>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-09-14T16:14:46"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/8a72bd91ae> ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/0b16568bd6> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b5554ce0e02>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-11-08T8:31:57"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/523a1d5d25> ;
+	owl:someValuesFrom	ns3:de62adbf1d ;
+	ns6:creator	"Fauconnet" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns11:hasSqlJoin	ns11:bf2e85ce61 ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b3f4d52a937>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-11-10T6:46:14"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/523a1d5d25> ;
+	owl:someValuesFrom	ns3:de62adbf1d ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<be5847bbcd0>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-11-14T15:29:36"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/523a1d5d25> ;
+	owl:someValuesFrom	ns3:de62adbf1d ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b8b69a64bf4>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-11-14T15:58:48"^^xsd:dateTime ;
+	owl:onProperty	<http://data.total.com/resource/tsf/ontology/gaia-test/4babaa9eb9> ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/738e98d5f8> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b3b891d62c3>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-11-15T11:47:33"^^xsd:dateTime ;
+	owl:onProperty	ns7:approvedBy ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b0276971b84>	rdf:type	owl:Restriction ;
+	ns6:created	"2022-11-26T19:49:00"^^xsd:dateTime ;
+	owl:onProperty	ns7:interestOf ;
+	owl:someValuesFrom	ns1:Petroleum_evaluation ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<bfdf6bc7f5a>	rdf:type	owl:Restriction ;
+	ns6:created	"2023-02-02T15:37:22"^^xsd:dateTime ;
+	owl:onProperty	ns7:approves ;
+	owl:someValuesFrom	<http://data.total.com/resource/tsf/ontology/gaia-test/66dea73978> ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
+<b12270df2b0>	rdf:type	owl:Restriction ;
+	ns6:created	"2023-03-08T11:42:09"^^xsd:dateTime ;
+	owl:onProperty	ns3:ffff ;
+	owl:someValuesFrom	ns3:f8f4a29312 ;
+	ns6:creator	"admin" ;
+	ns21:domainSourceLabel	"TSF_GAIA_TEST" ;
+	ns21:rangeSourceLabel	"TSF_GAIA_TEST" ;
+	ns6:source	"manual" ;
+	ns8:status	"candidate" .
