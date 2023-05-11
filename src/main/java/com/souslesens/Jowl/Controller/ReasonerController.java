@@ -173,11 +173,11 @@ public class ReasonerController {
     	 String externalApiUrl = "http://localhost:8080/reasoner/parametres";
     	 ResponseEntity<String> response = restTemplate.exchange(externalApiUrl, HttpMethod.GET, entity, String.class);
     	 System.out.println(response.getBody());
-    	 
+    	 List<String> valuesList = new ArrayList<>();
     	 try {
     		    ObjectMapper objectMapper = new ObjectMapper();
     		    Map<String, String> jsonMap = objectMapper.readValue(response.getBody(), Map.class);
-    		    List<String> valuesList = new ArrayList<>();
+    		    
 
     		    // Loop through the JSON data
     		    for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
@@ -211,7 +211,7 @@ public class ReasonerController {
                 result = reasonerService.postInferences(filePath, url);
                 System.out.println("here2");
             	}else {
-            	result = reasonerService.postInferencesContent(ontologyContentDecoded64);
+            	result = reasonerService.postInferencesContent(ontologyContentDecoded64,valuesList);
             	System.out.println("herfdsfse2");
             	}
                 return ResponseEntity.ok(result);

@@ -21,7 +21,7 @@ public interface ReasonerService {
 	
 	String postUnsatisfaisableClassesContent(String ontologyContentDecoded64) throws Exception;
 	
-	String postInferencesContent(String ontologyContentDecoded64)
+	String postInferencesContent(String ontologyContentDecoded64, List<String> valuesList)
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
 	
 	String postConsistencyContent(String ontologyContentDecoded64)
