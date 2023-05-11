@@ -1,8 +1,12 @@
 package com.souslesens.Jowl.Controller;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.LinkedList;
 import java.util.List;
+
+import org.checkerframework.checker.units.qual.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.souslesens.Jowl.model.jenaTripleParser;
+import com.souslesens.Jowl.model.parametresInputInference;
 import com.souslesens.Jowl.model.reasonerExtractTriples;
 import com.souslesens.Jowl.model.reasonerInference;
 import com.souslesens.Jowl.model.reasonerInput;
@@ -190,7 +196,40 @@ public class ReasonerController {
                 return ResponseEntity.badRequest().body("Error");
             }
         }
+    
+    
+    //Post API For STRING
+    @PostMapping("/parametres")
+    public ResponseEntity<?> retrieveParameteresInference(@RequestBody(required = false) parametresInputInference request) { 
+        
+        Boolean equivalentClass = request.getEquivalentClass();
+        Boolean sameIndividual = request.getSameIndividual();
+        Boolean IntersectionOf = request.getIntersectionOf();
+        Boolean UnionOf = request.getUnionOf();
+        Boolean DisjointClasses  = request.getDisjointClasses();
+        Boolean differentIndividual = request.getDifferentIndividual();
+        Boolean HasValue = request.getHasValue();
+        Boolean InverseObjectProperties = request.getInverseObjectProperties();
+        Boolean AllValuesFrom = request.getAllValuesFrom();
+        Boolean SomeValuesFrom = request.getSomeValuesFrom();
+        Boolean DomainAndRange  = request.getDomainAndRange();
+        
+    	int parametersCount = countParams(equivalentClass, sameIndividual, IntersectionOf,UnionOf,DisjointClasses,differentIndividual,HasValue,InverseObjectProperties,AllValuesFrom,SomeValuesFrom,DomainAndRange);
+        if (parametersCount == 0) {
+            return ResponseEntity.badRequest().body("At least one of params should be provided");
+        } else if (parametersCount > 11) {
+            return ResponseEntity.badRequest().body("paramateres u provided are more than u should pass");
+        }
+            try {
 
+            	List<parametresInputInference> parametresInference = new LinkedList<>();
+            	parametresInference.add(new parametresInputInference(equivalentClass, sameIndividual, IntersectionOf,UnionOf,DisjointClasses,differentIndividual,HasValue,InverseObjectProperties,AllValuesFrom,SomeValuesFrom,DomainAndRange));
+                return ResponseEntity.ok(parametresInference);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body("Error");
+            }
+        }
+    
     private int countParams(Object... parameters) {
         int count = 0;
         for (Object param : parameters) {

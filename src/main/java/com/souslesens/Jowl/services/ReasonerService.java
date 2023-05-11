@@ -26,7 +26,7 @@ public interface ReasonerService {
 	
 	String postConsistencyContent(String ontologyContentDecoded64)
 			throws OWLOntologyCreationException, JsonProcessingException, Exception;
-	
+
 	String postInferences(String filePath, String url)
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
 	
