@@ -73,6 +73,9 @@ You pick Body -> Raw -> JSON
        ]
     }
 ```
+
+### Example 2 Of Use For Reasoning Part
+
 ----------------
 
 __Jena's APIS__
@@ -89,6 +92,7 @@ You choose POST Request , you pass this URL https://localhost:8080/jena/rdftripl
 
 You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
 in the JSON Body 
+
 You pick Body -> Raw -> JSON 
 
 ```JSON
