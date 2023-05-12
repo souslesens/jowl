@@ -48,6 +48,7 @@ __Reasoning's APIS__
 | _GET_ | /reasoner/unsatisfiable?url=<YOUR_URL_HERE> | Checking if the passed ontology URL has an unsatifiable classes |
 | _GET_ | /reasoner/inference?filePath=<YOUR_FILE_NAME> | Generating Inferences from a file |
 | _GET_ | /reasoner/inference?url=<YOUR_URL_HERE> | Generating Inferences from an URL |
+| _GET_ | /reasoner/parametres | Get all the predicates associated with their class name |
 | _POST_ | /reasoner/consistency | Checking if the passed ontology file is consistent or not : can work with any input  (File , URL , Text) |
 | _POST_ | /reasoner/unsatisfiable | Checking if the passed ontology file has an unsatifiable classes : can work with any input  (File , URL , Text) |
 | _POST_ | /reasoner/inference | Generating Inferences : can work with any input  (File , URL , Text) |
