@@ -9,7 +9,6 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -22,11 +21,9 @@ import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
-import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLDifferentIndividualsAxiom;
 import org.semanticweb.owlapi.model.OWLDisjointClassesAxiom;
 import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
@@ -37,11 +34,8 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectHasValue;
 import org.semanticweb.owlapi.model.OWLObjectIntersectionOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
-import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
-import org.semanticweb.owlapi.model.OWLObjectPropertyDomainAxiom;
 import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
-import org.semanticweb.owlapi.model.OWLObjectPropertyRangeAxiom;
 import org.semanticweb.owlapi.model.OWLObjectSomeValuesFrom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -49,7 +43,6 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.OWLSameIndividualAxiom;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
-import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.NodeSet;
@@ -408,14 +401,11 @@ public class ReasonerServiceImpl implements ReasonerService {
 		JSONObject jsonObject = new JSONObject();
 		for (AxiomType<?> axiomType : AxiomType.AXIOM_TYPES) {
 			Set<? extends OWLAxiom> axioms = inferredOntology.getAxioms(axiomType);
-			System.out.println(convertAxiomSetToJSONArray(axioms));
-			System.out.println(axiomType.toString());
 			if (!axioms.isEmpty()) {
 				jsonObject.put(axiomType.toString(), convertAxiomSetToJSONArray(axioms));
 			}
 		}
 		String jsonString = jsonObject.toString();
-		System.out.println(jsonString);
 		return jsonString;
 	}
 	@Override
@@ -547,7 +537,7 @@ public class ReasonerServiceImpl implements ReasonerService {
 				e.printStackTrace();
 			}
 		}
-		// Load the ontology from the file
+		
 		ontology = manager.loadOntologyFromOntologyDocument(resource.getFile());
 		StringBuilder sb = new StringBuilder();
 		// Add the inferred axioms to the list
@@ -714,7 +704,7 @@ public class ReasonerServiceImpl implements ReasonerService {
 		}
 
 		public Set<InferredAxiomGenerator<?>> getInferredAxiomGenerators() {
-			return Collections.emptySet(); // No nested inferred axiom generators
+			return Collections.emptySet();
 		}
 
 		@Override
@@ -738,7 +728,7 @@ public class ReasonerServiceImpl implements ReasonerService {
 		}
 
 		public Set<InferredAxiomGenerator<?>> getInferredAxiomGenerators() {
-			return Collections.emptySet(); // No nested inferred axiom generators
+			return Collections.emptySet();
 		}
 
 		@Override
