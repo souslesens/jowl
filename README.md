@@ -60,7 +60,8 @@ You open for example Postman ( You don't you know postman ? : [Postman](https://
 
 You choose POST Request , you pass this URL https://localhost:8080/reasoner/inference
 
-You should pass 1 parameter in the JSON Body {url: or ontologyContentEncoded64: or filePath:}
+You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
+in the JSON Body 
 
 You pick Body -> Raw -> JSON 
 
