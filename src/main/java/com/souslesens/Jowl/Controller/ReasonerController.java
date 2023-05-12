@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.checkerframework.checker.units.qual.Length;
+import org.semanticweb.owlapi.util.InferredSubClassAxiomGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -259,10 +260,19 @@ public class ReasonerController {
         hashMap.put("DisjointClasses", "InferredDisjointClassesAxiomGenerator()");
         hashMap.put("differentIndividual","InferredDifferentIndividualAxiomGenerator()" );
         hashMap.put("HasValue", "InferredHasValueAxiomGenerator()");
-        hashMap.put("InverseObjectProperties", "InferredInverseObjectPropertiesAxiomGenerator()");
+        hashMap.put("InverseObjectProperties", "InferredInverseObjectPropertiesAxiomGenerator()"); //  if property A relates individual x to individual y, then property B relates individual y to individual x
         hashMap.put("AllValuesFrom", "InferredAllValuesFromAxiomGenerator()");
         hashMap.put("SomeValuesFrom", "InferredSameValueSomeValuesFromAxiomGenerator()");
         hashMap.put("DomainAndRange", "InferredDomainAndRangeAxiomGenerator()");
+        hashMap.put("ClassAssertion", "InferredClassAssertionAxiomGenerator()");
+        hashMap.put("SubClass", "InferredSubClassAxiomGenerator()");
+        hashMap.put("DataPropertyCharacteristic", "InferredDataPropertyCharacteristicAxiomGenerator()");
+        hashMap.put("EquivalentDataProperty", "InferredEquivalentDataPropertiesAxiomGenerator()");
+        hashMap.put("EquivalentObjectProperty", "InferredEquivalentObjectPropertyAxiomGenerator()");
+        hashMap.put("SubObjectProperty", "InferredSubObjectPropertyAxiomGenerator()");
+        hashMap.put("SubDataPropertyOfAxiom", "InferredSubDataPropertyAxiomGenerator()");
+        hashMap.put("ObjectPropertyCharacteristic", "InferredObjectPropertyCharacteristicAxiomGenerator()"); // FunctionalObjectProperty/InverseFunctionalObjectProperty/SymmetricObjectProperty/AsymmetricObjectProperty/ReflexiveObjectProperty/IrreflexiveObjectProperty/TransitiveObjectProperty 
+        hashMap.put("SubDataPropertyOfAxiom", "InferredPropertyAssertionGenerator()"); // This Covers both OWLObjectPropertyAssertionAxiom and OWLDataPropertyAssertionAxiom
         hashMap.put("AllOWL", "All");
             try {
 

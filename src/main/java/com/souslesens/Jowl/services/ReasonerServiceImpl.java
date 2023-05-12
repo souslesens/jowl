@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -48,9 +49,18 @@ import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.util.InferredAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredClassAssertionAxiomGenerator;
 import org.semanticweb.owlapi.util.InferredClassAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredDataPropertyCharacteristicAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredEquivalentDataPropertiesAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredEquivalentObjectPropertyAxiomGenerator;
 import org.semanticweb.owlapi.util.InferredIndividualAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredObjectPropertyCharacteristicAxiomGenerator;
 import org.semanticweb.owlapi.util.InferredOntologyGenerator;
+import org.semanticweb.owlapi.util.InferredPropertyAssertionGenerator;
+import org.semanticweb.owlapi.util.InferredSubClassAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredSubDataPropertyAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredSubObjectPropertyAxiomGenerator;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.WritableResource;
@@ -144,8 +154,8 @@ public class ReasonerServiceImpl implements ReasonerService {
 		OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
 		reasoner.precomputeInferences(InferenceType.values());
 		OWLOntology inferredOntology = manager.createOntology();
-		InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner);
-
+        List<InferredAxiomGenerator<? extends OWLAxiom>> axiomGenerators = new ArrayList<>();       
+		InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, axiomGenerators);
         for (String value : valuesList) {
             try {
             	InferredAxiomGenerator<?> instance = null;
@@ -182,6 +192,35 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("InferredDomainAndRangeAxiomGenerator()")) {
                 	iog.addGenerator( new InferredDomainAndRangeAxiomGenerator());
                     break;
+                }else if (value.contentEquals("InferredClassAssertionAxiomGenerator()")) {
+                	iog.addGenerator( new InferredClassAssertionAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredSubClassAxiomGenerator()")) {
+                	iog.addGenerator( new InferredSubClassAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredDataPropertyCharacteristicAxiomGenerator()")) {
+                	iog.addGenerator( new InferredDataPropertyCharacteristicAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredEquivalentDataPropertiesAxiomGenerator()")) {
+                	iog.addGenerator( new InferredEquivalentDataPropertiesAxiomGenerator());
+                    break;
+                
+                }else if (value.contentEquals("InferredEquivalentObjectPropertyAxiomGenerator()")) {
+                	iog.addGenerator( new InferredEquivalentObjectPropertyAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredSubObjectPropertyAxiomGenerator()")) {
+                	iog.addGenerator( new InferredSubObjectPropertyAxiomGenerator());
+                    break;
+                
+                }else if (value.contentEquals("InferredSubDataPropertyAxiomGenerator()")) {
+                	iog.addGenerator( new InferredSubDataPropertyAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredObjectPropertyCharacteristicAxiomGenerator()")) {
+                	iog.addGenerator( new InferredObjectPropertyCharacteristicAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredPropertyAssertionGenerator()")) {
+                	iog.addGenerator( new InferredPropertyAssertionGenerator());
+                    break;
                 }else if (value.contentEquals("All")) {
         	        iog.addGenerator(new InferredEquivalentClassesAxiomGenerator());
         	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
@@ -194,6 +233,16 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator(new InferredAllValuesFromAxiomGenerator());
         	        iog.addGenerator(new InferredSameValueSomeValuesFromAxiomGenerator());
         	        iog.addGenerator(new InferredDomainAndRangeAxiomGenerator());
+        	        iog.addGenerator( new InferredSubClassAxiomGenerator());
+        	        iog.addGenerator( new InferredClassAssertionAxiomGenerator());
+        	        iog.addGenerator( new InferredDataPropertyCharacteristicAxiomGenerator());
+        	        iog.addGenerator( new InferredEquivalentDataPropertiesAxiomGenerator());
+        	        iog.addGenerator( new InferredEquivalentObjectPropertyAxiomGenerator());
+        	        iog.addGenerator( new InferredSubObjectPropertyAxiomGenerator());
+        	        iog.addGenerator( new InferredSubDataPropertyAxiomGenerator());
+        	        iog.addGenerator( new InferredObjectPropertyCharacteristicAxiomGenerator());
+        	        iog.addGenerator( new InferredPropertyAssertionGenerator());
+        	        
                         break;
                 }else {
                 	break;
@@ -208,19 +257,15 @@ public class ReasonerServiceImpl implements ReasonerService {
         }
 		OWLDataFactory dataFactory = manager.getOWLDataFactory();
 		iog.fillOntology(dataFactory, inferredOntology);
-		System.out.println("Infered Ontologie \n" + inferredOntology);
 		// Extract the specified axioms and expressions
 		JSONObject jsonObject = new JSONObject();
 		for (AxiomType<?> axiomType : AxiomType.AXIOM_TYPES) {
 			Set<? extends OWLAxiom> axioms = inferredOntology.getAxioms(axiomType);
-			System.out.println(convertAxiomSetToJSONArray(axioms));
-			System.out.println(axiomType.toString());
 			if (!axioms.isEmpty()) {
 				jsonObject.put(axiomType.toString(), convertAxiomSetToJSONArray(axioms));
 			}
 		}
 		String jsonString = jsonObject.toString();
-		System.out.println(jsonString);
 		return jsonString;
 	}
 
@@ -332,8 +377,8 @@ public class ReasonerServiceImpl implements ReasonerService {
 		OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
 		reasoner.precomputeInferences(InferenceType.values());
 		OWLOntology inferredOntology = manager.createOntology();
-		InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner);
-
+        List<InferredAxiomGenerator<? extends OWLAxiom>> axiomGenerators = new ArrayList<>();       
+		InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, axiomGenerators);
         for (String value : valuesList) {
             try {
             	InferredAxiomGenerator<?> instance = null;
@@ -370,6 +415,35 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("InferredDomainAndRangeAxiomGenerator()")) {
                 	iog.addGenerator( new InferredDomainAndRangeAxiomGenerator());
                     break;
+                }else if (value.contentEquals("InferredClassAssertionAxiomGenerator()")) {
+                	iog.addGenerator( new InferredClassAssertionAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredSubClassAxiomGenerator()")) {
+                	iog.addGenerator( new InferredSubClassAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredDataPropertyCharacteristicAxiomGenerator()")) {
+                	iog.addGenerator( new InferredDataPropertyCharacteristicAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredEquivalentDataPropertiesAxiomGenerator()")) {
+                	iog.addGenerator( new InferredEquivalentDataPropertiesAxiomGenerator());
+                    break;
+                
+                }else if (value.contentEquals("InferredEquivalentObjectPropertyAxiomGenerator()")) {
+                	iog.addGenerator( new InferredEquivalentObjectPropertyAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredSubObjectPropertyAxiomGenerator()")) {
+                	iog.addGenerator( new InferredSubObjectPropertyAxiomGenerator());
+                    break;
+                
+                }else if (value.contentEquals("InferredSubDataPropertyAxiomGenerator()")) {
+                	iog.addGenerator( new InferredSubDataPropertyAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredObjectPropertyCharacteristicAxiomGenerator()")) {
+                	iog.addGenerator( new InferredObjectPropertyCharacteristicAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredPropertyAssertionGenerator()")) {
+                	iog.addGenerator( new InferredPropertyAssertionGenerator());
+                    break;
                 }else if (value.contentEquals("All")) {
         	        iog.addGenerator(new InferredEquivalentClassesAxiomGenerator());
         	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
@@ -382,6 +456,16 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator(new InferredAllValuesFromAxiomGenerator());
         	        iog.addGenerator(new InferredSameValueSomeValuesFromAxiomGenerator());
         	        iog.addGenerator(new InferredDomainAndRangeAxiomGenerator());
+        	        iog.addGenerator( new InferredSubClassAxiomGenerator());
+        	        iog.addGenerator( new InferredClassAssertionAxiomGenerator());
+        	        iog.addGenerator( new InferredDataPropertyCharacteristicAxiomGenerator());
+        	        iog.addGenerator( new InferredEquivalentDataPropertiesAxiomGenerator());
+        	        iog.addGenerator( new InferredEquivalentObjectPropertyAxiomGenerator());
+        	        iog.addGenerator( new InferredSubObjectPropertyAxiomGenerator());
+        	        iog.addGenerator( new InferredSubDataPropertyAxiomGenerator());
+        	        iog.addGenerator( new InferredObjectPropertyCharacteristicAxiomGenerator());
+        	        iog.addGenerator( new InferredPropertyAssertionGenerator());
+        	        
                         break;
                 }else {
                 	break;
@@ -396,7 +480,6 @@ public class ReasonerServiceImpl implements ReasonerService {
         }
 		OWLDataFactory dataFactory = manager.getOWLDataFactory();
 		iog.fillOntology(dataFactory, inferredOntology);
-		System.out.println("Infered Ontologie \n" + inferredOntology);
 		// Extract the specified axioms and expressions
 		JSONObject jsonObject = new JSONObject();
 		for (AxiomType<?> axiomType : AxiomType.AXIOM_TYPES) {
@@ -852,4 +935,11 @@ public class ReasonerServiceImpl implements ReasonerService {
 		}
 	}
 
+	public class CustomInferredOntologyGenerator extends InferredOntologyGenerator {
+
+	    public CustomInferredOntologyGenerator(OWLReasoner reasoner) {
+	        super(reasoner);
+	    }
+	}
+	
 }
