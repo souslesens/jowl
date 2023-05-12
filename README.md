@@ -77,7 +77,7 @@ You pick Body -> Raw -> JSON
 __Jena's APIS__
 | Method Type | API  | Description |
 | -------- | -------- | -------- |
-| _POST_ | /jena/rdftriple | Jena Triple Parsedr : : can work and support any format (NQUADS,N3,SHACLC,RDFJSON,NTRIPLES,JSONLD,TURTLE,RDFXML,OWL) and can work with any input type  (File , URL , Text) |
+| _POST_ | /jena/rdftriple | Jena Triple Parsedr : can work and support any format (NQUADS,N3,SHACLC,RDFJSON,NTRIPLES,JSONLD,TURTLE,RDFXML,OWL) and can work with any input type  (File , URL , Text) |
 
 ----------------
 ### Example Of Use for Jena PART .
