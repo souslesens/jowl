@@ -169,7 +169,50 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("InferredEquivalentClassesAxiomGenerator()")) {
                 	iog.addGenerator( new InferredEquivalentClassesAxiomGenerator());
                     break;
+                }else if (value.contentEquals("SameIndividualAxiomGenerator()")) {
+                	iog.addGenerator( new SameIndividualAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredUnionOfAxiomGenerator()")) {
+                	iog.addGenerator( new InferredEquivalentClassesAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredDisjointClassesAxiomGenerator()")) {
+                	iog.addGenerator( new InferredDisjointClassesAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredDifferentIndividualAxiomGenerator()")) {
+                	iog.addGenerator( new InferredDifferentIndividualAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredHasValueAxiomGenerator()")) {
+                	iog.addGenerator( new InferredHasValueAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredInverseObjectPropertiesAxiomGenerator()")) {
+                	iog.addGenerator( new InferredInverseObjectPropertiesAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredAllValuesFromAxiomGenerator()")) {
+                	iog.addGenerator( new InferredAllValuesFromAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredSameValueSomeValuesFromAxiomGenerator()")) {
+                	iog.addGenerator( new InferredSameValueSomeValuesFromAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredDomainAndRangeAxiomGenerator()")) {
+                	iog.addGenerator( new InferredDomainAndRangeAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("All")) {
+        	        iog.addGenerator(new InferredEquivalentClassesAxiomGenerator());
+        	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
+        	        iog.addGenerator(new InferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
+        	        iog.addGenerator(new InferredIntersectionOfAxiomGenerator());
+        	        iog.addGenerator(new InferredUnionOfAxiomGenerator());
+        	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
+        	        iog.addGenerator(new InferredHasValueAxiomGenerator());
+        	        iog.addGenerator(new InferredInverseObjectPropertiesAxiomGenerator() );
+        	        iog.addGenerator(new InferredAllValuesFromAxiomGenerator());
+        	        iog.addGenerator(new InferredSameValueSomeValuesFromAxiomGenerator());
+        	        iog.addGenerator(new InferredDomainAndRangeAxiomGenerator());
+                        break;
+                }else {
+                	break;
                 }
+
 
 
                 

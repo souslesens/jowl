@@ -265,10 +265,10 @@ public class ReasonerController {
         hashMap.put("differentIndividual","InferredDifferentIndividualAxiomGenerator()" );
         hashMap.put("HasValue", "InferredHasValueAxiomGenerator()");
         hashMap.put("InverseObjectProperties", "InferredInverseObjectPropertiesAxiomGenerator()");
-        hashMap.put("AllValuesFrom", "InferredDisjointClassesAxiomGenerator()");
+        hashMap.put("AllValuesFrom", "InferredAllValuesFromAxiomGenerator()");
         hashMap.put("SomeValuesFrom", "InferredSameValueSomeValuesFromAxiomGenerator()");
         hashMap.put("DomainAndRange", "InferredDomainAndRangeAxiomGenerator()");
-        hashMap.put("OWL", "All");
+        hashMap.put("AllOWL", "All");
             try {
 
             	
