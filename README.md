@@ -50,7 +50,7 @@ __Reasoning's APIS__
 | _GET_ | /reasoner/inference?url=<YOUR_URL_HERE> | Generating Inferences from an URL |
 | _POST_ | /reasoner/consistency | Checking if the passed ontology file is consistent or not : can work with any input  (File , URL , Text) |
 | _POST_ | /reasoner/unsatisfiable | Checking if the passed ontology file has an unsatifiable classes : can work with any input  (File , URL , Text) |
-| _POST_ | /reasoner/inference | Generating Inferences : : can work with any input  (File , URL , Text) |
+| _POST_ | /reasoner/inference | Generating Inferences : can work with any input  (File , URL , Text) |
 
 ----------------
 
