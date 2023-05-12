@@ -38,7 +38,7 @@ After successfully downloading the project and running it, here's the API that y
 __Base URL__ : https://localhost:8080
 
 
-__Reasoning"s APIS__
+__Reasoning's APIS__
 | Method Type | API  | Description |
 | -------- | -------- | -------- |
 | _GET_ | /reasoner/test | Testing if the server is running or not |
@@ -80,7 +80,7 @@ __Jena's APIS__
 | _POST_ | /jena/rdftriple | Jena Triple Parsedr : : can work and support any format (NQUADS,N3,SHACLC,RDFJSON,NTRIPLES,JSONLD,TURTLE,RDFXML,OWL) and can work with any input type  (File , URL , Text) |
 
 ----------------
-### Example Of Use of JENA'S API .
+### Example Of Use for Jena PART .
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
