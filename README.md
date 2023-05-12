@@ -63,6 +63,8 @@ You choose POST Request , you pass this URL https://localhost:8080/reasoner/infe
 You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
 in the JSON Body 
 
+For example when u say RangeAndDomain inside the predicate array u mean , Infer All the Range and Domain from the Ontology
+
 You pick Body -> Raw -> JSON 
 
 ```JSON
@@ -75,8 +77,8 @@ You pick Body -> Raw -> JSON
 ```
 
 ### Example 2 Of Use For Reasoning Part
-
-For example when u say AllOWL in the predicate u mean , Do Evreything
+ 
+here example when u say AllOWL inside the predicate array u mean , Infer Anything Possible from the Ontology
 
 ```JSON
 {  
