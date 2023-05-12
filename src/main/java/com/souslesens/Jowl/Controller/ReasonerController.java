@@ -45,6 +45,8 @@ import com.souslesens.Jowl.services.ReasonerServiceImpl.InferredSameValueSomeVal
 import com.souslesens.Jowl.services.ReasonerServiceImpl.InferredUnionOfAxiomGenerator;
 import com.souslesens.Jowl.services.ReasonerServiceImpl.SameIndividualAxiomGenerator;
 
+import de.uulm.ecs.ai.owlapi.krssrenderer.KRSS2OWLSyntaxOntologyStorer;
+
 @RestController
 @RequestMapping("/reasoner")
 public class ReasonerController {
@@ -175,29 +177,44 @@ public class ReasonerController {
     	 ResponseEntity<String> response = restTemplate.exchange(externalApiUrl, HttpMethod.GET, entity, String.class);
     	 System.out.println(response.getBody());
     	 List<String> valuesList = new ArrayList<>();
-    	 try {
-    		    ObjectMapper objectMapper = new ObjectMapper();
-    		    Map<String, String> jsonMap = objectMapper.readValue(response.getBody(), Map.class);
-    		    
+    	 List<String> valuesList2 = new ArrayList<>();
+	     for (int i = 0; i < reqParams.length; i++) {
+	        	 if (reqParams[i].equals("All_OWL")) {
+	                valuesList2.add("All");
+	                System.out.println("this is the end");
+	                break;
+	            }
+	        	
+	        }
+    	 if (valuesList2.isEmpty()) {
+    		 System.out.println("This is the beginning");
+        	 try {
+     		    ObjectMapper objectMapper = new ObjectMapper();
+     		    Map<String, String> jsonMap = objectMapper.readValue(response.getBody(), Map.class);
+     		    
 
-    		    // Loop through the JSON data
-    		    for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
-    		        String key = entry.getKey();
-    		        System.out.println("Key: " + key);
-    		        System.out.println("Value: " + entry.getValue());
+     		    // Loop through the JSON data
+     		    for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
+     		        String key = entry.getKey();
+     		        System.out.println("Key: " + key);
+     		        System.out.println("Value: " + entry.getValue());
 
-    		        // Loop through reqParams to check if the key is in reqParams
-    		        for (int i = 0; i < reqParams.length; i++) {
-    		            if (reqParams[i].equals(key)) {
-    		                valuesList.add(entry.getValue());
-    		                break; // No need to check further reqParams for this key
-    		            }
-    		        }
-    		    }
+     		        // Loop through reqParams to check if the key is in reqParams
+     		        for (int i = 0; i < reqParams.length; i++) {
+     		        	 if (reqParams[i].equals(key)) {
+     		                valuesList.add(entry.getValue());
+     		                break; // No need to check further reqParams for this key
+     		            }
+     		        }
+     		    }
 
-    		} catch (Exception e) {
-    			return ResponseEntity.badRequest().body("Error");
-         }
+     		} catch (Exception e) {
+     			return ResponseEntity.badRequest().body("Error");
+          }
+    	 }else {
+    		 valuesList = valuesList2;
+    	 }
+
 
     	int parametersCount = countParams(ontologyContentDecoded64, filePath, url);
         if (parametersCount == 0) {
