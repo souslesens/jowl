@@ -194,9 +194,8 @@ public class ReasonerController {
     		        }
     		    }
 
-    		    System.out.println(valuesList);
     		} catch (Exception e) {
-            System.out.println("error");
+    			return ResponseEntity.badRequest().body("Error");
          }
 
     	int parametersCount = countParams(ontologyContentDecoded64, filePath, url);
@@ -208,7 +207,7 @@ public class ReasonerController {
             try {
             	String result ;
             	if (!(filePath == null) || !(url == null) ) {
-                result = reasonerService.postInferences(filePath, url);
+                result = reasonerService.postInferences(filePath, url,valuesList);
                 System.out.println("here2");
             	}else {
             	result = reasonerService.postInferencesContent(ontologyContentDecoded64,valuesList);

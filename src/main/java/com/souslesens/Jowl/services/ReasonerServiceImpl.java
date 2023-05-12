@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -56,18 +55,12 @@ import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.util.InferredAxiomGenerator;
-import org.semanticweb.owlapi.util.InferredClassAssertionAxiomGenerator;
 import org.semanticweb.owlapi.util.InferredClassAxiomGenerator;
-import org.semanticweb.owlapi.util.InferredEquivalentDataPropertiesAxiomGenerator;
-import org.semanticweb.owlapi.util.InferredEquivalentObjectPropertyAxiomGenerator;
 import org.semanticweb.owlapi.util.InferredIndividualAxiomGenerator;
-import org.semanticweb.owlapi.util.InferredObjectPropertyCharacteristicAxiomGenerator;
 import org.semanticweb.owlapi.util.InferredOntologyGenerator;
-import org.semanticweb.owlapi.util.InferredPropertyAssertionGenerator;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.WritableResource;
-import org.springframework.javapoet.ClassName;
 import org.springframework.stereotype.Service;
 import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -220,24 +213,6 @@ public class ReasonerServiceImpl implements ReasonerService {
                 e.printStackTrace(); // Handle any exceptions that may occur
             }
         }
-//	        iog.addGenerator(new InferredEquivalentClassesAxiomGenerator());
-//	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
-//	        iog.addGenerator(new InferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
-//	        iog.addGenerator(new InferredIntersectionOfAxiomGenerator());
-//	        iog.addGenerator(new InferredUnionOfAxiomGenerator());
-//	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
-//	        iog.addGenerator(new InferredHasValueAxiomGenerator());
-//	        iog.addGenerator(new InferredInverseObjectPropertiesAxiomGenerator() );
-//	        iog.addGenerator(new InferredAllValuesFromAxiomGenerator());
-//	        iog.addGenerator(new InferredSameValueSomeValuesFromAxiomGenerator());
-//	        iog.addGenerator(new InferredDomainAndRangeAxiomGenerator());
-//	        // Can be deleted
-//	        iog.addGenerator(new InferredClassAssertionAxiomGenerator());
-//	        iog.addGenerator(new InferredEquivalentDataPropertiesAxiomGenerator());
-//	        iog.addGenerator(new InferredObjectPropertyCharacteristicAxiomGenerator());
-//	        iog.addGenerator(new InferredEquivalentObjectPropertyAxiomGenerator());
-//	        iog.addGenerator(new InferredPropertyAssertionGenerator());
-		// Can be deleted
 		OWLDataFactory dataFactory = manager.getOWLDataFactory();
 		iog.fillOntology(dataFactory, inferredOntology);
 		System.out.println("Infered Ontologie \n" + inferredOntology);
@@ -346,7 +321,7 @@ public class ReasonerServiceImpl implements ReasonerService {
 	}
 
 	@Override
-	public String postInferences(String filePath, String url)
+	public String postInferences(String filePath, String url,List<String> valuesList)
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology ontology = null;
@@ -362,37 +337,87 @@ public class ReasonerServiceImpl implements ReasonerService {
 		}
 		PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 		OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
-		String fileName = "inferred-ontology.owl";
 		reasoner.precomputeInferences(InferenceType.values());
-		InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner);
 		OWLOntology inferredOntology = manager.createOntology();
+		InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner);
+
+        for (String value : valuesList) {
+            try {
+            	InferredAxiomGenerator<?> instance = null;
+                if (value.contentEquals("InferredIntersectionOfAxiomGenerator()")  ) {
+                	iog.addGenerator( new InferredIntersectionOfAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredEquivalentClassesAxiomGenerator()")) {
+                	iog.addGenerator( new InferredEquivalentClassesAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("SameIndividualAxiomGenerator()")) {
+                	iog.addGenerator( new SameIndividualAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredUnionOfAxiomGenerator()")) {
+                	iog.addGenerator( new InferredEquivalentClassesAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredDisjointClassesAxiomGenerator()")) {
+                	iog.addGenerator( new InferredDisjointClassesAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredDifferentIndividualAxiomGenerator()")) {
+                	iog.addGenerator( new InferredDifferentIndividualAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredHasValueAxiomGenerator()")) {
+                	iog.addGenerator( new InferredHasValueAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredInverseObjectPropertiesAxiomGenerator()")) {
+                	iog.addGenerator( new InferredInverseObjectPropertiesAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredAllValuesFromAxiomGenerator()")) {
+                	iog.addGenerator( new InferredAllValuesFromAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredSameValueSomeValuesFromAxiomGenerator()")) {
+                	iog.addGenerator( new InferredSameValueSomeValuesFromAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("InferredDomainAndRangeAxiomGenerator()")) {
+                	iog.addGenerator( new InferredDomainAndRangeAxiomGenerator());
+                    break;
+                }else if (value.contentEquals("All")) {
+        	        iog.addGenerator(new InferredEquivalentClassesAxiomGenerator());
+        	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
+        	        iog.addGenerator(new InferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
+        	        iog.addGenerator(new InferredIntersectionOfAxiomGenerator());
+        	        iog.addGenerator(new InferredUnionOfAxiomGenerator());
+        	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
+        	        iog.addGenerator(new InferredHasValueAxiomGenerator());
+        	        iog.addGenerator(new InferredInverseObjectPropertiesAxiomGenerator() );
+        	        iog.addGenerator(new InferredAllValuesFromAxiomGenerator());
+        	        iog.addGenerator(new InferredSameValueSomeValuesFromAxiomGenerator());
+        	        iog.addGenerator(new InferredDomainAndRangeAxiomGenerator());
+                        break;
+                }else {
+                	break;
+                }
+
+
+
+                
+            } catch (Exception e) {
+                e.printStackTrace(); // Handle any exceptions that may occur
+            }
+        }
 		OWLDataFactory dataFactory = manager.getOWLDataFactory();
 		iog.fillOntology(dataFactory, inferredOntology);
-
-		List<OWLAxiom> axioms = new ArrayList<>();
-		for (OWLAxiom axiom : inferredOntology.getAxioms()) {
-			if (axiom instanceof OWLSubClassOfAxiom || axiom instanceof OWLDisjointClassesAxiom
-					|| axiom instanceof OWLEquivalentClassesAxiom || axiom instanceof OWLSubObjectPropertyOfAxiom
-					|| axiom instanceof OWLObjectPropertyDomainAxiom || axiom instanceof OWLObjectPropertyRangeAxiom
-					|| axiom instanceof OWLObjectPropertyAssertionAxiom || axiom instanceof OWLClassAssertionAxiom
-					|| axiom instanceof OWLDataPropertyAssertionAxiom) {
-				axioms.add(axiom);
+		System.out.println("Infered Ontologie \n" + inferredOntology);
+		// Extract the specified axioms and expressions
+		JSONObject jsonObject = new JSONObject();
+		for (AxiomType<?> axiomType : AxiomType.AXIOM_TYPES) {
+			Set<? extends OWLAxiom> axioms = inferredOntology.getAxioms(axiomType);
+			System.out.println(convertAxiomSetToJSONArray(axioms));
+			System.out.println(axiomType.toString());
+			if (!axioms.isEmpty()) {
+				jsonObject.put(axiomType.toString(), convertAxiomSetToJSONArray(axioms));
 			}
 		}
-
-		StringBuilder sb = new StringBuilder();
-		// Add the inferred axioms to the list
-		for (OWLAxiom axiom : inferredOntology.getAxioms()) {
-			sb.append(axiom.toString());
-
-		}
-		String axiomsString = sb.toString();
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("inference", axiomsString);
 		String jsonString = jsonObject.toString();
+		System.out.println(jsonString);
 		return jsonString;
 	}
-
 	@Override
 	public String postUnsatisfaisableClasses(String filePath, String Url) throws Exception {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
