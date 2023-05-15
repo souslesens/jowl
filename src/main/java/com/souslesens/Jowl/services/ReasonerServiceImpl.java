@@ -171,7 +171,7 @@ public class ReasonerServiceImpl implements ReasonerService {
                 	iog.addGenerator( new SameIndividualAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredUnionOfAxiomGenerator()") && !generatorAdded) {
-                	iog.addGenerator( new InferredEquivalentClassesAxiomGenerator());
+                	iog.addGenerator( new InferredUnionOfAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredDisjointClassesAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredDisjointClassesAxiomGenerator());
