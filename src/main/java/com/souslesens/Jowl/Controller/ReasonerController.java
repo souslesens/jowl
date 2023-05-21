@@ -250,10 +250,10 @@ public class ReasonerController {
     public ResponseEntity<?> retrieveParameteresInferenceMethod() { 
         Map<String, String> hashMap = new HashMap<>();
         // Add key-value pairs to the HashMap
-        hashMap.put("equivalentClass", "InferredEquivalentClassesAxiomGenerator()");
+        hashMap.put("equivalentClass", "CustomInferredEquivalentClassesAxiomGenerator()"); // Covers owl:equivalentClass Inferences
         hashMap.put("sameIndividual", "SameIndividualAxiomGenerator()");
-        hashMap.put("IntersectionOf", "CustomInferredIntersectionOfAxiomGenerator()");
-        hashMap.put("UnionOf", "CustomInferredUnionOfAxiomGenerator()");
+        hashMap.put("IntersectionOf", "CustomInferredIntersectionOfAxiomGenerator()"); // Covers Owl:Intersection:Of Inferences
+        hashMap.put("UnionOf", "CustomInferredUnionOfAxiomGenerator()"); // Covers Owl:UnionOf inferences
         hashMap.put("DisjointClasses", "InferredDisjointClassesAxiomGenerator()");
         hashMap.put("differentIndividual","CustomInferredDifferentIndividualAxiomGenerator()" );
         hashMap.put("HasValue", "InferredHasValueAxiomGenerator()");

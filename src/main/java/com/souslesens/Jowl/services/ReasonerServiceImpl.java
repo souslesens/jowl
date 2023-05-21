@@ -163,8 +163,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 if (value.contentEquals("CustomInferredIntersectionOfAxiomGenerator()")   && !generatorAdded ) {
                 	iog.addGenerator( new CustomInferredIntersectionOfAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("InferredEquivalentClassesAxiomGenerator()") && !generatorAdded) {
-                	iog.addGenerator( new InferredEquivalentClassesAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredEquivalentClassesAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomInferredEquivalentClassesAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("SameIndividualAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new SameIndividualAxiomGenerator());
@@ -223,7 +223,7 @@ public class ReasonerServiceImpl implements ReasonerService {
                 	iog.addGenerator( new InferredPropertyAssertionGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("All")) {
-        	        iog.addGenerator(new InferredEquivalentClassesAxiomGenerator() );
+        	        iog.addGenerator(new CustomInferredEquivalentClassesAxiomGenerator() );
         	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
         	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
         	        iog.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
@@ -387,8 +387,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 if (value.contentEquals("CustomInferredIntersectionOfAxiomGenerator()")   && !generatorAdded ) {
                 	iog.addGenerator( new CustomInferredIntersectionOfAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("InferredEquivalentClassesAxiomGenerator()") && !generatorAdded) {
-                	iog.addGenerator( new InferredEquivalentClassesAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredEquivalentClassesAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomInferredEquivalentClassesAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("SameIndividualAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new SameIndividualAxiomGenerator());
@@ -447,7 +447,7 @@ public class ReasonerServiceImpl implements ReasonerService {
                 	iog.addGenerator( new InferredPropertyAssertionGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("All")) {
-        	        iog.addGenerator(new InferredEquivalentClassesAxiomGenerator() );
+        	        iog.addGenerator(new CustomInferredEquivalentClassesAxiomGenerator() );
         	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
         	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
         	        iog.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
@@ -657,21 +657,21 @@ public class ReasonerServiceImpl implements ReasonerService {
 		}
 	}
 
-	public class InferredEquivalentClassesAxiomGenerator
+	public class CustomInferredEquivalentClassesAxiomGenerator
 			extends InferredClassAxiomGenerator<OWLEquivalentClassesAxiom> {
 
 		@Override
 		protected void addAxioms(OWLClass entity, OWLReasoner reasoner, OWLDataFactory dataFactory,
-				Set<OWLEquivalentClassesAxiom> result) {
+				Set<OWLEquivalentClassesAxiom> resultAxiom) {
 			Set<OWLClass> equivalentClasses = reasoner.getEquivalentClasses(entity).getEntities();
 			if (equivalentClasses.size() > 1) {
-				result.add(dataFactory.getOWLEquivalentClassesAxiom(equivalentClasses));
+				resultAxiom.add(dataFactory.getOWLEquivalentClassesAxiom(equivalentClasses));
 			}
 		}
 
 		@Override
 		public String getLabel() {
-			return "Equivalent classes";
+			return "owl:equivalentClass Inferences";
 		}
 	}
 
