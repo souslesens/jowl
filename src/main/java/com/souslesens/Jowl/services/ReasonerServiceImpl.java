@@ -190,8 +190,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("CustomInferredSameValueSomeValuesFromAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new CustomInferredSameValueSomeValuesFromAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("InferredDomainAndRangeAxiomGenerator()") && !generatorAdded)  {
-                	iog.addGenerator( new InferredDomainAndRangeAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredDomainAndRangeAxiomGenerator()") && !generatorAdded)  {
+                	iog.addGenerator( new CustomInferredDomainAndRangeAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredClassAssertionAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredClassAssertionAxiomGenerator());
@@ -233,7 +233,7 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator(new CustomInferredInverseObjectPropertiesAxiomGenerator() );
         	        iog.addGenerator(new CustomInferredAllValuesFromAxiomGenerator());
         	        iog.addGenerator(new CustomInferredSameValueSomeValuesFromAxiomGenerator());
-        	        iog.addGenerator(new InferredDomainAndRangeAxiomGenerator());
+        	        iog.addGenerator(new CustomInferredDomainAndRangeAxiomGenerator());
         	        iog.addGenerator( new InferredSubClassAxiomGenerator());
         	        iog.addGenerator( new InferredClassAssertionAxiomGenerator());
         	        iog.addGenerator( new InferredDataPropertyCharacteristicAxiomGenerator());
@@ -414,8 +414,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("CustomInferredSameValueSomeValuesFromAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new CustomInferredSameValueSomeValuesFromAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("InferredDomainAndRangeAxiomGenerator()") && !generatorAdded)  {
-                	iog.addGenerator( new InferredDomainAndRangeAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredDomainAndRangeAxiomGenerator()") && !generatorAdded)  {
+                	iog.addGenerator( new CustomInferredDomainAndRangeAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredClassAssertionAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredClassAssertionAxiomGenerator());
@@ -457,7 +457,7 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator(new CustomInferredInverseObjectPropertiesAxiomGenerator() );
         	        iog.addGenerator(new CustomInferredAllValuesFromAxiomGenerator());
         	        iog.addGenerator(new CustomInferredSameValueSomeValuesFromAxiomGenerator());
-        	        iog.addGenerator(new InferredDomainAndRangeAxiomGenerator());
+        	        iog.addGenerator(new CustomInferredDomainAndRangeAxiomGenerator());
         	        iog.addGenerator( new InferredSubClassAxiomGenerator());
         	        iog.addGenerator( new InferredClassAssertionAxiomGenerator());
         	        iog.addGenerator( new InferredDataPropertyCharacteristicAxiomGenerator());
@@ -900,30 +900,27 @@ public class ReasonerServiceImpl implements ReasonerService {
 		}
 	}
 
-	public class InferredDomainAndRangeAxiomGenerator implements InferredAxiomGenerator<OWLObjectPropertyAxiom> {
+	public class CustomInferredDomainAndRangeAxiomGenerator implements InferredAxiomGenerator<OWLObjectPropertyAxiom> {
 
 		@Override
 		public Set<OWLObjectPropertyAxiom> createAxioms(OWLDataFactory dataFactory, OWLReasoner reasoner) {
-			Set<OWLObjectPropertyAxiom> result = new HashSet<>();
-
+			Set<OWLObjectPropertyAxiom> resultSet = new HashSet<>();
+			// Two loops to get inference from domain and range
 			for (OWLObjectProperty property : reasoner.getRootOntology().getObjectPropertiesInSignature()) {
-				// Add inferred domain axioms
-				for (OWLClass domain : reasoner.getObjectPropertyDomains(property, true).getFlattened()) {
-					result.add(dataFactory.getOWLObjectPropertyDomainAxiom(property, domain));
+				for (OWLClass domainInf : reasoner.getObjectPropertyDomains(property, true).getFlattened()) {
+					resultSet.add(dataFactory.getOWLObjectPropertyDomainAxiom(property, domainInf));
 				}
-
-				// Add inferred range axioms
-				for (OWLClass range : reasoner.getObjectPropertyRanges(property, true).getFlattened()) {
-					result.add(dataFactory.getOWLObjectPropertyRangeAxiom(property, range));
+				for (OWLClass rangeInf : reasoner.getObjectPropertyRanges(property, true).getFlattened()) {
+					resultSet.add(dataFactory.getOWLObjectPropertyRangeAxiom(property, rangeInf));
 				}
 			}
 
-			return result;
+			return resultSet;
 		}
 
 		@Override
 		public String getLabel() {
-			return "Inferred domains and ranges";
+			return "Inference of Domain And Range";
 		}
 	}
 
