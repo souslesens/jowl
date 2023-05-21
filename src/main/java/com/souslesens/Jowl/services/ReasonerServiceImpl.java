@@ -169,8 +169,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("SameIndividualAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new SameIndividualAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("InferredUnionOfAxiomGenerator()") && !generatorAdded) {
-                	iog.addGenerator( new InferredUnionOfAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredUnionOfAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomInferredUnionOfAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredDisjointClassesAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredDisjointClassesAxiomGenerator());
@@ -227,7 +227,7 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
         	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
         	        iog.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
-        	        iog.addGenerator(new InferredUnionOfAxiomGenerator());
+        	        iog.addGenerator(new CustomInferredUnionOfAxiomGenerator());
         	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
         	        iog.addGenerator(new InferredHasValueAxiomGenerator());
         	        iog.addGenerator(new InferredInverseObjectPropertiesAxiomGenerator() );
@@ -393,8 +393,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("SameIndividualAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new SameIndividualAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("InferredUnionOfAxiomGenerator()") && !generatorAdded) {
-                	iog.addGenerator( new InferredEquivalentClassesAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredUnionOfAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomInferredUnionOfAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredDisjointClassesAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredDisjointClassesAxiomGenerator());
@@ -451,7 +451,7 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
         	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
         	        iog.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
-        	        iog.addGenerator(new InferredUnionOfAxiomGenerator());
+        	        iog.addGenerator(new CustomInferredUnionOfAxiomGenerator());
         	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
         	        iog.addGenerator(new InferredHasValueAxiomGenerator());
         	        iog.addGenerator(new InferredInverseObjectPropertiesAxiomGenerator() );
@@ -723,20 +723,20 @@ public class ReasonerServiceImpl implements ReasonerService {
 		}
 	}
 
-	public class InferredUnionOfAxiomGenerator extends InferredClassAxiomGenerator<OWLSubClassOfAxiom> {
+	public class CustomInferredUnionOfAxiomGenerator extends InferredClassAxiomGenerator<OWLSubClassOfAxiom> {
 		@Override
 		protected void addAxioms(OWLClass entity, OWLReasoner reasoner, OWLDataFactory dataFactory,
-				Set<OWLSubClassOfAxiom> result) {
-			Set<OWLClass> directSuperclasses = reasoner.getSuperClasses(entity, true).getFlattened();
-			if (directSuperclasses.size() > 1) {
-				result.add(
-						dataFactory.getOWLSubClassOfAxiom(entity, dataFactory.getOWLObjectUnionOf(directSuperclasses)));
+				Set<OWLSubClassOfAxiom> resultAxiom) {
+			Set<OWLClass> SuperClasses = reasoner.getSuperClasses(entity, true).getFlattened();
+			if (SuperClasses.size() > 1) {
+				resultAxiom.add(
+						dataFactory.getOWLSubClassOfAxiom(entity, dataFactory.getOWLObjectUnionOf(SuperClasses)));
 			}
 		}
 
 		@Override
 		public String getLabel() {
-			return "Inferred Union Of";
+			return "OWL:UnionOf Inference";
 		}
 	}
 
