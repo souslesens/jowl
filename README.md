@@ -102,7 +102,8 @@ the list of the predicate:
 18. SubDataPropertyOfAxiom
 19. ObjectPropertyCharacteristic
 20. SubDataPropertyOfAxiom
-21. All_OWL
+21. ComplementOf
+22. All_OWL
 
 
 ```JSON
