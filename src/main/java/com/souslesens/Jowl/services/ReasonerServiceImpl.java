@@ -22,6 +22,7 @@ import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLClassAxiom;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
@@ -32,6 +33,7 @@ import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLObjectComplementOf;
 import org.semanticweb.owlapi.model.OWLObjectHasValue;
 import org.semanticweb.owlapi.model.OWLObjectIntersectionOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
@@ -222,6 +224,9 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("InferredPropertyAssertionGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredPropertyAssertionGenerator());
                 	generatorAdded = true;
+                }else if (value.contentEquals("CustomInferredComplementOfAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomInferredComplementOfAxiomGenerator());
+                	generatorAdded = true;
                 }else if (value.contentEquals("All")) {
         	        iog.addGenerator(new CustomInferredEquivalentClassesAxiomGenerator() );
         	        iog.addGenerator(new CustomSameIndividualAxiomGenerator());
@@ -243,6 +248,7 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator( new InferredSubDataPropertyAxiomGenerator());
         	        iog.addGenerator( new InferredObjectPropertyCharacteristicAxiomGenerator());
         	        iog.addGenerator( new InferredPropertyAssertionGenerator());
+        	        iog.addGenerator(new CustomInferredComplementOfAxiomGenerator()); // Generate owl:ComplementOf
         	        
                         break;
                 }else {
@@ -446,6 +452,9 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("InferredPropertyAssertionGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredPropertyAssertionGenerator());
                 	generatorAdded = true;
+                }else if (value.contentEquals("CustomInferredComplementOfAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomInferredComplementOfAxiomGenerator());
+                	generatorAdded = true;
                 }else if (value.contentEquals("All")) {
         	        iog.addGenerator(new CustomInferredEquivalentClassesAxiomGenerator() );
         	        iog.addGenerator(new CustomSameIndividualAxiomGenerator()); // we generate same individual axioms
@@ -467,7 +476,7 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator( new InferredSubDataPropertyAxiomGenerator());
         	        iog.addGenerator( new InferredObjectPropertyCharacteristicAxiomGenerator());
         	        iog.addGenerator( new InferredPropertyAssertionGenerator());
-        	        
+        	        iog.addGenerator(new CustomInferredComplementOfAxiomGenerator()); // Generate owl:ComplementOf
                         break;
                 }else {
                 	break;
@@ -922,6 +931,34 @@ public class ReasonerServiceImpl implements ReasonerService {
 		public String getLabel() {
 			return "Inference of Domain And Range";
 		}
+	}
+	
+	public class CustomInferredComplementOfAxiomGenerator implements InferredAxiomGenerator<OWLClassAxiom> {
+
+	    @Override
+	    public Set<OWLClassAxiom> createAxioms(OWLDataFactory dataFactory, OWLReasoner reasoner) {
+	        Set<OWLClassAxiom> resultSet = new HashSet<>();
+
+	        Set<OWLClass> allClasses = reasoner.getRootOntology().getClassesInSignature();
+
+	        for (OWLClass cls : allClasses) {
+	            if (!reasoner.isSatisfiable(cls) && !cls.isOWLNothing()) {
+	                NodeSet<OWLClass> disjointClasses = reasoner.getDisjointClasses(cls);
+	                disjointClasses.getFlattened().forEach(disjointClass -> {
+	                    OWLObjectComplementOf ObjectComplementOf = dataFactory.getOWLObjectComplementOf(disjointClass);
+	                    OWLEquivalentClassesAxiom axiomEQ = dataFactory.getOWLEquivalentClassesAxiom(cls, ObjectComplementOf);
+	                    resultSet.add(axiomEQ);
+	                });
+	            }
+	        }
+
+	        return resultSet;
+	    }
+
+	    @Override
+	    public String getLabel() {
+	        return "complementOf";
+	    }
 	}
 
 	public class CustomInferredOntologyGenerator extends InferredOntologyGenerator {

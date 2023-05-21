@@ -25,6 +25,7 @@ import com.souslesens.Jowl.model.parametresInputInference;
 import com.souslesens.Jowl.model.reasonerInference;
 import com.souslesens.Jowl.model.reasonerInput;
 import com.souslesens.Jowl.services.ReasonerService;
+import com.souslesens.Jowl.services.ReasonerServiceImpl.CustomInferredComplementOfAxiomGenerator;
 
 
 @RestController
@@ -264,6 +265,7 @@ public class ReasonerController {
         hashMap.put("SubDataPropertyOfAxiom", "InferredSubDataPropertyAxiomGenerator()");
         hashMap.put("ObjectPropertyCharacteristic", "InferredObjectPropertyCharacteristicAxiomGenerator()"); // FunctionalObjectProperty/InverseFunctionalObjectProperty/SymmetricObjectProperty/AsymmetricObjectProperty/ReflexiveObjectProperty/IrreflexiveObjectProperty/TransitiveObjectProperty 
         hashMap.put("SubDataPropertyOfAxiom", "InferredPropertyAssertionGenerator()"); // This Covers both OWLObjectPropertyAssertionAxiom and OWLDataPropertyAssertionAxiom
+        hashMap.put("ComplementOf", "CustomInferredComplementOfAxiomGenerator()"); // Cover OwlComplementOf
         hashMap.put("All_OWL", "All"); // Covers Evreything
             try {
 
