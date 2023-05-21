@@ -256,7 +256,7 @@ public class ReasonerController {
         hashMap.put("UnionOf", "CustomInferredUnionOfAxiomGenerator()"); // Covers Owl:UnionOf inferences
         hashMap.put("DisjointClasses", "CustomInferredDisjointClassesAxiomGenerator()"); // Covers Owl:DisjointClasses Inferences
         hashMap.put("differentIndividual","CustomInferredDifferentIndividualAxiomGenerator()" );
-        hashMap.put("HasValue", "InferredHasValueAxiomGenerator()");
+        hashMap.put("HasValue", "CustomInferredHasValueAxiomGenerator()"); // Covers owl:hasValue restriction
         hashMap.put("InverseObjectProperties", "InferredInverseObjectPropertiesAxiomGenerator()"); //  if property A relates individual x to individual y, then property B relates individual y to individual x
         hashMap.put("AllValuesFrom", "InferredAllValuesFromAxiomGenerator()");
         hashMap.put("SomeValuesFrom", "InferredSameValueSomeValuesFromAxiomGenerator()");

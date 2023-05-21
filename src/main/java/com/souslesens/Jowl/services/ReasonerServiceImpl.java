@@ -178,8 +178,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("CustomInferredDifferentIndividualAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new CustomInferredDifferentIndividualAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("InferredHasValueAxiomGenerator()") && !generatorAdded) {
-                	iog.addGenerator( new InferredHasValueAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredHasValueAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomInferredHasValueAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredInverseObjectPropertiesAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredInverseObjectPropertiesAxiomGenerator());
@@ -229,7 +229,7 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
         	        iog.addGenerator(new CustomInferredUnionOfAxiomGenerator());
         	        iog.addGenerator(new CustomInferredDisjointClassesAxiomGenerator());
-        	        iog.addGenerator(new InferredHasValueAxiomGenerator());
+        	        iog.addGenerator(new CustomInferredHasValueAxiomGenerator());
         	        iog.addGenerator(new InferredInverseObjectPropertiesAxiomGenerator() );
         	        iog.addGenerator(new InferredAllValuesFromAxiomGenerator());
         	        iog.addGenerator(new InferredSameValueSomeValuesFromAxiomGenerator());
@@ -402,8 +402,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("CustomInferredDifferentIndividualAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new CustomInferredDifferentIndividualAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("InferredHasValueAxiomGenerator()") && !generatorAdded) {
-                	iog.addGenerator( new InferredHasValueAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredHasValueAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomInferredHasValueAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredInverseObjectPropertiesAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredInverseObjectPropertiesAxiomGenerator());
@@ -453,7 +453,7 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
         	        iog.addGenerator(new CustomInferredUnionOfAxiomGenerator());
         	        iog.addGenerator(new CustomInferredDisjointClassesAxiomGenerator());
-        	        iog.addGenerator(new InferredHasValueAxiomGenerator());
+        	        iog.addGenerator(new CustomInferredHasValueAxiomGenerator());
         	        iog.addGenerator(new InferredInverseObjectPropertiesAxiomGenerator() );
         	        iog.addGenerator(new InferredAllValuesFromAxiomGenerator());
         	        iog.addGenerator(new InferredSameValueSomeValuesFromAxiomGenerator());
@@ -797,16 +797,16 @@ public class ReasonerServiceImpl implements ReasonerService {
 		}
 	}
 
-	public class InferredHasValueAxiomGenerator extends InferredClassAxiomGenerator<OWLSubClassOfAxiom> {
+	public class CustomInferredHasValueAxiomGenerator extends InferredClassAxiomGenerator<OWLSubClassOfAxiom> {
 
 		@Override
 		protected void addAxioms(OWLClass cls, OWLReasoner reasoner, OWLDataFactory dataFactory,
-				Set<OWLSubClassOfAxiom> result) {
+				Set<OWLSubClassOfAxiom> resultAxiom) {
 			for (OWLClassExpression equivalentClass : reasoner.getEquivalentClasses(cls).getEntities()) {
 				if (equivalentClass.isAnonymous() && equivalentClass instanceof OWLObjectHasValue) {
-					OWLObjectHasValue hasValue = (OWLObjectHasValue) equivalentClass;
-					OWLSubClassOfAxiom axiom = dataFactory.getOWLSubClassOfAxiom(cls, hasValue);
-					result.add(axiom);
+					OWLObjectHasValue owlHasValue = (OWLObjectHasValue) equivalentClass;
+					OWLSubClassOfAxiom axiom = dataFactory.getOWLSubClassOfAxiom(cls, owlHasValue);
+					resultAxiom.add(axiom);
 				}
 			}
 		}
@@ -817,7 +817,7 @@ public class ReasonerServiceImpl implements ReasonerService {
 
 		@Override
 		public String getLabel() {
-			return "Has value";
+			return "Owl:hasValue Inferences";
 		}
 	}
 
