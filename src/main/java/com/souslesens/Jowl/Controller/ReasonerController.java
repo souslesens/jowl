@@ -252,7 +252,7 @@ public class ReasonerController {
         // Add key-value pairs to the HashMap
         hashMap.put("equivalentClass", "InferredEquivalentClassesAxiomGenerator()");
         hashMap.put("sameIndividual", "SameIndividualAxiomGenerator()");
-        hashMap.put("IntersectionOf", "InferredIntersectionOfAxiomGenerator()");
+        hashMap.put("IntersectionOf", "CustomInferredIntersectionOfAxiomGenerator()");
         hashMap.put("UnionOf", "InferredUnionOfAxiomGenerator()");
         hashMap.put("DisjointClasses", "InferredDisjointClassesAxiomGenerator()");
         hashMap.put("differentIndividual","CustomInferredDifferentIndividualAxiomGenerator()" );

@@ -118,7 +118,7 @@ public class ReasonerServiceImpl implements ReasonerService {
 	// TEST
 
 	@Override
-	public String postInferencesContent(String ontologyContentDecoded64, List<String> valuesList)
+	public String postInferencesContent(String ontologyContentDecoded64, List<String> ListOfValues)
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
 
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -156,13 +156,12 @@ public class ReasonerServiceImpl implements ReasonerService {
 		OWLOntology inferredOntology = manager.createOntology();
         List<InferredAxiomGenerator<? extends OWLAxiom>> axiomGenerators = new ArrayList<>();       
 		InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, axiomGenerators);
-		System.out.println(valuesList);
-        for (String value : valuesList) {
+		
+        for (String value : ListOfValues) {
             try {
                 boolean generatorAdded = false;
-            	InferredAxiomGenerator<?> instance = null;
-                if (value.contentEquals("InferredIntersectionOfAxiomGenerator()")   && !generatorAdded ) {
-                	iog.addGenerator( new InferredIntersectionOfAxiomGenerator());
+                if (value.contentEquals("CustomInferredIntersectionOfAxiomGenerator()")   && !generatorAdded ) {
+                	iog.addGenerator( new CustomInferredIntersectionOfAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredEquivalentClassesAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredEquivalentClassesAxiomGenerator());
@@ -227,7 +226,7 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator(new InferredEquivalentClassesAxiomGenerator() );
         	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
         	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
-        	        iog.addGenerator(new InferredIntersectionOfAxiomGenerator());
+        	        iog.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
         	        iog.addGenerator(new InferredUnionOfAxiomGenerator());
         	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
         	        iog.addGenerator(new InferredHasValueAxiomGenerator());
@@ -261,7 +260,6 @@ public class ReasonerServiceImpl implements ReasonerService {
         }
 		OWLDataFactory dataFactory = manager.getOWLDataFactory();
 		iog.fillOntology(dataFactory, inferredOntology);
-		// Extract the specified axioms and expressions
 		JSONObject jsonObject = new JSONObject();
 		for (AxiomType<?> axiomType : AxiomType.AXIOM_TYPES) {
 			Set<? extends OWLAxiom> axioms = inferredOntology.getAxioms(axiomType);
@@ -363,7 +361,7 @@ public class ReasonerServiceImpl implements ReasonerService {
 	}
 
 	@Override
-	public String postInferences(String filePath, String url,List<String> valuesList)
+	public String postInferences(String filePath, String url,List<String> ListOfValues)
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology ontology = null;
@@ -383,13 +381,11 @@ public class ReasonerServiceImpl implements ReasonerService {
 		OWLOntology inferredOntology = manager.createOntology();
         List<InferredAxiomGenerator<? extends OWLAxiom>> axiomGenerators = new ArrayList<>();       
 		InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, axiomGenerators);
-		System.out.println(valuesList);
-        for (String value : valuesList) {
+        for (String value : ListOfValues) {
             try {
                 boolean generatorAdded = false;
-            	InferredAxiomGenerator<?> instance = null;
-                if (value.contentEquals("InferredIntersectionOfAxiomGenerator()")   && !generatorAdded ) {
-                	iog.addGenerator( new InferredIntersectionOfAxiomGenerator());
+                if (value.contentEquals("CustomInferredIntersectionOfAxiomGenerator()")   && !generatorAdded ) {
+                	iog.addGenerator( new CustomInferredIntersectionOfAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredEquivalentClassesAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredEquivalentClassesAxiomGenerator());
@@ -454,7 +450,7 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator(new InferredEquivalentClassesAxiomGenerator() );
         	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
         	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
-        	        iog.addGenerator(new InferredIntersectionOfAxiomGenerator());
+        	        iog.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
         	        iog.addGenerator(new InferredUnionOfAxiomGenerator());
         	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
         	        iog.addGenerator(new InferredHasValueAxiomGenerator());
@@ -483,12 +479,11 @@ public class ReasonerServiceImpl implements ReasonerService {
 
                 
             } catch (Exception e) {
-                e.printStackTrace(); // Handle any exceptions that may occur
+                e.printStackTrace(); 
             }
         }
 		OWLDataFactory dataFactory = manager.getOWLDataFactory();
 		iog.fillOntology(dataFactory, inferredOntology);
-		// Extract the specified axioms and expressions
 		JSONObject jsonObject = new JSONObject();
 		for (AxiomType<?> axiomType : AxiomType.AXIOM_TYPES) {
 			Set<? extends OWLAxiom> axioms = inferredOntology.getAxioms(axiomType);
@@ -700,31 +695,31 @@ public class ReasonerServiceImpl implements ReasonerService {
 		}
 	}
 
-	public class InferredIntersectionOfAxiomGenerator extends InferredClassAxiomGenerator<OWLEquivalentClassesAxiom> {
+	public class CustomInferredIntersectionOfAxiomGenerator extends InferredClassAxiomGenerator<OWLEquivalentClassesAxiom> {
 
 		@Override
 		protected void addAxioms(OWLClass entity, OWLReasoner reasoner, OWLDataFactory dataFactory,
-				Set<OWLEquivalentClassesAxiom> result) {
-			NodeSet<OWLClass> directSuperClasses = reasoner.getSuperClasses(entity, true);
-			if (directSuperClasses.isEmpty()) {
+				Set<OWLEquivalentClassesAxiom> resultAxiom) {
+			NodeSet<OWLClass> SuperClasses = reasoner.getSuperClasses(entity, true);
+			if (SuperClasses.isEmpty()) {
 				return;
 			}
 
 			Set<OWLClassExpression> operands = new HashSet<>();
-			for (Node<OWLClass> superClassNode : directSuperClasses.getNodes()) {
+			for (Node<OWLClass> superClassNode : SuperClasses.getNodes()) {
 				operands.add(superClassNode.getRepresentativeElement());
 			}
 
 			if (operands.size() > 1) {
-				OWLObjectIntersectionOf intersection = dataFactory.getOWLObjectIntersectionOf(operands);
-				OWLEquivalentClassesAxiom axiom = dataFactory.getOWLEquivalentClassesAxiom(entity, intersection);
-				result.add(axiom);
+				OWLObjectIntersectionOf intersectionOf = dataFactory.getOWLObjectIntersectionOf(operands);
+				OWLEquivalentClassesAxiom axiom = dataFactory.getOWLEquivalentClassesAxiom(entity, intersectionOf);
+				resultAxiom.add(axiom);
 			}
 		}
 
 		@Override
 		public String getLabel() {
-			return "Inferred Intersection Of";
+			return "OWL:IntersectionOf Inference";
 		}
 	}
 
