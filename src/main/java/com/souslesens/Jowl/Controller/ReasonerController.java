@@ -45,7 +45,7 @@ public class ReasonerController {
     public ResponseEntity<?> getUnsatisfaisableClasses(
             @RequestParam(required = false) String filePath,
             @RequestParam(required = false) String url) { 
-    	int parametersCount = countParams( filePath, url);
+    	int parametersCount = countNumberOfParametres( filePath, url);
         if (parametersCount == 0) {
             return ResponseEntity.badRequest().body("At least one of params should be provided");
         } else if (parametersCount > 1) {
@@ -62,7 +62,7 @@ public class ReasonerController {
     public ResponseEntity<?> getConsistency(@RequestParam(required = false) String filePath,
             @RequestParam(required = false) String url) {
         
-    		int parametersCount = countParams( filePath, url);
+    		int parametersCount = countNumberOfParametres( filePath, url);
         	if (parametersCount == 0) {
             	return ResponseEntity.badRequest().body("At least one of params should be provided");
         	} else if (parametersCount > 1) {
@@ -82,7 +82,7 @@ public class ReasonerController {
     public ResponseEntity<?> getInference(@RequestParam(required = false) String filePath,
             @RequestParam(required = false) String url) {
         
-    		int parametersCount = countParams( filePath, url);
+    		int parametersCount = countNumberOfParametres( filePath, url);
         	if (parametersCount == 0) {
             	return ResponseEntity.badRequest().body("At least one of params should be provided");
         	} else if (parametersCount > 1) {
@@ -112,7 +112,7 @@ public class ReasonerController {
     	 ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
     	System.out.println("Inference"+ontologyContentDecoded64);
     	}
-    	int parametersCount = countParams(ontologyContentDecoded64, filePath, url);
+    	int parametersCount = countNumberOfParametres(ontologyContentDecoded64, filePath, url);
         if (parametersCount == 0) {
             return ResponseEntity.badRequest().body("At least one of params should be provided");
         } else if (parametersCount > 1) {
@@ -122,10 +122,10 @@ public class ReasonerController {
             	String result ;
             	if (!(filePath == null) || !(url == null) ) {
                 result = reasonerService.postConsistency(filePath, url);
-                System.out.println("here");
+                // Here if we use filePath or Url
             	}else {
             	result = reasonerService.postConsistencyContent(ontologyContentDecoded64);
-            	System.out.println("here2");
+            	// Here if we use the Encoded Content
             	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
@@ -140,7 +140,7 @@ public class ReasonerController {
         String filePath = request.getFilePath();
         String url = request.getUrl();
         String ontologyContentEncoded64 = request.getOntologyContentEncoded64();
-        String[] reqParams = request.getParams();
+        String[] reqParametres = request.getParams();
 
     	byte[] ontologyContentDecoded64Bytes = null;
     	String ontologyContentDecoded64 = null;
@@ -148,7 +148,7 @@ public class ReasonerController {
     	 ontologyContentDecoded64Bytes = Base64.getMimeDecoder().decode(ontologyContentEncoded64);
     	 ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
     	}
-        // Configure the HTTP request headers if needed
+    	// Automatic call to the parametres API
         HttpHeaders headers = new HttpHeaders();
         headers.set("Accept", "application/json");
 
@@ -158,30 +158,24 @@ public class ReasonerController {
     	 System.out.println(response.getBody());
     	 List<String> valuesList = new ArrayList<>();
     	 List<String> valuesList2 = new ArrayList<>();
-	     for (int i = 0; i < reqParams.length; i++) {
-	        	 if (reqParams[i].equals("All_OWL")) {
+	     for (int i = 0; i < reqParametres.length; i++) {
+	        	 if (reqParametres[i].equals("All_OWL")) {
 	                valuesList2.add("All");
-	                System.out.println("this is the end");
 	                break;
 	            }
 	        	
 	        }
     	 if (valuesList2.isEmpty()) {
-    		 System.out.println("This is the beginning");
         	 try {
      		    ObjectMapper objectMapper = new ObjectMapper();
-     		    Map<String, String> jsonMap = objectMapper.readValue(response.getBody(), Map.class);
+     		    Map<String, String> jsonMappin = objectMapper.readValue(response.getBody(), Map.class);
      		    
 
      		    // Loop through the JSON data
-     		    for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
-     		        String key = entry.getKey();
-     		        System.out.println("Key: " + key);
-     		        System.out.println("Value: " + entry.getValue());
-
-     		        
-     		        for (int i = 0; i < reqParams.length; i++) {
-     		        	 if (reqParams[i].equals(key)) {
+     		    for (Map.Entry<String, String> entry : jsonMappin.entrySet()) {
+     		        String key = entry.getKey();     		        
+     		        for (int i = 0; i < reqParametres.length; i++) {
+     		        	 if (reqParametres[i].equals(key)) {
      		                valuesList.add(entry.getValue());
      		                break;
      		            }
@@ -196,7 +190,7 @@ public class ReasonerController {
     	 }
 
 
-    	int parametersCount = countParams(ontologyContentDecoded64, filePath, url);
+    	int parametersCount = countNumberOfParametres(ontologyContentDecoded64, filePath, url);
         if (parametersCount == 0) {
             return ResponseEntity.badRequest().body("At least one of params should be provided");
         } else if (parametersCount > 1) {
@@ -226,7 +220,7 @@ public class ReasonerController {
     	 ontologyContentDecoded64Bytes = Base64.getMimeDecoder().decode(ontologyContentEncoded64);
     	 ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
     	}
-    	int parametersCount = countParams(ontologyContentDecoded64, filePath, url);
+    	int parametersCount = countNumberOfParametres(ontologyContentDecoded64, filePath, url);
         if (parametersCount == 0) {
             return ResponseEntity.badRequest().body("At least one of params should be provided");
         } else if (parametersCount > 1) {
@@ -297,7 +291,7 @@ public class ReasonerController {
         Boolean SomeValuesFrom = request.getSomeValuesFrom();
         Boolean DomainAndRange  = request.getDomainAndRange();
         
-    	int parametersCount = countParams(equivalentClass, sameIndividual, IntersectionOf,UnionOf,DisjointClasses,differentIndividual,HasValue,InverseObjectProperties,AllValuesFrom,SomeValuesFrom,DomainAndRange);
+    	int parametersCount = countNumberOfParametres(equivalentClass, sameIndividual, IntersectionOf,UnionOf,DisjointClasses,differentIndividual,HasValue,InverseObjectProperties,AllValuesFrom,SomeValuesFrom,DomainAndRange);
         if (parametersCount == 0) {
             return ResponseEntity.badRequest().body("At least one of params should be provided");
         } else if (parametersCount > 11) {
@@ -313,14 +307,16 @@ public class ReasonerController {
             }
         }
     
-    private int countParams(Object... parameters) {
-        int count = 0;
-        for (Object param : parameters) {
-            if (param != null && !param.toString().isEmpty()) {
-                count++;
+    // This to count the number of the parameteres that will help us to know how many parameteres we passed to the API 
+    // and we can return errors if the number of parameters is more than one
+    private int countNumberOfParametres(Object... parameters) {
+        int nb = 0;
+        for (Object prms : parameters) {
+            if (prms != null && !prms.toString().isEmpty()) {
+            	nb++;
             }
         }
-        return count;
+        return nb;
     }
 
 

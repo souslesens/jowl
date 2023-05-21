@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.souslesens.Jowl.model.reasonerExtractTriples;
 import com.souslesens.Jowl.services.AlternativeReasonerService;
-import com.souslesens.Jowl.services.ReasonerService;
 
 @RestController
 @RequestMapping("/alternative")
@@ -23,7 +22,7 @@ public class ReasonerAlternativeAPIController {
     public ResponseEntity<?> postConsistencyAlt(@RequestParam(required = false) MultipartFile ontologyFile,
             @RequestParam(required = false) String filePath,
             @RequestParam(required = false) String url) { 
-    	int parametersCount = countParams(ontologyFile, filePath, url);
+    	int parametersCount = countNumberOfParametres(ontologyFile, filePath, url);
         if (parametersCount == 0) {
             return ResponseEntity.badRequest().body("At least one of params should be provided");
         } else if (parametersCount > 1) {
@@ -45,7 +44,7 @@ public class ReasonerAlternativeAPIController {
     public ResponseEntity<?> postInferenceAlt(@RequestParam(required = false) MultipartFile ontologyFile,
             @RequestParam(required = false) String filePath,
             @RequestParam(required = false) String url) { 
-    	int parametersCount = countParams(ontologyFile, filePath, url);
+    	int parametersCount = countNumberOfParametres(ontologyFile, filePath, url);
         if (parametersCount == 0) {
             return ResponseEntity.badRequest().body("At least one of params should be provided");
         } else if (parametersCount > 1) {
@@ -63,7 +62,7 @@ public class ReasonerAlternativeAPIController {
     public ResponseEntity<?> postUnsatisfaisableClassesAlt(@RequestParam(required = false) MultipartFile ontologyFile,
             @RequestParam(required = false) String filePath,
             @RequestParam(required = false) String url) { 
-    	int parametersCount = countParams(ontologyFile, filePath, url);
+    	int parametersCount = countNumberOfParametres(ontologyFile, filePath, url);
         if (parametersCount == 0) {
             return ResponseEntity.badRequest().body("At least one of params should be provided");
         } else if (parametersCount > 1) {
@@ -76,14 +75,16 @@ public class ReasonerAlternativeAPIController {
                 return ResponseEntity.badRequest().body("Error");
             }
         }
-    private int countParams(Object... parameters) {
-        int count = 0;
-        for (Object param : parameters) {
-            if (param != null && !param.toString().isEmpty()) {
-                count++;
+    // This to count the number of the parameteres that will help us to know how many parameteres we passed to the API 
+    // and we can return errors if the number of parameters is more than one
+    private int countNumberOfParametres(Object... parameters) {
+        int nb = 0;
+        for (Object prms : parameters) {
+            if (prms != null && !prms.toString().isEmpty()) {
+            	nb++;
             }
         }
-        return count;
+        return nb;
     }
 
 
