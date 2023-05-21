@@ -172,8 +172,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("CustomInferredUnionOfAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new CustomInferredUnionOfAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("InferredDisjointClassesAxiomGenerator()") && !generatorAdded) {
-                	iog.addGenerator( new InferredDisjointClassesAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredDisjointClassesAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomInferredDisjointClassesAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("CustomInferredDifferentIndividualAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new CustomInferredDifferentIndividualAxiomGenerator());
@@ -228,7 +228,7 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator());
         	        iog.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
         	        iog.addGenerator(new CustomInferredUnionOfAxiomGenerator());
-        	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
+        	        iog.addGenerator(new CustomInferredDisjointClassesAxiomGenerator());
         	        iog.addGenerator(new InferredHasValueAxiomGenerator());
         	        iog.addGenerator(new InferredInverseObjectPropertiesAxiomGenerator() );
         	        iog.addGenerator(new InferredAllValuesFromAxiomGenerator());
@@ -396,8 +396,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("CustomInferredUnionOfAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new CustomInferredUnionOfAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("InferredDisjointClassesAxiomGenerator()") && !generatorAdded) {
-                	iog.addGenerator( new InferredDisjointClassesAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredDisjointClassesAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomInferredDisjointClassesAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("CustomInferredDifferentIndividualAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new CustomInferredDifferentIndividualAxiomGenerator());
@@ -452,7 +452,7 @@ public class ReasonerServiceImpl implements ReasonerService {
         	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator()); // we generate different individual axioms
         	        iog.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
         	        iog.addGenerator(new CustomInferredUnionOfAxiomGenerator());
-        	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
+        	        iog.addGenerator(new CustomInferredDisjointClassesAxiomGenerator());
         	        iog.addGenerator(new InferredHasValueAxiomGenerator());
         	        iog.addGenerator(new InferredInverseObjectPropertiesAxiomGenerator() );
         	        iog.addGenerator(new InferredAllValuesFromAxiomGenerator());
@@ -739,24 +739,23 @@ public class ReasonerServiceImpl implements ReasonerService {
 		}
 	}
 
-	public class InferredDisjointClassesAxiomGenerator extends InferredClassAxiomGenerator<OWLDisjointClassesAxiom> {
+	public class CustomInferredDisjointClassesAxiomGenerator extends InferredClassAxiomGenerator<OWLDisjointClassesAxiom> {
 
 		@Override
 		protected void addAxioms(OWLClass entity, OWLReasoner reasoner, OWLDataFactory dataFactory,
-				Set<OWLDisjointClassesAxiom> result) {
+				Set<OWLDisjointClassesAxiom> resultAxiom) {
 			Set<OWLClass> allClasses = reasoner.getRootOntology().getClassesInSignature();
-			for (OWLClass cls : allClasses) {
-				if (!cls.equals(entity)) {
-					Set<OWLClass> theEQ = reasoner.getEquivalentClasses(entity).getEntities();
+			for (OWLClass classe : allClasses) {
+				if (!classe.equals(entity)) {
 					NodeSet<OWLClass> disjointClasses = reasoner.getDisjointClasses(entity);
-					if (disjointClasses.containsEntity(cls)) {
+					if (disjointClasses.containsEntity(classe)) {
 
 						Set<OWLClass> equivalentClasses1 = reasoner.getEquivalentClasses(entity).getEntities();
-						Set<OWLClass> equivalentClasses2 = reasoner.getEquivalentClasses(cls).getEntities();
-						for (OWLClass eqClass1 : equivalentClasses1) {
-							for (OWLClass eqClass2 : equivalentClasses2) {
-								if (!eqClass1.equals(eqClass2)) {
-									result.add(dataFactory.getOWLDisjointClassesAxiom(eqClass1, eqClass2));
+						Set<OWLClass> equivalentClasses2 = reasoner.getEquivalentClasses(classe).getEntities();
+						for (OWLClass loopEquivalentClass1 : equivalentClasses1) {
+							for (OWLClass loopEquivalentClass2 : equivalentClasses2) {
+								if (!loopEquivalentClass1.equals(loopEquivalentClass2)) {
+									resultAxiom.add(dataFactory.getOWLDisjointClassesAxiom(loopEquivalentClass1, loopEquivalentClass2));
 								}
 							}
 						}
@@ -767,7 +766,7 @@ public class ReasonerServiceImpl implements ReasonerService {
 
 		@Override
 		public String getLabel() {
-			return "Disjoint classes";
+			return "OWL DisjointClasses";
 		}
 	}
 
