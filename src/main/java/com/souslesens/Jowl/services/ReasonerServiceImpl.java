@@ -166,8 +166,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("CustomInferredEquivalentClassesAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new CustomInferredEquivalentClassesAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("SameIndividualAxiomGenerator()") && !generatorAdded) {
-                	iog.addGenerator( new SameIndividualAxiomGenerator());
+                }else if (value.contentEquals("CustomSameIndividualAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomSameIndividualAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("CustomInferredUnionOfAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new CustomInferredUnionOfAxiomGenerator());
@@ -224,8 +224,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 	generatorAdded = true;
                 }else if (value.contentEquals("All")) {
         	        iog.addGenerator(new CustomInferredEquivalentClassesAxiomGenerator() );
-        	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
-        	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
+        	        iog.addGenerator(new CustomSameIndividualAxiomGenerator());
+        	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator());
         	        iog.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
         	        iog.addGenerator(new CustomInferredUnionOfAxiomGenerator());
         	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
@@ -390,8 +390,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("CustomInferredEquivalentClassesAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new CustomInferredEquivalentClassesAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("SameIndividualAxiomGenerator()") && !generatorAdded) {
-                	iog.addGenerator( new SameIndividualAxiomGenerator());
+                }else if (value.contentEquals("CustomSameIndividualAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomSameIndividualAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("CustomInferredUnionOfAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new CustomInferredUnionOfAxiomGenerator());
@@ -448,8 +448,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 	generatorAdded = true;
                 }else if (value.contentEquals("All")) {
         	        iog.addGenerator(new CustomInferredEquivalentClassesAxiomGenerator() );
-        	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
-        	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
+        	        iog.addGenerator(new CustomSameIndividualAxiomGenerator()); // we generate same individual axioms
+        	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator()); // we generate different individual axioms
         	        iog.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
         	        iog.addGenerator(new CustomInferredUnionOfAxiomGenerator());
         	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
@@ -638,22 +638,21 @@ public class ReasonerServiceImpl implements ReasonerService {
 		return jsonString;
 	}
 
-	public static class SameIndividualAxiomGenerator extends InferredIndividualAxiomGenerator<OWLSameIndividualAxiom> {
+	public static class CustomSameIndividualAxiomGenerator extends InferredIndividualAxiomGenerator<OWLSameIndividualAxiom> {
 
 		@Override
 		protected void addAxioms(OWLNamedIndividual entity, OWLReasoner reasoner, OWLDataFactory dataFactory,
-				Set<OWLSameIndividualAxiom> result) {
-			for (OWLNamedIndividual i : reasoner.getSameIndividuals(entity).getEntities()) {
-				if (!entity.equals(i)) {
-					result.add(dataFactory.getOWLSameIndividualAxiom(entity, i));
+				Set<OWLSameIndividualAxiom> resultAxiom) {
+			for (OWLNamedIndividual x : reasoner.getSameIndividuals(entity).getEntities()) {
+				if (!entity.equals(x)) {
+					resultAxiom.add(dataFactory.getOWLSameIndividualAxiom(entity, x));
 				}
 			}
 		}
 
 		@Override
 		public String getLabel() {
-			// TODO Auto-generated method stub
-			return "Same individual axioms";
+			return "OWL:SameAs Inferences";
 		}
 	}
 

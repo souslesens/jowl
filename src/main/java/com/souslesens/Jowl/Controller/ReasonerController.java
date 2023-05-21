@@ -251,7 +251,7 @@ public class ReasonerController {
         Map<String, String> hashMap = new HashMap<>();
         // Add key-value pairs to the HashMap
         hashMap.put("equivalentClass", "CustomInferredEquivalentClassesAxiomGenerator()"); // Covers owl:equivalentClass Inferences
-        hashMap.put("sameIndividual", "SameIndividualAxiomGenerator()");
+        hashMap.put("sameIndividual", "CustomSameIndividualAxiomGenerator()"); // Covers Owl SameAs 
         hashMap.put("IntersectionOf", "CustomInferredIntersectionOfAxiomGenerator()"); // Covers Owl:Intersection:Of Inferences
         hashMap.put("UnionOf", "CustomInferredUnionOfAxiomGenerator()"); // Covers Owl:UnionOf inferences
         hashMap.put("DisjointClasses", "InferredDisjointClassesAxiomGenerator()");
