@@ -176,8 +176,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("InferredDisjointClassesAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredDisjointClassesAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("InferredDifferentIndividualAxiomGenerator()") && !generatorAdded) {
-                	iog.addGenerator( new InferredDifferentIndividualAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredDifferentIndividualAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomInferredDifferentIndividualAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredHasValueAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredHasValueAxiomGenerator());
@@ -226,7 +226,7 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("All")) {
         	        iog.addGenerator(new InferredEquivalentClassesAxiomGenerator() );
         	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
-        	        iog.addGenerator(new InferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
+        	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
         	        iog.addGenerator(new InferredIntersectionOfAxiomGenerator());
         	        iog.addGenerator(new InferredUnionOfAxiomGenerator());
         	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
@@ -403,8 +403,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("InferredDisjointClassesAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredDisjointClassesAxiomGenerator());
                 	generatorAdded = true;
-                }else if (value.contentEquals("InferredDifferentIndividualAxiomGenerator()") && !generatorAdded) {
-                	iog.addGenerator( new InferredDifferentIndividualAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredDifferentIndividualAxiomGenerator()") && !generatorAdded) {
+                	iog.addGenerator( new CustomInferredDifferentIndividualAxiomGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredHasValueAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredHasValueAxiomGenerator());
@@ -453,7 +453,7 @@ public class ReasonerServiceImpl implements ReasonerService {
                 }else if (value.contentEquals("All")) {
         	        iog.addGenerator(new InferredEquivalentClassesAxiomGenerator() );
         	        iog.addGenerator(new SameIndividualAxiomGenerator()); // Add custom generator for same individual axioms
-        	        iog.addGenerator(new InferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
+        	        iog.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator()); // Add custom generator for different individual axioms
         	        iog.addGenerator(new InferredIntersectionOfAxiomGenerator());
         	        iog.addGenerator(new InferredUnionOfAxiomGenerator());
         	        iog.addGenerator(new InferredDisjointClassesAxiomGenerator());
@@ -680,16 +680,16 @@ public class ReasonerServiceImpl implements ReasonerService {
 		}
 	}
 
-	public class InferredDifferentIndividualAxiomGenerator
+	public class CustomInferredDifferentIndividualAxiomGenerator
 			extends InferredIndividualAxiomGenerator<OWLDifferentIndividualsAxiom> {
 
 		@Override
 		protected void addAxioms(OWLNamedIndividual entity, OWLReasoner reasoner, OWLDataFactory dataFactory,
-				Set<OWLDifferentIndividualsAxiom> result) {
-			Set<OWLNamedIndividual> differentIndividuals = reasoner.getDifferentIndividuals(entity).getFlattened();
-			if (!differentIndividuals.isEmpty()) {
-				result.add(dataFactory.getOWLDifferentIndividualsAxiom(
-						Stream.concat(Stream.of(entity), differentIndividuals.stream()).toArray(OWLIndividual[]::new)));
+				Set<OWLDifferentIndividualsAxiom> AxiomResult) {
+			Set<OWLNamedIndividual> differentOWLNamedIndividual = reasoner.getDifferentIndividuals(entity).getFlattened();
+			if (!differentOWLNamedIndividual.isEmpty()) {
+				AxiomResult.add(dataFactory.getOWLDifferentIndividualsAxiom(
+						Stream.concat(Stream.of(entity), differentOWLNamedIndividual.stream()).toArray(OWLIndividual[]::new)));
 
 			}
 		}

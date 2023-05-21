@@ -4,13 +4,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import org.checkerframework.checker.units.qual.Length;
-import org.semanticweb.owlapi.util.InferredSubClassAxiomGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -24,28 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.souslesens.Jowl.model.jenaTripleParser;
 import com.souslesens.Jowl.model.parametresInputInference;
-import com.souslesens.Jowl.model.reasonerExtractTriples;
 import com.souslesens.Jowl.model.reasonerInference;
 import com.souslesens.Jowl.model.reasonerInput;
 import com.souslesens.Jowl.services.ReasonerService;
-import com.souslesens.Jowl.services.ReasonerServiceImpl.InferredAllValuesFromAxiomGenerator;
-import com.souslesens.Jowl.services.ReasonerServiceImpl.InferredDifferentIndividualAxiomGenerator;
-import com.souslesens.Jowl.services.ReasonerServiceImpl.InferredDisjointClassesAxiomGenerator;
-import com.souslesens.Jowl.services.ReasonerServiceImpl.InferredDomainAndRangeAxiomGenerator;
-import com.souslesens.Jowl.services.ReasonerServiceImpl.InferredEquivalentClassesAxiomGenerator;
-import com.souslesens.Jowl.services.ReasonerServiceImpl.InferredHasValueAxiomGenerator;
-import com.souslesens.Jowl.services.ReasonerServiceImpl.InferredIntersectionOfAxiomGenerator;
-import com.souslesens.Jowl.services.ReasonerServiceImpl.InferredInverseObjectPropertiesAxiomGenerator;
-import com.souslesens.Jowl.services.ReasonerServiceImpl.InferredSameValueSomeValuesFromAxiomGenerator;
-import com.souslesens.Jowl.services.ReasonerServiceImpl.InferredUnionOfAxiomGenerator;
-import com.souslesens.Jowl.services.ReasonerServiceImpl.SameIndividualAxiomGenerator;
 
-import de.uulm.ecs.ai.owlapi.krssrenderer.KRSS2OWLSyntaxOntologyStorer;
 
 @RestController
 @RequestMapping("/reasoner")
@@ -199,11 +179,11 @@ public class ReasonerController {
      		        System.out.println("Key: " + key);
      		        System.out.println("Value: " + entry.getValue());
 
-     		        // Loop through reqParams to check if the key is in reqParams
+     		        
      		        for (int i = 0; i < reqParams.length; i++) {
      		        	 if (reqParams[i].equals(key)) {
      		                valuesList.add(entry.getValue());
-     		                break; // No need to check further reqParams for this key
+     		                break;
      		            }
      		        }
      		    }
@@ -275,7 +255,7 @@ public class ReasonerController {
         hashMap.put("IntersectionOf", "InferredIntersectionOfAxiomGenerator()");
         hashMap.put("UnionOf", "InferredUnionOfAxiomGenerator()");
         hashMap.put("DisjointClasses", "InferredDisjointClassesAxiomGenerator()");
-        hashMap.put("differentIndividual","InferredDifferentIndividualAxiomGenerator()" );
+        hashMap.put("differentIndividual","CustomInferredDifferentIndividualAxiomGenerator()" );
         hashMap.put("HasValue", "InferredHasValueAxiomGenerator()");
         hashMap.put("InverseObjectProperties", "InferredInverseObjectPropertiesAxiomGenerator()"); //  if property A relates individual x to individual y, then property B relates individual y to individual x
         hashMap.put("AllValuesFrom", "InferredAllValuesFromAxiomGenerator()");
