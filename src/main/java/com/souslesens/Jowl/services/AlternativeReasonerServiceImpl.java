@@ -60,7 +60,7 @@ public class AlternativeReasonerServiceImpl implements AlternativeReasonerServic
  		Path tempFile = null;
         if (ontologyFile != null) {
              try {
-                 inputOntology = convertMultipartFileToFile(ontologyFile);
+                 inputOntology = CnvMultFile(ontologyFile);
                  inputOntology.setLastModified(System.currentTimeMillis());
                  filePath = inputOntology.getAbsolutePath();
                  System.out.println(filePath);
@@ -119,7 +119,7 @@ public class AlternativeReasonerServiceImpl implements AlternativeReasonerServic
  		 Path tempFile = null;
          if (ontologyFile != null) {
              try {
-                 inputOntology = convertMultipartFileToFile(ontologyFile);
+                 inputOntology = CnvMultFile(ontologyFile);
                  inputOntology.setLastModified(System.currentTimeMillis());
                  filePath = inputOntology.getAbsolutePath();
                  System.out.println(filePath);
@@ -170,7 +170,7 @@ public class AlternativeReasonerServiceImpl implements AlternativeReasonerServic
  		 Path tempFile = null;
          if (ontologyFile != null) {
              try {
-                 inputOntology = convertMultipartFileToFile(ontologyFile);
+                 inputOntology = CnvMultFile(ontologyFile);
                  
                  filePath = inputOntology.getAbsolutePath();
                  System.out.println(filePath);
@@ -358,23 +358,12 @@ public class AlternativeReasonerServiceImpl implements AlternativeReasonerServic
 	 }
 	 
 	 // ******************* Executors && Thread *******************
-//	 private void scheduleTempFileDeletion(Path tempFile) {
-//	        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(2);
-//	        executorService.schedule(() -> {
-//	            try {
-//	                Files.delete(tempFile);
-//	            } catch (IOException e) {
-//	                e.printStackTrace();
-//	            }
-//	        }, TEMP_FILE_EXPIRATION_TIME_MINUTES, TimeUnit.MINUTES);
-//	        executorService.shutdown();
-//	    }
 	    public void deleteIfOneMinuteOld(String filePath) {
 	        File file = new File(filePath);
 	        long creationTime = file.lastModified();
 	        long currentTime = System.currentTimeMillis();
-	        Duration timeDifference = Duration.between(Instant.ofEpochMilli(creationTime), Instant.ofEpochMilli(currentTime));
-	        if (timeDifference.equals(Duration.ofMinutes(1))) {
+	        Duration DiffBetweenCreationCurrent = Duration.between(Instant.ofEpochMilli(creationTime), Instant.ofEpochMilli(currentTime));
+	        if (DiffBetweenCreationCurrent.equals(Duration.ofMinutes(1))) {
 	            boolean deleted = file.delete();
 	            if (deleted) {
 	                System.out.println("File " + filePath + " deleted new meth successfully.");
@@ -410,10 +399,11 @@ public class AlternativeReasonerServiceImpl implements AlternativeReasonerServic
 	            }
 	        }
 	    }
-	 private File convertMultipartFileToFile(MultipartFile file) throws IOException {
-		    File convertedFile = new File(file.getOriginalFilename());
-		    file.transferTo(convertedFile);
-		    return convertedFile;
+	    // Convert the MultiPartFile to File
+	 private File CnvMultFile(MultipartFile nameFile) throws IOException {
+		    File CnvFile = new File(nameFile.getOriginalFilename());
+		    nameFile.transferTo(CnvFile);
+		    return CnvFile;
 		}
 
 }

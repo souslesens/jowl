@@ -29,7 +29,7 @@ public class JenaServiceImpl implements JenaService {
 		
 		ArrayList<jenaTripleParser> tripleParser = new ArrayList<>();
 		Model m = ModelFactory.createDefaultModel();
-		
+		// Can Read all FORMATS
 
         try {
             if (filePath != null && url == null && ontologyContentEncoded64 == null) {
