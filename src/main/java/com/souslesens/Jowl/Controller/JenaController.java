@@ -35,6 +35,7 @@ public class JenaController {
         // extract input parameters from the request object
         String filePath = request.getFilePath();
         String url = request.getUrl();
+        System.out.println(url);
         String ontologyContentEncoded64 = request.getOntologyContentEncoded64();
         int parametersCount = countParams(ontologyContentEncoded64, filePath, url);
         if (parametersCount == 0) {

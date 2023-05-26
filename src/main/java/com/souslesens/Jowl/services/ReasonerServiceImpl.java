@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
@@ -46,6 +47,9 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.OWLSameIndividualAxiom;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
+import org.semanticweb.owlapi.model.SWRLClassAtom;
+import org.semanticweb.owlapi.model.SWRLRule;
+import org.semanticweb.owlapi.model.SWRLVariable;
 import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.NodeSet;
@@ -93,7 +97,6 @@ public class ReasonerServiceImpl implements ReasonerService {
 
 		PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 		OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
-
 		reasonerUnsatisfaisability myData = new reasonerUnsatisfaisability();
 		Node<OWLClass> unsatisfiableClasses = reasoner.getUnsatisfiableClasses();
 
@@ -152,6 +155,30 @@ public class ReasonerServiceImpl implements ReasonerService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		// BLOC //
+		
+
+		// Get data factory
+		OWLDataFactory factory = manager.getOWLDataFactory();
+
+		// Create classes
+		OWLClass classPerson = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Person"));
+		OWLClass classStudent = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Student"));
+
+		// Create SWRL Variable
+		SWRLVariable var = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
+
+		// Create SWRL rule
+		SWRLClassAtom body = factory.getSWRLClassAtom(classPerson, var);
+		SWRLClassAtom head = factory.getSWRLClassAtom(classStudent, var);
+		SWRLRule rule = factory.getSWRLRule(Collections.singleton(body), Collections.singleton(head));
+
+		// Add SWRL rule to ontology
+		manager.applyChange(new AddAxiom(ontology, rule));
+		
+
+		
+		// END OF //
 		PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 		OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
 		reasoner.precomputeInferences(InferenceType.values());
@@ -159,6 +186,14 @@ public class ReasonerServiceImpl implements ReasonerService {
         List<InferredAxiomGenerator<? extends OWLAxiom>> axiomGenerators = new ArrayList<>();       
 		InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, axiomGenerators);
 		
+		//
+		// we write what is inferred for amine
+		OWLNamedIndividual Amine = factory.getOWLNamedIndividual(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Amine"));
+		NodeSet<OWLClass> inferredClasses = reasoner.getTypes(Amine, true);
+		for (OWLClass inferredClass : inferredClasses.getFlattened()) {
+		    System.out.println("Amine belongs to: " + inferredClass);
+		}
+		//
         for (String value : ListOfValues) {
             try {
                 boolean generatorAdded = false;
