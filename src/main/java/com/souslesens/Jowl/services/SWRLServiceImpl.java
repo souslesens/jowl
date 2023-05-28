@@ -50,7 +50,7 @@ public class SWRLServiceImpl implements SWRLService {
 	// TEST
 
 	@Override
-	public String SWRLruleMeth2(String ontologyContentDecoded64)
+	public String SWRLruleMeth2(String ontologyContentDecoded64 ,  String[] reqBodies , String reqHead)
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
 
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -87,24 +87,30 @@ public class SWRLServiceImpl implements SWRLService {
 		// RULE : Person (x) ^ Human (x) -> Student(x)
 		// Get data factory
 		OWLDataFactory factory = manager.getOWLDataFactory();
-
-		// Create classes
-		OWLClass classPerson = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Person"));
-		OWLClass classHuman = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Human"));
-		OWLClass classStudent = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Student"));
-
 		// Create SWRL Variable
 		SWRLVariable var = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
+		Set<SWRLAtom> body = new HashSet<>();
+		for (String bodies : reqBodies) {
+			OWLClass classX = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+bodies));
+			SWRLClassAtom body2 = factory.getSWRLClassAtom(classX, var);
+			body.add(body2);
+		}
+		// Create classes
+//		OWLClass classPerson = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Person"));
+//		OWLClass classHuman = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Human"));
+		OWLClass classReqHead = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+reqHead));
 
+
+		
 		// Create SWRL rule
-		SWRLClassAtom body1 = factory.getSWRLClassAtom(classPerson, var);
-		SWRLClassAtom body2 = factory.getSWRLClassAtom(classHuman, var);
-		SWRLClassAtom head = factory.getSWRLClassAtom(classStudent, var);
+//		SWRLClassAtom body1 = factory.getSWRLClassAtom(classPerson, var);
+//		SWRLClassAtom body2 = factory.getSWRLClassAtom(classHuman, var);
+		SWRLClassAtom head = factory.getSWRLClassAtom(classReqHead, var);
 //		SWRLRule rule = factory.getSWRLRule(Collections.singleton(body), Collections.singleton(head));
 
-		Set<SWRLAtom> body = new HashSet<>();
-		body.add(body1);
-		body.add(body2);
+		
+//		body.add(body1);
+//		body.add(body2);
 		
 		SWRLRule rule = factory.getSWRLRule(body, Collections.singleton(head));
 		AddAxiom addAxiom = new AddAxiom(ontology, rule);
@@ -123,10 +129,10 @@ public class SWRLServiceImpl implements SWRLService {
 		reasoner.precomputeInferences(InferenceType.values());
 		//
 		//
-		NodeSet<OWLNamedIndividual> inferredStudents = reasoner.getInstances(classStudent, false); // false = only inferred
+		NodeSet<OWLNamedIndividual> inferredIndv = reasoner.getInstances(classReqHead, false); // false = only inferred
 		//
-		for (OWLNamedIndividual student : inferredStudents.getFlattened()) {
-		    System.out.println("Inferred student: " + student.getIRI());
+		for (OWLNamedIndividual indiv : inferredIndv.getFlattened()) {
+		    System.out.println("Inferred student: " + indiv.getIRI());
 		}
 		//
 		OWLOntology inferredOntology = manager.createOntology();    

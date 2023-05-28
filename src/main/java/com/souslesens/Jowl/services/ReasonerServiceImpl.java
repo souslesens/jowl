@@ -155,30 +155,6 @@ public class ReasonerServiceImpl implements ReasonerService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// BLOC //
-		
-
-		// Get data factory
-		OWLDataFactory factory = manager.getOWLDataFactory();
-
-		// Create classes
-		OWLClass classPerson = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Person"));
-		OWLClass classStudent = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Student"));
-
-		// Create SWRL Variable
-		SWRLVariable var = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
-
-		// Create SWRL rule
-		SWRLClassAtom body = factory.getSWRLClassAtom(classPerson, var);
-		SWRLClassAtom head = factory.getSWRLClassAtom(classStudent, var);
-		SWRLRule rule = factory.getSWRLRule(Collections.singleton(body), Collections.singleton(head));
-
-		// Add SWRL rule to ontology
-		manager.applyChange(new AddAxiom(ontology, rule));
-		
-
-		
-		// END OF //
 		PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 		OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
 		reasoner.precomputeInferences(InferenceType.values());
@@ -186,13 +162,6 @@ public class ReasonerServiceImpl implements ReasonerService {
         List<InferredAxiomGenerator<? extends OWLAxiom>> axiomGenerators = new ArrayList<>();       
 		InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, axiomGenerators);
 		
-		//
-		// we write what is inferred for amine
-		OWLNamedIndividual Amine = factory.getOWLNamedIndividual(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Amine"));
-		NodeSet<OWLClass> inferredClasses = reasoner.getTypes(Amine, true);
-		for (OWLClass inferredClass : inferredClasses.getFlattened()) {
-		    System.out.println("Amine belongs to: " + inferredClass);
-		}
 		//
         for (String value : ListOfValues) {
             try {

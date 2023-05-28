@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.souslesens.Jowl.model.reasonerInput;
+import com.souslesens.Jowl.model.ruleSWRLInput;
 import com.souslesens.Jowl.services.SWRLService;
 
 
@@ -22,12 +23,22 @@ public class SWRLController {
 	private SWRLService SWRLService;
     //Post API For STRING
     @PostMapping("/insertRule")
-    public ResponseEntity<?> postUnsatisfiable(@RequestBody(required = false) reasonerInput request) { 
+    public ResponseEntity<?> postUnsatisfiable(@RequestBody(required = false) ruleSWRLInput request) { 
         String filePath = request.getFilePath();
         String url = request.getUrl();
         String ontologyContentEncoded64 = request.getOntologyContentEncoded64();
     	byte[] ontologyContentDecoded64Bytes = null;
     	String ontologyContentDecoded64 = null;
+        String[] reqBodies = request.getBody();
+        String reqHead = request.getHead();
+        for (String bd : reqBodies) {
+			System.out.println(bd);
+		}
+        
+        System.out.println(reqHead);
+        if (reqBodies.length == 0 || reqHead == null) {
+        	return ResponseEntity.badRequest().body("Body or Head are empty");
+        }
     	if (ontologyContentEncoded64 != null && !ontologyContentEncoded64.isEmpty()) {
     	 ontologyContentDecoded64Bytes = Base64.getMimeDecoder().decode(ontologyContentEncoded64);
     	 ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
@@ -43,7 +54,7 @@ public class SWRLController {
             	if (!(filePath == null) || !(url == null) ) {
                 result = SWRLService.SWRLruleMeth1(filePath, url);
             	}else {
-            	result = SWRLService.SWRLruleMeth2(ontologyContentDecoded64);
+            	result = SWRLService.SWRLruleMeth2(ontologyContentDecoded64,reqBodies,reqHead);
             	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
