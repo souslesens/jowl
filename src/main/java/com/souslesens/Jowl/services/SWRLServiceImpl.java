@@ -8,20 +8,13 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddAxiom;
-import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -37,8 +30,6 @@ import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
-import org.semanticweb.owlapi.util.InferredAxiomGenerator;
-import org.semanticweb.owlapi.util.InferredOntologyGenerator;
 import org.springframework.stereotype.Service;
 import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
 import com.google.gson.Gson;
@@ -48,15 +39,81 @@ public class SWRLServiceImpl implements SWRLService {
 
 
 	@Override
-	public String SWRLruleMeth1(String filePath, String Url) throws Exception {
-		return null;
+	public String SWRLruleReclassification(String filePath, String url, String[] reqBodies , String[] reqHead) throws Exception {
+		try {
+			
+		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		OWLOntology ontology = null;
+
+		if (filePath == null && url.isEmpty() == false && (url.startsWith("http") || url.startsWith("ftp"))) {
+
+			ontology = manager.loadOntologyFromOntologyDocument(IRI.create(url));
+		} else if (filePath.isEmpty() == false && url == null) {
+
+			ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
+		} else {
+			return null;
+		}
+		// BLOC //
+		
+				// RULE : N { BODY } (x) -> N { Head } (x)
+
+				OWLDataFactory factory = manager.getOWLDataFactory();
+				// Create SWRL Variable for classification
+				SWRLVariable var = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
+				Set<SWRLAtom> body = new HashSet<>();
+				for (String bodies : reqBodies) {
+					OWLClass classX = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+bodies));
+					SWRLClassAtom body2 = factory.getSWRLClassAtom(classX, var);
+					body.add(body2);
+				}
+				Set<OWLClass> classes = new HashSet<>();
+				Set<SWRLAtom> head = new HashSet<>();
+				for (String headies : reqHead) {
+					OWLClass classX = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+headies));
+					classes.add(classX);
+					SWRLClassAtom head2 = factory.getSWRLClassAtom(classX, var);
+					head.add(head2);
+				}
+				
+				SWRLRule rule = factory.getSWRLRule(body, head);
+				AddAxiom addAxiom = new AddAxiom(ontology, rule);
+				// Add SWRL rule to ontology
+				manager.applyChange(addAxiom);
+
+				// Creation reasoner 
+				PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
+				OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
+				//
+				// Computing inferences
+				reasoner.precomputeInferences(InferenceType.values());
+
+		        Map<String, Set<String>> instances = new HashMap<>();
+				for (OWLClass cls : classes) {
+					NodeSet<OWLNamedIndividual> inferredIndv = reasoner.getInstances(cls, false); // false = only inferred
+		            for (Node<OWLNamedIndividual> individualNode : inferredIndv) {
+		                for (OWLNamedIndividual individual : individualNode) {
+		                	System.out.println(individual.getIRI().getFragment() + " is an instance of " + cls.getIRI().getFragment());
+		                	instances.computeIfAbsent(individual.getIRI().getFragment(), k -> new HashSet<>()).add(cls.getIRI().getFragment());
+		                }
+		            }
+				}
+				 Gson gson = new Gson();
+		         String json = gson.toJson(instances);
+				 return json;
+			}catch (OWLOntologyCreationException e){
+				Gson gson = new Gson();
+				String json = gson.toJson(e);
+				return json;
+			}
+		
 	}
 	// TEST
 
 	@Override
-	public String SWRLruleMeth2(String ontologyContentDecoded64 ,  String[] reqBodies , String[] reqHead)
+	public String SWRLruleReclassificationB64(String ontologyContentDecoded64 ,  String[] reqBodies , String[] reqHead)
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
-
+		try {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology ontology = null;
 		String filePath = null;
@@ -88,8 +145,8 @@ public class SWRLServiceImpl implements SWRLService {
 		}
 		// BLOC //
 		
-		// RULE : Person (x) ^ Human (x) -> Student(x)
-		// Get data factory
+		// RULE : N { BODY } (x) -> N { Head } (x)
+
 		OWLDataFactory factory = manager.getOWLDataFactory();
 		// Create SWRL Variable for classification
 		SWRLVariable var = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
@@ -107,40 +164,19 @@ public class SWRLServiceImpl implements SWRLService {
 			SWRLClassAtom head2 = factory.getSWRLClassAtom(classX, var);
 			head.add(head2);
 		}
-		// Create classes
-//		OWLClass classPerson = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Person"));
-//		OWLClass classHuman = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Human"));
-//		OWLClass classReqHead = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+reqHead));
-
-
-		
-		// Create SWRL rule
-//		SWRLClassAtom body1 = factory.getSWRLClassAtom(classPerson, var);
-//		SWRLClassAtom body2 = factory.getSWRLClassAtom(classHuman, var);
-//		SWRLClassAtom head = factory.getSWRLClassAtom(classReqHead, var);
-//		SWRLRule rule = factory.getSWRLRule(Collections.singleton(body), Collections.singleton(head));
-
-		
-//		body.add(body1);
-//		body.add(body2);
 		
 		SWRLRule rule = factory.getSWRLRule(body, head);
 		AddAxiom addAxiom = new AddAxiom(ontology, rule);
 		// Add SWRL rule to ontology
 		manager.applyChange(addAxiom);
-//		manager.applyChange(new AddAxiom(ontology, rule));
-		
 
-		
-		// END OF //
 		// Creation reasoner 
 		PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 		OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
 		//
 		// Computing inferences
 		reasoner.precomputeInferences(InferenceType.values());
-		//
-		//
+
         Map<String, Set<String>> instances = new HashMap<>();
 		for (OWLClass cls : classes) {
 			NodeSet<OWLNamedIndividual> inferredIndv = reasoner.getInstances(cls, false); // false = only inferred
@@ -151,45 +187,16 @@ public class SWRLServiceImpl implements SWRLService {
                 }
             }
 		}
-		//
-//		for (OWLNamedIndividual indiv : inferredIndv.getFlattened()) {
-//		    System.out.println("Inferred student: " + indiv.getIRI());
-//		}
-		//
-//		OWLOntology inferredOntology = manager.createOntology();    
-//        List<InferredAxiomGenerator<? extends OWLAxiom>> axiomGenerators = new ArrayList<>();       
-//		InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, axiomGenerators);
-		
-		//
-//		// we write what is inferred for amine
-//		OWLNamedIndividual Amine = factory.getOWLNamedIndividual(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#Amine"));
-//		NodeSet<OWLClass> inferredClasses = reasoner.getTypes(Amine, true);
-//		for (OWLClass inferredClass : inferredClasses.getFlattened()) {
-//		    System.out.println("Amine belongs to: " + inferredClass);
-//		}
-//		//
-//		OWLDataFactory dataFactory = manager.getOWLDataFactory();
-//		iog.fillOntology(dataFactory, inferredOntology);
-//		JSONObject jsonObject = new JSONObject();
-//		for (AxiomType<?> axiomType : AxiomType.AXIOM_TYPES) {
-//			Set<? extends OWLAxiom> axioms = inferredOntology.getAxioms(axiomType);
-//			if (!axioms.isEmpty()) {
-//				jsonObject.put(axiomType.toString(), convertAxiomSetToJSONArray(axioms));
-//			}
-//		}
 		 Gson gson = new Gson();
          String json = gson.toJson(instances);
-		System.out.println(json);
+		 return json;
+	}catch (OWLOntologyCreationException e){
+		Gson gson = new Gson();
+		String json = gson.toJson(e);
 		return json;
 	}
-//	private static JSONArray convertAxiomSetToJSONArray(Set<? extends OWLAxiom> axiomSet) {
-//		JSONArray jsonArray = new JSONArray();
-//		for (OWLAxiom axiom : axiomSet) {
-//			jsonArray.put(axiom.toString());
-//		}
-//		return jsonArray;
-//	}
 
 
+	}
 
 }

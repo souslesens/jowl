@@ -29,11 +29,6 @@ public class SWRLController {
     	String ontologyContentDecoded64 = null;
         String[] reqBodies = request.getBody();
         String[] reqHead = request.getHead();
-        for (String bd : reqBodies) {
-			System.out.println(bd);
-		}
-        
-        System.out.println(reqHead);
         if (reqBodies.length == 0 || reqHead.length == 0) {
         	return ResponseEntity.badRequest().body("Body or Head are empty");
         }
@@ -50,9 +45,9 @@ public class SWRLController {
             try {
             	String result ;
             	if (!(filePath == null) || !(url == null) ) {
-                result = SWRLService.SWRLruleMeth1(filePath, url);
+                result = SWRLService.SWRLruleReclassification(filePath, url,reqBodies,reqHead);
             	}else {
-            	result = SWRLService.SWRLruleMeth2(ontologyContentDecoded64,reqBodies,reqHead);
+            	result = SWRLService.SWRLruleReclassificationB64(ontologyContentDecoded64,reqBodies,reqHead);
             	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
