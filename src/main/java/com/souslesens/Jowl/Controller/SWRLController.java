@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.souslesens.Jowl.model.reasonerInput;
 import com.souslesens.Jowl.model.ruleSWRLInput;
 import com.souslesens.Jowl.services.SWRLService;
 
@@ -30,13 +28,13 @@ public class SWRLController {
     	byte[] ontologyContentDecoded64Bytes = null;
     	String ontologyContentDecoded64 = null;
         String[] reqBodies = request.getBody();
-        String reqHead = request.getHead();
+        String[] reqHead = request.getHead();
         for (String bd : reqBodies) {
 			System.out.println(bd);
 		}
         
         System.out.println(reqHead);
-        if (reqBodies.length == 0 || reqHead == null) {
+        if (reqBodies.length == 0 || reqHead.length == 0) {
         	return ResponseEntity.badRequest().body("Body or Head are empty");
         }
     	if (ontologyContentEncoded64 != null && !ontologyContentEncoded64.isEmpty()) {

@@ -5,9 +5,9 @@ public class ruleSWRLInput {
 	private String url;
 	private String ontologyContentEncoded64;
 	private String[] body;
-	private String head;
+	private String[] head;
 	
-	public ruleSWRLInput(String filePath , String url, String ontologyContentEncoded64 ,String[] body,String head) {
+	public ruleSWRLInput(String filePath , String url, String ontologyContentEncoded64 ,String[] body,String[] head) {
 		this.filePath = filePath;
 		this.url = url;
 		this.ontologyContentEncoded64 = ontologyContentEncoded64;
@@ -26,7 +26,7 @@ public class ruleSWRLInput {
 		return ontologyContentEncoded64;
 	}
 
-	public String getHead() {
+	public String[] getHead() {
 		return head;
 	}
 	
