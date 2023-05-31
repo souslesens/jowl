@@ -209,7 +209,7 @@ public class SWRLServiceImpl implements SWRLService {
 	}
 	
 	@Override
-	public String SWRLruleVAB64(String ontologyContentDecoded64 , List<SWRLVariable1> reqBodies , String reqHead)
+	public String SWRLruleVAB64(String ontologyContentDecoded64 , List<SWRLVariable1> reqBodies , List<SWRLVariable1> reqHead)
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
 		try {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -248,19 +248,16 @@ public class SWRLServiceImpl implements SWRLService {
 		OWLDataFactory factory = manager.getOWLDataFactory();
 		// Create SWRL Variable for classification
 		
-//		SWRLVariable varY = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#y"));
-//		SWRLVariable varZ = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#z"));
 		Set<SWRLAtom> body = new HashSet<>();
-		///////////////////
-//    	for (SWRLVariable1 swrlVariable1 : reqBodies) {
-//    	    System.out.println("Type: " + swrlVariable1.getType());
-//    	    for (SWRLVariables entity : swrlVariable1.getEntities()) {
-//    	        System.out.println("Name: " + entity.getName());
-//    	        System.out.println("Var: " + Arrays.toString(entity.getVar()));
-//    	    }
-//    	    System.out.println();
-//    	}
-		
+
+    	for (SWRLVariable1 swrlVariable1 : reqHead) {
+	    System.out.println("Type: " + swrlVariable1.getType());
+	    for (SWRLVariables entity : swrlVariable1.getEntities()) {
+	        System.out.println("Name: " + entity.getName());
+	        System.out.println("Var: " + Arrays.toString(entity.getVar()));
+	    }
+	    System.out.println();
+	}
 		
 		
     	for (SWRLVariable1 swrlVariable1 : reqBodies) {
@@ -313,26 +310,12 @@ public class SWRLServiceImpl implements SWRLService {
     	    	        }
     	    	}
     	    }
-//    	    for (SWRLVariables entity : swrlVariable1.getEntities()) {
-//    	        System.out.println("Name: " + entity.getName());
-//    	        String[] variables = entity.getVar();
-//    	        for (String table : variables ) {
-//    	        	System.out.println("Var: " + table);
-//    	        }
-//    	        System.out.println("Var: " + Arrays.toString(entity.getVar()));
-//    	    }
     	    System.out.println();
     	}
 		
-		
-		////////////////////
-//		for (String bodies : reqBodies) {
-//			OWLClass classX = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+bodies));
-//			SWRLClassAtom body2 = factory.getSWRLClassAtom(classX, var);
-//			body.add(body2);
-//		}
 		Set<OWLClass> classes = new HashSet<>();
-//		Set<SWRLAtom> head = new HashSet<>();
+		Set<OWLObjectProperty> objectproperties = new HashSet<>();
+		Set<SWRLAtom> head = new HashSet<>();
 		// WORKING 1 ??
 //		OWLClass classReqHead = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+reqHead));
 		//??
@@ -340,21 +323,63 @@ public class SWRLServiceImpl implements SWRLService {
 		//working2 
 		OWLObjectProperty objectPropertyReqHead = factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() +"#"+reqHead));
 		//
+		// ##########################
+    	for (SWRLVariable1 swrlVariable1 : reqHead) {
+    	    if( swrlVariable1.getType().equalsIgnoreCase("class")){
+    	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
+    	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
+    	    		classes.add(classX);
+    	    		// SWRLClassAtom body2 = factory.getSWRLClassAtom(classX, varX);
+    	    		 String[] variables = entity.getVar();
+    	    	        for (String table : variables ) {
+    	    	        	if ( table.equalsIgnoreCase("x")) {
+    	    	        		SWRLVariable varX = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
+    	    	        		SWRLClassAtom head2 = factory.getSWRLClassAtom(classX, varX);
+    	    	        		head.add(head2);
+    	    	        	}else if (table.equalsIgnoreCase("y")) {
+    	    	        		SWRLVariable varY = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#y"));
+    	    	        		SWRLClassAtom head2 = factory.getSWRLClassAtom(classX, varY);
+    	    	        		head.add(head2);
+    	    	        	}else if (table.equalsIgnoreCase("z")) {
+    	    	        		SWRLVariable varZ = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#z"));
+    	    	        		SWRLClassAtom head2 = factory.getSWRLClassAtom(classX, varZ);
+    	    	        		head.add(head2);
+    	    	        	}
+    	    	        }
+    	    	}
+    	    }else if (swrlVariable1.getType().equalsIgnoreCase("objectProperty")) {
+    	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
+//    	    		System.out.println(entity);
+    	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
+    	    		objectproperties.add(ObjectPropertyX);
+    	    		//    	    		SWRLClassAtom body2 = factory.getSWRLClassAtom(classX, varX);
+    	    		 String[] variables = entity.getVar();
+    	    		 String Var = "";
+    	    	        for (String table : variables ) {
+    	    	        	Var = Var+table;
+    	    	        }
+    	    	        if (Var.equalsIgnoreCase("XY") || Var.equalsIgnoreCase("YX")) {
+	    	        		SWRLVariable varX = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
+	    	        		SWRLVariable varY = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#y"));
+	    	        		SWRLObjectPropertyAtom  head2 = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, varX , varY);
+	    	        		head.add(head2);
+    	    	        }else if(Var.equalsIgnoreCase("XZ") || Var.equalsIgnoreCase("ZX")) {
+	    	        		SWRLVariable varX = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
+	    	        		SWRLVariable varZ = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#z"));
+	    	        		SWRLObjectPropertyAtom  head2 = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, varX , varZ);
+	    	        		head.add(head2);
+    	    	        }else if(Var.equalsIgnoreCase("YZ") || Var.equalsIgnoreCase("YZ") ) {
+	    	        		SWRLVariable varY = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#y"));
+	    	        		SWRLVariable varZ = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#z"));
+	    	        		SWRLObjectPropertyAtom  head2 = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, varY , varZ);
+	    	        		head.add(head2);
+    	    	        }
+    	    	}
+    	    }
+    	    System.out.println();
+    	}
 		
-		
-		
-		//		for (String headies : reqHead) {
-//			OWLClass classX = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+headies));
-//			classes.add(classX);
-//			SWRLClassAtom head2 = factory.getSWRLClassAtom(classX, var);
-//			head.add(head2);
-//		}
-		SWRLVariable varX = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
-		SWRLVariable varY = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#y"));
-//		SWRLClassAtom head = factory.getSWRLClassAtom(classReqHead, varX);
-		SWRLObjectPropertyAtom head = factory.getSWRLObjectPropertyAtom(objectPropertyReqHead, varX, varY);
-		SWRLRule rule = factory.getSWRLRule(body,Collections.singleton(head));
-//		SWRLRule rule = factory.getSWRLRule(body, head);
+		SWRLRule rule = factory.getSWRLRule(body, head);
 		AddAxiom addAxiom = new AddAxiom(ontology, rule);
 		// Add SWRL rule to ontology
 		manager.applyChange(addAxiom);
@@ -368,9 +393,10 @@ public class SWRLServiceImpl implements SWRLService {
 		// Print out inferred instances
 		// LAST 
         // Loop through each individual in the ontology
+		for (OWLObjectProperty objectproperty : objectproperties){
         for (OWLNamedIndividual individual : ontology.getIndividualsInSignature()) {
             // Get the inferred cooperatedWith values
-            NodeSet<OWLNamedIndividual> cooperatedWithValues = reasoner.getObjectPropertyValues(individual, objectPropertyReqHead);
+            NodeSet<OWLNamedIndividual> cooperatedWithValues = reasoner.getObjectPropertyValues(individual, objectproperty);
 
             // If there are any values, print them
             if (!cooperatedWithValues.getFlattened().isEmpty()) {
@@ -381,7 +407,7 @@ public class SWRLServiceImpl implements SWRLService {
                 }
             }
         }
-		
+		}
 		
 		// LAST
 		

@@ -13,5 +13,5 @@ public interface SWRLService {
 	
 	String SWRLruleReclassification(String filePath, String Url, String[] reqBodies , String[] reqHead) throws Exception;
 	String SWRLruleReclassificationB64(String ontologyContentDecoded64 , String[] reqBodies , String[] reqHead) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
-	String SWRLruleVAB64(String ontologyContentDecoded64 , List<SWRLVariable1> reqBodies , String reqHead) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
+	String SWRLruleVAB64(String ontologyContentDecoded64 , List<SWRLVariable1> reqBodies , List<SWRLVariable1> reqHead) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
 }

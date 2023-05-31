@@ -69,6 +69,7 @@ public class SWRLController {
     	byte[] ontologyContentDecoded64Bytes = null;
     	String ontologyContentDecoded64 = null;
     	List<SWRLVariable1> reqBodies = request.getBody();
+    	List<SWRLVariable1> reqHead = request.getHead();
 //    	for (SWRLVariable1 swrlVariable1 : reqBodies) {
 //    	    System.out.println("Type: " + swrlVariable1.getType());
 //    	    for (SWRLVariables entity : swrlVariable1.getEntities()) {
@@ -77,8 +78,8 @@ public class SWRLController {
 //    	    }
 //    	    System.out.println();
 //    	}
-        String reqHead = request.getHead();
-        System.out.println(reqHead);
+//        String reqHead = request.getHead();
+//        System.out.println(reqHead);
 //        if (reqBodies.length == 0 || reqHead == null) {
 //        	return ResponseEntity.badRequest().body("Body or Head are empty");
 //        }
