@@ -413,35 +413,48 @@ public class SWRLServiceImpl implements SWRLService {
 		
 		
 		//222222
-//		for (OWLClass owlClass : ontology.getClassesInSignature()) {
-//			
-//		    Set<OWLIndividual> assertedInstances = new HashSet<>();
-//		    for (OWLClassAssertionAxiom axiom : ontology.getClassAssertionAxioms(owlClass)) {
-//		        assertedInstances.add(axiom.getIndividual());
-//		    }
-//			
-//		    NodeSet<OWLNamedIndividual> allInstances  = reasoner.getInstances(owlClass, false);
-//		    
-//		    Set<OWLNamedIndividual> inferredInstances = allInstances.getFlattened();
-//		    inferredInstances.removeAll(assertedInstances);
-//		    
-//		    for (OWLNamedIndividual inferredInstance  : inferredInstances) {
-//		        System.out.println(inferredInstance + " is an instance of " + owlClass);
-//		    }
-//		}
-		
+		for (OWLClass owlClass : classes) {
+			
+		    Set<OWLIndividual> assertedInstances = new HashSet<>();
+		    for (OWLClassAssertionAxiom axiom : ontology.getClassAssertionAxioms(owlClass)) {
+		        assertedInstances.add(axiom.getIndividual());
+		    }
+			
+		    NodeSet<OWLNamedIndividual> allInstances  = reasoner.getInstances(owlClass, false);
+		    
+		    Set<OWLNamedIndividual> inferredInstances = allInstances.getFlattened();
+		    inferredInstances.removeAll(assertedInstances);
+		    
+		    for (OWLNamedIndividual inferredInstance  : inferredInstances) {
+		        System.out.println(inferredInstance + " is an instance of " + owlClass);
+		    }
+		}
+		Map<String, Set<String>> propertyValues = new HashMap<>();
+		for (OWLObjectProperty objectproperty : objectproperties) {
+		    for (OWLNamedIndividual individual : ontology.getIndividualsInSignature()) {
+		        NodeSet<OWLNamedIndividual> objectPropertyValues = reasoner.getObjectPropertyValues(individual, objectproperty);
+
+		        // If there are any values, add them to the map
+		        for (OWLNamedIndividual value : objectPropertyValues.getFlattened()) {
+		            String key = individual.getIRI().getFragment();
+		            propertyValues.computeIfAbsent(key, k -> new HashSet<>()).add(objectproperty.getIRI().getFragment()+"/"+ value.getIRI().getFragment() );
+		        }
+		    }
+		}
         Map<String, Set<String>> instances = new HashMap<>();
 		for (OWLClass cls : classes) {
 			NodeSet<OWLNamedIndividual> inferredIndv = reasoner.getInstances(cls, false); // false = only inferred
             for (Node<OWLNamedIndividual> individualNode : inferredIndv) {
                 for (OWLNamedIndividual individual : individualNode) {
-                	System.out.println(individual.getIRI().getFragment() + " is an instance of " + cls.getIRI().getFragment());
                 	instances.computeIfAbsent(individual.getIRI().getFragment(), k -> new HashSet<>()).add(cls.getIRI().getFragment());
                 }
             }
 		}
+		Map<String, Map<String, Set<String>>> finalMap = new HashMap<>();
+		finalMap.put("class", instances);
+		finalMap.put("objectProperty", propertyValues);
 		 Gson gson = new Gson();
-         String json = gson.toJson(instances);
+         String json = gson.toJson(finalMap);
 		 return json;
 	}catch (OWLOntologyCreationException e){
 		Gson gson = new Gson();
