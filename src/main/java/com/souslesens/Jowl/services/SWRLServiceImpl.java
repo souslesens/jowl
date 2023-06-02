@@ -38,7 +38,7 @@ import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.springframework.stereotype.Service;
 import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
 import com.google.gson.Gson;
-import com.souslesens.Jowl.model.SWRLVariable1;
+import com.souslesens.Jowl.model.SWRLTypeEntityVariable;
 import com.souslesens.Jowl.model.SWRLVariables;
 @Service
 
@@ -206,7 +206,7 @@ public class SWRLServiceImpl implements SWRLService {
 	}
 	
 	@Override
-	public String SWRLruleVAB64(String ontologyContentDecoded64 , List<SWRLVariable1> reqBodies , List<SWRLVariable1> reqHead)
+	public String SWRLruleVAB64(String ontologyContentDecoded64 , List<SWRLTypeEntityVariable> reqBodies , List<SWRLTypeEntityVariable> reqHead)
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
 		try {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -247,7 +247,7 @@ public class SWRLServiceImpl implements SWRLService {
 		
 		Set<SWRLAtom> body = new HashSet<>();
 	
-    	for (SWRLVariable1 swrlVariable1 : reqBodies) {
+    	for (SWRLTypeEntityVariable swrlVariable1 : reqBodies) {
     	    if( swrlVariable1.getType().equalsIgnoreCase("class")){
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
@@ -281,7 +281,7 @@ public class SWRLServiceImpl implements SWRLService {
 		Set<OWLClass> classes = new HashSet<>();
 		Set<OWLObjectProperty> objectproperties = new HashSet<>();
 		Set<SWRLAtom> head = new HashSet<>();
-    	for (SWRLVariable1 swrlVariable1 : reqHead) {
+    	for (SWRLTypeEntityVariable swrlVariable1 : reqHead) {
     	    if( swrlVariable1.getType().equalsIgnoreCase("class")){
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));

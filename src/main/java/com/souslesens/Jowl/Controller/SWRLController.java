@@ -1,19 +1,15 @@
 package com.souslesens.Jowl.Controller;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.souslesens.Jowl.model.SWRLVariable1;
-import com.souslesens.Jowl.model.SWRLVariables;
+import com.souslesens.Jowl.model.SWRLTypeEntityVariable;
 import com.souslesens.Jowl.model.ruleSWRLInput;
 import com.souslesens.Jowl.model.ruleSWRLInputComplex;
 import com.souslesens.Jowl.services.SWRLService;
@@ -68,21 +64,8 @@ public class SWRLController {
         String ontologyContentEncoded64 = request.getOntologyContentEncoded64();
     	byte[] ontologyContentDecoded64Bytes = null;
     	String ontologyContentDecoded64 = null;
-    	List<SWRLVariable1> reqBodies = request.getBody();
-    	List<SWRLVariable1> reqHead = request.getHead();
-//    	for (SWRLVariable1 swrlVariable1 : reqBodies) {
-//    	    System.out.println("Type: " + swrlVariable1.getType());
-//    	    for (SWRLVariables entity : swrlVariable1.getEntities()) {
-//    	        System.out.println("Name: " + entity.getName());
-//    	        System.out.println("Var: " + Arrays.toString(entity.getVar()));
-//    	    }
-//    	    System.out.println();
-//    	}
-//        String reqHead = request.getHead();
-//        System.out.println(reqHead);
-//        if (reqBodies.length == 0 || reqHead == null) {
-//        	return ResponseEntity.badRequest().body("Body or Head are empty");
-//        }
+    	List<SWRLTypeEntityVariable> reqBodies = request.getBody();
+    	List<SWRLTypeEntityVariable> reqHead = request.getHead();
     	if (ontologyContentEncoded64 != null && !ontologyContentEncoded64.isEmpty()) {
     	 ontologyContentDecoded64Bytes = Base64.getMimeDecoder().decode(ontologyContentEncoded64);
     	 ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
@@ -96,7 +79,6 @@ public class SWRLController {
             try {
             	String result = null;
             	if (!(filePath == null) || !(url == null) ) {
-//                result = SWRLService.SWRLruleVA(filePath, url,reqBodies,reqHead);
             	}else {
             	result = SWRLService.SWRLruleVAB64(ontologyContentDecoded64,reqBodies,reqHead);
             	}
