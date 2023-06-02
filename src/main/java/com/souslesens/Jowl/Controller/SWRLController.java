@@ -79,8 +79,9 @@ public class SWRLController {
             try {
             	String result = null;
             	if (!(filePath == null) || !(url == null) ) {
+            		result = SWRLService.SWRLruleVABUF(filePath,url,reqBodies,reqHead);
             	}else {
-            	result = SWRLService.SWRLruleVAB64(ontologyContentDecoded64,reqBodies,reqHead);
+            		result = SWRLService.SWRLruleVAB64(ontologyContentDecoded64,reqBodies,reqHead);
             	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
