@@ -145,6 +145,8 @@ __SWRL Rules's APIS__
 | -------- | -------- | -------- |
 | _POST_ | /SWRL/insertRuleReclassification | SWRL Rule for classification : Student(x) -> Person (x) |
 
+Comming soon the rest of APIS
+
 ----------------
 
 ### Example Of Use For SWRL Part
@@ -174,7 +176,6 @@ You pick Body -> Raw -> JSON
 
         }
 ```
-
 
 ----------------
 ### Useful encoders to encode the TEXT
