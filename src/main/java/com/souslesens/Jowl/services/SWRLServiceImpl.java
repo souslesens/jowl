@@ -266,10 +266,10 @@ public class SWRLServiceImpl implements SWRLService {
 	    	            throw new IllegalArgumentException("The variable list must contains Variable");
 	    	        }
 	    	        for (int v = 0 ; v<variables.length; v+=2) {
-	    	            String varX = variables[v];
-	    	            String varY = variables[v + 1];
-	    	            SWRLVariable swrlVar1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varX));
-	    	            SWRLVariable swrlVar2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varY));
+	    	            String variable1 = variables[v];
+	    	            String variable2 = variables[v + 1];
+	    	            SWRLVariable swrlVar1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable1));
+	    	            SWRLVariable swrlVar2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable2));
 	    	            SWRLObjectPropertyAtom bodyElement = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, swrlVar1, swrlVar2);
 	    	            bodyList.add(bodyElement);
 	    	        }
@@ -302,10 +302,10 @@ public class SWRLServiceImpl implements SWRLService {
     	    	            throw new IllegalArgumentException("The variable list must contain an even number of elements");
     	    	        }
     	    	        for (int v = 0 ; v<variables.length; v+=2) {
-    	    	            String varX = variables[v];
-    	    	            String varY = variables[v + 1];
-    	    	            SWRLVariable swrlVar1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varX));
-    	    	            SWRLVariable swrlVar2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varY));
+    	    	            String variable1 = variables[v];
+    	    	            String variable2 = variables[v + 1];
+    	    	            SWRLVariable swrlVar1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable1));
+    	    	            SWRLVariable swrlVar2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable2));
     	    	            SWRLObjectPropertyAtom headElement = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, swrlVar1, swrlVar2);
     	    	            headList.add(headElement);
     	    	        }
@@ -424,10 +424,10 @@ public class SWRLServiceImpl implements SWRLService {
 	    	            throw new IllegalArgumentException("The variable list must contains Variable");
 	    	        }
 	    	        for (int v = 0 ; v<variables.length; v+=2) {
-	    	            String varX = variables[v];
-	    	            String varY = variables[v + 1];
-	    	            SWRLVariable swrlVar1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varX));
-	    	            SWRLVariable swrlVar2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varY));
+	    	            String variable1 = variables[v];
+	    	            String variable2 = variables[v + 1];
+	    	            SWRLVariable swrlVar1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable1));
+	    	            SWRLVariable swrlVar2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable2));
 	    	            SWRLObjectPropertyAtom bodyElement = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, swrlVar1, swrlVar2);
 	    	            bodyList.add(bodyElement);
 	    	        }
@@ -460,10 +460,10 @@ public class SWRLServiceImpl implements SWRLService {
     	    	            throw new IllegalArgumentException("The variable list must contain an even number of elements");
     	    	        }
     	    	        for (int v = 0 ; v<variables.length; v+=2) {
-    	    	            String varX = variables[v];
-    	    	            String varY = variables[v + 1];
-    	    	            SWRLVariable swrlVar1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varX));
-    	    	            SWRLVariable swrlVar2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varY));
+    	    	            String variable1 = variables[v];
+    	    	            String variable2 = variables[v + 1];
+    	    	            SWRLVariable swrlVar1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable1));
+    	    	            SWRLVariable swrlVar2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable2));
     	    	            SWRLObjectPropertyAtom headElement = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, swrlVar1, swrlVar2);
     	    	            headList.add(headElement);
     	    	        }
@@ -495,9 +495,8 @@ public class SWRLServiceImpl implements SWRLService {
 		    
 		    Set<OWLNamedIndividual> inferredInstances = allInstances.getFlattened();
 		    inferredInstances.removeAll(assertedInstances);
-		    
 		    for (OWLNamedIndividual inferredInstance  : inferredInstances) {
-		        System.out.println(inferredInstance + " is an instance of " + owlClass);
+		        System.out.println(inferredInstance + " Is Also A " + owlClass);
 		    }
 		}
 		Map<String, Set<String>> propertyValues = new HashMap<>();
