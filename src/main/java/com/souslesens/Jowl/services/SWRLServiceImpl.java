@@ -68,22 +68,22 @@ public class SWRLServiceImpl implements SWRLService {
 				OWLDataFactory factory = manager.getOWLDataFactory();
 				// Create SWRL Variable for classification
 				SWRLVariable var = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
-				Set<SWRLAtom> body = new HashSet<>();
+				Set<SWRLAtom> bodyList = new HashSet<>();
 				for (String bodies : reqBodies) {
 					OWLClass classX = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+bodies));
-					SWRLClassAtom body2 = factory.getSWRLClassAtom(classX, var);
-					body.add(body2);
+					SWRLClassAtom bodyElement = factory.getSWRLClassAtom(classX, var);
+					bodyList.add(bodyElement);
 				}
 				Set<OWLClass> classes = new HashSet<>();
-				Set<SWRLAtom> head = new HashSet<>();
+				Set<SWRLAtom> headList = new HashSet<>();
 				for (String headies : reqHead) {
 					OWLClass classX = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+headies));
 					classes.add(classX);
-					SWRLClassAtom head2 = factory.getSWRLClassAtom(classX, var);
-					head.add(head2);
+					SWRLClassAtom headElement = factory.getSWRLClassAtom(classX, var);
+					headList.add(headElement);
 				}
 				
-				SWRLRule rule = factory.getSWRLRule(body, head);
+				SWRLRule rule = factory.getSWRLRule(bodyList, headList);
 				AddAxiom addAxiom = new AddAxiom(ontology, rule);
 				// Add SWRL rule to ontology
 				manager.applyChange(addAxiom);
@@ -156,22 +156,22 @@ public class SWRLServiceImpl implements SWRLService {
 		OWLDataFactory factory = manager.getOWLDataFactory();
 		// Create SWRL Variable for classification
 		SWRLVariable var = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
-		Set<SWRLAtom> body = new HashSet<>();
+		Set<SWRLAtom> bodyList = new HashSet<>();
 		for (String bodies : reqBodies) {
 			OWLClass classX = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+bodies));
-			SWRLClassAtom body2 = factory.getSWRLClassAtom(classX, var);
-			body.add(body2);
+			SWRLClassAtom bodyElement = factory.getSWRLClassAtom(classX, var);
+			bodyList.add(bodyElement);
 		}
 		Set<OWLClass> classes = new HashSet<>();
-		Set<SWRLAtom> head = new HashSet<>();
+		Set<SWRLAtom> headList = new HashSet<>();
 		for (String headies : reqHead) {
 			OWLClass classX = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+headies));
 			classes.add(classX);
-			SWRLClassAtom head2 = factory.getSWRLClassAtom(classX, var);
-			head.add(head2);
+			SWRLClassAtom headElement = factory.getSWRLClassAtom(classX, var);
+			headList.add(headElement);
 		}
 		
-		SWRLRule rule = factory.getSWRLRule(body, head);
+		SWRLRule rule = factory.getSWRLRule(bodyList, headList);
 		AddAxiom addAxiom = new AddAxiom(ontology, rule);
 		// Add SWRL rule to ontology
 		manager.applyChange(addAxiom);
@@ -245,7 +245,7 @@ public class SWRLServiceImpl implements SWRLService {
 		OWLDataFactory factory = manager.getOWLDataFactory();
 		// Create SWRL Variable for classification
 		
-		Set<SWRLAtom> body = new HashSet<>();
+		Set<SWRLAtom> bodyList = new HashSet<>();
 	
     	for (SWRLTypeEntityVariable swrlVariable1 : reqBodies) {
     	    if( swrlVariable1.getType().equalsIgnoreCase("class")){
@@ -254,8 +254,8 @@ public class SWRLServiceImpl implements SWRLService {
     	    		 String[] variables = entity.getVar();
     	    	        for (String table : variables ) {
     	    	        		SWRLVariable varX = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));
-    	    	        		SWRLClassAtom body2 = factory.getSWRLClassAtom(classX, varX);
-    	    	        		body.add(body2);
+    	    	        		SWRLClassAtom bodyElement = factory.getSWRLClassAtom(classX, varX);
+    	    	        		bodyList.add(bodyElement);
     	    	        }
     	    	}
     	    }else if (swrlVariable1.getType().equalsIgnoreCase("objectProperty")) {
@@ -270,8 +270,8 @@ public class SWRLServiceImpl implements SWRLService {
 	    	            String varY = variables[v + 1];
 	    	            SWRLVariable var1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varX));
 	    	            SWRLVariable var2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varY));
-	    	            SWRLObjectPropertyAtom body2 = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, var1, var2);
-	    	            body.add(body2);
+	    	            SWRLObjectPropertyAtom bodyElement = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, var1, var2);
+	    	            bodyList.add(bodyElement);
 	    	        }
     	    	}
     	    }
@@ -280,7 +280,7 @@ public class SWRLServiceImpl implements SWRLService {
 		
 		Set<OWLClass> classes = new HashSet<>();
 		Set<OWLObjectProperty> objectproperties = new HashSet<>();
-		Set<SWRLAtom> head = new HashSet<>();
+		Set<SWRLAtom> headList = new HashSet<>();
     	for (SWRLTypeEntityVariable swrlVariable1 : reqHead) {
     	    if( swrlVariable1.getType().equalsIgnoreCase("class")){
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
@@ -289,8 +289,8 @@ public class SWRLServiceImpl implements SWRLService {
    	    		 String[] variables = entity.getVar();
 	    	        for (String table : variables ) {
 	    	        		SWRLVariable varX = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));
-	    	        		SWRLClassAtom head2 = factory.getSWRLClassAtom(classX, varX);
-	    	        		head.add(head2);
+	    	        		SWRLClassAtom headElement = factory.getSWRLClassAtom(classX, varX);
+	    	        		headList.add(headElement);
 	    	        }
     	    	}
     	    }else if (swrlVariable1.getType().equalsIgnoreCase("objectProperty")) {
@@ -306,15 +306,15 @@ public class SWRLServiceImpl implements SWRLService {
     	    	            String varY = variables[v + 1];
     	    	            SWRLVariable var1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varX));
     	    	            SWRLVariable var2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varY));
-    	    	            SWRLObjectPropertyAtom head2 = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, var1, var2);
-    	    	            head.add(head2);
+    	    	            SWRLObjectPropertyAtom headElement = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, var1, var2);
+    	    	            headList.add(headElement);
     	    	        }
     	    	}
     	    }
     	    System.out.println();
     	}
 		
-		SWRLRule rule = factory.getSWRLRule(body, head);
+		SWRLRule rule = factory.getSWRLRule(bodyList, headList);
 		AddAxiom addAxiom = new AddAxiom(ontology, rule);
 		// Add SWRL rule to ontology
 		manager.applyChange(addAxiom);
@@ -403,7 +403,7 @@ public class SWRLServiceImpl implements SWRLService {
 		OWLDataFactory factory = manager.getOWLDataFactory();
 		// Create SWRL Variable for classification
 		
-		Set<SWRLAtom> body = new HashSet<>();
+		Set<SWRLAtom> bodyList = new HashSet<>();
 	
     	for (SWRLTypeEntityVariable swrlVariable1 : reqBodies) {
     	    if( swrlVariable1.getType().equalsIgnoreCase("class")){
@@ -412,8 +412,8 @@ public class SWRLServiceImpl implements SWRLService {
     	    		 String[] variables = entity.getVar();
     	    	        for (String table : variables ) {
     	    	        		SWRLVariable varX = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));
-    	    	        		SWRLClassAtom body2 = factory.getSWRLClassAtom(classX, varX);
-    	    	        		body.add(body2);
+    	    	        		SWRLClassAtom bodyElement = factory.getSWRLClassAtom(classX, varX);
+    	    	        		bodyList.add(bodyElement);
     	    	        }
     	    	}
     	    }else if (swrlVariable1.getType().equalsIgnoreCase("objectProperty")) {
@@ -428,8 +428,8 @@ public class SWRLServiceImpl implements SWRLService {
 	    	            String varY = variables[v + 1];
 	    	            SWRLVariable var1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varX));
 	    	            SWRLVariable var2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varY));
-	    	            SWRLObjectPropertyAtom body2 = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, var1, var2);
-	    	            body.add(body2);
+	    	            SWRLObjectPropertyAtom bodyElement = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, var1, var2);
+	    	            bodyList.add(bodyElement);
 	    	        }
     	    	}
     	    }
@@ -438,7 +438,7 @@ public class SWRLServiceImpl implements SWRLService {
 		
 		Set<OWLClass> classes = new HashSet<>();
 		Set<OWLObjectProperty> objectproperties = new HashSet<>();
-		Set<SWRLAtom> head = new HashSet<>();
+		Set<SWRLAtom> headList = new HashSet<>();
     	for (SWRLTypeEntityVariable swrlVariable1 : reqHead) {
     	    if( swrlVariable1.getType().equalsIgnoreCase("class")){
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
@@ -447,8 +447,8 @@ public class SWRLServiceImpl implements SWRLService {
    	    		 String[] variables = entity.getVar();
 	    	        for (String table : variables ) {
 	    	        		SWRLVariable varX = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));
-	    	        		SWRLClassAtom head2 = factory.getSWRLClassAtom(classX, varX);
-	    	        		head.add(head2);
+	    	        		SWRLClassAtom headElement = factory.getSWRLClassAtom(classX, varX);
+	    	        		headList.add(headElement);
 	    	        }
     	    	}
     	    }else if (swrlVariable1.getType().equalsIgnoreCase("objectProperty")) {
@@ -464,15 +464,15 @@ public class SWRLServiceImpl implements SWRLService {
     	    	            String varY = variables[v + 1];
     	    	            SWRLVariable var1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varX));
     	    	            SWRLVariable var2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + varY));
-    	    	            SWRLObjectPropertyAtom head2 = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, var1, var2);
-    	    	            head.add(head2);
+    	    	            SWRLObjectPropertyAtom headElement = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, var1, var2);
+    	    	            headList.add(headElement);
     	    	        }
     	    	}
     	    }
     	    System.out.println();
     	}
 		
-		SWRLRule rule = factory.getSWRLRule(body, head);
+		SWRLRule rule = factory.getSWRLRule(bodyList, headList);
 		AddAxiom addAxiom = new AddAxiom(ontology, rule);
 		// Add SWRL rule to ontology
 		manager.applyChange(addAxiom);
