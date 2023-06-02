@@ -139,6 +139,44 @@ You pick Body -> Raw -> JSON
         "ontologyContentEncoded64":"PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxyZGY6UkRGIHhtbG5zPSJodHRwOi8vd3d3LnNlbWFudGljd2ViLm9yZy9uYXNyby9vbnRvbG9naWVzLzIwMjMvMy91bnRpdGxlZC1vbnRvbG9neS0xMC8iCiAgICAgeG1sOmJhc2U9Imh0dHA6Ly93d3cuc2VtYW50aWN3ZWIub3JnL25hc3JvL29udG9sb2dpZXMvMjAyMy8zL3VudGl0bGVkLW9udG9sb2d5LTEwLyIKICAgICB4bWxuczpvd2w9Imh0dHA6Ly93d3cudzMub3JnLzIwMDIvMDcvb3dsIyIKICAgICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgICAgeG1sbnM6eG1sPSJodHRwOi8vd3d3LnczLm9yZy9YTUwvMTk5OC9uYW1lc3BhY2UiCiAgICAgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSMiCiAgICAgeG1sbnM6cmRmcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wMS9yZGYtc2NoZW1hIyI+CiAgICA8b3dsOk9udG9sb2d5IHJkZjphYm91dD0iaHR0cDovL3d3dy5zZW1hbnRpY3dlYi5vcmcvbmFzcm8vb250b2xvZ2llcy8yMDIzLzMvdW50aXRsZWQtb250b2xvZ3ktMTAiLz4KICAgIAoKCiAgICA8IS0tIAogICAgLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vCiAgICAvLwogICAgLy8gQ2xhc3NlcwogICAgLy8KICAgIC8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLwogICAgIC0tPgoKICAgIAoKCiAgICA8IS0tIGh0dHA6Ly93d3cuc2VtYW50aWN3ZWIub3JnL25hc3JvL29udG9sb2dpZXMvMjAyMy8zL3VudGl0bGVkLW9udG9sb2d5LTEwI2JveSAtLT4KCiAgICA8b3dsOkNsYXNzIHJkZjphYm91dD0iaHR0cDovL3d3dy5zZW1hbnRpY3dlYi5vcmcvbmFzcm8vb250b2xvZ2llcy8yMDIzLzMvdW50aXRsZWQtb250b2xvZ3ktMTAjYm95Ii8+CiAgICAKCgogICAgPCEtLSBodHRwOi8vd3d3LnNlbWFudGljd2ViLm9yZy9uYXNyby9vbnRvbG9naWVzLzIwMjMvMy91bnRpdGxlZC1vbnRvbG9neS0xMCNib3lfb3Jfc21hbGwgLS0+CgogICAgPG93bDpDbGFzcyByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuc2VtYW50aWN3ZWIub3JnL25hc3JvL29udG9sb2dpZXMvMjAyMy8zL3VudGl0bGVkLW9udG9sb2d5LTEwI2JveV9vcl9zbWFsbCI+CiAgICAgICAgPG93bDplcXVpdmFsZW50Q2xhc3M+CiAgICAgICAgICAgIDxvd2w6Q2xhc3M+CiAgICAgICAgICAgICAgICA8b3dsOnVuaW9uT2YgcmRmOnBhcnNlVHlwZT0iQ29sbGVjdGlvbiI+CiAgICAgICAgICAgICAgICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuc2VtYW50aWN3ZWIub3JnL25hc3JvL29udG9sb2dpZXMvMjAyMy8zL3VudGl0bGVkLW9udG9sb2d5LTEwI2JveSIvPgogICAgICAgICAgICAgICAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSJodHRwOi8vd3d3LnNlbWFudGljd2ViLm9yZy9uYXNyby9vbnRvbG9naWVzLzIwMjMvMy91bnRpdGxlZC1vbnRvbG9neS0xMCNzbWFsbCIvPgogICAgICAgICAgICAgICAgPC9vd2w6dW5pb25PZj4KICAgICAgICAgICAgPC9vd2w6Q2xhc3M+CiAgICAgICAgPC9vd2w6ZXF1aXZhbGVudENsYXNzPgogICAgPC9vd2w6Q2xhc3M+CiAgICAKCgogICAgPCEtLSBodHRwOi8vd3d3LnNlbWFudGljd2ViLm9yZy9uYXNyby9vbnRvbG9naWVzLzIwMjMvMy91bnRpdGxlZC1vbnRvbG9neS0xMCNzbWFsbCAtLT4KCiAgICA8b3dsOkNsYXNzIHJkZjphYm91dD0iaHR0cDovL3d3dy5zZW1hbnRpY3dlYi5vcmcvbmFzcm8vb250b2xvZ2llcy8yMDIzLzMvdW50aXRsZWQtb250b2xvZ3ktMTAjc21hbGwiLz4KPC9yZGY6UkRGPgoKCgo8IS0tIEdlbmVyYXRlZCBieSB0aGUgT1dMIEFQSSAodmVyc2lvbiA0LjUuMjUuMjAyMy0wMi0xNVQxOToxNTo0OVopIGh0dHBzOi8vZ2l0aHViLmNvbS9vd2xjcy9vd2xhcGkgLS0+Cgo="}
  ```       
 ----------------
+
+__SWRL Rules's APIS__
+| Method Type | API  | Description |
+| -------- | -------- | -------- |
+| _POST_ | /SWRL/insertRuleReclassification | SWRL Rule for classification : Student(x) -> Person (x) |
+
+----------------
+
+### Example Of Use For SWRL Part
+
+You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
+
+You choose POST Request , you pass this URL http://localhost:8080/SWRL/insertRuleReclassification
+
+You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
+in the JSON Body 
+
+Lets take an example : 
+
+Person(x) -> Student (x)
+
+if x = Amine and Amine is a person then Amine is a student 
+and that's what we infer.
+
+You pick Body -> Raw -> JSON 
+
+```JSON
+    {
+        "ontologyContentEncoded64" : "PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIgogICAgICAgICB4bWxuczpvd2w9Imh0dHA6Ly93d3cudzMub3JnLzIwMDIvMDcvb3dsIyIKICAgICAgICAgeG1sbnM6cmRmcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wMS9yZGYtc2NoZW1hIyIKICAgICAgICAgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSMiCiAgICAgICAgIHhtbG5zPSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5IyIKICAgICAgICAgeG1sOmJhc2U9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kiPgoKICAgIDxvd2w6T250b2xvZ3kgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5Ii8+CgogICAgPG93bDpDbGFzcyByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjUGVyc29uIi8+CiAgICAKICAgIDxvd2w6Q2xhc3MgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5I1N0dWRlbnQiLz4KCiAgICA8b3dsOk5hbWVkSW5kaXZpZHVhbCByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjQW1pbmUiPgogICAgICAgIDxyZGY6dHlwZSByZGY6cmVzb3VyY2U9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjU3R1ZGVudCIvPgogICAgPC9vd2w6TmFtZWRJbmRpdmlkdWFsPgo8L3JkZjpSREY+Cg==" ,
+            "premise":["Person"],
+            "conclusion":["Student"]
+            
+
+        }
+```
+
+
+----------------
 ### Useful encoders to encode the TEXT
 
 [ENOCDER-64](https://codebeautify.org/xml-to-base64-converter#)

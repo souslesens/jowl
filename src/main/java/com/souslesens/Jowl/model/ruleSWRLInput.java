@@ -4,15 +4,15 @@ public class ruleSWRLInput {
 	private String filePath;
 	private String url;
 	private String ontologyContentEncoded64;
-	private String[] body;
-	private String[] head;
+	private String[] premise;
+	private String[] conclusion;
 	
-	public ruleSWRLInput(String filePath , String url, String ontologyContentEncoded64 ,String[] body,String[] head) {
+	public ruleSWRLInput(String filePath , String url, String ontologyContentEncoded64 ,String[] premise,String[] conclusion) {
 		this.filePath = filePath;
 		this.url = url;
 		this.ontologyContentEncoded64 = ontologyContentEncoded64;
-        this.body = body;
-        this.head = head;
+        this.premise = premise;
+        this.conclusion = conclusion;
         }
 	public String getFilePath() {
 		return filePath;
@@ -27,10 +27,10 @@ public class ruleSWRLInput {
 	}
 
 	public String[] getHead() {
-		return head;
+		return conclusion;
 	}
 	
 	public String[] getBody() {
-		return body;
+		return premise;
 	}
 }

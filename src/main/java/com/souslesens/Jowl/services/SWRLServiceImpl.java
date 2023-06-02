@@ -66,7 +66,6 @@ public class SWRLServiceImpl implements SWRLService {
 				// RULE : N { BODY } (x) -> N { Head } (x)
 
 				OWLDataFactory factory = manager.getOWLDataFactory();
-				// Create SWRL Variable for classification
 				SWRLVariable var = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
 				Set<SWRLAtom> bodyList = new HashSet<>();
 				for (String bodies : reqBodies) {
@@ -85,14 +84,9 @@ public class SWRLServiceImpl implements SWRLService {
 				
 				SWRLRule rule = factory.getSWRLRule(bodyList, headList);
 				AddAxiom addAxiom = new AddAxiom(ontology, rule);
-				// Add SWRL rule to ontology
 				manager.applyChange(addAxiom);
-
-				// Creation reasoner 
 				PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 				OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
-				//
-				// Computing inferences
 				reasoner.precomputeInferences(InferenceType.values());
 
 		        Map<String, Set<String>> instances = new HashMap<>();
@@ -149,7 +143,6 @@ public class SWRLServiceImpl implements SWRLService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// BLOC //
 		
 		// RULE : N { BODY } (x) -> N { Head } (x)
 
@@ -173,7 +166,6 @@ public class SWRLServiceImpl implements SWRLService {
 		
 		SWRLRule rule = factory.getSWRLRule(bodyList, headList);
 		AddAxiom addAxiom = new AddAxiom(ontology, rule);
-		// Add SWRL rule to ontology
 		manager.applyChange(addAxiom);
 
 		// Creation reasoner 
@@ -185,7 +177,7 @@ public class SWRLServiceImpl implements SWRLService {
 
         Map<String, Set<String>> instances = new HashMap<>();
 		for (OWLClass cls : classes) {
-			NodeSet<OWLNamedIndividual> inferredIndv = reasoner.getInstances(cls, false); // false = only inferred
+			NodeSet<OWLNamedIndividual> inferredIndv = reasoner.getInstances(cls, false);
             for (Node<OWLNamedIndividual> individualNode : inferredIndv) {
                 for (OWLNamedIndividual individual : individualNode) {
                 	System.out.println(individual.getIRI().getFragment() + " is an instance of " + cls.getIRI().getFragment());
@@ -238,7 +230,6 @@ public class SWRLServiceImpl implements SWRLService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// BLOC //
 
 		// RULE : N { BODY } (x) || N { BODY } (x,y) -> N { Head } (x) || N { BODY } (x,y)
 
@@ -396,13 +387,10 @@ public class SWRLServiceImpl implements SWRLService {
 		} else {
 			return null;
 		}
-		// BLOC //
 
 		// RULE : N { BODY } (x) || N { BODY } (x,y) -> N { Head } (x) || N { BODY } (x,y)
 
 		OWLDataFactory factory = manager.getOWLDataFactory();
-		// Create SWRL Variable for classification
-		
 		Set<SWRLAtom> bodyList = new HashSet<>();
 	
     	for (SWRLTypeEntityVariable swrlVariable1 : reqBodies) {
@@ -457,7 +445,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    		objectproperties.add(ObjectPropertyX);
     	    		 String[] variables = entity.getVar();
     	    	        if (variables.length % 2 != 0) {
-    	    	            throw new IllegalArgumentException("The variable list must contain an even number of elements");
+    	    	            throw new IllegalArgumentException("Vars mod 2 should be different to 0");
     	    	        }
     	    	        for (int v = 0 ; v<variables.length; v+=2) {
     	    	            String variable1 = variables[v];
@@ -474,16 +462,10 @@ public class SWRLServiceImpl implements SWRLService {
 		
 		SWRLRule rule = factory.getSWRLRule(bodyList, headList);
 		AddAxiom addAxiom = new AddAxiom(ontology, rule);
-		// Add SWRL rule to ontology
 		manager.applyChange(addAxiom);
-
-		// Creation reasoner 
 		PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 		OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
-		//
-		// Computing inferences
 		reasoner.precomputeInferences(InferenceType.values());
-		// Print out inferred instances
 		for (OWLClass owlClass : classes) {
 			
 		    Set<OWLIndividual> assertedInstances = new HashSet<>();
@@ -513,7 +495,7 @@ public class SWRLServiceImpl implements SWRLService {
 		}
         Map<String, Set<String>> instances = new HashMap<>();
 		for (OWLClass cls : classes) {
-			NodeSet<OWLNamedIndividual> inferredIndv = reasoner.getInstances(cls, false); // false = only inferred
+			NodeSet<OWLNamedIndividual> inferredIndv = reasoner.getInstances(cls, false);
             for (Node<OWLNamedIndividual> individualNode : inferredIndv) {
                 for (OWLNamedIndividual individual : individualNode) {
                 	instances.computeIfAbsent(individual.getIRI().getFragment(), k -> new HashSet<>()).add(cls.getIRI().getFragment());
