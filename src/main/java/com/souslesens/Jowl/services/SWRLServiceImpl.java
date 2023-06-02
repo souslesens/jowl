@@ -8,8 +8,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -117,7 +115,6 @@ public class SWRLServiceImpl implements SWRLService {
 			}
 		
 	}
-	// TEST
 
 	@Override
 	public String SWRLruleReclassificationB64(String ontologyContentDecoded64 ,  String[] reqBodies , String[] reqHead)
@@ -249,22 +246,11 @@ public class SWRLServiceImpl implements SWRLService {
 		// Create SWRL Variable for classification
 		
 		Set<SWRLAtom> body = new HashSet<>();
-
-    	for (SWRLVariable1 swrlVariable1 : reqHead) {
-	    System.out.println("Type: " + swrlVariable1.getType());
-	    for (SWRLVariables entity : swrlVariable1.getEntities()) {
-	        System.out.println("Name: " + entity.getName());
-	        System.out.println("Var: " + Arrays.toString(entity.getVar()));
-	    }
-	    System.out.println();
-	}
-		
-		
+	
     	for (SWRLVariable1 swrlVariable1 : reqBodies) {
     	    if( swrlVariable1.getType().equalsIgnoreCase("class")){
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
-//    	    		SWRLClassAtom body2 = factory.getSWRLClassAtom(classX, varX);
     	    		 String[] variables = entity.getVar();
     	    	        for (String table : variables ) {
     	    	        		SWRLVariable varX = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));
@@ -274,9 +260,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    	}
     	    }else if (swrlVariable1.getType().equalsIgnoreCase("objectProperty")) {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
-//    	    		System.out.println(entity);
     	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
-//    	    		SWRLClassAtom body2 = factory.getSWRLClassAtom(classX, varX);
    	    		 String[] variables = entity.getVar();
 	    	        if (variables.length % 2 != 0) {
 	    	            throw new IllegalArgumentException("The variable list must contains Variable");
@@ -297,14 +281,6 @@ public class SWRLServiceImpl implements SWRLService {
 		Set<OWLClass> classes = new HashSet<>();
 		Set<OWLObjectProperty> objectproperties = new HashSet<>();
 		Set<SWRLAtom> head = new HashSet<>();
-		// WORKING 1 ??
-//		OWLClass classReqHead = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+reqHead));
-		//??
-		
-		//working2 
-		OWLObjectProperty objectPropertyReqHead = factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() +"#"+reqHead));
-		//
-		// ##########################
     	for (SWRLVariable1 swrlVariable1 : reqHead) {
     	    if( swrlVariable1.getType().equalsIgnoreCase("class")){
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
@@ -320,10 +296,8 @@ public class SWRLServiceImpl implements SWRLService {
     	    	}
     	    }else if (swrlVariable1.getType().equalsIgnoreCase("objectProperty")) {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
-//    	    		System.out.println(entity);
     	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		objectproperties.add(ObjectPropertyX);
-    	    		//    	    		SWRLClassAtom body2 = factory.getSWRLClassAtom(classX, varX);
     	    		 String[] variables = entity.getVar();
     	    	        if (variables.length % 2 != 0) {
     	    	            throw new IllegalArgumentException("The variable list must contain an even number of elements");
@@ -353,28 +327,6 @@ public class SWRLServiceImpl implements SWRLService {
 		// Computing inferences
 		reasoner.precomputeInferences(InferenceType.values());
 		// Print out inferred instances
-		// LAST 
-        // Loop through each individual in the ontology
-		for (OWLObjectProperty objectproperty : objectproperties){
-        for (OWLNamedIndividual individual : ontology.getIndividualsInSignature()) {
-            // Get the inferred cooperatedWith values
-            NodeSet<OWLNamedIndividual> cooperatedWithValues = reasoner.getObjectPropertyValues(individual, objectproperty);
-
-            // If there are any values, print them
-            if (!cooperatedWithValues.getFlattened().isEmpty()) {
-                System.out.println(individual + " HasBrother:");
-
-                for (OWLNamedIndividual value : cooperatedWithValues.getFlattened()) {
-                    System.out.println("\t" + value);
-                }
-            }
-        }
-		}
-		
-		// LAST
-		
-		
-		//222222
 		for (OWLClass owlClass : classes) {
 			
 		    Set<OWLIndividual> assertedInstances = new HashSet<>();
