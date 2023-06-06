@@ -196,11 +196,11 @@ and that's what we infer.
 You pick Body -> Raw -> JSON 
 
 ```JSON
-    {
-        "ontologyContentEncoded64" : "PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIgogICAgICAgICB4bWxuczpvd2w9Imh0dHA6Ly93d3cudzMub3JnLzIwMDIvMDcvb3dsIyIKICAgICAgICAgeG1sbnM6cmRmcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wMS9yZGYtc2NoZW1hIyIKICAgICAgICAgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSMiCiAgICAgICAgIHhtbG5zPSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5IyIKICAgICAgICAgeG1sOmJhc2U9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kiPgoKICAgIDxvd2w6T250b2xvZ3kgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5Ii8+CgogICAgPG93bDpDbGFzcyByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjUGVyc29uIi8+CiAgICAKICAgIDxvd2w6Q2xhc3MgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5I0h1bWFuIi8+CiAgICAKICAgIDxvd2w6Q2xhc3MgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5I1N0dWRlbnQiLz4KCiAgICA8b3dsOkNsYXNzIHJkZjphYm91dD0iaHR0cDovL3d3dy5leGFtcGxlLmNvbS9vbnRvbG9neSNNYW4iLz4KCiAgICA8IS0tIE9iamVjdCBwcm9wZXJ0aWVzIC0tPgogICAgPG93bDpPYmplY3RQcm9wZXJ0eSByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjaGFzU2libGluZyIvPgogICAgPG93bDpPYmplY3RQcm9wZXJ0eSByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjaGFzQnJvdGhlciIvPgogICAgPCEtLSBJbmRpdmlkdWFscyAtLT4KICAgIDxvd2w6TmFtZWRJbmRpdmlkdWFsIHJkZjphYm91dD0iaHR0cDovL3d3dy5leGFtcGxlLmNvbS9vbnRvbG9neSNBbWluZSI+CiAgICAgICAgPHJkZjp0eXBlIHJkZjpyZXNvdXJjZT0iaHR0cDovL3d3dy5leGFtcGxlLmNvbS9vbnRvbG9neSNQZXJzb24iLz4KICAgIDwvb3dsOk5hbWVkSW5kaXZpZHVhbD4KCiAgICA8b3dsOk5hbWVkSW5kaXZpZHVhbCByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjQW5hcyI+CiAgICAgICAgPHJkZjp0eXBlIHJkZjpyZXNvdXJjZT0iaHR0cDovL3d3dy5leGFtcGxlLmNvbS9vbnRvbG9neSNNYW4iLz4KICAgIDwvb3dsOk5hbWVkSW5kaXZpZHVhbD4KCiAgICA8b3dsOk5hbWVkSW5kaXZpZHVhbCByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjQW1pbmUiPgogICAgICAgIDxyZGY6dHlwZSByZGY6cmVzb3VyY2U9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjUGVyc29uIi8+CiAgICAgICAgPGhhc1NpYmxpbmcgcmRmOnJlc291cmNlPSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5I0FuYXMiLz4KICAgIDwvb3dsOk5hbWVkSW5kaXZpZHVhbD4KICAgIAo8L3JkZjpSREY+Cg==" ,
+{
+"ontologyContentEncoded64" : "PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIgogICAgICAgICB4bWxuczpvd2w9Imh0dHA6Ly93d3cudzMub3JnLzIwMDIvMDcvb3dsIyIKICAgICAgICAgeG1sbnM6cmRmcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wMS9yZGYtc2NoZW1hIyIKICAgICAgICAgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSMiCiAgICAgICAgIHhtbG5zPSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5IyIKICAgICAgICAgeG1sOmJhc2U9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kiPgoKICAgIDxvd2w6T250b2xvZ3kgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5Ii8+CgogICAgPG93bDpDbGFzcyByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjUGVyc29uIi8+CiAgICAKICAgIDxvd2w6Q2xhc3MgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5I0h1bWFuIi8+CiAgICAKICAgIDxvd2w6Q2xhc3MgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5I1N0dWRlbnQiLz4KCiAgICA8b3dsOkNsYXNzIHJkZjphYm91dD0iaHR0cDovL3d3dy5leGFtcGxlLmNvbS9vbnRvbG9neSNNYW4iLz4KCiAgICA8IS0tIE9iamVjdCBwcm9wZXJ0aWVzIC0tPgogICAgPG93bDpPYmplY3RQcm9wZXJ0eSByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjaGFzU2libGluZyIvPgogICAgPG93bDpPYmplY3RQcm9wZXJ0eSByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjaGFzQnJvdGhlciIvPgogICAgPCEtLSBJbmRpdmlkdWFscyAtLT4KICAgIDxvd2w6TmFtZWRJbmRpdmlkdWFsIHJkZjphYm91dD0iaHR0cDovL3d3dy5leGFtcGxlLmNvbS9vbnRvbG9neSNBbWluZSI+CiAgICAgICAgPHJkZjp0eXBlIHJkZjpyZXNvdXJjZT0iaHR0cDovL3d3dy5leGFtcGxlLmNvbS9vbnRvbG9neSNQZXJzb24iLz4KICAgIDwvb3dsOk5hbWVkSW5kaXZpZHVhbD4KCiAgICA8b3dsOk5hbWVkSW5kaXZpZHVhbCByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjQW5hcyI+CiAgICAgICAgPHJkZjp0eXBlIHJkZjpyZXNvdXJjZT0iaHR0cDovL3d3dy5leGFtcGxlLmNvbS9vbnRvbG9neSNNYW4iLz4KICAgIDwvb3dsOk5hbWVkSW5kaXZpZHVhbD4KCiAgICA8b3dsOk5hbWVkSW5kaXZpZHVhbCByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjQW1pbmUiPgogICAgICAgIDxyZGY6dHlwZSByZGY6cmVzb3VyY2U9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjUGVyc29uIi8+CiAgICAgICAgPGhhc1NpYmxpbmcgcmRmOnJlc291cmNlPSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5I0FuYXMiLz4KICAgIDwvb3dsOk5hbWVkSW5kaXZpZHVhbD4KICAgIAo8L3JkZjpSREY+Cg==" ,
 "premise":[
     {
-        "type": "class",
+        "type": "owl:Class",
         "entities": [
             {
                 "name": "Person",
@@ -213,7 +213,7 @@ You pick Body -> Raw -> JSON
         ]
     },
     {
-        "type": "objectProperty",
+        "type": "owl:ObjectProperty",
         "entities": [
             {
                 "name": "hasSibling",
@@ -224,7 +224,7 @@ You pick Body -> Raw -> JSON
 ],
 "conclusion":[
     {
-        "type": "objectProperty",
+        "type": "owl:ObjectProperty",
         "entities": [
             {
                 "name": "hasBrother",
@@ -234,6 +234,7 @@ You pick Body -> Raw -> JSON
     }
 ]
             
+
 }
 ```
 

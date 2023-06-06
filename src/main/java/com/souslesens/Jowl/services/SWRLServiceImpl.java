@@ -239,7 +239,7 @@ public class SWRLServiceImpl implements SWRLService {
 		Set<SWRLAtom> bodyList = new HashSet<>();
 	
     	for (SWRLTypeEntityVariable swrlVariable1 : reqBodies) {
-    	    if( swrlVariable1.getType().equalsIgnoreCase("class")){
+    	    if( swrlVariable1.getType().equalsIgnoreCase("owl:Class")){
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		 String[] variables = entity.getVar();
@@ -249,7 +249,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    	        		bodyList.add(bodyElement);
     	    	        }
     	    	}
-    	    }else if (swrlVariable1.getType().equalsIgnoreCase("objectProperty")) {
+    	    }else if (swrlVariable1.getType().equalsIgnoreCase("owl:ObjectProperty")) {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
    	    		 String[] variables = entity.getVar();
@@ -273,7 +273,7 @@ public class SWRLServiceImpl implements SWRLService {
 		Set<OWLObjectProperty> objectproperties = new HashSet<>();
 		Set<SWRLAtom> headList = new HashSet<>();
     	for (SWRLTypeEntityVariable swrlVariable1 : reqHead) {
-    	    if( swrlVariable1.getType().equalsIgnoreCase("class")){
+    	    if( swrlVariable1.getType().equalsIgnoreCase("owl:Class")){
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		classes.add(classX);
@@ -284,7 +284,7 @@ public class SWRLServiceImpl implements SWRLService {
 	    	        		headList.add(headElement);
 	    	        }
     	    	}
-    	    }else if (swrlVariable1.getType().equalsIgnoreCase("objectProperty")) {
+    	    }else if (swrlVariable1.getType().equalsIgnoreCase("owl:ObjectProperty")) {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		objectproperties.add(ObjectPropertyX);
@@ -394,7 +394,7 @@ public class SWRLServiceImpl implements SWRLService {
 		Set<SWRLAtom> bodyList = new HashSet<>();
 	
     	for (SWRLTypeEntityVariable swrlVariable1 : reqBodies) {
-    	    if( swrlVariable1.getType().equalsIgnoreCase("class")){
+    	    if( swrlVariable1.getType().equalsIgnoreCase("owl:Class")){
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		 String[] variables = entity.getVar();
@@ -404,7 +404,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    	        		bodyList.add(bodyElement);
     	    	        }
     	    	}
-    	    }else if (swrlVariable1.getType().equalsIgnoreCase("objectProperty")) {
+    	    }else if (swrlVariable1.getType().equalsIgnoreCase("owl:ObjectProperty")) {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
    	    		 String[] variables = entity.getVar();
@@ -428,7 +428,7 @@ public class SWRLServiceImpl implements SWRLService {
 		Set<OWLObjectProperty> objectproperties = new HashSet<>();
 		Set<SWRLAtom> headList = new HashSet<>();
     	for (SWRLTypeEntityVariable swrlVariable1 : reqHead) {
-    	    if( swrlVariable1.getType().equalsIgnoreCase("class")){
+    	    if( swrlVariable1.getType().equalsIgnoreCase("owl:Class")){
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		classes.add(classX);
@@ -439,7 +439,7 @@ public class SWRLServiceImpl implements SWRLService {
 	    	        		headList.add(headElement);
 	    	        }
     	    	}
-    	    }else if (swrlVariable1.getType().equalsIgnoreCase("objectProperty")) {
+    	    }else if (swrlVariable1.getType().equalsIgnoreCase("owl:ObjectProperty")) {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		objectproperties.add(ObjectPropertyX);
@@ -503,8 +503,8 @@ public class SWRLServiceImpl implements SWRLService {
             }
 		}
 		Map<String, Map<String, Set<String>>> finalMap = new HashMap<>();
-		finalMap.put("class", instances);
-		finalMap.put("objectProperty", propertyValues);
+		finalMap.put("owl:Class", instances);
+		finalMap.put("owl:ObjectProperty", propertyValues);
 		 Gson gson = new Gson();
          String json = gson.toJson(finalMap);
 		 return json;
