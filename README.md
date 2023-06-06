@@ -188,7 +188,8 @@ in the JSON Body
 
 Lets take an example : 
 
- Person(x) ^ hasSibling (x,y) ^ man (y) → hasBrother(x,y)
+Person(x) ^ hasSibling (x,y) ^ man (y) → hasBrother(x,y)
+
 x = Amine and y = Anas
 if Amine is a person also Amine has a sibling Anas and Anas is a man then Amine has brother called Anas 
 and that's what we infer.
