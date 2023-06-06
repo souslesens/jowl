@@ -143,11 +143,11 @@ You pick Body -> Raw -> JSON
 __SWRL Rules's APIS__
 | Method Type | API  | Description |
 | -------- | -------- | -------- |
-| _POST_ | /SWRL/insertRuleReclassification | SWRL Rule for classification : Student(x) →  Person (x) |
+| _POST_ | /SWRL/insertRuleReclassification | SWRL Rule for classification : Student(x) ->  Person (x) |
 | _POST_ | /SWRL/insertRulePropertyVA | SWRL Rule Complex Input :
- Person(x) ^ hasSibling (x,y) ^ man (y) → hasBrother(x,y)
+ Person(x) ^ hasSibling (x,y) ^ man (y) -> hasBrother(x,y)
 |
-Comming soon the rest of APIS
+
 
 ----------------
 
