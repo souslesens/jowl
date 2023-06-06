@@ -143,13 +143,15 @@ You pick Body -> Raw -> JSON
 __SWRL Rules's APIS__
 | Method Type | API  | Description |
 | -------- | -------- | -------- |
-| _POST_ | /SWRL/insertRuleReclassification | SWRL Rule for classification : Student(x) -> Person (x) |
-
+| _POST_ | /SWRL/insertRuleReclassification | SWRL Rule for classification : Student(x) →  Person (x) |
+| _POST_ | /SWRL/insertRulePropertyVA | SWRL Rule Complex Input :
+ Person(x) ^ hasSibling (x,y) ^ man (y) → hasBrother(x,y)
+|
 Comming soon the rest of APIS
 
 ----------------
 
-### Example Of Use For SWRL Part
+### Example Of Use For SWRL Part [ api 1]
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
@@ -160,9 +162,9 @@ in the JSON Body
 
 Lets take an example : 
 
-Person(x) -> Student (x)
+Student(x) -> Person(x)
 
-if x = Amine and Amine is a person then Amine is a student 
+if x = Amine and Amine is a student then Amine is a person 
 and that's what we infer.
 
 You pick Body -> Raw -> JSON 
@@ -170,11 +172,71 @@ You pick Body -> Raw -> JSON
 ```JSON
     {
         "ontologyContentEncoded64" : "PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIgogICAgICAgICB4bWxuczpvd2w9Imh0dHA6Ly93d3cudzMub3JnLzIwMDIvMDcvb3dsIyIKICAgICAgICAgeG1sbnM6cmRmcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wMS9yZGYtc2NoZW1hIyIKICAgICAgICAgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSMiCiAgICAgICAgIHhtbG5zPSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5IyIKICAgICAgICAgeG1sOmJhc2U9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kiPgoKICAgIDxvd2w6T250b2xvZ3kgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5Ii8+CgogICAgPG93bDpDbGFzcyByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjUGVyc29uIi8+CiAgICAKICAgIDxvd2w6Q2xhc3MgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5I1N0dWRlbnQiLz4KCiAgICA8b3dsOk5hbWVkSW5kaXZpZHVhbCByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjQW1pbmUiPgogICAgICAgIDxyZGY6dHlwZSByZGY6cmVzb3VyY2U9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjU3R1ZGVudCIvPgogICAgPC9vd2w6TmFtZWRJbmRpdmlkdWFsPgo8L3JkZjpSREY+Cg==" ,
-            "premise":["Person"],
-            "conclusion":["Student"]
-            
-
+            "premise":["Student"],
+            "conclusion":["Person"]
+        
         }
+```
+
+----------------
+### Example Of Use For SWRL Part [ api 2]
+
+You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
+
+You choose POST Request , you pass this URL http://localhost:8080/SWRL/insertRuleReclassification
+
+You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
+in the JSON Body 
+
+Lets take an example : 
+
+ Person(x) ^ hasSibling (x,y) ^ man (y) → hasBrother(x,y)
+x = Amine and y = Anas
+if Amine is a person also Amine has a sibling Anas and Anas is a man then Amine has brother called Anas 
+and that's what we infer.
+
+You pick Body -> Raw -> JSON 
+
+```JSON
+    {
+        "ontologyContentEncoded64" : "PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIgogICAgICAgICB4bWxuczpvd2w9Imh0dHA6Ly93d3cudzMub3JnLzIwMDIvMDcvb3dsIyIKICAgICAgICAgeG1sbnM6cmRmcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wMS9yZGYtc2NoZW1hIyIKICAgICAgICAgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSMiCiAgICAgICAgIHhtbG5zPSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5IyIKICAgICAgICAgeG1sOmJhc2U9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kiPgoKICAgIDxvd2w6T250b2xvZ3kgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5Ii8+CgogICAgPG93bDpDbGFzcyByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjUGVyc29uIi8+CiAgICAKICAgIDxvd2w6Q2xhc3MgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5I0h1bWFuIi8+CiAgICAKICAgIDxvd2w6Q2xhc3MgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5I1N0dWRlbnQiLz4KCiAgICA8b3dsOkNsYXNzIHJkZjphYm91dD0iaHR0cDovL3d3dy5leGFtcGxlLmNvbS9vbnRvbG9neSNNYW4iLz4KCiAgICA8IS0tIE9iamVjdCBwcm9wZXJ0aWVzIC0tPgogICAgPG93bDpPYmplY3RQcm9wZXJ0eSByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjaGFzU2libGluZyIvPgogICAgPG93bDpPYmplY3RQcm9wZXJ0eSByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjaGFzQnJvdGhlciIvPgogICAgPCEtLSBJbmRpdmlkdWFscyAtLT4KICAgIDxvd2w6TmFtZWRJbmRpdmlkdWFsIHJkZjphYm91dD0iaHR0cDovL3d3dy5leGFtcGxlLmNvbS9vbnRvbG9neSNBbWluZSI+CiAgICAgICAgPHJkZjp0eXBlIHJkZjpyZXNvdXJjZT0iaHR0cDovL3d3dy5leGFtcGxlLmNvbS9vbnRvbG9neSNQZXJzb24iLz4KICAgIDwvb3dsOk5hbWVkSW5kaXZpZHVhbD4KCiAgICA8b3dsOk5hbWVkSW5kaXZpZHVhbCByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjQW5hcyI+CiAgICAgICAgPHJkZjp0eXBlIHJkZjpyZXNvdXJjZT0iaHR0cDovL3d3dy5leGFtcGxlLmNvbS9vbnRvbG9neSNNYW4iLz4KICAgIDwvb3dsOk5hbWVkSW5kaXZpZHVhbD4KCiAgICA8b3dsOk5hbWVkSW5kaXZpZHVhbCByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjQW1pbmUiPgogICAgICAgIDxyZGY6dHlwZSByZGY6cmVzb3VyY2U9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjUGVyc29uIi8+CiAgICAgICAgPGhhc1NpYmxpbmcgcmRmOnJlc291cmNlPSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5I0FuYXMiLz4KICAgIDwvb3dsOk5hbWVkSW5kaXZpZHVhbD4KICAgIAo8L3JkZjpSREY+Cg==" ,
+"premise":[
+    {
+        "type": "class",
+        "entities": [
+            {
+                "name": "Person",
+                "var": ["A"]
+            },
+            {
+                "name": "Man",
+                "var": ["Y"]
+            }
+        ]
+    },
+    {
+        "type": "objectProperty",
+        "entities": [
+            {
+                "name": "hasSibling",
+                "var": ["A", "Y"]
+            }
+        ]
+    }
+],
+"conclusion":[
+    {
+        "type": "objectProperty",
+        "entities": [
+            {
+                "name": "hasBrother",
+                "var": ["A", "Y"]
+            }
+        ]
+    }
+]
+            
+}
 ```
 
 ----------------
