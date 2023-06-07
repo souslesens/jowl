@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLIndividual;
+import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -28,8 +30,11 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.SWRLAtom;
+import org.semanticweb.owlapi.model.SWRLBuiltInAtom;
 import org.semanticweb.owlapi.model.SWRLClassAtom;
+import org.semanticweb.owlapi.model.SWRLDArgument;
 import org.semanticweb.owlapi.model.SWRLDataPropertyAtom;
+import org.semanticweb.owlapi.model.SWRLLiteralArgument;
 import org.semanticweb.owlapi.model.SWRLObjectPropertyAtom;
 import org.semanticweb.owlapi.model.SWRLRule;
 import org.semanticweb.owlapi.model.SWRLVariable;
@@ -37,6 +42,7 @@ import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.vocab.SWRLBuiltInsVocabulary;
 import org.springframework.stereotype.Service;
 import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
 import com.google.gson.Gson;
@@ -457,6 +463,48 @@ public class SWRLServiceImpl implements SWRLService {
 	    	            SWRLDataPropertyAtom  bodyElement = factory.getSWRLDataPropertyAtom(dataPropertyVar, swrlVar1, swrlVar2);
 	    	            System.out.println(bodyElement);
 	    	            bodyList.add(bodyElement);
+	    	        }
+    	    	}
+    	    }else if (swrlVariable1.getType().equalsIgnoreCase("swrlb")) {
+    	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
+    	    		
+   	    		 String[] variables = entity.getVar();
+   	    		 String[] literal = entity.getLiteral();
+   	    		 
+	    	        if (variables.length != 1) {
+	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
+	    	        }
+	    	        if (literal.length != 1) {
+	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
+	    	        }
+	    	        for (String table : variables ) {
+	    	        	System.out.println("gregerg"+table);
+    	        		SWRLVariable swrlVar = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));   	        		
+	    	        	for (String Lit : literal) {
+	    	        		System.out.println("gregerg"+Lit);
+	    	        		OWLLiteral LitVar;
+	    	        		if(Lit.matches("\\d+")) {
+	    	        			int covertedValue = Integer.parseInt(Lit);
+	    	        			System.out.println(covertedValue);
+	    	        			LitVar = factory.getOWLLiteral(covertedValue);}
+	    	        			else if (Lit.matches("^\\d*\\.?\\d+$")){
+	    	        				float covertedValue = Float.parseFloat(Lit);
+	    	        				System.out.println(covertedValue);
+		    	        			LitVar = factory.getOWLLiteral(covertedValue);
+	    	        			}
+	    	        			
+	    	        			else {
+	    	        				LitVar = factory.getOWLLiteral(Lit);
+	    	        		}
+	    	        		
+	    	        		SWRLLiteralArgument LitVarArg = factory.getSWRLLiteralArgument(LitVar);
+	    	        		List<SWRLDArgument> arguments = Arrays.asList(swrlVar, LitVarArg);
+	    	        		SWRLBuiltInAtom bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.GREATER_THAN_OR_EQUAL.getIRI(), arguments);
+	    	        		 System.out.println(bodyElement);
+	    	        		bodyList.add(bodyElement);
+	    	        	}
+	    	        	
+    	        		
 	    	        }
     	    	}
     	    }
