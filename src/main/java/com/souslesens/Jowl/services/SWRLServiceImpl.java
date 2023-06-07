@@ -19,6 +19,7 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLDataFactory;
+import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
@@ -28,6 +29,7 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.SWRLAtom;
 import org.semanticweb.owlapi.model.SWRLClassAtom;
+import org.semanticweb.owlapi.model.SWRLDataPropertyAtom;
 import org.semanticweb.owlapi.model.SWRLObjectPropertyAtom;
 import org.semanticweb.owlapi.model.SWRLRule;
 import org.semanticweb.owlapi.model.SWRLVariable;
@@ -243,6 +245,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		 String[] variables = entity.getVar();
+    	    		 String[] literals = entity.getLiteral();
     	    	        for (String table : variables ) {
     	    	        		SWRLVariable swrlVar = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));
     	    	        		SWRLClassAtom bodyElement = factory.getSWRLClassAtom(classX, swrlVar);
@@ -253,7 +256,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
    	    		 String[] variables = entity.getVar();
-	    	        if (variables.length % 2 != 0) {
+	    	        if (variables.length != 2) {
 	    	            throw new IllegalArgumentException("The variable list must contains Variable");
 	    	        }
 	    	        for (int v = 0 ; v<variables.length; v+=2) {
@@ -262,6 +265,23 @@ public class SWRLServiceImpl implements SWRLService {
 	    	            SWRLVariable swrlVar1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable1));
 	    	            SWRLVariable swrlVar2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable2));
 	    	            SWRLObjectPropertyAtom bodyElement = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, swrlVar1, swrlVar2);
+	    	            bodyList.add(bodyElement);
+	    	        }
+    	    	}
+    	    }else if (swrlVariable1.getType().equalsIgnoreCase("owl:DataProperty")) {
+    	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
+    	    		OWLDataProperty dataPropertyVar = factory.getOWLDataProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
+   	    		 String[] variables = entity.getVar();
+	    	        if (variables.length != 2) {
+	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
+	    	        }
+	    	        for (int v = 0 ; v<variables.length; v+=2) {
+	    	            String variable1 = variables[v];
+	    	            String variable2 = variables[v + 1];    	            
+	    	            SWRLVariable swrlVar1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable1));
+	    	            SWRLVariable swrlVar2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable2));
+	    	            SWRLDataPropertyAtom  bodyElement = factory.getSWRLDataPropertyAtom(dataPropertyVar, swrlVar1, swrlVar2);
+	    	            System.out.println(bodyElement);
 	    	            bodyList.add(bodyElement);
 	    	        }
     	    	}
@@ -289,7 +309,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		objectproperties.add(ObjectPropertyX);
     	    		 String[] variables = entity.getVar();
-    	    	        if (variables.length % 2 != 0) {
+    	    	        if (variables.length != 2) {
     	    	            throw new IllegalArgumentException("The variable list must contain an even number of elements");
     	    	        }
     	    	        for (int v = 0 ; v<variables.length; v+=2) {
@@ -398,6 +418,8 @@ public class SWRLServiceImpl implements SWRLService {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		 String[] variables = entity.getVar();
+    	    		 String[] literals = entity.getLiteral();
+    	    		 System.out.print("3ezedine bouchnek"+literals);
     	    	        for (String table : variables ) {
     	    	        		SWRLVariable swrlVar = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));
     	    	        		SWRLClassAtom bodyElement = factory.getSWRLClassAtom(classX, swrlVar);
@@ -408,7 +430,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
    	    		 String[] variables = entity.getVar();
-	    	        if (variables.length % 2 != 0) {
+	    	        if (variables.length != 2) {
 	    	            throw new IllegalArgumentException("The variable list must contains Variable");
 	    	        }
 	    	        for (int v = 0 ; v<variables.length; v+=2) {
@@ -417,6 +439,23 @@ public class SWRLServiceImpl implements SWRLService {
 	    	            SWRLVariable swrlVar1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable1));
 	    	            SWRLVariable swrlVar2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable2));
 	    	            SWRLObjectPropertyAtom bodyElement = factory.getSWRLObjectPropertyAtom(ObjectPropertyX, swrlVar1, swrlVar2);
+	    	            bodyList.add(bodyElement);
+	    	        }
+    	    	}
+    	    }else if (swrlVariable1.getType().equalsIgnoreCase("owl:DataProperty")) {
+    	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
+    	    		OWLDataProperty dataPropertyVar = factory.getOWLDataProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
+   	    		 String[] variables = entity.getVar();
+	    	        if (variables.length != 2) {
+	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
+	    	        }
+	    	        for (int v = 0 ; v<variables.length; v+=2) {
+	    	            String variable1 = variables[v];
+	    	            String variable2 = variables[v + 1];    	            
+	    	            SWRLVariable swrlVar1 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable1));
+	    	            SWRLVariable swrlVar2 = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#" + variable2));
+	    	            SWRLDataPropertyAtom  bodyElement = factory.getSWRLDataPropertyAtom(dataPropertyVar, swrlVar1, swrlVar2);
+	    	            System.out.println(bodyElement);
 	    	            bodyList.add(bodyElement);
 	    	        }
     	    	}
@@ -444,7 +483,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		objectproperties.add(ObjectPropertyX);
     	    		 String[] variables = entity.getVar();
-    	    	        if (variables.length % 2 != 0) {
+    	    	        if (variables.length != 2) {
     	    	            throw new IllegalArgumentException("Vars mod 2 should be different to 0");
     	    	        }
     	    	        for (int v = 0 ; v<variables.length; v+=2) {
