@@ -242,8 +242,6 @@ public class SWRLServiceImpl implements SWRLService {
 		// RULE : N { BODY } (x) || N { BODY } (x,y) -> N { Head } (x) || N { BODY } (x,y)
 
 		OWLDataFactory factory = manager.getOWLDataFactory();
-		// Create SWRL Variable for classification
-		
 		Set<SWRLAtom> bodyList = new HashSet<>();
 	
     	for (SWRLTypeEntityVariable swrlVariable1 : reqBodies) {
@@ -252,6 +250,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		 String[] variables = entity.getVar();
     	    		 String[] literals = entity.getLiteral();
+    	    		 System.out.print("3ezedine bouchnek"+literals);
     	    	        for (String table : variables ) {
     	    	        		SWRLVariable swrlVar = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));
     	    	        		SWRLClassAtom bodyElement = factory.getSWRLClassAtom(classX, swrlVar);
@@ -289,6 +288,61 @@ public class SWRLServiceImpl implements SWRLService {
 	    	            SWRLDataPropertyAtom  bodyElement = factory.getSWRLDataPropertyAtom(dataPropertyVar, swrlVar1, swrlVar2);
 	    	            System.out.println(bodyElement);
 	    	            bodyList.add(bodyElement);
+	    	        }
+    	    	}
+    	    }else if (swrlVariable1.getType().equalsIgnoreCase("swrlb")) {
+    	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
+    	    		
+   	    		 String[] variables = entity.getVar();
+   	    		 String[] literal = entity.getLiteral();
+   	    		 
+	    	        if (variables.length != 1) {
+	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
+	    	        }
+	    	        if (literal.length != 1) {
+	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
+	    	        }
+	    	        for (String table : variables ) {
+	    	        	System.out.println("gregerg"+table);
+    	        		SWRLVariable swrlVar = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));   	        		
+	    	        	for (String Lit : literal) {
+	    	        		System.out.println("gregerg"+Lit);
+	    	        		OWLLiteral LitVar;
+	    	        		if(Lit.matches("\\d+")) {
+	    	        			int covertedValue = Integer.parseInt(Lit);
+	    	        			System.out.println(covertedValue);
+	    	        			LitVar = factory.getOWLLiteral(covertedValue);}
+	    	        			else if (Lit.matches("^\\d*\\.?\\d+$")){
+	    	        				float covertedValue = Float.parseFloat(Lit);
+	    	        				System.out.println(covertedValue);
+		    	        			LitVar = factory.getOWLLiteral(covertedValue);
+	    	        			}
+	    	        			
+	    	        			else {
+	    	        				LitVar = factory.getOWLLiteral(Lit);
+	    	        		}
+	    	        		
+	    	        		SWRLLiteralArgument LitVarArg = factory.getSWRLLiteralArgument(LitVar);
+	    	        		List<SWRLDArgument> arguments = Arrays.asList(swrlVar, LitVarArg);    	  
+	    	        		SWRLBuiltInAtom bodyElement = null;
+	    	        		if(entity.getName().equalsIgnoreCase("greaterThanOrEqual")) {
+	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.GREATER_THAN_OR_EQUAL.getIRI(), arguments);
+	    	        		}else if (entity.getName().equalsIgnoreCase("lessThanOrEqual")) {
+	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.LESS_THAN_OR_EQUAL.getIRI(), arguments);
+	    	        		}else if(entity.getName().equalsIgnoreCase("greaterThan")) {
+	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.GREATER_THAN.getIRI(), arguments);	
+	    	        		}else if(entity.getName().equalsIgnoreCase("lessThan")) {
+	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.LESS_THAN.getIRI(), arguments);		
+	    	        		}else if(entity.getName().equalsIgnoreCase("equal")) {
+	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.EQUAL.getIRI(), arguments);	
+	    	        		}else if(entity.getName().equalsIgnoreCase("notEqual")) {
+	    	        			bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.NOT_EQUAL.getIRI(), arguments);	
+	    	        		}
+	    	        		 System.out.println(bodyElement);
+	    	        		bodyList.add(bodyElement);
+	    	        	}
+	    	        	
+    	        		
 	    	        }
     	    	}
     	    }
