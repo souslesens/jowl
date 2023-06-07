@@ -498,8 +498,21 @@ public class SWRLServiceImpl implements SWRLService {
 	    	        		}
 	    	        		
 	    	        		SWRLLiteralArgument LitVarArg = factory.getSWRLLiteralArgument(LitVar);
-	    	        		List<SWRLDArgument> arguments = Arrays.asList(swrlVar, LitVarArg);
-	    	        		SWRLBuiltInAtom bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.GREATER_THAN_OR_EQUAL.getIRI(), arguments);
+	    	        		List<SWRLDArgument> arguments = Arrays.asList(swrlVar, LitVarArg);    	  
+	    	        		SWRLBuiltInAtom bodyElement = null;
+	    	        		if(entity.getName().equalsIgnoreCase("greaterThanOrEqual")) {
+	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.GREATER_THAN_OR_EQUAL.getIRI(), arguments);
+	    	        		}else if (entity.getName().equalsIgnoreCase("lessThanOrEqual")) {
+	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.LESS_THAN_OR_EQUAL.getIRI(), arguments);
+	    	        		}else if(entity.getName().equalsIgnoreCase("greaterThan")) {
+	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.GREATER_THAN.getIRI(), arguments);	
+	    	        		}else if(entity.getName().equalsIgnoreCase("lessThan")) {
+	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.LESS_THAN.getIRI(), arguments);		
+	    	        		}else if(entity.getName().equalsIgnoreCase("equal")) {
+	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.EQUAL.getIRI(), arguments);	
+	    	        		}else if(entity.getName().equalsIgnoreCase("notEqual")) {
+	    	        			bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.NOT_EQUAL.getIRI(), arguments);	
+	    	        		}
 	    	        		 System.out.println(bodyElement);
 	    	        		bodyList.add(bodyElement);
 	    	        	}
