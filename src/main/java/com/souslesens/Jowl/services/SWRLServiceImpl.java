@@ -137,8 +137,6 @@ public class SWRLServiceImpl implements SWRLService {
 			if (instream.available() > 0) {
 				OWLOntologyDocumentSource documentSource = new StreamDocumentSource(instream);
 				ontology = manager.loadOntologyFromOntologyDocument(documentSource);
-			} else {
-				return null;
 			}
 		// RULE : N { BODY } (x) -> N { Head } (x)
 
@@ -204,12 +202,9 @@ public class SWRLServiceImpl implements SWRLService {
 			config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
 			manager.setOntologyLoaderConfiguration(config);
 			OWLOntology ontology = null;
-			System.out.println(instream.toString().isEmpty() == false);
 			if (instream.available() > 0) {
 				OWLOntologyDocumentSource documentSource = new StreamDocumentSource(instream);
 				ontology = manager.loadOntologyFromOntologyDocument(documentSource);
-			} else {
-				return null;
 			}
 
 		// RULE : N { BODY } (x) || N { BODY } (x,y) -> N { Head } (x) || N { BODY } (x,y)
