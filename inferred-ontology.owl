@@ -1,0 +1,1726 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <Ontology/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC10_belongs_to -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC10_belongs_to">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC10_has_member -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC10_has_member">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC10_has_member"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC11_had_participant -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC11_had_participant">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC11_participated_in"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC11_participated_in -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC11_participated_in">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC12_assigned_attribute_to -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC12_assigned_attribute_to">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC12_was_attributed_by"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC12_was_attributed_by -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC12_was_attributed_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC13_is_carried_out_by -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC13_is_carried_out_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC13_performed"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC13_performed -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC13_performed">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC15_took_place_at -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC15_took_place_at">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC15_witnessed"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC15_witnessed -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC15_witnessed">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC16_forms_part_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC16_forms_part_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC16_is_composed_of"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC16_is_composed_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC16_is_composed_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC17_observed -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC17_observed">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC17_was_observed_during"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC17_was_observed_during -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC17_was_observed_during">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC19_has_dimension -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC19_has_dimension">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC19_is_dimension_of"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC19_is_dimension_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC19_is_dimension_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC1_is_identified_by -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC1_is_identified_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC21_has_unit -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC21_has_unit">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC21_is_unit_of"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC21_is_unit_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC21_is_unit_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC22_approximates -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC22_approximates">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC23_is_expressed_in_terms_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC23_is_expressed_in_terms_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC24_defines_place -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC24_defines_place">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC27_has_section -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC27_has_section">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC27_is_located_on_or_within"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC27_is_located_on_or_within -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC27_is_located_on_or_within">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC28_has_dimension -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC28_has_dimension">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC29_had_output -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC29_had_output">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC2_is_referred_by -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC2_is_referred_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC2_refers_to"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC2_refers_to -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC2_refers_to">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC30_had_input -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC30_had_input">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC31_used_software -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC31_used_software">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC32_happened_on_device -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC32_happened_on_device">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC33_captures -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC33_captures">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC34_observed_dimension -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC34_observed_dimension">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC35_describes -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC35_describes">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC36_is_fixed_on -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC36_is_fixed_on">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC37_measured -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC37_measured">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC37_was_measured_by"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC37_was_measured_by -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC37_was_measured_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC38_falls_within_or_overlaps -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC38_falls_within_or_overlaps">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC43_occupied -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC43_occupied">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC44_has_temporal_projection -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC44_has_temporal_projection">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC45_has_spatial_projection -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC45_has_spatial_projection">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC46_observed_value -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC46_observed_value">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC47_took_place_at -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC47_took_place_at">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC48_assigned_dimension -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC48_assigned_dimension">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC4_has_appellation -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC4_has_appellation">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC4_is_appellation_of"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC4_is_appellation_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC4_is_appellation_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC55_used_object_of_type -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC55_used_object_of_type">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC55_was_type_of_object_used_in"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC55_was_type_of_object_used_in -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC55_was_type_of_object_used_in">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC56_has_preferred_identifier -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC56_has_preferred_identifier">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC56_is_preferred_identifier_of"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC56_is_preferred_identifier_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC56_is_preferred_identifier_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC57_used_specific_technique -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC57_used_specific_technique">
+        <rdfs:subPropertyOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC55_used_object_of_type"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC57_was_used_by"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC57_was_used_by -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC57_was_used_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC55_was_type_of_object_used_in"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC58_has_right_on -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC58_has_right_on">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC58_right_held_by"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC58_right_held_by -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC58_right_held_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC59_applies_to -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC59_applies_to">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC59_is_subject_to"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC59_is_subject_to -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC59_is_subject_to">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC5_has_time_span -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC5_has_time_span">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC5_is_time_span_of"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC5_is_time_span_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC5_is_time_span_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC60_is_possessed_by -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC60_is_possessed_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC60_possesses"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC60_possesses -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC60_possesses">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC6_has_alternative_form -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC6_has_alternative_form">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC7_is_about -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC7_is_about">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC8_occured_in_the_presence_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC8_occured_in_the_presence_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC8_was_present_at"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC8_was_present_at -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC8_was_present_at">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC9_assigned -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC9_assigned">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC9_was_assigned_by"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC9_was_assigned_by -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC9_was_assigned_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT1_usually_identifies -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT1_usually_identifies">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT1_usually_is_identified_by"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT1_usually_is_identified_by -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT1_usually_is_identified_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT2_usually_consists_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT2_usually_consists_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT2_usually_is_component_of"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT2_usually_is_component_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT2_usually_is_component_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT3_usaually_is_component_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT3_usaually_is_component_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT3_usually_has_component"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT3_usually_has_component -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT3_usually_has_component">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT4_usually_appears_to -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT4_usually_appears_to">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT4_usually_use_to_appear"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT4_usually_use_to_appear -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT4_usually_use_to_appear">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT5_usually_is_predator_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT5_usually_is_predator_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT5_usually_is_prey_of"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT5_usually_is_prey_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT5_usually_is_prey_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT6_usually_is_about -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT6_usually_is_about">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT6_usually_is_subject_of"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT6_usually_is_subject_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT6_usually_is_subject_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT7_usually_is_carried_out_by -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT7_usually_is_carried_out_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT7_usually_performed"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT7_usually_performed -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT7_usually_performed">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT8_usually_belongs_to -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT8_usually_belongs_to">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT8_usually_has_member"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LT8_usually_has_member -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LT8_usually_has_member">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LX1_is_identified_by -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LX1_is_identified_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LX2_is_about_type -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LX2_is_about_type">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LX3_has_type -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LX3_has_type">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LX4_has_appellation -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LX4_has_appellation">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LX6_assigned_attribute_to_type -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LX6_assigned_attribute_to_type">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LX6_type_was_attributed_by"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LX6_type_was_attributed_by -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LX6_type_was_attributed_by">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LX7_observed_propery -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LX7_observed_propery">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LX7_was_observed_in"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LX7_was_observed_in -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LX7_was_observed_in">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LX8_has_language -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LX8_has_language">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <inverseOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/LX8_is_language_of"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LX8_is_language_of -->
+
+    <ObjectProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LX8_is_language_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
+
+    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#topObjectProperty">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ReflexiveProperty"/>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/LC20_has_value -->
+
+    <DatatypeProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/LC20_has_value">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/O3_has_note -->
+
+    <DatatypeProperty rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/O3_has_note">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC10_Event -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC10_Event">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC4_Temporal_Phenomenon"/>
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC9_Observable_Entity"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC11_Person -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC11_Person">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC8_Actor"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC12_Ecosystem -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC12_Ecosystem">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC4_Temporal_Phenomenon"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC13_Organization -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC13_Organization">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC8_Actor"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC14_Ecosystem_Environment -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC14_Ecosystem_Environment">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC35_Physical_Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC15_Water_Area -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC15_Water_Area">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC35_Physical_Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC16_Man-Made_thing -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC16_Man-Made_thing">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC7_Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC17_Conceptual_Object -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC17_Conceptual_Object">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC16_Man-Made_thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC18_Proposition -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC18_Proposition">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC17_Conceptual_Object"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC19_Title -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC19_Title">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC25_Linguistic_Object"/>
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC30_Appellation"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC1_TLO_Entity -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC1_TLO_Entity">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC20_Declarative_Place -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC20_Declarative_Place">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC3_Place"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC21_DataSet -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC21_DataSet">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC18_Proposition"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC22_Encounter_Event -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC22_Encounter_Event">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC45_Observation"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC23_Digital_Object -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC23_Digital_Object">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC18_Proposition"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC24_Repository_Object -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC24_Repository_Object">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC23_Digital_Object"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC25_Linguistic_Object -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC25_Linguistic_Object">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC18_Proposition"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC26_Place_Name -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC26_Place_Name">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC31_Place_Appellation"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC27_Publication -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC27_Publication">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC18_Proposition"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC29_Spatial_Coordinate_Reference_System -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC29_Spatial_Coordinate_Reference_System">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC18_Proposition"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC2_Time_Span -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC2_Time_Span">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC1_TLO_Entity"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC30_Appellation -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC30_Appellation">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC17_Conceptual_Object"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC31_Place_Appellation -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC31_Place_Appellation">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC30_Appellation"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC32_Identifier -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC32_Identifier">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC30_Appellation"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC33_Spatial_Coordinate -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC33_Spatial_Coordinate">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC30_Appellation"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC34_Geometric_Place_Expression -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC34_Geometric_Place_Expression">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC33_Spatial_Coordinate"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC35_Physical_Thing -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC35_Physical_Thing">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC7_Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC36_Abiotic_Element -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC36_Abiotic_Element">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC35_Physical_Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC37_Biological_Object -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC37_Biological_Object">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC51_Physical_Object"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC38_Biotic_Element -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC38_Biotic_Element">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC37_Biological_Object"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC39_Marine_Animal -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC39_Marine_Animal">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC38_Biotic_Element"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC3_Place -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC3_Place">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC1_TLO_Entity"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC40_Physical_Man-Made_Thing -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC40_Physical_Man-Made_Thing">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC16_Man-Made_thing"/>
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC35_Physical_Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC41_Man-Made_Object -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC41_Man-Made_Object">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC40_Physical_Man-Made_Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC42_Collection -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC42_Collection">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC40_Physical_Man-Made_Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC43_Activity -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC43_Activity">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC10_Event"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC44_Attribute_Assignment -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC44_Attribute_Assignment">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC43_Activity"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC45_Observation -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC45_Observation">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC44_Attribute_Assignment"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC46_Identifier_Assignment -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC46_Identifier_Assignment">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC44_Attribute_Assignment"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC47_Image -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC47_Image">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC18_Proposition"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC48_Database -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC48_Database">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC18_Proposition"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC4_Temporal_Phenomenon -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC4_Temporal_Phenomenon">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC1_TLO_Entity"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC51_Physical_Object -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC51_Physical_Object">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC35_Physical_Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC53_Specimen -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC53_Specimen">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC38_Biotic_Element"/>
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC41_Man-Made_Object"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC54_Measurement -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC54_Measurement">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC45_Observation"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC55_Measurement_Unit -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC55_Measurement_Unit">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC17_Conceptual_Object"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC56_Digital_Measurement_Event -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC56_Digital_Measurement_Event">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC54_Measurement"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC57_Capture -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC57_Capture">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC35_Physical_Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC58_Digital_Device -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC58_Digital_Device">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC16_Man-Made_thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC59_Software -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC59_Software">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC23_Digital_Object"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC5_Dimension -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC5_Dimension">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC1_TLO_Entity"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC60_Software_Execution -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC60_Software_Execution">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC43_Activity"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC61_Capture_Activity -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC61_Capture_Activity">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC43_Activity"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC62_Statistic_Indicator -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC62_Statistic_Indicator">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC17_Conceptual_Object"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC63_Global_Statistic_Landing -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC63_Global_Statistic_Landing">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC44_Attribute_Assignment"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC64_Design_or_Procedure -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC64_Design_or_Procedure">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC17_Conceptual_Object"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC6_Persistent_Item -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC6_Persistent_Item">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC1_TLO_Entity"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC70_Group -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC70_Group">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC8_Actor"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC71_Name_Use_Activity -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC71_Name_Use_Activity">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC44_Attribute_Assignment"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC72_SpaceTime_Volume -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC72_SpaceTime_Volume">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC1_TLO_Entity"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC75_Stock -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC75_Stock">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC7_Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC76_Stock_Formation -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC76_Stock_Formation">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC43_Activity"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC77_Matter_Removal -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC77_Matter_Removal">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC43_Activity"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC78_Amount_of_Matter -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC78_Amount_of_Matter">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC7_Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC79_Right -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC79_Right">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC18_Proposition"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC7_Thing -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC7_Thing">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC6_Persistent_Item"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC8_Actor -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC8_Actor">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC6_Persistent_Item"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BC9_Observable_Entity -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC9_Observable_Entity">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BC1_TLO_Entity"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT3_Physical_Thing_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT11_Equipment_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT11_Equipment_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT3_Physical_Thing_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT12_Scientific_Data_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT12_Scientific_Data_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT4_Conceptual_Object_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT13_Digital_Object_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT13_Digital_Object_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT4_Conceptual_Object_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT14_Appellation_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT14_Appellation_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT4_Conceptual_Object_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT16_Visual_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT16_Visual_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT4_Conceptual_Object_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT17_Human_Activity_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT17_Human_Activity_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT6_Human_Event_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT18_Kingdom -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT18_Kingdom">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT19_Phylum -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT19_Phylum">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT1_TLO_Entity_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT1_TLO_Entity_Type">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT20_SubPhylum -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT20_SubPhylum">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT21_SuperClass -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT21_SuperClass">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT22_Class -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT22_Class">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT23_SubClass -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT23_SubClass">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT24_Family -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT24_Family">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT25_SubFamily -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT25_SubFamily">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT26_Genus -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT26_Genus">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT27_Species -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT27_Species">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT28_Scientific_Activity_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT28_Scientific_Activity_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT17_Human_Activity_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT29_Industrial_Activity_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT29_Industrial_Activity_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT17_Human_Activity_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT2_Temporal_Phenomenon_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT2_Temporal_Phenomenon_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT1_TLO_Entity_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT30_Identifier_Assignment_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT30_Identifier_Assignment_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT17_Human_Activity_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT31_Biological_Part_Time -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT31_Biological_Part_Time">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT32_Persisten_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT32_Persisten_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT1_TLO_Entity_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT32_Persistent_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT32_Persistent_Type">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT33_Marine_Animal_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT33_Marine_Animal_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT34_Order -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT34_Order">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT10_Biotic_Element_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT35_Property_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT35_Property_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT4_Conceptual_Object_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT36_Language -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT36_Language">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT4_Conceptual_Object_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT3_Physical_Thing_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT3_Physical_Thing_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT32_Persisten_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT4_Conceptual_Object_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT4_Conceptual_Object_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT32_Persisten_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT5_Legislative_Zone_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT5_Legislative_Zone_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT2_Temporal_Phenomenon_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT6_Human_Event_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT6_Human_Event_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT2_Temporal_Phenomenon_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT7_Ecosystem_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT7_Ecosystem_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT2_Temporal_Phenomenon_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT8_Abiotic_Element_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT8_Abiotic_Element_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT3_Physical_Thing_Type"/>
+    </Class>
+    
+
+
+    <!-- http://www.ics.forth.gr/isl/ontology/MarineTLO/BT9_Actor_Type -->
+
+    <Class rdf:about="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT9_Actor_Type">
+        <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/ontology/MarineTLO/BT32_Persisten_Type"/>
+    </Class>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Person -->
+
+    <Class rdf:about="http://xmlns.com/foaf/0.1/Person">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://users.ics.forth.gr/~fafalios/ -->
+
+    <Thing rdf:about="http://users.ics.forth.gr/~fafalios/">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    </Thing>
+    
+
+
+    <!-- http://users.ics.forth.gr/~marketak/pages/aboutme.html -->
+
+    <Thing rdf:about="http://users.ics.forth.gr/~marketak/pages/aboutme.html">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    </Thing>
+    
+
+
+    <!-- http://users.ics.forth.gr/~tzitzik/ -->
+
+    <Thing rdf:about="http://users.ics.forth.gr/~tzitzik/">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    </Thing>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.20.2021-07-31T18:42:45Z) https://github.com/owlcs/owlapi -->
+
