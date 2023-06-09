@@ -146,12 +146,14 @@ public class ReasonerServiceImpl implements ReasonerService {
 		config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
 		manager.setOntologyLoaderConfiguration(config);
 		OWLOntology ontology = null;
-		System.out.println(instream.toString().isEmpty() == false);
-		if (instream.available() > 0) {
-			OWLOntologyDocumentSource documentSource = new StreamDocumentSource(instream);
-			ontology = manager.loadOntologyFromOntologyDocument(documentSource);
-		} else {
-			return null;
+		try {
+		    if (instream.available() > 0) {
+		        OWLOntologyDocumentSource documentSource = new StreamDocumentSource(instream);
+		        ontology = manager.loadOntologyFromOntologyDocument(documentSource);
+		    }
+		} catch (OWLOntologyCreationException e) {
+		    e.printStackTrace();
+		    return e.getMessage(); 
 		}
 		PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 		OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
@@ -296,12 +298,14 @@ public class ReasonerServiceImpl implements ReasonerService {
 		config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
 		manager.setOntologyLoaderConfiguration(config);
 		OWLOntology ontology = null;
-		System.out.println(instream.toString().isEmpty() == false);
-		if (instream.available() > 0) {
-			OWLOntologyDocumentSource documentSource = new StreamDocumentSource(instream);
-			ontology = manager.loadOntologyFromOntologyDocument(documentSource);
-		} else {
-			return null;
+		try {
+		    if (instream.available() > 0) {
+		        OWLOntologyDocumentSource documentSource = new StreamDocumentSource(instream);
+		        ontology = manager.loadOntologyFromOntologyDocument(documentSource);
+		    }
+		} catch (OWLOntologyCreationException e) {
+		    e.printStackTrace();
+		    return e.getMessage(); 
 		}
 		PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 		OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
@@ -340,12 +344,14 @@ public class ReasonerServiceImpl implements ReasonerService {
 		config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
 		manager.setOntologyLoaderConfiguration(config);
 		OWLOntology ontology = null;
-		System.out.println(instream.toString().isEmpty() == false);
-		if (instream.available() > 0) {
-			OWLOntologyDocumentSource documentSource = new StreamDocumentSource(instream);
-			ontology = manager.loadOntologyFromOntologyDocument(documentSource);
-		} else {
-			return null;
+		try {
+		    if (instream.available() > 0) {
+		        OWLOntologyDocumentSource documentSource = new StreamDocumentSource(instream);
+		        ontology = manager.loadOntologyFromOntologyDocument(documentSource);
+		    }
+		} catch (OWLOntologyCreationException e) {
+		    e.printStackTrace();
+		    return e.getMessage(); 
 		}
 		PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 		OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
