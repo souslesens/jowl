@@ -130,7 +130,7 @@ public class ReasonerController {
             	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e);
             }
         }
     //Post API For STRING
@@ -142,12 +142,12 @@ public class ReasonerController {
         String url = request.getUrl();
         String ontologyContentEncoded64 = request.getOntologyContentEncoded64();
         String[] reqParametres = request.getParams();
-
     	byte[] ontologyContentDecoded64Bytes = null;
     	String ontologyContentDecoded64 = null;
     	if (ontologyContentEncoded64 != null && !ontologyContentEncoded64.isEmpty()) {
     	 ontologyContentDecoded64Bytes = Base64.getMimeDecoder().decode(ontologyContentEncoded64);
     	 ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
+    	 System.out.println(ontologyContentDecoded64.getClass().getSimpleName());
     	}
     	// Automatic call to the parametres API
         HttpHeaders headers = new HttpHeaders();
@@ -206,7 +206,7 @@ public class ReasonerController {
             	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     //Post API For STRING

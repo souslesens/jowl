@@ -15,12 +15,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
+
+import org.coode.owlapi.owlxmlparser.OWLXMLParserFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.io.FileDocumentSource;
+import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
+import org.semanticweb.owlapi.io.StreamDocumentSource;
 import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.MissingImportHandlingStrategy;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassAxiom;
@@ -43,6 +49,9 @@ import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
 import org.semanticweb.owlapi.model.OWLObjectSomeValuesFrom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyFactory.OWLOntologyCreationHandler;
+import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+import org.semanticweb.owlapi.model.OWLOntologyLoaderListener;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.OWLSameIndividualAxiom;
@@ -84,9 +93,14 @@ public class ReasonerServiceImpl implements ReasonerService {
 	public String getUnsatisfaisableClasses(String filePath, String Url) throws Exception {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 
+		OWLOntologyLoaderConfiguration configurator = new OWLOntologyLoaderConfiguration();
+	     configurator.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
+	    // manager.setOntologyConfigurator(configurator);
+		
 		OWLOntology ontology = null;
 		if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
 
+		//	ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url), configurator);
 			ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
 		} else if (filePath.isEmpty() == false && Url == null) {
 
@@ -127,34 +141,59 @@ public class ReasonerServiceImpl implements ReasonerService {
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
 
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		InputStream instream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
+		//set silent imports
+		OWLOntologyLoaderConfiguration config = new OWLOntologyLoaderConfiguration();
+		config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
+		manager.setOntologyLoaderConfiguration(config);
+		///
+		
+		System.out.println("ontologyContentDecoded64: " + ontologyContentDecoded64);
+		System.out.println("instream: " + instream);
+		System.out.println("manager: " + manager);
+		System.out.println("config: " + config);
+		///
+//		OWLOntologyLoaderConfiguration configurator = new OWLOntologyLoaderConfiguration();
+//	     configurator.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
+	    // manager.setOntologyConfigurator(configurator);
 		OWLOntology ontology = null;
 		String filePath = null;
-		if (ontologyContentDecoded64.isEmpty() == false) {
-			InputStream ontologyStream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
-			try {
-				Files.copy(ontologyStream, Paths.get("output.owl"), StandardCopyOption.REPLACE_EXISTING);
-				filePath = "output.owl";
+		System.out.println(instream.toString().isEmpty() == false);
+		if (instream.available() > 0) {
+//			InputStream ontologyStream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
+//			InputStream ontologyStream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
+//			try {
+//				Files.copy(ontologyStream, Paths.get("output.owl"), StandardCopyOption.REPLACE_EXISTING);
+//				filePath = "output.owl";
+//
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+			OWLOntologyDocumentSource documentSource = new StreamDocumentSource(instream);
+			ontology = manager.loadOntologyFromOntologyDocument(documentSource);
+			System.out.println("documentSource: " + documentSource);
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			ontology = manager.loadOntologyFromOntologyDocument(ontologyStream);
-			if (filePath.isEmpty() == false) {
-
-				ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
-			}
+//			if (filePath.isEmpty() == false) {
+//				
+//				
+//			OWLOntologyDocumentSource documentSource = new FileDocumentSource(new File(filePath));
+//				ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
+//			}
 
 		} else {
 			return null;
 		}
-		try {
-			File file = new File(filePath);
-			FileWriter writer = new FileWriter(file);
-			writer.write("");
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+		
+		System.out.println("ontology: " + ontology);
+//		try {
+//			File file = new File(filePath);
+//			FileWriter writer = new FileWriter(file);
+//			writer.write("");
+//			writer.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 		OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
 		reasoner.precomputeInferences(InferenceType.values());
@@ -380,7 +419,7 @@ public class ReasonerServiceImpl implements ReasonerService {
 
 			ontology = manager.loadOntologyFromOntologyDocument(IRI.create(url));
 		} else if (filePath.isEmpty() == false && url == null) {
-
+			
 			ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
 		} else {
 			return null;
