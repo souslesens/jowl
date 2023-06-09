@@ -17,7 +17,7 @@ ARG JAR_FILE=target/*.jar
 
 COPY --from=build /home/app/${JAR_FILE} app.jar
 
-EXPOSE 8080
+EXPOSE 9170
 
 
 #ENTRYPOINT ["java", "-Xmx4g", "-Xms4g", "-jar", "/app.jar"]  //Expected_update { fix memory issues due to limited heap space.}
