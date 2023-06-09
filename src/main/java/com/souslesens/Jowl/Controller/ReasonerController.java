@@ -56,7 +56,7 @@ public class ReasonerController {
                 String result = reasonerService.getUnsatisfaisableClasses(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     @GetMapping("/consistency")
@@ -73,7 +73,7 @@ public class ReasonerController {
                 String result = reasonerService.getConsistency(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("ERROR");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
             
         	
@@ -93,7 +93,7 @@ public class ReasonerController {
                 String result = reasonerService.getInferences(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("ERROR");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
             
         	
@@ -130,7 +130,7 @@ public class ReasonerController {
             	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body(e);
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     //Post API For STRING
@@ -147,7 +147,6 @@ public class ReasonerController {
     	if (ontologyContentEncoded64 != null && !ontologyContentEncoded64.isEmpty()) {
     	 ontologyContentDecoded64Bytes = Base64.getMimeDecoder().decode(ontologyContentEncoded64);
     	 ontologyContentDecoded64 = new String(ontologyContentDecoded64Bytes, StandardCharsets.UTF_8);
-    	 System.out.println(ontologyContentDecoded64.getClass().getSimpleName());
     	}
     	// Automatic call to the parametres API
         HttpHeaders headers = new HttpHeaders();
@@ -184,7 +183,7 @@ public class ReasonerController {
      		    }
 
      		} catch (Exception e) {
-     			return ResponseEntity.badRequest().body("Error");
+     			return ResponseEntity.badRequest().body(e.getMessage());
           }
     	 }else {
     		 valuesList = valuesList2;
@@ -236,7 +235,7 @@ public class ReasonerController {
             	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     
@@ -272,7 +271,7 @@ public class ReasonerController {
             	
                 return ResponseEntity.ok(hashMap);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     
@@ -305,7 +304,7 @@ public class ReasonerController {
             	parametresInference.add(new parametresInputInference(equivalentClass, sameIndividual, IntersectionOf,UnionOf,DisjointClasses,differentIndividual,HasValue,InverseObjectProperties,AllValuesFrom,SomeValuesFrom,DomainAndRange));
                 return ResponseEntity.ok(parametresInference);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     

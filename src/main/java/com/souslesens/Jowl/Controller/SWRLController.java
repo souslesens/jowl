@@ -53,7 +53,7 @@ public class SWRLController {
             	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     
@@ -85,7 +85,7 @@ public class SWRLController {
             	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     
