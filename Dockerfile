@@ -7,8 +7,15 @@ WORKDIR /home/app
 COPY src ./src
 #copy pom
 COPY pom.xml ./
+
+## Industry Portal Future Updates Part ## 
+######## Uncomment ###########
+COPY config/settings.xml /usr/share/maven/conf/settings.xml
+######## Uncomment ###########
+
 #resolve maven dependencies
 RUN mvn -f /home/app/pom.xml clean package -Dmaven.test.skip
+
 ########Run Project########
 # we use a light-weight base image with JAVA17
 FROM openjdk:17-alpine

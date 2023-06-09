@@ -152,7 +152,7 @@ public class ReasonerController {
         headers.set("Accept", "application/json");
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
-    	 String externalApiUrl = "http://localhost:8080/reasoner/parametres";
+    	 String externalApiUrl = "http://localhost:9170/reasoner/parametres";
     	 ResponseEntity<String> response = restTemplate.exchange(externalApiUrl, HttpMethod.GET, entity, String.class);
     	 System.out.println(response.getBody());
     	 List<String> valuesList = new ArrayList<>();
