@@ -1,9 +1,5 @@
 package com.souslesens.Jowl.model;
 
-import java.io.File;
-
-import org.springframework.web.multipart.MultipartFile;
-
 public class reasonerInput {
 	private String filePath;
 	private String url;

@@ -25,7 +25,6 @@ import com.souslesens.Jowl.model.parametresInputInference;
 import com.souslesens.Jowl.model.reasonerInference;
 import com.souslesens.Jowl.model.reasonerInput;
 import com.souslesens.Jowl.services.ReasonerService;
-import com.souslesens.Jowl.services.ReasonerServiceImpl.CustomInferredComplementOfAxiomGenerator;
 
 
 @RestController

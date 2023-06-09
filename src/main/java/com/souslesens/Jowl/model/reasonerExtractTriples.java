@@ -1,6 +1,5 @@
 package com.souslesens.Jowl.model;
 
-import java.util.ArrayList;
 
 public class reasonerExtractTriples {
     private String subject;

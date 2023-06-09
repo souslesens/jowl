@@ -2,7 +2,6 @@ package com.souslesens.Jowl.model;
 
 
 import org.semanticweb.owlapi.model.OWLClass;
-import uk.ac.manchester.cs.owl.owlapi.OWLClassImpl;
 
 public class reasonerUnsatisfaisability {
 	private OWLClass[] Unsatisfaisable;

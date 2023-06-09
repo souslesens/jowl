@@ -1,25 +1,14 @@
 package com.souslesens.Jowl.Controller;
 
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
-
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.rdf.model.StmtIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.souslesens.Jowl.model.jenaTripleParser;
 import com.souslesens.Jowl.model.jenaTripleParserInput;
-import com.souslesens.Jowl.model.reasonerExtractTriples;
 import com.souslesens.Jowl.services.JenaService;
 
 @RestController
