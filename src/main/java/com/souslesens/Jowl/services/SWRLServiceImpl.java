@@ -15,8 +15,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
+import org.semanticweb.owlapi.io.StreamDocumentSource;
 import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.MissingImportHandlingStrategy;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLDataFactory;
@@ -27,6 +30,7 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.SWRLAtom;
@@ -122,36 +126,20 @@ public class SWRLServiceImpl implements SWRLService {
 	public String SWRLruleReclassificationB64(String ontologyContentDecoded64 ,  String[] reqBodies , String[] reqHead)
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
 		try {
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology ontology = null;
-		String filePath = null;
-		if (ontologyContentDecoded64.isEmpty() == false) {
-			InputStream ontologyStream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
-			try {
-				Files.copy(ontologyStream, Paths.get("output.owl"), StandardCopyOption.REPLACE_EXISTING);
-				filePath = "output.owl";
-
-			} catch (IOException e) {
-				e.printStackTrace();
+			OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+			InputStream instream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
+			//set silent imports
+			OWLOntologyLoaderConfiguration config = new OWLOntologyLoaderConfiguration();
+			config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
+			manager.setOntologyLoaderConfiguration(config);
+			OWLOntology ontology = null;
+			System.out.println(instream.toString().isEmpty() == false);
+			if (instream.available() > 0) {
+				OWLOntologyDocumentSource documentSource = new StreamDocumentSource(instream);
+				ontology = manager.loadOntologyFromOntologyDocument(documentSource);
+			} else {
+				return null;
 			}
-			ontology = manager.loadOntologyFromOntologyDocument(ontologyStream);
-			if (filePath.isEmpty() == false) {
-
-				ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
-			}
-
-		} else {
-			return null;
-		}
-		try {
-			File file = new File(filePath);
-			FileWriter writer = new FileWriter(file);
-			writer.write("");
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 		// RULE : N { BODY } (x) -> N { Head } (x)
 
 		OWLDataFactory factory = manager.getOWLDataFactory();
@@ -209,35 +197,20 @@ public class SWRLServiceImpl implements SWRLService {
 	public String SWRLruleVAB64(String ontologyContentDecoded64 , List<SWRLTypeEntityVariable> reqBodies , List<SWRLTypeEntityVariable> reqHead)
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
 		try {
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology ontology = null;
-		String filePath = null;
-		if (ontologyContentDecoded64.isEmpty() == false) {
-			InputStream ontologyStream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
-			try {
-				Files.copy(ontologyStream, Paths.get("output.owl"), StandardCopyOption.REPLACE_EXISTING);
-				filePath = "output.owl";
-
-			} catch (IOException e) {
-				e.printStackTrace();
+			OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+			InputStream instream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
+			//set silent imports
+			OWLOntologyLoaderConfiguration config = new OWLOntologyLoaderConfiguration();
+			config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
+			manager.setOntologyLoaderConfiguration(config);
+			OWLOntology ontology = null;
+			System.out.println(instream.toString().isEmpty() == false);
+			if (instream.available() > 0) {
+				OWLOntologyDocumentSource documentSource = new StreamDocumentSource(instream);
+				ontology = manager.loadOntologyFromOntologyDocument(documentSource);
+			} else {
+				return null;
 			}
-			ontology = manager.loadOntologyFromOntologyDocument(ontologyStream);
-			if (filePath.isEmpty() == false) {
-
-				ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
-			}
-
-		} else {
-			return null;
-		}
-		try {
-			File file = new File(filePath);
-			FileWriter writer = new FileWriter(file);
-			writer.write("");
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		// RULE : N { BODY } (x) || N { BODY } (x,y) -> N { Head } (x) || N { BODY } (x,y)
 
