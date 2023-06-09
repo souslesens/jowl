@@ -19,7 +19,7 @@ docker run -p 8080:8080 jowl
 ----------------
 ### To Run The Application in the background
 ```
-docker run -d -p 8080:8080 jowl
+docker run -d -p 9170:9170 jowl
 ```
 ----------------
 ### One Command : To Build && Run The application Via Docker-Compose
@@ -35,7 +35,7 @@ Refer to the
 ### API Documentation
 After successfully downloading the project and running it, here's the API that you can use
 
-__Base URL__ : https://localhost:8080
+__Base URL__ : http://localhost:9170
 
 
 __Reasoning's APIS__
@@ -59,7 +59,7 @@ __Reasoning's APIS__
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-You choose POST Request , you pass this URL https://localhost:8080/reasoner/inference
+You choose POST Request , you pass this URL http://localhost:9170/reasoner/inference
 
 You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
 in the JSON Body 
@@ -127,7 +127,7 @@ __Jena's APIS__
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-You choose POST Request , you pass this URL https://localhost:8080/jena/rdftriple
+You choose POST Request , you pass this URL http://localhost:9170/jena/rdftriple
 
 You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
 in the JSON Body 
@@ -153,7 +153,7 @@ __SWRL Rules's APIS__
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-You choose POST Request , you pass this URL http://localhost:8080/SWRL/insertRuleReclassification
+You choose POST Request , you pass this URL http://localhost:9170/SWRL/insertRuleReclassification
 
 You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
 in the JSON Body 
@@ -181,7 +181,7 @@ You pick Body -> Raw -> JSON
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-You choose POST Request , you pass this URL http://localhost:8080/SWRL/insertRuleReclassification
+You choose POST Request , you pass this URL http://localhost:9170/SWRL/insertRuleReclassification
 
 You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
 in the JSON Body 
