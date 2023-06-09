@@ -214,7 +214,6 @@ public class SWRLServiceImpl implements SWRLService {
     	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		 String[] variables = entity.getVar();
     	    		 String[] literals = entity.getLiteral();
-    	    		 System.out.print("3ezedine bouchnek"+literals);
     	    	        for (String table : variables ) {
     	    	        		SWRLVariable swrlVar = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));
     	    	        		SWRLClassAtom bodyElement = factory.getSWRLClassAtom(classX, swrlVar);
