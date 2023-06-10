@@ -10,7 +10,7 @@ COPY pom.xml ./
 
 ## Industry Portal Future Updates Part ## 
 ######## Uncomment ###########
-COPY config/settings.xml /usr/share/maven/conf/settings.xml
+# COPY config/settings.xml /usr/share/maven/conf/settings.xml
 ######## Uncomment ###########
 
 #resolve maven dependencies
