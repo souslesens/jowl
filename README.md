@@ -14,7 +14,7 @@ docker build -t jowl .
 
 ### To Run The Application
 ```
-docker run -p 8080:8080 jowl
+docker run -p 9170:9170 jowl
 ```
 ----------------
 ### To Run The Application in the background
