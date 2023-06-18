@@ -253,7 +253,7 @@ public class SWRLServiceImpl implements SWRLService {
 	    	            bodyList.add(bodyElement);
 	    	        }
     	    	}
-    	    }else if (swrlVariable1.getType().equalsIgnoreCase("swrlb")) {
+    	    }else if (swrlVariable1.getType().equalsIgnoreCase("swrlb:compare")) {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		
    	    		 String[] variables = entity.getVar();
@@ -308,6 +308,57 @@ public class SWRLServiceImpl implements SWRLService {
     	        		
 	    	        }
     	    	}
+    	    }else if(swrlVariable1.getType().equalsIgnoreCase("swrlb:string")) {
+    	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
+    	    		
+      	    		 String[] variables = entity.getVar();
+      	    		 String[] literal = entity.getLiteral();
+      	    		 
+   	    	        if (variables.length != 1) {
+   	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
+   	    	        }
+   	    	        if (literal.length != 1) {
+   	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
+   	    	        }
+   	    	        for (String table : variables ) {
+   	    	        	System.out.println("gregerg"+table);
+       	        		SWRLVariable swrlVar = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));   	        		
+   	    	        	for (String Lit : literal) {
+   	    	        		System.out.println("gregerg"+Lit);
+   	    	        		OWLLiteral LitVar;
+   	    	        		if(Lit.matches("\\d+")) {
+   	    	        			int covertedValue = Integer.parseInt(Lit);
+   	    	        			System.out.println(covertedValue);
+   	    	        			LitVar = factory.getOWLLiteral(covertedValue);}
+   	    	        			else if (Lit.matches("^\\d*\\.?\\d+$")){
+   	    	        				float covertedValue = Float.parseFloat(Lit);
+   	    	        				System.out.println(covertedValue);
+   		    	        			LitVar = factory.getOWLLiteral(covertedValue);
+   	    	        			}
+   	    	        			
+   	    	        			else {
+   	    	        				LitVar = factory.getOWLLiteral(Lit);
+   	    	        		}
+   	    	        		SWRLLiteralArgument LitVarArg = factory.getSWRLLiteralArgument(LitVar);
+   	    	        		System.out.println("WTFMAN"+LitVarArg);
+   	    	        		List<SWRLDArgument> arguments = Arrays.asList(swrlVar, LitVarArg);    	  
+   	    	        		SWRLBuiltInAtom bodyElement = null;
+   	    	        		if(entity.getName().equalsIgnoreCase("contains")) {
+   	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.CONTAINS.getIRI(), arguments);
+   	    	        		}else if (entity.getName().equalsIgnoreCase("containsIgnoreCase")) {
+   	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.CONTAINS_IGNORE_CASE.getIRI(), arguments);
+   	    	        		}else if (entity.getName().equalsIgnoreCase("startsWith")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.STARTS_WITH.getIRI(), arguments);
+   	   	    	        	}else if (entity.getName().equalsIgnoreCase("endsWith")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.ENDS_WITH.getIRI(), arguments);
+   	   	    	        	}
+   	    	        		 System.out.println(bodyElement);
+   	    	        		bodyList.add(bodyElement);
+   	    	        	}
+   	    	        	
+       	        		
+   	    	        }
+       	    	}
     	    }
     	    System.out.println();
     	}
