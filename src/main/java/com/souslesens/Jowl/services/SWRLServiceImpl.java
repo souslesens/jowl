@@ -351,6 +351,8 @@ public class SWRLServiceImpl implements SWRLService {
    	   	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.STARTS_WITH.getIRI(), arguments);
    	   	    	        	}else if (entity.getName().equalsIgnoreCase("endsWith")) {
    	   	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.ENDS_WITH.getIRI(), arguments);
+   	   	    	        	}else if (entity.getName().equalsIgnoreCase("matches")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((IRI.create("http://www.w3.org/2003/11/swrlb#matches")), arguments);
    	   	    	        	}
    	    	        		 System.out.println(bodyElement);
    	    	        		bodyList.add(bodyElement);
