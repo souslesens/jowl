@@ -353,6 +353,8 @@ public class SWRLServiceImpl implements SWRLService {
    	   	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.ENDS_WITH.getIRI(), arguments);
    	   	    	        	}else if (entity.getName().equalsIgnoreCase("matches")) {
    	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((IRI.create("http://www.w3.org/2003/11/swrlb#matches")), arguments);
+   	   	    	        	}else if (entity.getName().equalsIgnoreCase("stringEqualIgnoreCase")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.STRING_EQUALS_IGNORE_CASE.getIRI()), arguments);
    	   	    	        	}
    	    	        		 System.out.println(bodyElement);
    	    	        		bodyList.add(bodyElement);
