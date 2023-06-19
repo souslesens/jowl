@@ -339,6 +339,7 @@ public class SWRLServiceImpl implements SWRLService {
    	    	        			else {
    	    	        				LitVar = factory.getOWLLiteral(Lit);
    	    	        		}
+   	    	        		
    	    	        		SWRLLiteralArgument LitVarArg = factory.getSWRLLiteralArgument(LitVar);
    	    	        		System.out.println("WTFMAN"+LitVarArg);
    	    	        		List<SWRLDArgument> arguments = Arrays.asList(swrlVar, LitVarArg);    	  
@@ -355,6 +356,12 @@ public class SWRLServiceImpl implements SWRLService {
    	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((IRI.create("http://www.w3.org/2003/11/swrlb#matches")), arguments);
    	   	    	        	}else if (entity.getName().equalsIgnoreCase("stringEqualIgnoreCase")) {
    	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.STRING_EQUALS_IGNORE_CASE.getIRI()), arguments);
+   	   	    	        	}else if(entity.getName().equalsIgnoreCase("upperCase")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((IRI.create("http://www.w3.org/2003/11/swrlb#upperCase")), arguments);
+   	   	    	        	}else if(entity.getName().equalsIgnoreCase("lowerCase")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.LOWER_CASE.getIRI()), arguments);
+   	   	    	        	}else if(entity.getName().equalsIgnoreCase("stringLength")) {	
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.STRING_LENGTH.getIRI()) , arguments);
    	   	    	        	}
    	    	        		 System.out.println(bodyElement);
    	    	        		bodyList.add(bodyElement);
