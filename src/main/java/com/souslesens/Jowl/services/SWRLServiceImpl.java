@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -317,13 +318,16 @@ public class SWRLServiceImpl implements SWRLService {
    	    	        if (variables.length != 1) {
    	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
    	    	        }
-   	    	        if (literal.length != 1) {
-   	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
-   	    	        }
+//   	    	        if (literal.length != 1) {
+//   	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
+//   	    	        }
+   	    	        
    	    	        for (String table : variables ) {
    	    	        	System.out.println("gregerg"+table);
        	        		SWRLVariable swrlVar = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));   	        		
-   	    	        	for (String Lit : literal) {
+       	        		SWRLBuiltInAtom bodyElement = null;
+       	        		if(literal.length == 1){
+       	        		for (String Lit : literal) {
    	    	        		System.out.println("gregerg"+Lit);
    	    	        		OWLLiteral LitVar;
    	    	        		if(Lit.matches("\\d+")) {
@@ -339,11 +343,10 @@ public class SWRLServiceImpl implements SWRLService {
    	    	        			else {
    	    	        				LitVar = factory.getOWLLiteral(Lit);
    	    	        		}
-   	    	        		
+   	    	        		System.out.println("ya VIPER"+LitVar);
    	    	        		SWRLLiteralArgument LitVarArg = factory.getSWRLLiteralArgument(LitVar);
    	    	        		System.out.println("WTFMAN"+LitVarArg);
-   	    	        		List<SWRLDArgument> arguments = Arrays.asList(swrlVar, LitVarArg);    	  
-   	    	        		SWRLBuiltInAtom bodyElement = null;
+   	    	        		List<SWRLDArgument> arguments = new ArrayList<>(Arrays.asList(swrlVar, LitVarArg));    	    	    	        		
    	    	        		if(entity.getName().equalsIgnoreCase("contains")) {
    	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.CONTAINS.getIRI(), arguments);
    	    	        		}else if (entity.getName().equalsIgnoreCase("containsIgnoreCase")) {
@@ -363,7 +366,47 @@ public class SWRLServiceImpl implements SWRLService {
    	   	    	        	}else if(entity.getName().equalsIgnoreCase("stringLength")) {	
    	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.STRING_LENGTH.getIRI()) , arguments);
    	   	    	        	}
-   	    	        		 System.out.println(bodyElement);
+       	        		}
+//   	   	    	        	else if(entity.getName().equalsIgnoreCase("stringConcat")) {
+//   	   	    	        	OWLLiteral LitVar1 = factory.getOWLLiteral("ine");
+//   	   	    	        	SWRLLiteralArgument LitVarArg1 = factory.getSWRLLiteralArgument(LitVar1);
+//   	   	    	        	arguments.add(LitVarArg1);
+//   	   	    	        	bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.STRING_CONCAT.getIRI()) , arguments);
+//   	   	    	        	}
+   	    	        		System.out.println(bodyElement);
+   	    	        		bodyList.add(bodyElement);
+   	    	        	}else if(literal.length > 1) {
+   	    	        		SWRLLiteralArgument LitVarArg = null;
+   	    	        		List<SWRLDArgument> arguments = new ArrayList<>(Arrays.asList(swrlVar));
+   	    	        		for (int i = 0; i < literal.length; i++) {
+   	    	        			OWLLiteral LitVar;
+   	   	    	        		if(literal[i].matches("\\d+")) {
+   	   	    	        			int covertedValue = Integer.parseInt(literal[i]);
+   	   	    	        			System.out.println(covertedValue);
+   	   	    	        			LitVar = factory.getOWLLiteral(covertedValue);}
+   	   	    	        			else if (literal[i].matches("^\\d*\\.?\\d+$")){
+   	   	    	        				float covertedValue = Float.parseFloat(literal[i]);
+   	   	    	        				System.out.println(covertedValue);
+   	   		    	        			LitVar = factory.getOWLLiteral(covertedValue);
+   	   	    	        			}
+   	   	    	        			
+   	   	    	        			else {
+   	   	    	        				LitVar = factory.getOWLLiteral(literal[i]);
+   	   	    	        		}
+   	   	    	        		System.out.println(LitVar);
+   	   	    	        		LitVarArg = factory.getSWRLLiteralArgument(LitVar);
+   	   	    	        		System.out.println("AMINE"+LitVarArg);
+   	   	    	        		
+   	   	    	        		arguments.add(LitVarArg);
+   	   	    	        		System.out.println(arguments);
+   	   	    	        		if(entity.getName().equalsIgnoreCase("stringConcat")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.STRING_CONCAT.getIRI()) , arguments);
+   	   	    	        		}else if(entity.getName().equalsIgnoreCase("stringConcat")) {
+   	   	    	        			
+   	   	    	        		}
+   	   	    	        			
+							}
+   	    	        		System.out.println(bodyElement);
    	    	        		bodyList.add(bodyElement);
    	    	        	}
    	    	        	
