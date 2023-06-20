@@ -445,9 +445,9 @@ public class SWRLServiceImpl implements SWRLService {
    	   	    	        		if(entity.getName().equalsIgnoreCase("stringConcat")) {
    	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.STRING_CONCAT.getIRI()) , arguments);
    	   	    	        		}else if(entity.getName().equalsIgnoreCase("substring")) {
-   	   	    	        		
-   	   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.SUBSTRING.getIRI()) , arguments);
-   	   	   	    	        	
+   	   	   	    	        	bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.SUBSTRING.getIRI()) , arguments); 	   	    	        	
+   	   	    	        		}else if(entity.getName().equalsIgnoreCase("replace")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.REPLACE.getIRI()) , arguments);
    	   	    	        		}
    	   	    	        			
 							}
