@@ -409,6 +409,10 @@ public class SWRLServiceImpl implements SWRLService {
    	   	   	    	        	
    	   	    	        		}else if(entity.getName().equalsIgnoreCase("tokenize")) {
    	   	    	        			bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.TOKENIZE.getIRI()) , arguments);
+   	   	    	        		}else if(entity.getName().equalsIgnoreCase("substringBefore")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.SUBSTRING_BEFORE.getIRI()) , arguments);
+   	   	    	        		}else if(entity.getName().equalsIgnoreCase("substringAfter")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.SUBSTRING_AFTER.getIRI()) , arguments);
    	   	    	        		}
    	   	    	        			
 							}
