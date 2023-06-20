@@ -448,6 +448,8 @@ public class SWRLServiceImpl implements SWRLService {
    	   	   	    	        	bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.SUBSTRING.getIRI()) , arguments); 	   	    	        	
    	   	    	        		}else if(entity.getName().equalsIgnoreCase("replace")) {
    	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.REPLACE.getIRI()) , arguments);
+   	   	    	        		}else if(entity.getName().equalsIgnoreCase("translate")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.TRANSLATE.getIRI()) , arguments);
    	   	    	        		}
    	   	    	        			
 							}
