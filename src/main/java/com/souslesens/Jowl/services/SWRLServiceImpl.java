@@ -407,6 +407,8 @@ public class SWRLServiceImpl implements SWRLService {
    	   	    	        		
    	   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.SUBSTRING.getIRI()) , arguments);
    	   	   	    	        	
+   	   	    	        		}else if(entity.getName().equalsIgnoreCase("tokenize")) {
+   	   	    	        			bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.TOKENIZE.getIRI()) , arguments);
    	   	    	        		}
    	   	    	        			
 							}
