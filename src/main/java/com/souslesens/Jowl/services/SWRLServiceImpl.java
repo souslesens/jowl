@@ -365,6 +365,8 @@ public class SWRLServiceImpl implements SWRLService {
    	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.LOWER_CASE.getIRI()), arguments);
    	   	    	        	}else if(entity.getName().equalsIgnoreCase("stringLength")) {	
    	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.STRING_LENGTH.getIRI()) , arguments);
+   	   	    	        	}else if(entity.getName().equalsIgnoreCase("normalizeSpace")) {	
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.NORMALIZE_SPACE.getIRI()) , arguments);
    	   	    	        	}
        	        		}
 //   	   	    	        	else if(entity.getName().equalsIgnoreCase("stringConcat")) {
