@@ -594,7 +594,6 @@ public class SWRLServiceImpl implements SWRLService {
     	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
     	    		 String[] variables = entity.getVar();
     	    		 String[] literals = entity.getLiteral();
-    	    		 System.out.print("3ezedine bouchnek"+literals);
     	    	        for (String table : variables ) {
     	    	        		SWRLVariable swrlVar = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));
     	    	        		SWRLClassAtom bodyElement = factory.getSWRLClassAtom(classX, swrlVar);
@@ -634,7 +633,7 @@ public class SWRLServiceImpl implements SWRLService {
 	    	            bodyList.add(bodyElement);
 	    	        }
     	    	}
-    	    }else if (swrlVariable1.getType().equalsIgnoreCase("swrlb")) {
+    	    }else if (swrlVariable1.getType().equalsIgnoreCase("swrlb:compare")) {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
     	    		
    	    		 String[] variables = entity.getVar();
@@ -689,6 +688,157 @@ public class SWRLServiceImpl implements SWRLService {
     	        		
 	    	        }
     	    	}
+    	    }else if(swrlVariable1.getType().equalsIgnoreCase("swrlb:string")) {
+    	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
+    	    		
+      	    		 String[] variables = entity.getVar();
+      	    		 String[] literal = entity.getLiteral();
+      	    		 
+   	    	        if (variables.length != 1) {
+   	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
+   	    	        }
+//   	    	        if (literal.length != 1) {
+//   	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
+//   	    	        }
+   	    	        
+   	    	        for (String table : variables ) {
+   	    	        	System.out.println("gregerg"+table);
+       	        		SWRLVariable swrlVar = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+table));   	        		
+       	        		SWRLBuiltInAtom bodyElement = null;
+       	        		if(literal.length == 1){
+       	        		for (String Lit : literal) {
+   	    	        		System.out.println("gregerg"+Lit);
+   	    	        		OWLLiteral LitVar;
+   	    	        		if(Lit.matches("\\d+")) {
+   	    	        			int covertedValue = Integer.parseInt(Lit);
+   	    	        			System.out.println(covertedValue);
+   	    	        			LitVar = factory.getOWLLiteral(covertedValue);}
+   	    	        			else if (Lit.matches("^\\d*\\.?\\d+$")){
+   	    	        				float covertedValue = Float.parseFloat(Lit);
+   	    	        				System.out.println(covertedValue);
+   		    	        			LitVar = factory.getOWLLiteral(covertedValue);
+   	    	        			}
+   	    	        			
+   	    	        			else {
+   	    	        				LitVar = factory.getOWLLiteral(Lit);
+   	    	        		}
+   	    	        		System.out.println("ya VIPER"+LitVar);
+   	    	        		SWRLLiteralArgument LitVarArg = factory.getSWRLLiteralArgument(LitVar);
+   	    	        		System.out.println("WTFMAN"+LitVarArg);
+   	    	        		List<SWRLDArgument> arguments = new ArrayList<>(Arrays.asList(swrlVar, LitVarArg));    	    	    	        		
+   	    	        		if(entity.getName().equalsIgnoreCase("contains")) {
+   	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.CONTAINS.getIRI(), arguments);
+   	    	        		}else if (entity.getName().equalsIgnoreCase("containsIgnoreCase")) {
+   	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.CONTAINS_IGNORE_CASE.getIRI(), arguments);
+   	    	        		}else if (entity.getName().equalsIgnoreCase("startsWith")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.STARTS_WITH.getIRI(), arguments);
+   	   	    	        	}else if (entity.getName().equalsIgnoreCase("endsWith")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom(SWRLBuiltInsVocabulary.ENDS_WITH.getIRI(), arguments);
+   	   	    	        	}else if (entity.getName().equalsIgnoreCase("matches")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((IRI.create("http://www.w3.org/2003/11/swrlb#matches")), arguments);
+   	   	    	        	}else if (entity.getName().equalsIgnoreCase("stringEqualIgnoreCase")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.STRING_EQUALS_IGNORE_CASE.getIRI()), arguments);
+   	   	    	        	}else if(entity.getName().equalsIgnoreCase("upperCase")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((IRI.create("http://www.w3.org/2003/11/swrlb#upperCase")), arguments);
+   	   	    	        	}else if(entity.getName().equalsIgnoreCase("lowerCase")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.LOWER_CASE.getIRI()), arguments);
+   	   	    	        	}else if(entity.getName().equalsIgnoreCase("stringLength")) {	
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.STRING_LENGTH.getIRI()) , arguments);
+   	   	    	        	}else if(entity.getName().equalsIgnoreCase("normalizeSpace")) {	
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.NORMALIZE_SPACE.getIRI()) , arguments);
+   	   	    	        	}
+       	        		}
+//   	   	    	        	else if(entity.getName().equalsIgnoreCase("stringConcat")) {
+//   	   	    	        	OWLLiteral LitVar1 = factory.getOWLLiteral("ine");
+//   	   	    	        	SWRLLiteralArgument LitVarArg1 = factory.getSWRLLiteralArgument(LitVar1);
+//   	   	    	        	arguments.add(LitVarArg1);
+//   	   	    	        	bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.STRING_CONCAT.getIRI()) , arguments);
+//   	   	    	        	}
+   	    	        		System.out.println(bodyElement);
+   	    	        		bodyList.add(bodyElement);
+   	    	        	}else if(literal.length == 2) {
+   	    	        		SWRLLiteralArgument LitVarArg = null;
+   	    	        		List<SWRLDArgument> arguments = new ArrayList<>(Arrays.asList(swrlVar));
+   	    	        		for (int i = 0; i < literal.length; i++) {
+   	    	        			OWLLiteral LitVar;
+   	   	    	        		if(literal[i].matches("\\d+")) {
+   	   	    	        			int covertedValue = Integer.parseInt(literal[i]);
+   	   	    	        			System.out.println(covertedValue);
+   	   	    	        			LitVar = factory.getOWLLiteral(covertedValue);}
+   	   	    	        			else if (literal[i].matches("^\\d*\\.?\\d+$")){
+   	   	    	        				float covertedValue = Float.parseFloat(literal[i]);
+   	   	    	        				System.out.println(covertedValue);
+   	   		    	        			LitVar = factory.getOWLLiteral(covertedValue);
+   	   	    	        			}
+   	   	    	        			
+   	   	    	        			else {
+   	   	    	        				LitVar = factory.getOWLLiteral(literal[i]);
+   	   	    	        		}
+   	   	    	        		System.out.println(LitVar);
+   	   	    	        		LitVarArg = factory.getSWRLLiteralArgument(LitVar);
+   	   	    	        		System.out.println("AMINE"+LitVarArg);
+   	   	    	        		
+   	   	    	        		arguments.add(LitVarArg);
+   	   	    	        		System.out.println(arguments);
+   	   	    	        		if(entity.getName().equalsIgnoreCase("stringConcat")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.STRING_CONCAT.getIRI()) , arguments);
+   	   	    	        		}else if(entity.getName().equalsIgnoreCase("substring")) {
+   	   	    	        		
+   	   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.SUBSTRING.getIRI()) , arguments);
+   	   	   	    	        	
+   	   	    	        		}else if(entity.getName().equalsIgnoreCase("tokenize")) {
+   	   	    	        			bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.TOKENIZE.getIRI()) , arguments);
+   	   	    	        		}else if(entity.getName().equalsIgnoreCase("substringBefore")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.SUBSTRING_BEFORE.getIRI()) , arguments);
+   	   	    	        		}else if(entity.getName().equalsIgnoreCase("substringAfter")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.SUBSTRING_AFTER.getIRI()) , arguments);
+   	   	    	        		}
+   	   	    	        			
+							}
+   	    	        		System.out.println(bodyElement);
+   	    	        		bodyList.add(bodyElement);
+   	    	        	}else if(literal.length > 2) {
+   	    	        		SWRLLiteralArgument LitVarArg = null;
+   	    	        		List<SWRLDArgument> arguments = new ArrayList<>(Arrays.asList(swrlVar));
+   	    	        		for (int i = 0; i < literal.length; i++) {
+   	    	        			OWLLiteral LitVar;
+   	   	    	        		if(literal[i].matches("\\d+")) {
+   	   	    	        			int covertedValue = Integer.parseInt(literal[i]);
+   	   	    	        			System.out.println(covertedValue);
+   	   	    	        			LitVar = factory.getOWLLiteral(covertedValue);}
+   	   	    	        			else if (literal[i].matches("^\\d*\\.?\\d+$")){
+   	   	    	        				float covertedValue = Float.parseFloat(literal[i]);
+   	   	    	        				System.out.println(covertedValue);
+   	   		    	        			LitVar = factory.getOWLLiteral(covertedValue);
+   	   	    	        			}
+   	   	    	        			
+   	   	    	        			else {
+   	   	    	        				LitVar = factory.getOWLLiteral(literal[i]);
+   	   	    	        		}
+   	   	    	        		System.out.println(LitVar);
+   	   	    	        		LitVarArg = factory.getSWRLLiteralArgument(LitVar);
+   	   	    	        		System.out.println("AMINE"+LitVarArg);
+   	   	    	        		
+   	   	    	        		arguments.add(LitVarArg);
+   	   	    	        		System.out.println(arguments);
+   	   	    	        		if(entity.getName().equalsIgnoreCase("stringConcat")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.STRING_CONCAT.getIRI()) , arguments);
+   	   	    	        		}else if(entity.getName().equalsIgnoreCase("substring")) {
+   	   	   	    	        	bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.SUBSTRING.getIRI()) , arguments); 	   	    	        	
+   	   	    	        		}else if(entity.getName().equalsIgnoreCase("replace")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.REPLACE.getIRI()) , arguments);
+   	   	    	        		}else if(entity.getName().equalsIgnoreCase("translate")) {
+   	   	    	        		bodyElement = factory.getSWRLBuiltInAtom((SWRLBuiltInsVocabulary.TRANSLATE.getIRI()) , arguments);
+   	   	    	        		}
+   	   	    	        			
+							}
+   	    	        		System.out.println(bodyElement);
+   	    	        		bodyList.add(bodyElement);
+   	    	        	}
+   	    	        	
+       	        		
+   	    	        }
+       	    	}
     	    }
     	    System.out.println();
     	}
@@ -714,7 +864,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    		objectproperties.add(ObjectPropertyX);
     	    		 String[] variables = entity.getVar();
     	    	        if (variables.length != 2) {
-    	    	            throw new IllegalArgumentException("Vars mod 2 should be different to 0");
+    	    	            throw new IllegalArgumentException("The variable list must contain an even number of elements");
     	    	        }
     	    	        for (int v = 0 ; v<variables.length; v+=2) {
     	    	            String variable1 = variables[v];
@@ -731,10 +881,16 @@ public class SWRLServiceImpl implements SWRLService {
 		
 		SWRLRule rule = factory.getSWRLRule(bodyList, headList);
 		AddAxiom addAxiom = new AddAxiom(ontology, rule);
+		// Add SWRL rule to ontology
 		manager.applyChange(addAxiom);
+
+		// Creation reasoner 
 		PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 		OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
+		//
+		// Computing inferences
 		reasoner.precomputeInferences(InferenceType.values());
+		// Print out inferred instances
 		for (OWLClass owlClass : classes) {
 			
 		    Set<OWLIndividual> assertedInstances = new HashSet<>();
@@ -746,8 +902,9 @@ public class SWRLServiceImpl implements SWRLService {
 		    
 		    Set<OWLNamedIndividual> inferredInstances = allInstances.getFlattened();
 		    inferredInstances.removeAll(assertedInstances);
+		    
 		    for (OWLNamedIndividual inferredInstance  : inferredInstances) {
-		        System.out.println(inferredInstance + " Is Also A " + owlClass);
+		        System.out.println(inferredInstance + " is an instance of " + owlClass);
 		    }
 		}
 		Map<String, Set<String>> propertyValues = new HashMap<>();
@@ -764,7 +921,7 @@ public class SWRLServiceImpl implements SWRLService {
 		}
         Map<String, Set<String>> instances = new HashMap<>();
 		for (OWLClass cls : classes) {
-			NodeSet<OWLNamedIndividual> inferredIndv = reasoner.getInstances(cls, false);
+			NodeSet<OWLNamedIndividual> inferredIndv = reasoner.getInstances(cls, false); // false = only inferred
             for (Node<OWLNamedIndividual> individualNode : inferredIndv) {
                 for (OWLNamedIndividual individual : individualNode) {
                 	instances.computeIfAbsent(individual.getIRI().getFragment(), k -> new HashSet<>()).add(cls.getIRI().getFragment());
@@ -772,8 +929,8 @@ public class SWRLServiceImpl implements SWRLService {
             }
 		}
 		Map<String, Map<String, Set<String>>> finalMap = new HashMap<>();
-		finalMap.put("owl:Class", instances);
-		finalMap.put("owl:ObjectProperty", propertyValues);
+		finalMap.put("class", instances);
+		finalMap.put("objectProperty", propertyValues);
 		 Gson gson = new Gson();
          String json = gson.toJson(finalMap);
 		 return json;
@@ -781,7 +938,9 @@ public class SWRLServiceImpl implements SWRLService {
 		Gson gson = new Gson();
 		String json = gson.toJson(e);
 		return json;
-		}
+	}
+
+
 	}
 
 }
