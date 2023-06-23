@@ -381,3 +381,6 @@ You pick Body -> Raw -> JSON
 ### Useful encoders to encode the TEXT
 
 [ENOCDER-64](https://codebeautify.org/xml-to-base64-converter#)
+
+### Useful Link for BuiltIn Function 
+[Documentation](http://www.daml.org/swrl/proposal/builtins.html)
