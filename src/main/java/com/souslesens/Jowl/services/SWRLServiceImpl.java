@@ -59,6 +59,10 @@ public class SWRLServiceImpl implements SWRLService {
 		try {
 			
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		//set silent imports
+		OWLOntologyLoaderConfiguration config = new OWLOntologyLoaderConfiguration();
+		config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
+		manager.setOntologyLoaderConfiguration(config);
 		OWLOntology ontology = null;
 
 		if (filePath == null && url.isEmpty() == false && (url.startsWith("http") || url.startsWith("ftp"))) {
@@ -577,6 +581,10 @@ public class SWRLServiceImpl implements SWRLService {
 		try {
 			
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		//set silent imports
+		OWLOntologyLoaderConfiguration config = new OWLOntologyLoaderConfiguration();
+		config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
+		manager.setOntologyLoaderConfiguration(config);
 		OWLOntology ontology = null;
 
 		if (filePath == null && url.isEmpty() == false && (url.startsWith("http") || url.startsWith("ftp"))) {
