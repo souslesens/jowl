@@ -244,7 +244,7 @@ You pick Body -> Raw -> JSON
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-You choose POST Request , you pass this URL http://localhost:9170/SWRL/insertRulePropertyVA
+You choose POST Request , you pass this URL http://localhost:9170/swrl/exec_rule
 
 You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
 in the JSON Body 
@@ -313,7 +313,7 @@ You pick Body -> Raw -> JSON
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-You choose POST Request , you pass this URL http://localhost:9170/SWRL/insertRulePropertyVA
+You choose POST Request , you pass this URL http://localhost:9170/swrl/exec_rule
 
 You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
 in the JSON Body 
