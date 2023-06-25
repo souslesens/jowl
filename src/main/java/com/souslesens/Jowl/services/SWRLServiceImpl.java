@@ -78,17 +78,20 @@ public class SWRLServiceImpl implements SWRLService {
 				SWRLVariable var = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
 				Set<SWRLAtom> bodyList = new HashSet<>();
 				for (String bodies : reqBodies) {
-					OWLClass classX = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+bodies));
+					
+					OWLClass classX = factory.getOWLClass(IRI.create(bodies));
 					SWRLClassAtom bodyElement = factory.getSWRLClassAtom(classX, var);
 					bodyList.add(bodyElement);
+					
 				}
 				Set<OWLClass> classes = new HashSet<>();
 				Set<SWRLAtom> headList = new HashSet<>();
 				for (String headies : reqHead) {
-					OWLClass classX = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+headies));
+					OWLClass classX = factory.getOWLClass(IRI.create(headies));
 					classes.add(classX);
 					SWRLClassAtom headElement = factory.getSWRLClassAtom(classX, var);
 					headList.add(headElement);
+					
 				}
 				
 				SWRLRule rule = factory.getSWRLRule(bodyList, headList);
@@ -142,17 +145,20 @@ public class SWRLServiceImpl implements SWRLService {
 		SWRLVariable var = factory.getSWRLVariable(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#x"));
 		Set<SWRLAtom> bodyList = new HashSet<>();
 		for (String bodies : reqBodies) {
-			OWLClass classX = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+bodies));
+			
+			OWLClass classX = factory.getOWLClass(IRI.create(bodies));
 			SWRLClassAtom bodyElement = factory.getSWRLClassAtom(classX, var);
 			bodyList.add(bodyElement);
+			
 		}
 		Set<OWLClass> classes = new HashSet<>();
 		Set<SWRLAtom> headList = new HashSet<>();
 		for (String headies : reqHead) {
-			OWLClass classX = factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+headies));
+			OWLClass classX = factory.getOWLClass(IRI.create(headies));
 			classes.add(classX);
 			SWRLClassAtom headElement = factory.getSWRLClassAtom(classX, var);
 			headList.add(headElement);
+			
 		}
 		
 		SWRLRule rule = factory.getSWRLRule(bodyList, headList);
