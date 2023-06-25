@@ -605,7 +605,7 @@ public class SWRLServiceImpl implements SWRLService {
     	for (SWRLTypeEntityVariable swrlVariable1 : reqBodies) {
     	    if( swrlVariable1.getType().equalsIgnoreCase("owl:Class")){
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
-    	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
+    	    		OWLClass classX =factory.getOWLClass(IRI.create(entity.getName()));
     	    		 String[] variables = entity.getVar();
     	    		 String[] literals = entity.getLiteral();
     	    	        for (String table : variables ) {
@@ -616,7 +616,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    	}
     	    }else if (swrlVariable1.getType().equalsIgnoreCase("owl:ObjectProperty")) {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
-    	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
+    	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(entity.getName()));
    	    		 String[] variables = entity.getVar();
 	    	        if (variables.length != 2) {
 	    	            throw new IllegalArgumentException("The variable list must contains Variable");
@@ -632,7 +632,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    	}
     	    }else if (swrlVariable1.getType().equalsIgnoreCase("owl:DataProperty")) {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
-    	    		OWLDataProperty dataPropertyVar = factory.getOWLDataProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
+    	    		OWLDataProperty dataPropertyVar = factory.getOWLDataProperty(IRI.create(entity.getName()));
    	    		 String[] variables = entity.getVar();
 	    	        if (variables.length != 2) {
 	    	            throw new IllegalArgumentException("The variable list must contains 2 arguemts");
@@ -863,7 +863,7 @@ public class SWRLServiceImpl implements SWRLService {
     	for (SWRLTypeEntityVariable swrlVariable1 : reqHead) {
     	    if( swrlVariable1.getType().equalsIgnoreCase("owl:Class")){
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
-    	    		OWLClass classX =factory.getOWLClass(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
+    	    		OWLClass classX =factory.getOWLClass(IRI.create(entity.getName()));
     	    		classes.add(classX);
    	    		 String[] variables = entity.getVar();
 	    	        for (String table : variables ) {
@@ -874,7 +874,7 @@ public class SWRLServiceImpl implements SWRLService {
     	    	}
     	    }else if (swrlVariable1.getType().equalsIgnoreCase("owl:ObjectProperty")) {
     	    	for (SWRLVariables entity : swrlVariable1.getEntities()) {
-    	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(ontology.getOntologyID().getOntologyIRI().get() + "#"+entity.getName()));
+    	    		OWLObjectProperty ObjectPropertyX =factory.getOWLObjectProperty(IRI.create(entity.getName()));
     	    		objectproperties.add(ObjectPropertyX);
     	    		 String[] variables = entity.getVar();
     	    	        if (variables.length != 2) {
