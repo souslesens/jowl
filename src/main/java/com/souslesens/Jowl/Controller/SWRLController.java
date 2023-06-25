@@ -16,13 +16,13 @@ import com.souslesens.Jowl.services.SWRLService;
 
 
 @RestController
-@RequestMapping("/SWRL")
+@RequestMapping("/swrl")
 public class SWRLController {
 
 	@Autowired
 	private SWRLService SWRLService;
     //Post API For STRING
-    @PostMapping("/insertRuleReclassification")
+    @PostMapping("/alternative_exec_rule")
     public ResponseEntity<?> postReclassification(@RequestBody(required = false) ruleSWRLInput request) { 
         String filePath = request.getFilePath();
         String url = request.getUrl();
@@ -57,7 +57,7 @@ public class SWRLController {
             }
         }
     
-    @PostMapping("/insertRulePropertyVA")
+    @PostMapping("/exec_rule")
     public ResponseEntity<?> postPropertyValueAssignment(@RequestBody(required = false) ruleSWRLInputComplex request) { 
         String filePath = request.getFilePath();
         String url = request.getUrl();
