@@ -143,8 +143,8 @@ You pick Body -> Raw -> JSON
 __SWRL Rules's APIS__
 | Method Type | API  | Description |
 | -------- | -------- | -------- |
-| _POST_ | /SWRL/insertRuleReclassification | SWRL Rule for classification : Student(x) ->  Person (x) |
-| _POST_ | /SWRL/insertRulePropertyVA | SWRL Rule Complex Input :Person(x) ^ hasSibling (x,y) ^ man (y) -> hasBrother(x,y)|
+| _POST_ | /swrl/alternative_exec_rule | SWRL Rule for classification : Student(x) ->  Person (x) |
+| _POST_ | /swrl/exec_rule | SWRL Rule Complex Input :Person(x) ^ hasSibling (x,y) ^ man (y) -> hasBrother(x,y)|
 
 
 ----------------
@@ -153,7 +153,7 @@ __SWRL Rules's APIS__
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-You choose POST Request , you pass this URL http://localhost:9170/SWRL/insertRuleReclassification
+You choose POST Request , you pass this URL http://localhost:9170/swrl/alternative_exec_rule
 
 You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
 in the JSON Body 
@@ -170,8 +170,8 @@ You pick Body -> Raw -> JSON
 ```JSON
     {
         "ontologyContentEncoded64" : "PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIgogICAgICAgICB4bWxuczpvd2w9Imh0dHA6Ly93d3cudzMub3JnLzIwMDIvMDcvb3dsIyIKICAgICAgICAgeG1sbnM6cmRmcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wMS9yZGYtc2NoZW1hIyIKICAgICAgICAgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSMiCiAgICAgICAgIHhtbG5zPSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5IyIKICAgICAgICAgeG1sOmJhc2U9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kiPgoKICAgIDxvd2w6T250b2xvZ3kgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5Ii8+CgogICAgPG93bDpDbGFzcyByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjUGVyc29uIi8+CiAgICAKICAgIDxvd2w6Q2xhc3MgcmRmOmFib3V0PSJodHRwOi8vd3d3LmV4YW1wbGUuY29tL29udG9sb2d5I1N0dWRlbnQiLz4KCiAgICA8b3dsOk5hbWVkSW5kaXZpZHVhbCByZGY6YWJvdXQ9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjQW1pbmUiPgogICAgICAgIDxyZGY6dHlwZSByZGY6cmVzb3VyY2U9Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vb250b2xvZ3kjU3R1ZGVudCIvPgogICAgPC9vd2w6TmFtZWRJbmRpdmlkdWFsPgo8L3JkZjpSREY+Cg==" ,
-            "premise":["Student"],
-            "conclusion":["Person"]
+            "premise":["http://www.example.com/ontology#Student"],
+            "conclusion":["http://www.example.com/ontology#Person"]
         
         }
 ```
@@ -181,7 +181,7 @@ You pick Body -> Raw -> JSON
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-You choose POST Request , you pass this URL http://localhost:9170/SWRL/insertRulePropertyVA
+You choose POST Request , you pass this URL http://localhost:9170/swrl/exec_rule
 
 You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
 in the JSON Body 
@@ -204,11 +204,11 @@ You pick Body -> Raw -> JSON
         "type": "owl:Class",
         "entities": [
             {
-                "name": "Person",
+                "name": "http://www.example.com/ontology#Person",
                 "var": ["A"]
             },
             {
-                "name": "Man",
+                "name": "http://www.example.com/ontology#Man",
                 "var": ["Y"]
             }
         ]
@@ -217,7 +217,7 @@ You pick Body -> Raw -> JSON
         "type": "owl:ObjectProperty",
         "entities": [
             {
-                "name": "hasSibling",
+                "name": "http://www.example.com/ontology#hasSibling",
                 "var": ["A", "Y"]
             }
         ]
@@ -228,7 +228,7 @@ You pick Body -> Raw -> JSON
         "type": "owl:ObjectProperty",
         "entities": [
             {
-                "name": "hasBrother",
+                "name": "http://www.example.com/ontology#hasBrother",
                 "var": ["A", "Y"]
             }
         ]
@@ -267,7 +267,7 @@ You pick Body -> Raw -> JSON
         "type": "owl:Class",
         "entities": [
             {
-                "name": "Person",
+                "name": "http://www.example.com/ontology#Person",
                 "var": ["X"]
             }
         ]
@@ -276,7 +276,7 @@ You pick Body -> Raw -> JSON
         "type": "owl:DataProperty",
         "entities": [
             {
-                "name": "hasAge",
+                "name": "http://www.example.com#hasAge",
                 "var": ["X", "age"]
             }
         ]
@@ -297,7 +297,7 @@ You pick Body -> Raw -> JSON
         "type": "owl:Class",
         "entities": [
             {
-                "name": "Adult",
+                "name": "http://www.example.com#Adult",
                 "var": ["X"]
             }
         ]
@@ -334,7 +334,7 @@ You pick Body -> Raw -> JSON
         "type": "owl:Class",
         "entities": [
             {
-                "name": "Student",
+                "name": "http://www.example.com/ontology#Student",
                 "var": ["Y"]
             }
         ]
@@ -343,7 +343,7 @@ You pick Body -> Raw -> JSON
         "type": "owl:DataProperty",
         "entities": [
             {
-                "name": "hasName",
+                "name": "http://www.example.com/ontology#hasName",
                 "var": ["Y", "name"]
             }
         ]
@@ -365,7 +365,7 @@ You pick Body -> Raw -> JSON
         "type": "owl:Class",
         "entities": [
             {
-                "name": "Person",
+                "name": "http://www.example.com/ontology#Person",
                 "var": ["Y"]
             }
         ]
