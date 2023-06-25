@@ -24,6 +24,7 @@ public class SWRLController {
     //Post API For STRING
     @PostMapping("/alternative_exec_rule")
     public ResponseEntity<?> postReclassification(@RequestBody(required = false) ruleSWRLInput request) { 
+    	// This Class works only for Classess
         String filePath = request.getFilePath();
         String url = request.getUrl();
         String ontologyContentEncoded64 = request.getOntologyContentEncoded64();
