@@ -32,7 +32,7 @@ public class ReasonerAlternativeAPIController {
                 String result = reasonerServiceAlt.getConsistencyAlt(filePath, url,ontologyFile);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     
@@ -54,7 +54,7 @@ public class ReasonerAlternativeAPIController {
                 List<reasonerExtractTriples> result = reasonerServiceAlt.getInferencesAlt(filePath, url,ontologyFile);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
    
@@ -72,7 +72,7 @@ public class ReasonerAlternativeAPIController {
                 String result = reasonerServiceAlt.getUnsatisfaisableClassesAlt(filePath, url,ontologyFile);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     // This to count the number of the parameteres that will help us to know how many parameteres we passed to the API 

@@ -25,7 +25,6 @@ import com.souslesens.Jowl.model.parametresInputInference;
 import com.souslesens.Jowl.model.reasonerInference;
 import com.souslesens.Jowl.model.reasonerInput;
 import com.souslesens.Jowl.services.ReasonerService;
-import com.souslesens.Jowl.services.ReasonerServiceImpl.CustomInferredComplementOfAxiomGenerator;
 
 
 @RestController
@@ -56,7 +55,7 @@ public class ReasonerController {
                 String result = reasonerService.getUnsatisfaisableClasses(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     @GetMapping("/consistency")
@@ -73,7 +72,7 @@ public class ReasonerController {
                 String result = reasonerService.getConsistency(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("ERROR");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
             
         	
@@ -93,7 +92,7 @@ public class ReasonerController {
                 String result = reasonerService.getInferences(filePath, url);
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("ERROR");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
             
         	
@@ -130,7 +129,7 @@ public class ReasonerController {
             	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     //Post API For STRING
@@ -142,7 +141,6 @@ public class ReasonerController {
         String url = request.getUrl();
         String ontologyContentEncoded64 = request.getOntologyContentEncoded64();
         String[] reqParametres = request.getParams();
-
     	byte[] ontologyContentDecoded64Bytes = null;
     	String ontologyContentDecoded64 = null;
     	if (ontologyContentEncoded64 != null && !ontologyContentEncoded64.isEmpty()) {
@@ -154,7 +152,7 @@ public class ReasonerController {
         headers.set("Accept", "application/json");
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
-    	 String externalApiUrl = "http://localhost:8080/reasoner/parametres";
+    	 String externalApiUrl = "http://localhost:9170/reasoner/parametres";
     	 ResponseEntity<String> response = restTemplate.exchange(externalApiUrl, HttpMethod.GET, entity, String.class);
     	 System.out.println(response.getBody());
     	 List<String> valuesList = new ArrayList<>();
@@ -184,7 +182,7 @@ public class ReasonerController {
      		    }
 
      		} catch (Exception e) {
-     			return ResponseEntity.badRequest().body("Error");
+     			return ResponseEntity.badRequest().body(e.getMessage());
           }
     	 }else {
     		 valuesList = valuesList2;
@@ -206,7 +204,7 @@ public class ReasonerController {
             	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     //Post API For STRING
@@ -236,7 +234,7 @@ public class ReasonerController {
             	}
                 return ResponseEntity.ok(result);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     
@@ -272,7 +270,7 @@ public class ReasonerController {
             	
                 return ResponseEntity.ok(hashMap);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     
@@ -305,7 +303,7 @@ public class ReasonerController {
             	parametresInference.add(new parametresInputInference(equivalentClass, sameIndividual, IntersectionOf,UnionOf,DisjointClasses,differentIndividual,HasValue,InverseObjectProperties,AllValuesFrom,SomeValuesFrom,DomainAndRange));
                 return ResponseEntity.ok(parametresInference);
             } catch (Exception e) {
-                return ResponseEntity.badRequest().body("Error");
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
     

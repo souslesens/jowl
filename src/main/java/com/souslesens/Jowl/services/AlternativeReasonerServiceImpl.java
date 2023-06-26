@@ -195,7 +195,6 @@ public class AlternativeReasonerServiceImpl implements AlternativeReasonerServic
 	        }
 	        PelletReasonerFactory reasonerFactory = new PelletReasonerFactory();
 	        OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
-	        String fileName = "inferred-ontology.owl";
 	        reasoner.precomputeInferences(InferenceType.values());
 	        InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner);
 	        OWLOntology inferredOntology = manager.createOntology();
