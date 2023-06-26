@@ -2,72 +2,118 @@ package com.souslesens.Jowl.services;
 
 
 import be.ugent.rml.cli.Main;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+
+import com.souslesens.Jowl.model.Source;
+
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+import java.util.Comparator;
+import java.util.List;
 
 @Service
 public class RMLProcessorServiceImpl implements RMLProcessorService {
-	@Override
-	public Model performRmlMapping(MultipartFile rmlFile, MultipartFile dataFile,  String format) throws Exception {
-		String dataFileExtension;
-	    switch (format.toLowerCase()) {
-	        case "csv":
-	            dataFileExtension = ".csv";
-	            break;
-	        case "xml":
-	            dataFileExtension = ".xml";
-	            break;
-	        case "tsv":
-	            dataFileExtension = ".tsv";
-	            break;
-	        case "json":
-	            dataFileExtension = ".json";
-	            break;
-	        default:
-	            throw new IllegalArgumentException("Unsupported format: " + format);
-	    }
-		Path rmlTempFile = Files.createTempFile("rml-", ".rml");
-	    Path dataTempFile = Files.createTempFile("data-", dataFileExtension);
-	    Path outputTempFile = Files.createTempFile("output-", ".ttl");
+    public Model performRmlMappingMultiSource(String rmlString, List<Source> sources) throws Exception {
+        Path tempDir = Files.createTempDirectory("data-");
+        Path rmlTempFile = createTempFileFromString("rml-", ".rml", rmlString, tempDir);
+        Path outputTempFile = Files.createTempFile("output-", ".ttl");
 
-	    Files.copy(rmlFile.getInputStream(), rmlTempFile, StandardCopyOption.REPLACE_EXISTING);
-	    Files.copy(dataFile.getInputStream(), dataTempFile, StandardCopyOption.REPLACE_EXISTING);
+        System.out.println("RML file path: " + rmlTempFile); // Debug log
 
-	    String[] args = {
-	            "-m", rmlTempFile.toString(),
-	            "-o", outputTempFile.toString(),
-	            "-d", dataTempFile.toString()
-	    };
+        for (Source source : sources) {
+            if (source.getFileContent() != null) {
+                createFileFromString(source.getFileContent(), source.getFormat(), source.getFileName(), tempDir);
+            } else {
+                createCSVFile(source.getCsvHeaders(), source.getCsvData(), source.getFileName(), tempDir);
+            }
+        }
 
-	    PrintStream originalOut = System.out;
-	    PrintStream redirectedOut = new PrintStream(outputTempFile.toFile()); // Redirect the output to the output file
-	    System.setOut(redirectedOut);
+        processRMLMapping(rmlTempFile, tempDir, outputTempFile);
 
-	    try {
-	        Main.main(args);
-	    } finally {
-	        System.setOut(originalOut);
-	        redirectedOut.close(); // Close the PrintStream used for redirection
-	        Files.deleteIfExists(rmlTempFile);
-	        Files.deleteIfExists(dataTempFile);
-	    }
+        Model model = generateModelFromOutput(outputTempFile);
+        
+        try {
+            Files.deleteIfExists(outputTempFile);
+            deleteDirectoryWithContents(tempDir);
+            } catch (IOException e) {
+            System.err.println("Failed to clean up temporary files: " + e.getMessage());
+        }
 
-	    String rdfOutput = Files.readString(outputTempFile, StandardCharsets.UTF_8);
-	    InputStream rdfInputStream = new ByteArrayInputStream(rdfOutput.getBytes(StandardCharsets.UTF_8));
-	    Model model = Rio.parse(rdfInputStream, "", RDFFormat.TURTLE);
 
-	    Files.deleteIfExists(outputTempFile);
+        return model;
+    }
 
-	    return model;
-	}
+    private Path createCSVFile(List<String> headers, List<List<String>> data, String filename, Path directory) throws IOException {
+        Path dataTempFile = directory.resolve(filename + ".csv");
+        BufferedWriter writer = Files.newBufferedWriter(dataTempFile, StandardCharsets.UTF_8);
+        CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader(headers.toArray(new String[0])));
+        for (List<String> row : data) {
+            csvPrinter.printRecord(row);
+        }
+        csvPrinter.close();
+
+        return dataTempFile;
+    }
+
+    private Path createFileFromString(String content, String format, String filename, Path directory) throws IOException {
+        Path dataTempFile = directory.resolve(filename + "." + format);
+        System.out.println("Saving file: " + dataTempFile); // Debug log
+        Files.writeString(dataTempFile, content, StandardCharsets.UTF_8);
+
+        return dataTempFile;
+    }
+
+
+    private Path createTempFileFromString(String prefix, String suffix, String content, Path directory) throws IOException {
+        Path tempFile = directory.resolve(prefix + suffix);
+        Files.writeString(tempFile, content, StandardCharsets.UTF_8);
+
+        return tempFile;
+    }
+
+    private void processRMLMapping(Path rmlTempFile, Path dataDir, Path outputTempFile) throws Exception {
+        String[] args = {
+            "-m", rmlTempFile.toString(),
+            "-o", outputTempFile.toString(),
+            "-d", dataDir.toString() // directory where the data files are
+        };
+
+        PrintStream originalOut = System.out;
+        PrintStream redirectedOut = new PrintStream(outputTempFile.toFile());
+        System.setOut(redirectedOut);
+
+        try {
+            Main.main(args);
+        } finally {
+            System.setOut(originalOut);
+            redirectedOut.close();
+        }
+    }
+
+    private Model generateModelFromOutput(Path outputTempFile) throws IOException {
+        String rdfOutput = Files.readString(outputTempFile, StandardCharsets.UTF_8);
+        InputStream rdfInputStream = new ByteArrayInputStream(rdfOutput.getBytes(StandardCharsets.UTF_8));
+        Model model = Rio.parse(rdfInputStream, "", RDFFormat.TURTLE);
+
+        return model;
+    }
+    
+    private static void deleteDirectoryWithContents(Path pathToBeDeleted) throws IOException {
+        Files.walk(pathToBeDeleted)
+             .sorted(Comparator.reverseOrder())
+             .map(Path::toFile)
+             .forEach(File::delete);
+    }
 }
