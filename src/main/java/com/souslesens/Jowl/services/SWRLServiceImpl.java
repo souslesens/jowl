@@ -111,7 +111,7 @@ public class SWRLServiceImpl implements SWRLService {
 		            for (Node<OWLNamedIndividual> individualNode : inferredIndv) {
 		                for (OWLNamedIndividual individual : individualNode) {
 		                	System.out.println(individual.getIRI().getFragment() + " is an instance of " + cls.getIRI().getFragment());
-		                	instances.computeIfAbsent(individual.getIRI().getFragment(), k -> new HashSet<>()).add(cls.getIRI().getFragment());
+		                	instances.computeIfAbsent(individual.getIRI().toString(), k -> new HashSet<>()).add(cls.getIRI().toString());
 		                }
 		            }
 				}
@@ -182,7 +182,7 @@ public class SWRLServiceImpl implements SWRLService {
             for (Node<OWLNamedIndividual> individualNode : inferredIndv) {
                 for (OWLNamedIndividual individual : individualNode) {
                 	System.out.println(individual.getIRI().getFragment() + " is an instance of " + cls.getIRI().getFragment());
-                	instances.computeIfAbsent(individual.getIRI().getFragment(), k -> new HashSet<>()).add(cls.getIRI().getFragment());
+                	instances.computeIfAbsent(individual.getIRI().toString(), k -> new HashSet<>()).add(cls.getIRI().toString());
                 }
             }
 		}
@@ -545,8 +545,9 @@ public class SWRLServiceImpl implements SWRLService {
 
 			        // If there are any values, add them to the map
 			        for (OWLNamedIndividual value : objectPropertyValues.getFlattened()) {
-			            String key = individual.getIRI().getFragment();
-			            propertyValues.computeIfAbsent(key, k -> new HashSet<>()).add(objectproperty.getIRI().getFragment()+"/"+ value.getIRI().getFragment() );
+			            String key = individual.getIRI().toString();
+			            propertyValues.computeIfAbsent(key, k -> new HashSet<>()).add(objectproperty.getIRI().toString());
+			            propertyValues.computeIfAbsent(key, k -> new HashSet<>()).add(value.getIRI().toString() );
 			        }
 			    }
 			}
@@ -555,7 +556,7 @@ public class SWRLServiceImpl implements SWRLService {
 				NodeSet<OWLNamedIndividual> inferredIndv = reasoner.getInstances(cls, false); // false = only inferred
 	            for (Node<OWLNamedIndividual> individualNode : inferredIndv) {
 	                for (OWLNamedIndividual individual : individualNode) {
-	                	instances.computeIfAbsent(individual.getIRI().getFragment(), k -> new HashSet<>()).add(cls.getIRI().getFragment());
+	                	instances.computeIfAbsent(individual.getIRI().toString(), k -> new HashSet<>()).add(cls.getIRI().toString());
 	                }
 	            }
 			}
@@ -928,8 +929,9 @@ public class SWRLServiceImpl implements SWRLService {
 
 		        // If there are any values, add them to the map
 		        for (OWLNamedIndividual value : objectPropertyValues.getFlattened()) {
-		            String key = individual.getIRI().getFragment();
-		            propertyValues.computeIfAbsent(key, k -> new HashSet<>()).add(objectproperty.getIRI().getFragment()+"/"+ value.getIRI().getFragment() );
+		            String key = individual.getIRI().toString();
+		            propertyValues.computeIfAbsent(key, k -> new HashSet<>()).add(objectproperty.getIRI().toString());
+		            propertyValues.computeIfAbsent(key, k -> new HashSet<>()).add(value.getIRI().toString() );
 		        }
 		    }
 		}
@@ -938,7 +940,7 @@ public class SWRLServiceImpl implements SWRLService {
 			NodeSet<OWLNamedIndividual> inferredIndv = reasoner.getInstances(cls, false); // false = only inferred
             for (Node<OWLNamedIndividual> individualNode : inferredIndv) {
                 for (OWLNamedIndividual individual : individualNode) {
-                	instances.computeIfAbsent(individual.getIRI().getFragment(), k -> new HashSet<>()).add(cls.getIRI().getFragment());
+                	instances.computeIfAbsent(individual.getIRI().toString(), k -> new HashSet<>()).add(cls.getIRI().toString());
                 }
             }
 		}
