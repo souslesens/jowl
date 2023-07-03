@@ -39,6 +39,7 @@ public class RMLController {
             Model model = rmlProcessorService.performRmlMappingMultiSource(mappingRequest.getRml(), mappingRequest.getSources());
             StringWriter stringWriter = new StringWriter();
             Rio.write(model, stringWriter, RDFFormat.TURTLE);
+
             return ResponseEntity.ok(stringWriter.toString());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error during the RML mapping process: " + e.getMessage());

@@ -1,16 +1,20 @@
 package com.souslesens.Jowl.model;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Base64;
 import java.util.List;
 
 public class Source {
-    private String fileContent;
-    private String format;
-    private String fileName;
-    private List<String> csvHeaders;
-    private List<List<String>> csvData;
+	 private String data;
+	 private String format;
+	 private String fileName;
+	 private List<String> csvHeaders;
+	 private List<List<String>> csvData;
 
-    public String getFileContent() {
-        return this.fileContent;
+
+    public String getData() {
+        return this.data;
     }
     public String getFormat() {
         return this.format;
@@ -28,8 +32,8 @@ public class Source {
         return this.csvData;
     }
 
-    public void setFileContent(String fileContent) {
-        this.fileContent = fileContent;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public void setFormat(String format) {
@@ -46,5 +50,10 @@ public class Source {
 
     public void setCsvData(List<List<String>> csvData) {
         this.csvData = csvData;
+    }
+
+    public InputStream getDataAsInputStream() {
+        byte[] bytes = Base64.getDecoder().decode(this.data);
+        return new ByteArrayInputStream(bytes);
     }
 }
