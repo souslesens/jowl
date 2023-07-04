@@ -423,7 +423,8 @@ After running the API with the provided RML mapping and source data, you should 
   <http://www.w3.org/2003/01/geo/wgs84_pos#long> "4.484444" .
 ```
 
-**note** 
+***Note*** 
+
 Please note that the data source referenced in your RML mapping should follow a relative path structure, namely: 'temp-files/mapping/dataFile.format'. Make sure to replace 'dataFile.format' with your corresponding file name and format. For example, if you have a CSV file named 'Airport.csv', your RML mapping should include the path 'temp-files/mapping/Airport.csv'.
 
 
