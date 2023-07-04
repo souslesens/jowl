@@ -406,11 +406,6 @@ You pick Body -> Raw -> JSON
       "format": "csv",
       "fileName": "Airport",
       "data": "PHRyYW5zcG9ydD4KICAgIDxidXMgaWQ9IjI1Ij4KICAgICAgICA8cm91dGU+CiAgICAgICAgICAgIDxzdG9wIGlkPSI2NDUiPkludGVybmF0aW9uYWwgQWlycG9ydDwvc3RvcD4KICAgICAgICAgICAgPHN0b3AgaWQ9IjY1MSI+Q29uZmVyZW5jZSBjZW50ZXI8L3N0b3A+CiAgICAgICAgPC9yb3V0ZT4KICAgIDwvYnVzPgo8L3RyYW5zcG9ydD4K"
-    },
-      {
-      "format": "csv",
-      "fileName": "Airport",
-      "data": "aWQsc3RvcCxsb25naXR1ZGUsbGF0aXR1ZGUKNjUyMywyNSw1MC45MDEzODksNC40ODQ0NDQ="
     }
   ]
 }
@@ -419,6 +414,14 @@ You pick Body -> Raw -> JSON
 Click the "Send" button on the top right corner of the Postman window.
 
 The API should return a response based on the provided RML mappings. If you see any errors, check if the data are correctly encoded in base64 and that they are valid RML mappings.
+
+After running the API with the provided RML mapping and source data, you should see the following output:
+```plaintext
+<http://airport.example.com/6523> a <http://vocab.org/transit/terms/Stop>;
+  <http://vocab.org/transit/terms/route> "25"^^<http://www.w3.org/2001/XMLSchema#int>;
+  <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "50.901389";
+  <http://www.w3.org/2003/01/geo/wgs84_pos#long> "4.484444" .
+
 
 **note** 
 Please note that the data source referenced in your RML mapping should follow a relative path structure, namely: 'temp-files/mapping/dataFile.format'. Make sure to replace 'dataFile.format' with your corresponding file name and format. For example, if you have a CSV file named 'Airport.csv', your RML mapping should include the path 'temp-files/mapping/Airport.csv'.
