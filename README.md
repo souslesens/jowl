@@ -377,6 +377,52 @@ You pick Body -> Raw -> JSON
 ```
 
 ----------------
+__RML Mapping's APIS__
+| Method Type | API  | Description |
+| -------- | -------- | -------- |
+| _POST_ | /rml/mapping | Transforming multiple data sources into a RDF model in TURTLE format using provided RML mappings. |
+| _POST_ | /rml/validateRML | Validating provided RML syntax and reporting any encountered errors or inconsistencies. |
+----------------
+### Example Of Use For Mapping Part
+You open for example Postman.  If you are not familiar with Postman, you can download it from [Postman](https://www.postman.com/) )
+
+Copy and paste the URL http://localhost:9170/rml/mapping into the URL field.
+
+In your request payload, you should pass two key parameters: 'rml' and 'sources'.
+
+The 'rml' parameter accepts a string, which represents your RML mapping configuration.
+
+The 'sources' parameter accepts an array of one or more source objects. Each source object must contain three properties: 'fileName', 'data', and 'format'. 'fileName' is the name to be used for the data source, 'data' contains the base64 encoded data, and 'format' indicates the format of the data.
+
+You pick Body -> Raw -> JSON 
+
+```JSON
+{  
+    {
+"rml": "@prefix rr: <http://www.w3.org/ns/r2rml#>.\n@prefix rml: <http://semweb.mmlab.be/ns/rml#>.\n@prefix ql: <http://semweb.mmlab.be/ns/ql#>.\n@prefix transit: <http://vocab.org/transit/terms/>.\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.\n@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#>.\n@base <http://example.com/ns#>.\n\n<#AirportMapping> a rr:TriplesMap;\n  rml:logicalSource [\n    rml:source \"temp-files/mapping/Airport.csv\" ;\n    rml:referenceFormulation ql:CSV\n  ];\n  rr:subjectMap [\n    rr:template \"http://airport.example.com/{id}\";\n    rr:class transit:Stop\n  ];\n\n  rr:predicateObjectMap [\n    rr:predicate transit:route;\n    rr:objectMap [\n      rml:reference \"stop\";\n      rr:datatype xsd:int\n      ]\n    ];\n\n  rr:predicateObjectMap [\n    rr:predicate wgs84_pos:lat;\n    rr:objectMap [\n      rml:reference \"latitude\"\n    ]\n  ];\n\n  rr:predicateObjectMap [\n    rr:predicate wgs84_pos:long;\n    rr:objectMap [\n      rml:reference \"longitude\"\n    ]\n  ].",
+
+  "sources": [
+    {
+      "format": "csv",
+      "fileName": "Airport",
+      "data": "PHRyYW5zcG9ydD4KICAgIDxidXMgaWQ9IjI1Ij4KICAgICAgICA8cm91dGU+CiAgICAgICAgICAgIDxzdG9wIGlkPSI2NDUiPkludGVybmF0aW9uYWwgQWlycG9ydDwvc3RvcD4KICAgICAgICAgICAgPHN0b3AgaWQ9IjY1MSI+Q29uZmVyZW5jZSBjZW50ZXI8L3N0b3A+CiAgICAgICAgPC9yb3V0ZT4KICAgIDwvYnVzPgo8L3RyYW5zcG9ydD4K"
+    },
+      {
+      "format": "csv",
+      "fileName": "Airport",
+      "data": "aWQsc3RvcCxsb25naXR1ZGUsbGF0aXR1ZGUKNjUyMywyNSw1MC45MDEzODksNC40ODQ0NDQ="
+    }
+  ]
+}
+```
+
+Click the "Send" button on the top right corner of the Postman window.
+
+The API should return a response based on the provided RML mappings. If you see any errors, check if the data are correctly encoded in base64 and that they are valid RML mappings.
+
+**note** 
+Please note that the data source referenced in your RML mapping should follow a relative path structure, namely: 'temp-files/mapping/dataFile.format'. Make sure to replace 'dataFile.format' with your corresponding file name and format. For example, if you have a CSV file named 'Airport.csv', your RML mapping should include the path 'temp-files/mapping/Airport.csv'.
+
 
 ### Useful encoders to encode the TEXT
 
