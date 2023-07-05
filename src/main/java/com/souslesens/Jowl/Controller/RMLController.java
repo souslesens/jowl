@@ -33,7 +33,7 @@ public class RMLController {
     private  RMLProcessorService rmlProcessorService;
 
 
-    @PostMapping("/mapping")
+    @PostMapping("/createTriples")
     public ResponseEntity<String> performMapping(@RequestBody MappingRequest mappingRequest) {
         try {
             Model model = rmlProcessorService.performRmlMappingMultiSource(mappingRequest.getRml(), mappingRequest.getSources());

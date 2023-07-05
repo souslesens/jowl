@@ -6,16 +6,24 @@ import java.util.Base64;
 import java.util.List;
 
 public class Source {
-	 private String data;
-	 private String format;
-	 private String fileName;
-	 private List<String> csvHeaders;
-	 private List<List<String>> csvData;
+    private String contentEncoded64; 
+    private String format;
+    private String fileName;
+    
 
-
-    public String getData() {
-        return this.data;
+    public String getContentEncoded64() {
+        return this.contentEncoded64;
     }
+
+    public void setContentEncoded64(String ContentEncoded64) {
+        this.contentEncoded64 = ContentEncoded64;
+    }
+
+    public InputStream getContentEncoded64AsInputStream() {
+        byte[] bytes = Base64.getDecoder().decode(this.contentEncoded64);
+        return new ByteArrayInputStream(bytes);
+    }
+
     public String getFormat() {
         return this.format;
     }
@@ -24,17 +32,6 @@ public class Source {
         return this.fileName;
     }
 
-    public List<String> getCsvHeaders() {
-        return this.csvHeaders;
-    }
-
-    public List<List<String>> getCsvData() {
-        return this.csvData;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
 
     public void setFormat(String format) {
         this.format = format;
@@ -42,18 +39,5 @@ public class Source {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
-    }
-
-    public void setCsvHeaders(List<String> csvHeaders) {
-        this.csvHeaders = csvHeaders;
-    }
-
-    public void setCsvData(List<List<String>> csvData) {
-        this.csvData = csvData;
-    }
-
-    public InputStream getDataAsInputStream() {
-        byte[] bytes = Base64.getDecoder().decode(this.data);
-        return new ByteArrayInputStream(bytes);
     }
 }
