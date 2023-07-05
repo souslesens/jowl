@@ -380,7 +380,7 @@ You pick Body -> Raw -> JSON
 __RML Mapping's APIS__
 | Method Type | API  | Description |
 | -------- | -------- | -------- |
-| _POST_ | /rml/mapping | Transforming multiple data sources into a RDF model in TURTLE format using provided RML mappings. |
+| _POST_ | /rml/createTriples | Transforming multiple data sources into a RDF model in TURTLE format using provided RML mappings. |
 | _POST_ | /rml/validateRML | Validating provided RML syntax and reporting any encountered errors or inconsistencies. |
 ----------------
 ### Example Of Use For Mapping Part
@@ -398,7 +398,7 @@ You pick Body -> Raw -> JSON
 
 ```JSON
 {  
-    {
+    
 
   "rml": "@prefix rr: <http://www.w3.org/ns/r2rml#>.\n@prefix rml: <http://semweb.mmlab.be/ns/rml#>.\n@prefix ql: <http://semweb.mmlab.be/ns/ql#>.\n@prefix transit: <http://vocab.org/transit/terms/>.\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.\n@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#>.\n@base <http://example.com/ns#>.\n\n<#AirportMapping> a rr:TriplesMap;\n  rml:logicalSource [\n    rml:source \"temp-files/mapping/Airport.csv\" ;\n    rml:referenceFormulation ql:CSV\n  ];\n  rr:subjectMap [\n    rr:template \"http://airport.example.com/{id}\";\n    rr:class transit:Stop\n  ];\n\n  rr:predicateObjectMap [\n    rr:predicate transit:route;\n    rr:objectMap [\n      rml:reference \"stop\";\n      rr:datatype xsd:int\n      ]\n    ];\n\n  rr:predicateObjectMap [\n    rr:predicate wgs84_pos:lat;\n    rr:objectMap [\n      rml:reference \"latitude\"\n    ]\n  ];\n\n  rr:predicateObjectMap [\n    rr:predicate wgs84_pos:long;\n    rr:objectMap [\n      rml:reference \"longitude\"\n    ]\n  ].",
 
@@ -406,7 +406,7 @@ You pick Body -> Raw -> JSON
     {
       "format": "csv",
       "fileName": "Airport",
-      "data": "PHRyYW5zcG9ydD4KICAgIDxidXMgaWQ9IjI1Ij4KICAgICAgICA8cm91dGU+CiAgICAgICAgICAgIDxzdG9wIGlkPSI2NDUiPkludGVybmF0aW9uYWwgQWlycG9ydDwvc3RvcD4KICAgICAgICAgICAgPHN0b3AgaWQ9IjY1MSI+Q29uZmVyZW5jZSBjZW50ZXI8L3N0b3A+CiAgICAgICAgPC9yb3V0ZT4KICAgIDwvYnVzPgo8L3RyYW5zcG9ydD4K"
+      "contentEncoded64": "PHRyYW5zcG9ydD4KICAgIDxidXMgaWQ9IjI1Ij4KICAgICAgICA8cm91dGU+CiAgICAgICAgICAgIDxzdG9wIGlkPSI2NDUiPkludGVybmF0aW9uYWwgQWlycG9ydDwvc3RvcD4KICAgICAgICAgICAgPHN0b3AgaWQ9IjY1MSI+Q29uZmVyZW5jZSBjZW50ZXI8L3N0b3A+CiAgICAgICAgPC9yb3V0ZT4KICAgIDwvYnVzPgo8L3RyYW5zcG9ydD4K"
     }
   ]
 }
