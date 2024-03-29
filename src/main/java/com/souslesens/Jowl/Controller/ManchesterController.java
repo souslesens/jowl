@@ -1,6 +1,7 @@
 package com.souslesens.Jowl.Controller;
 
 import com.souslesens.Jowl.model.ManchesterParserInput;
+import com.souslesens.Jowl.model.jenaTripleParser;
 import com.souslesens.Jowl.services.ManchesterService;
 import org.apache.jena.base.Sys;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -49,8 +50,13 @@ public class ManchesterController {
             if (axiom == null) {
                 return ResponseEntity.badRequest().body("Error parsing axiom");
             }
-            return ResponseEntity.ok(axiom.toString());
+
+            ArrayList<jenaTripleParser> triples = serviceManchester.getTriples(axiom);
+            return ResponseEntity.ok().body(triples.toString());
         } catch (OWLOntologyCreationException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Error");
+        } catch (OWLOntologyStorageException e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Error");
         }
