@@ -5,6 +5,10 @@ HELP.md
 /bin/
 /target/
 
+# Maven
+.m2/
+~/.m2/
+
 # Log files
 /log/
 

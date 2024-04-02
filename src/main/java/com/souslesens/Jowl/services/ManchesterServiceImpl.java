@@ -50,6 +50,7 @@ public class ManchesterServiceImpl implements ManchesterService {
 
         ShortFormEntityChecker checker = new ShortFormEntityChecker(shortFormProvider);
 
+        // check if possible to avoid the entity checker
         parser.setOWLEntityChecker(checker);
 
         OWLAxiom axiom;
