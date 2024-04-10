@@ -26,7 +26,9 @@ import org.apache.jena.rdf.model.Model;
 
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.util.*;
 
 @Service
@@ -34,7 +36,23 @@ public class ManchesterServiceImpl implements ManchesterService {
     @Override
     public OWLAxiom parseStringToAxiom(String owlOntologyFilePath, String url, String ontologyContentBased64, String input) throws OWLOntologyCreationException {
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
-        OWLOntology owlOntology = owlManager.loadOntology(IRI.create(url));
+        OWLOntology owlOntology = null;
+        if ( owlOntologyFilePath != null) {
+            File file = new File(owlOntologyFilePath);
+             owlOntology = owlManager.loadOntologyFromOntologyDocument(file);
+        } else if (url != null) {
+             owlOntology = owlManager.loadOntology(IRI.create(url));
+        } else if (ontologyContentBased64 != null) {
+            try (InputStream inputStream = new ByteArrayInputStream(ontologyContentBased64.getBytes())) {
+                owlOntology = owlManager.loadOntologyFromOntologyDocument(inputStream);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (owlOntology == null) {
+            return null;
+        }
 
         OWLDataFactory dataFactory = owlManager.getOWLDataFactory();
         ShortFormProvider sfp =
@@ -50,7 +68,6 @@ public class ManchesterServiceImpl implements ManchesterService {
 
         ShortFormEntityChecker checker = new ShortFormEntityChecker(shortFormProvider);
 
-        // check if possible to avoid the entity checker
         parser.setOWLEntityChecker(checker);
 
         OWLAxiom axiom;
@@ -79,6 +96,10 @@ public class ManchesterServiceImpl implements ManchesterService {
 
         System.out.println("Statements: ");
         for (Statement statement : statements) {
+            //ignore rdfs type statements
+            if (statement.getPredicate().toString().contains("type")) {
+                continue;
+            }
             System.out.println(statement);
             jenaTripleParser triple = new jenaTripleParser();
             triple.setSubject(statement.getSubject().toString());
