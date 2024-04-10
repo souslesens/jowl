@@ -59,7 +59,7 @@ __Reasoning's APIS__
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-You choose POST Request , you pass this URL http://localhost:9170/reasoner/inference
+You choose POST Request , you pass this URL http://localhost:9170/reasoner/inference (or http://localhost:9170/hermit/inference )
 
 You should pass one parameter of those in this List {url,ontologyContentEncoded64,filePath } 
 in the JSON Body 
