@@ -52,7 +52,6 @@ __Reasoning's APIS__
 | _POST_ | /reasoner/consistency | Checking if the passed ontology file is consistent or not : can work with any input  (File , URL , Text) |
 | _POST_ | /reasoner/unsatisfiable | Checking if the passed ontology file has an unsatifiable classes : can work with any input  (File , URL , Text) |
 | _POST_ | /reasoner/inference | Generating Inferences : can work with any input  (File , URL , Text) |
-
 ----------------
 
 ### Example Of Use For Reasoning Part
@@ -378,9 +377,37 @@ You pick Body -> Raw -> JSON
 
 ----------------
 
+__Manchester OWL Syntax's APIS__
+| Method Type | API  | Description |
+| -------- | -------- | -------- |
+| _POST_ | /manchester/manchester2triples | Convert an Axiom written in Manchester OWL Syntax to Triples |
+----------------
+### Example Of Use For Manchester Part
+
+You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
+
+Choose a POST Request , you pass this URL http://localhost:9170/manchester/manchester2triples
+
+In the body of the request (You click on Body -> Raw -> JSON ), two parameters should be passed:
+
+1. The ontology that contains the definition of the classes and properties used in the axiom you want to convert to triples. This ontology should be: encoded in base64, url pointing to it or filepath.
+2. The axiom you want to convert to triples.
+
+```JSON
+    {
+    "url":  "https://raw.githubusercontent.com/BFO-ontology/BFO-2020/master/src/owl/bfo-core.owl",
+    "input": " <http://purl.obolibrary.org/obo/BFO_0000003> EquivalentTo: ( <http://purl.obolibrary.org/obo/BFO_0000004> and ( <http://purl.obolibrary.org/obo/BFO_0000001> and <http://purl.obolibrary.org/obo/BFO_0000002> ) ) "
+    }
+```
+
+----------------
+
 ### Useful encoders to encode the TEXT
 
 [ENOCDER-64](https://codebeautify.org/xml-to-base64-converter#)
 
 ### Useful Link for BuiltIn Function 
 [Documentation](http://www.daml.org/swrl/proposal/builtins.html)
+
+### Useful Link for Manchester OWL Syntax
+[Machester OWL Syntax](https://www.w3.org/TR/owl2-manchester-syntax/)
