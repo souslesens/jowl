@@ -32,21 +32,17 @@ public class ManchesterController {
     @PostMapping(value="/manchester2triples")
     public ResponseEntity<String> manchester2triple(@RequestBody ManchesterParserInput request) {
 
-        String filePath = request.getFilePath();
-        String url = request.getUrl();
-        String ontologyContentEncoded64 = request.getOntologyContentEncoded64();
+        String graphName = request.getGraphName();
         String input = request.getInput();
-        int parametersCount = countParams(ontologyContentEncoded64, filePath, url);
+        int parametersCount = countParams(graphName);
         if (input == null || input.isEmpty()) {
             return ResponseEntity.badRequest().body("Manchester Syntax Input should be provided");
-        } else if (parametersCount == 0) {
-            return ResponseEntity.badRequest().body("Besides the input, at least one of params should be provided");
-        } else if (parametersCount > 1) {
-            return ResponseEntity.badRequest().body("Only one of params should be provided");
+        } else if (graphName == null || graphName.isEmpty()) {
+            return ResponseEntity.badRequest().body("Graph Name should be provided");
         }
 
         try {
-            OWLAxiom axiom = serviceManchester.parseStringToAxiom(filePath, url, ontologyContentEncoded64, input);
+            OWLAxiom axiom = serviceManchester.parseStringToAxiom(graphName, input);
             if (axiom == null) {
                 return ResponseEntity.badRequest().body("Error parsing axiom");
             }

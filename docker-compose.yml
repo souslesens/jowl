@@ -10,4 +10,21 @@ services:
     restart: always
     ports:
       - "9170:9170"
+    networks:
+      - slsdev
 
+  virtuoso:
+    image: askomics/virtuoso:7.2.7
+    environment:
+      DBA_PASSWORD: "dba"
+      SPARQL_UPDATE: "true"
+    ports:
+      - 8890:8890
+    volumes:
+      - ../data/virtuoso:/data
+    networks:
+      - slsdev
+
+networks:
+  slsdev:
+    driver: bridge

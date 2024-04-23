@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface ManchesterService {
 
-    public OWLAxiom parseStringToAxiom(String owlOntologyFilePath, String url, String ontologyContentBased64, String input) throws OWLOntologyCreationException;
+    public OWLAxiom parseStringToAxiom(String graphName, String input) throws OWLOntologyCreationException;
 
     public ArrayList<jenaTripleParser> getTriples(OWLAxiom axiom) throws OWLOntologyStorageException;
 

@@ -24,6 +24,7 @@ import org.semanticweb.owlapi.util.mansyntax.ManchesterOWLSyntaxParser;
 
 import org.apache.jena.rdf.model.Model;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
@@ -33,26 +34,24 @@ import java.util.*;
 
 @Service
 public class ManchesterServiceImpl implements ManchesterService {
+
+    @Autowired
+    VirtuosoService virtuosoService;
+
     @Override
-    public OWLAxiom parseStringToAxiom(String owlOntologyFilePath, String url, String ontologyContentBased64, String input) throws OWLOntologyCreationException {
+    public OWLAxiom parseStringToAxiom(String graphName, String input) throws OWLOntologyCreationException {
+
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
         OWLOntology owlOntology = null;
-        if ( owlOntologyFilePath != null) {
-            File file = new File(owlOntologyFilePath);
-             owlOntology = owlManager.loadOntologyFromOntologyDocument(file);
-        } else if (url != null) {
-             owlOntology = owlManager.loadOntology(IRI.create(url));
-        } else if (ontologyContentBased64 != null) {
-            try (InputStream inputStream = new ByteArrayInputStream(ontologyContentBased64.getBytes())) {
-                owlOntology = owlManager.loadOntologyFromOntologyDocument(inputStream);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName);
+        } catch (OWLOntologyStorageException e) {
+            e.printStackTrace();
         }
-
         if (owlOntology == null) {
             return null;
         }
+        System.out.println("Ontology: " + owlOntology);
 
         OWLDataFactory dataFactory = owlManager.getOWLDataFactory();
         ShortFormProvider sfp =

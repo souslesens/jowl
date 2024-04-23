@@ -4,39 +4,22 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ManchesterParserInput {
 
-		private String filePath;
-		private String url;
-		private String ontologyContentEncoded64;
+    private String graphName;
+    private String input;
 
-		private MultipartFile file;
-		private String input;
+    public ManchesterParserInput(String graphName, String input) {
+        this.graphName = graphName;
+        this.input = input;
+    }
 
-		public ManchesterParserInput(String filePath , String url, String ontologyContentEncoded64, String input) {
-			this.filePath = filePath;
-			this.url = url;
-			this.ontologyContentEncoded64 = ontologyContentEncoded64;
-			this.input = input;
-		}
-		public String getFilePath() {
-			return filePath;
-		}
-		
-		public String getUrl() {
-			return url;
-		}
+    public String getGraphName() {
+        return graphName;
+    }
 
-		public String getOntologyContentEncoded64() {
-			return ontologyContentEncoded64;
-		}
+    public String getInput() {
+        return input;
+    }
 
-	public MultipartFile getFile() {
-		return file;
-	}
-
-	public String getInput() {
-			return input;
-		}
-
-	}
+}
 
 
