@@ -15,6 +15,7 @@ services:
 
   virtuoso:
     image: askomics/virtuoso:7.2.7
+    container_name: virtuoso
     environment:
       DBA_PASSWORD: "dba"
       SPARQL_UPDATE: "true"
@@ -28,3 +29,5 @@ services:
 networks:
   slsdev:
     driver: bridge
+    labels:
+        - "com.docker.compose.project=slsdev"
