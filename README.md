@@ -5,14 +5,28 @@ checking consistency / satisfaisability and computeinference.
 we used Pellet and OWLAPI for developement of this application.</summary>
 This application will be in docker and we will provide a full documentation to run it.
 
-----------------
-### To Build The application Via Docker
+### One Command : To Build && Run The application Via Docker-Compose (Jowl + Virtuoso)
+```
+docker-compose up
+```
+this command will build and run two containers (Jowl and Virtuoso) and link them together.
 
+----------------
+### Build only Jowl (without virtuoso) Via Docker
+in case you already have a virtuoso container running in your machine (server or local pc), you only need to run the Jowl container:
+
+1. inside the application.properties file, you need to specify the virtuoso endpoint
+
+```
+VIRTUOSO_ENDPOINT_URL=http://localhost:8890/sparql
+```
+
+2. build the Jowl container
 ```
 docker build -t jowl .
 ```
 
-### To Run The Application
+3. run the Jowl container
 ```
 docker run -p 9170:9170 jowl
 ```
@@ -21,11 +35,7 @@ docker run -p 9170:9170 jowl
 ```
 docker run -d -p 9170:9170 jowl
 ```
-----------------
-### One Command : To Build && Run The application Via Docker-Compose
-```
-docker-compose up
-```
+
 ----------------
 ### If you don't have docker installed
 Refer to the
@@ -390,13 +400,13 @@ Choose a POST Request , you pass this URL http://localhost:9170/manchester/manch
 
 In the body of the request (You click on Body -> Raw -> JSON ), two parameters should be passed:
 
-1. The ontology that contains the definition of the classes and properties used in the axiom you want to convert to triples. This ontology should be: encoded in base64, url pointing to it or filepath.
+1. The graph name in virtuoso of the ontology that contains the definition of the classes and properties used in the axiom you want to convert to triples.
 2. The axiom you want to convert to triples.
 
 ```JSON
     {
-    "url":  "https://raw.githubusercontent.com/BFO-ontology/BFO-2020/master/src/owl/bfo-core.owl",
-    "input": " <http://purl.obolibrary.org/obo/BFO_0000003> EquivalentTo: ( <http://purl.obolibrary.org/obo/BFO_0000004> and ( <http://purl.obolibrary.org/obo/BFO_0000001> and <http://purl.obolibrary.org/obo/BFO_0000002> ) ) "
+    "graphName":  "https://spec.industrialontologies.org/ontology/core/Core/",
+    "input": " <https://spec.industrialontologies.org/ontology/core/Core/BusinessProcess> SubClassOf: ( <https://spec.industrialontologies.org/ontology/core/Core/prescribedBy> some (<https://spec.industrialontologies.org/ontology/core/Core/PlanSpecification> and ( <http://purl.obolibrary.org/obo/BFO_0000110> some (<https://spec.industrialontologies.org/ontology/core/Core/ObjectiveSpecification> and (<http://purl.obolibrary.org/obo/BFO_0000084> some <https://spec.industrialontologies.org/ontology/core/Core/BusinessOrganization>)))))"
     }
 ```
 
