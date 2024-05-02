@@ -48,6 +48,7 @@ public class ManchesterServiceImpl implements ManchesterService {
             owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName);
         } catch (OWLOntologyStorageException | NoVirtuosoTriplesException e) {
             e.printStackTrace();
+            return null;
         }
         if (owlOntology == null) {
             return null;
