@@ -2,6 +2,7 @@ package com.souslesens.Jowl.services;
 
 import com.github.owlcs.ontapi.OntManagers;
 import com.github.owlcs.ontapi.Ontology;
+import com.souslesens.Jowl.model.exceptions.NoVirtuosoTriplesException;
 import com.souslesens.Jowl.model.jenaTripleParser;
 
 import org.apache.jena.rdf.model.Statement;
@@ -45,7 +46,7 @@ public class ManchesterServiceImpl implements ManchesterService {
         OWLOntology owlOntology = null;
         try {
             owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName);
-        } catch (OWLOntologyStorageException e) {
+        } catch (OWLOntologyStorageException | NoVirtuosoTriplesException e) {
             e.printStackTrace();
         }
         if (owlOntology == null) {

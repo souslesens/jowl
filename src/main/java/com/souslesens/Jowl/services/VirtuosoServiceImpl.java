@@ -3,6 +3,7 @@ package com.souslesens.Jowl.services;
 import com.github.owlcs.ontapi.OntManagers;
 import com.github.owlcs.ontapi.Ontology;
 import com.github.owlcs.ontapi.OntologyManager;
+import com.souslesens.Jowl.model.exceptions.NoVirtuosoTriplesException;
 import org.apache.jena.base.Sys;
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
@@ -27,13 +28,16 @@ public class VirtuosoServiceImpl implements VirtuosoService {
     private String virtuosoEndpointUrl;
 
     @Override
-    public OWLOntology readOntologyFromVirtuoso(String graphName) throws OWLOntologyCreationException, OWLOntologyStorageException {
+    public OWLOntology readOntologyFromVirtuoso(String graphName) throws OWLOntologyCreationException, OWLOntologyStorageException, NoVirtuosoTriplesException {
 
         String query = "SELECT ?subject ?predicate ?object WHERE { GRAPH <" + graphName + "> { ?subject ?predicate ?object . FILTER(isIRI(?object) || isBlank(?object)) } }"; // Update with your ontology graph URI
-        Set<Statement> statements = new HashSet<>();
 
         try (QueryExecution queryExecution = QueryExecutionFactory.sparqlService(virtuosoEndpointUrl, query)) {
             ResultSet results = queryExecution.execSelect();
+
+            if (!results.hasNext()) {
+                throw new NoVirtuosoTriplesException("No triples found in the graph " + graphName);
+            }
 
             OntologyManager m = OntManagers.createManager();
             Ontology o = m.createOntology(IRI.create(graphName));
