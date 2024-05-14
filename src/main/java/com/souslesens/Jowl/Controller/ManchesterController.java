@@ -43,6 +43,7 @@ public class ManchesterController {
 
         try {
             OWLAxiom axiom = serviceManchester.parseStringToAxiom(graphName, input);
+            System.out.print("graphName: " + graphName + " input: " + input + " axiom: " + axiom);
             if (axiom == null) {
                 return ResponseEntity.badRequest().body("Error parsing axiom");
             }

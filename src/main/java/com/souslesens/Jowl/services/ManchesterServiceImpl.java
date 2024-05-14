@@ -51,6 +51,7 @@ public class ManchesterServiceImpl implements ManchesterService {
             return null;
         }
         if (owlOntology == null) {
+            System.out.println("Error reading ontology from Virtuoso");
             return null;
         }
         System.out.println("Ontology: " + owlOntology);

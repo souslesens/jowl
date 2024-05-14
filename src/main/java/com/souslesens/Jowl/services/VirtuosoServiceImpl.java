@@ -3,36 +3,28 @@ package com.souslesens.Jowl.services;
 import com.github.owlcs.ontapi.OntManagers;
 import com.github.owlcs.ontapi.Ontology;
 import com.github.owlcs.ontapi.OntologyManager;
+import com.souslesens.Jowl.config.AppConfig;
 import com.souslesens.Jowl.model.exceptions.NoVirtuosoTriplesException;
-import org.apache.jena.base.Sys;
-import org.apache.jena.graph.Node;
-import org.apache.jena.graph.Triple;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
-import org.apache.jena.rdf.model.impl.StatementImpl;
-import org.apache.jena.update.UpdateAction;
-import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import uk.ac.manchester.cs.owl.owlapi.OWLAxiomImpl;
 
-import javax.swing.plaf.nimbus.State;
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 public class VirtuosoServiceImpl implements VirtuosoService {
 
-    @Value("${VIRTUOSO_ENDPOINT_URL}")
-    private String virtuosoEndpointUrl;
+    @Autowired
+    private AppConfig appConfig;
 
     @Override
     public OWLOntology readOntologyFromVirtuoso(String graphName) throws OWLOntologyCreationException, OWLOntologyStorageException, NoVirtuosoTriplesException {
 
         String query = "SELECT ?subject ?predicate ?object WHERE { GRAPH <" + graphName + "> { ?subject ?predicate ?object . FILTER(isIRI(?object) || isBlank(?object)) } }"; // Update with your ontology graph URI
 
-        try (QueryExecution queryExecution = QueryExecutionFactory.sparqlService(virtuosoEndpointUrl, query)) {
+        try (QueryExecution queryExecution = QueryExecutionFactory.sparqlService(appConfig.getVirtuosoEndpoint(), query)) {
             ResultSet results = queryExecution.execSelect();
 
             if (!results.hasNext()) {
@@ -62,6 +54,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
 
         }
 
+        System.out.println("Error reading ontology from Virtuoso");
         return null;
     }
 

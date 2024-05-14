@@ -58,3 +58,4 @@ Thumbs.db
 *.ttl
 *.owl
 config/settings.xml
+.env

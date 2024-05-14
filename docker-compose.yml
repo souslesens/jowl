@@ -9,7 +9,11 @@ services:
     container_name: jowl
     restart: always
     ports:
-      - "9170:9170"
+      - ${SERVER_PORT:-9170}:9170
+    environment:
+      - VIRTUOSO_PASSWORD=${VIRTUOSO_PASSWORD}
+      - VIRTUOSO_ENDPOINT=${VIRTUOSO_ENDPOINT}
+      - SERVER_PORT=${SERVER_PORT}
     networks:
       - slsdev
 
@@ -17,10 +21,10 @@ services:
     image: askomics/virtuoso:7.2.7
     container_name: virtuoso
     environment:
-      DBA_PASSWORD: "dba"
+      DBA_PASSWORD: ${VIRTUOSO_PASSWORD}
       SPARQL_UPDATE: "true"
     ports:
-      - 8890:8890
+      - "8890:8890"
     volumes:
       - ../data/virtuoso:/data
     networks:
