@@ -13,7 +13,6 @@ services:
     environment:
       - VIRTUOSO_PASSWORD=${VIRTUOSO_PASSWORD}
       - VIRTUOSO_ENDPOINT=${VIRTUOSO_ENDPOINT}
-      - SERVER_PORT=${SERVER_PORT}
     networks:
       - slsdev
 
