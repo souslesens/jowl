@@ -39,6 +39,9 @@ public class ManchesterServiceImpl implements ManchesterService {
     @Autowired
     VirtuosoService virtuosoService;
 
+    @Autowired
+    HermitReasonerService hermitReasonerService;
+
     @Override
     public OWLAxiom parseStringToAxiom(String graphName, String input) throws OWLOntologyCreationException {
 
@@ -112,13 +115,24 @@ public class ManchesterServiceImpl implements ManchesterService {
         return triples;
     }
 
-    private BidirectionalShortFormProvider getShortFormProvider(OWLOntologyManager owlManager, OWLOntology owlOntology) {
+    @Override
+    public boolean checkManchesterAxiomConsistency(String graphName, OWLAxiom axiom) throws OWLOntologyCreationException {
+        OWLOntology owlOntology = null;
+        try {
+            owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName);
+        } catch (OWLOntologyStorageException | NoVirtuosoTriplesException e) {
+            e.printStackTrace();
+            return false;
+        }
+        if (owlOntology == null) {
+            System.out.println("Error reading ontology from Virtuoso");
+            return false;
+        }
 
-        Set<OWLOntology> ontologies = owlManager.getOntologies();
-        ShortFormProvider sfp = new ManchesterOWLSyntaxPrefixNameShortFormProvider(
-                owlManager.getOntologyFormat(owlOntology));
-        BidirectionalShortFormProvider shortFormProvider = new BidirectionalShortFormProviderAdapter(
-                ontologies, sfp);
-        return shortFormProvider;
+        owlOntology.addAxiom(axiom);
+
+        return hermitReasonerService.getConsistency(owlOntology);
+
     }
+
 }

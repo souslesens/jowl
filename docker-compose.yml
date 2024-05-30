@@ -11,6 +11,7 @@ services:
     ports:
       - ${SERVER_PORT:-9170}:9170
     environment:
+      - VIRTUOSO_USER=${VIRTUOSO_USER}
       - VIRTUOSO_PASSWORD=${VIRTUOSO_PASSWORD}
       - VIRTUOSO_ENDPOINT=${VIRTUOSO_ENDPOINT}
     networks:

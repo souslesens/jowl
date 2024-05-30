@@ -1,6 +1,7 @@
 package com.souslesens.Jowl.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 
@@ -16,6 +17,8 @@ public interface HermitReasonerService {
 
     String getConsistency(String ontologyContentDecoded64)
             throws OWLOntologyCreationException, JsonProcessingException, Exception;
+
+    boolean getConsistency(OWLOntology ontology);
 
     String getInferences(String filePath, String Url) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
 

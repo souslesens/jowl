@@ -12,4 +12,6 @@ public interface ManchesterService {
 
     public ArrayList<jenaTripleParser> getTriples(OWLAxiom axiom) throws OWLOntologyStorageException;
 
+    public boolean checkManchesterAxiomConsistency(String graphName, OWLAxiom axiom) throws OWLOntologyCreationException;
+
 }

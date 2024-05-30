@@ -59,6 +59,33 @@ public class ManchesterController {
         }
     }
 
+    @PostMapping(value="/checkConsistency")
+    public ResponseEntity<String> manchesterAxiomConsistencyCheck(@RequestBody ManchesterParserInput request) {
+
+        String graphName = request.getGraphName();
+        String input = request.getInput();
+        int parametersCount = countParams(graphName);
+        if (input == null || input.isEmpty()) {
+            return ResponseEntity.badRequest().body("Manchester Syntax Input should be provided");
+        } else if (graphName == null || graphName.isEmpty()) {
+            return ResponseEntity.badRequest().body("Graph Name should be provided");
+        }
+
+        try {
+            OWLAxiom axiom = serviceManchester.parseStringToAxiom(graphName, input);
+            System.out.print("graphName: " + graphName + " input: " + input + " axiom: " + axiom);
+            if (axiom == null) {
+                return ResponseEntity.badRequest().body("Error parsing axiom");
+            }
+
+            return serviceManchester.checkManchesterAxiomConsistency(graphName, axiom) ? ResponseEntity.ok().body("true") : ResponseEntity.status(422).body("false");
+
+        } catch (OWLOntologyCreationException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Error");
+        }
+    }
+
     private int countParams(Object... parameters) {
         int count = 0;
         for (Object param : parameters) {

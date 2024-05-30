@@ -2,7 +2,6 @@ package com.souslesens.Jowl.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.json.JSONObject;
-import org.openjena.atlas.json.JSON;
 import org.semanticweb.HermiT.Configuration;
 import org.semanticweb.HermiT.Reasoner;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -118,6 +117,13 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         Configuration c = new Configuration();
         Reasoner hermit = new Reasoner(c, ontology);
         return (new JSONObject()).put("Consistency", hermit.isConsistent()).toString();
+    }
+
+    @Override
+    public boolean getConsistency(OWLOntology ontology) {
+
+        Reasoner hermit = new Reasoner(new Configuration(), ontology);
+        return hermit.isConsistent();
     }
 
     @Override

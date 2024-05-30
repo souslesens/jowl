@@ -1,5 +1,6 @@
 package com.souslesens.Jowl.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -9,31 +10,37 @@ public class AppConfig {
     private static final AppConfig instance = new AppConfig();
 
     private AppConfig() {
-        serverPort = Integer.parseInt(System.getenv("SERVER_PORT"));
-        virtuosoEndpoint = System.getenv("VIRTUOSO_ENDPOINT");
-        virtuosoPassword = System.getenv("VIRTUOSO_PASSWORD");
+        virtuosoEndpoint = System.getenv("VIRTUOSO_ENDPOINT") != null ? System.getenv("VIRTUOSO_ENDPOINT") : null;
+        virtuosoPassword = System.getenv("VIRTUOSO_PASSWORD") != null ? System.getenv("VIRTUOSO_PASSWORD") : null;
+        virtuosoUser = System.getenv("VIRTUOSO_USER") != null ? System.getenv("VIRTUOSO_USER") : null;
     }
 
     @Bean
     public static AppConfig getInstance() {
         return instance;
     }
-    private int serverPort;
-
+    @Value("${virtuoso.endpoint}")
     private String virtuosoEndpoint;
-
+    @Value("${virtuoso.user}")
+    private String virtuosoUser;
+    @Value("${virtuoso.password}")
     private String virtuosoPassword;
-
-    public int getServerPort() {
-        return serverPort;
-    }
 
     public String getVirtuosoEndpoint() {
         return virtuosoEndpoint;
     }
 
-    public String getVirtuosoPassword() {
-        return virtuosoPassword;
+    public String getVirtuosoUser() {
+        if (virtuosoUser == null) {
+            return "";
+        }
+        return virtuosoUser;
     }
 
+    public String getVirtuosoPassword() {
+        if (virtuosoPassword == null) {
+            return "";
+        }
+        return virtuosoPassword;
+    }
 }
