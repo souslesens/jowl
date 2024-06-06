@@ -48,7 +48,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
     private AppConfig appConfig;
 
     @Override
-    public OWLOntology readOntologyFromVirtuoso(String graphName) throws OWLOntologyCreationException, OWLOntologyStorageException, NoVirtuosoTriplesException {
+    public OWLOntology readOntologyFromVirtuoso(String graphName) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
 
         JSONArray triples = null;
 

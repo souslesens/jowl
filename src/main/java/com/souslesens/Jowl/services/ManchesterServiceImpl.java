@@ -3,6 +3,7 @@ package com.souslesens.Jowl.services;
 import com.github.owlcs.ontapi.OntManagers;
 import com.github.owlcs.ontapi.Ontology;
 import com.souslesens.Jowl.model.exceptions.NoVirtuosoTriplesException;
+import com.souslesens.Jowl.model.exceptions.ParsingAxiomException;
 import com.souslesens.Jowl.model.jenaTripleParser;
 
 import org.apache.jena.rdf.model.Statement;
@@ -43,16 +44,13 @@ public class ManchesterServiceImpl implements ManchesterService {
     HermitReasonerService hermitReasonerService;
 
     @Override
-    public OWLAxiom parseStringToAxiom(String graphName, String input) throws OWLOntologyCreationException {
+    public OWLAxiom parseStringToAxiom(String graphName, String input) throws OWLOntologyCreationException, ParsingAxiomException, NoVirtuosoTriplesException {
 
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
         OWLOntology owlOntology = null;
-        try {
-            owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName);
-        } catch (OWLOntologyStorageException | NoVirtuosoTriplesException e) {
-            e.printStackTrace();
-            return null;
-        }
+
+        owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName);
+
         if (owlOntology == null) {
             System.out.println("Error reading ontology from Virtuoso");
             return null;
@@ -82,14 +80,13 @@ public class ManchesterServiceImpl implements ManchesterService {
             System.out.println("Axiom:" + axiom);
             return axiom;
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            throw new ParsingAxiomException(e.getMessage());
         }
 
     }
 
     @Override
-    public ArrayList<jenaTripleParser> getTriples(OWLAxiom axiom) throws OWLOntologyStorageException {
+    public ArrayList<jenaTripleParser> getTriples(OWLAxiom axiom) {
         ArrayList<jenaTripleParser> triples = new ArrayList<>();
         Ontology owl = OntManagers.createManager().createOntology();
 
@@ -116,14 +113,9 @@ public class ManchesterServiceImpl implements ManchesterService {
     }
 
     @Override
-    public boolean checkManchesterAxiomConsistency(String graphName, OWLAxiom axiom) throws OWLOntologyCreationException {
-        OWLOntology owlOntology = null;
-        try {
-            owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName);
-        } catch (OWLOntologyStorageException | NoVirtuosoTriplesException e) {
-            e.printStackTrace();
-            return false;
-        }
+    public boolean checkManchesterAxiomConsistency(String graphName, OWLAxiom axiom) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
+        OWLOntology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName);
+
         if (owlOntology == null) {
             System.out.println("Error reading ontology from Virtuoso");
             return false;

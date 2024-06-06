@@ -1,6 +1,8 @@
 package com.souslesens.Jowl.Controller;
 
 import com.souslesens.Jowl.model.ManchesterParserInput;
+import com.souslesens.Jowl.model.exceptions.NoVirtuosoTriplesException;
+import com.souslesens.Jowl.model.exceptions.ParsingAxiomException;
 import com.souslesens.Jowl.model.jenaTripleParser;
 import com.souslesens.Jowl.services.ManchesterService;
 import org.apache.jena.base.Sys;
@@ -52,10 +54,13 @@ public class ManchesterController {
             return ResponseEntity.ok().body(triples.toString());
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
-            return ResponseEntity.badRequest().body("Error");
-        } catch (OWLOntologyStorageException e) {
+            return ResponseEntity.status(500).body("Error while creating the ontology");
+        } catch (ParsingAxiomException e) {
             e.printStackTrace();
-            return ResponseEntity.badRequest().body("Error");
+            return ResponseEntity.status(422).body(e.getMessage());
+        } catch (NoVirtuosoTriplesException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(404).body(e.getMessage());
         }
     }
 
@@ -83,6 +88,12 @@ public class ManchesterController {
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Error");
+        } catch (NoVirtuosoTriplesException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(404).body(e.getMessage());
+        } catch (ParsingAxiomException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(422).body(e.getMessage());
         }
     }
 
