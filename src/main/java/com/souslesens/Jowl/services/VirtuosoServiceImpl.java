@@ -48,7 +48,66 @@ public class VirtuosoServiceImpl implements VirtuosoService {
     private AppConfig appConfig;
 
     @Override
-    public OWLOntology readOntologyFromVirtuoso(String graphName) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
+    public JSONObject querySparql(String query) throws IOException, URISyntaxException, MalformedChallengeException, AuthenticationException {
+
+        final DigestScheme md5Auth = new DigestScheme();
+
+        URI endpoint = new URI(appConfig.getVirtuosoEndpoint() + "?format=json&query=" + URLEncoder.encode(query, "UTF-8"));
+        HttpGet request = new HttpGet(endpoint);
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpResponse authResponse = client.execute(request);
+
+
+        if (authResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+
+            BufferedReader rd = new BufferedReader(new InputStreamReader(authResponse.getEntity().getContent()));
+            StringBuffer result = new StringBuffer();
+
+            String line = "";
+            while ((line = rd.readLine()) != null) {
+                result.append(line);
+            }
+
+            return new JSONObject(result.toString()).getJSONObject("results");
+
+        } else if (authResponse.getStatusLine().getStatusCode() == HttpStatus.SC_UNAUTHORIZED) {
+            if (authResponse.containsHeader("WWW-Authenticate")) {
+                final Header challenge = authResponse.getHeaders("WWW-Authenticate")[0];
+                NameRegistrar.register("www-authenticate", authResponse.getHeaders("WWW-Authenticate")[0]);
+                md5Auth.processChallenge(challenge);
+
+                System.out.println(appConfig.getVirtuosoUser() + appConfig.getVirtuosoPassword());
+                final Header solution = md5Auth.authenticate(
+                        new UsernamePasswordCredentials(appConfig.getVirtuosoUser(), appConfig.getVirtuosoPassword()),
+                        new BasicHttpRequest(HttpGet.METHOD_NAME, endpoint
+                                .getPath()), new HttpClientContext());
+
+                md5Auth.createCnonce();
+                request.addHeader(solution.getName(), solution.getValue());
+                HttpResponse response = client.execute(request);
+
+                BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+                StringBuffer result = new StringBuffer();
+
+                String line = "";
+                while ((line = rd.readLine()) != null) {
+                    result.append(line);
+                }
+
+                return new JSONObject(result.toString()).getJSONObject("results");
+
+            } else {
+                throw new Error("Web-service responded with Http 401, " +
+                        "but didn't send us a usable WWW-Authenticate header.");
+            }
+        } else {
+            throw new Error("Didn't get an Http 401 " +
+                    "like we were expecting.");
+        }
+    }
+
+    @Override
+    public Ontology readOntologyFromVirtuoso(String graphName) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
 
         JSONArray triples = null;
 
@@ -118,62 +177,41 @@ public class VirtuosoServiceImpl implements VirtuosoService {
 
     public JSONArray getTriplesVirtuosoSparql(String graphName) throws MalformedChallengeException, URISyntaxException, IOException, AuthenticationException {
 
-        final DigestScheme md5Auth = new DigestScheme();
         String query = "SELECT ?subject ?predicate ?object WHERE { GRAPH <" + graphName + "> { ?subject ?predicate ?object . FILTER(isIRI(?object) || isBlank(?object)) } }";
         //String query = "SELECT ?subject ?predicate ?object WHERE {?subject ?predicate ?object} LIMIT 10";
-        URI endpoint = new URI(appConfig.getVirtuosoEndpoint() + "?format=json&query=" + URLEncoder.encode(query, "UTF-8"));
-        HttpGet request = new HttpGet(endpoint);
-        HttpClient client = HttpClientBuilder.create().build();
-        HttpResponse authResponse = client.execute(request);
 
+        return querySparql(query).getJSONArray("bindings");
 
-        if (authResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-
-            BufferedReader rd = new BufferedReader(new InputStreamReader(authResponse.getEntity().getContent()));
-            StringBuffer result = new StringBuffer();
-
-            String line = "";
-            while ((line = rd.readLine()) != null) {
-                result.append(line);
-            }
-
-            return new JSONObject(result.toString()).getJSONObject("results").getJSONArray("bindings");
-
-        } else if (authResponse.getStatusLine().getStatusCode() == HttpStatus.SC_UNAUTHORIZED) {
-            if (authResponse.containsHeader("WWW-Authenticate")) {
-                final Header challenge = authResponse.getHeaders("WWW-Authenticate")[0];
-                NameRegistrar.register("www-authenticate", authResponse.getHeaders("WWW-Authenticate")[0]);
-                md5Auth.processChallenge(challenge);
-
-                System.out.println(appConfig.getVirtuosoUser() + appConfig.getVirtuosoPassword());
-                final Header solution = md5Auth.authenticate(
-                        new UsernamePasswordCredentials(appConfig.getVirtuosoUser(), appConfig.getVirtuosoPassword()),
-                        new BasicHttpRequest(HttpGet.METHOD_NAME, endpoint
-                                .getPath()), new HttpClientContext());
-
-                md5Auth.createCnonce();
-                request.addHeader(solution.getName(), solution.getValue());
-                HttpResponse response = client.execute(request);
-
-                BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                StringBuffer result = new StringBuffer();
-
-                String line = "";
-                while ((line = rd.readLine()) != null) {
-                    result.append(line);
-                }
-
-                return new JSONObject(result.toString()).getJSONObject("results").getJSONArray("bindings");
-
-            } else {
-                throw new Error("Web-service responded with Http 401, " +
-                        "but didn't send us a usable WWW-Authenticate header.");
-            }
-        } else {
-            throw new Error("Didn't get an Http 401 " +
-                    "like we were expecting.");
-        }
     }
 
 }
+
+//    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+//        DELETE {
+//        GRAPH <https://spec.industrialontologies.org/ontology/202401/core/Core/> {
+//        ?subject ?predicate ?object
+//        }
+//        }
+//        WHERE {
+//        GRAPH <https://spec.industrialontologies.org/ontology/202401/core/Core/> {
+//        VALUES (?subject ?predicate ?object) {
+//        (406c8018-86e9-4ca2-b498-9290f3d18a4e <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://spec.industrialontologies.org/ontology/core/Core/ObjectiveSpecification>)
+//        (406c8018-86e9-4ca2-b498-9290f3d18a4e <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> 3367f5cb-b12d-456d-94a9-1d52e5354d14)
+//        (6369a3c4-a6b2-474d-a406-421f0792b1b9 <http://www.w3.org/2002/07/owl#intersectionOf> 406c8018-86e9-4ca2-b498-9290f3d18a4e)
+//        (<https://spec.industrialontologies.org/ontology/core/Core/BusinessProcess> <http://www.w3.org/2000/01/rdf-schema#subClassOf> 6369a3c4-a6b2-474d-a406-421f0792b1b9)
+//        (3367f5cb-b12d-456d-94a9-1d52e5354d14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://spec.industrialontologies.org/ontology/core/Core/PlanSpecification>)
+//        (3367f5cb-b12d-456d-94a9-1d52e5354d14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil>)
+//        }
+//        }
+//        }
+//
+//
+//        DELETE DATA {
+//            GRAPH <https://spec.industrialontologies.org/ontology/202401/core/Core/> {
+//                 <3367f5cb-b12d-456d-94a9-1d52e5354d>
+//                 <http://www.w3.org/2000/01/rdf-schema%23subClassOf>
+//                 <https://spec.industrialontologies.org/ontology/core/Core/PlanSpecification> .
+//            }
+//        }
+
 
