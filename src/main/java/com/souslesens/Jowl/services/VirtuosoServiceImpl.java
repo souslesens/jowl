@@ -8,6 +8,7 @@ import com.github.owlcs.ontapi.OntologyManager;
 import com.souslesens.Jowl.config.AppConfig;
 import com.souslesens.Jowl.model.exceptions.NoVirtuosoTriplesException;
 
+import com.souslesens.Jowl.model.jenaTripleParser;
 import org.apache.http.Header;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.MalformedChallengeException;
@@ -26,6 +27,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.AnonId;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.semanticweb.owlapi.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Set;
 
 @Service
 public class VirtuosoServiceImpl implements VirtuosoService {
@@ -48,7 +52,8 @@ public class VirtuosoServiceImpl implements VirtuosoService {
     private AppConfig appConfig;
 
     @Override
-    public JSONObject querySparql(String query) throws IOException, URISyntaxException, MalformedChallengeException, AuthenticationException {
+    public JSONObject querySparql(String query) throws IOException, URISyntaxException, MalformedChallengeException, AuthenticationException, JSONException {
+
 
         final DigestScheme md5Auth = new DigestScheme();
 
@@ -67,6 +72,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
             while ((line = rd.readLine()) != null) {
                 result.append(line);
             }
+
 
             return new JSONObject(result.toString()).getJSONObject("results");
 
@@ -102,7 +108,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
             }
         } else {
             throw new Error("Didn't get an Http 401 " +
-                    "like we were expecting.");
+                    "like we were expecting, instead we got:" + authResponse.getStatusLine().getStatusCode());
         }
     }
 
@@ -175,7 +181,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
     }
 
 
-    public JSONArray getTriplesVirtuosoSparql(String graphName) throws MalformedChallengeException, URISyntaxException, IOException, AuthenticationException {
+    public JSONArray getTriplesVirtuosoSparql(String graphName) throws MalformedChallengeException, URISyntaxException, IOException, AuthenticationException, JSONException {
 
         String query = "SELECT ?subject ?predicate ?object WHERE { GRAPH <" + graphName + "> { ?subject ?predicate ?object . FILTER(isIRI(?object) || isBlank(?object)) } }";
         //String query = "SELECT ?subject ?predicate ?object WHERE {?subject ?predicate ?object} LIMIT 10";
@@ -184,6 +190,83 @@ public class VirtuosoServiceImpl implements VirtuosoService {
 
     }
 
+    @Override
+    public boolean saveTriples(String graphName, String classUri, String axiomType, ArrayList<jenaTripleParser> triplesList) throws AuthenticationException, JSONException, MalformedChallengeException, IOException, URISyntaxException {
+
+        ArrayList<jenaTripleParser> triples =  new ArrayList<>();
+        for (jenaTripleParser triple : triplesList) {
+            triples.add(new jenaTripleParser(triple.getSubject(), triple.getPredicate(), triple.getObject()));
+        }
+        String uuid = java.util.UUID.randomUUID().toString(); // Generates a unique UUID
+        //getting last part of classUri
+        String[] parts = classUri.split("[#/]");
+        String classLastPart = parts[parts.length - 1];
+
+
+        String newGraphName = graphName + "concepts/" + classLastPart + "/" + axiomType + "/" + uuid + "/";
+        //create new graph
+        String createGraphQuery = "CREATE GRAPH <" + newGraphName + ">";
+        querySparql(createGraphQuery);
+        System.out.println("new graph name: " + newGraphName);
+
+        //reformulate blank node uris to an acceptable format by triple store
+        triples = replaceBlankNodesWithURIs(triples);
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("INSERT DATA { GRAPH <" + newGraphName + "> { ");
+
+        // Loop through the triples and add them to the query
+        for (jenaTripleParser triple : triples) {
+
+            queryBuilder.append("<")
+                    .append(triple.getSubject())
+                    .append("> ");
+
+
+            // Handle the predicate (always a URI)
+            queryBuilder.append("<")
+                    .append(triple.getPredicate())
+                    .append("> ");
+
+            queryBuilder.append("<")
+                    .append(triple.getObject())
+                    .append("> ");
+
+
+            queryBuilder.append(". ");
+        }
+
+        // Close the SPARQL query
+        queryBuilder.append("} }");
+
+        // Convert the query to a string
+        String query = queryBuilder.toString();
+
+        System.out.println(query);
+
+        System.out.println(querySparql(query));
+
+        return true;
+
+
+    }
+
+    private boolean isBlankNode(String value) {
+        return !value.startsWith("http");
+    }
+
+
+    public ArrayList<jenaTripleParser> replaceBlankNodesWithURIs(ArrayList<jenaTripleParser> triples) {
+        for (jenaTripleParser triple : triples) {
+            if (isBlankNode(triple.getSubject())) {
+                triple.setSubject("urn:uuid:" + triple.getSubject().substring(2));
+            }
+            if (isBlankNode(triple.getObject())) {
+                triple.setObject("urn:uuid:" + triple.getObject().substring(2));
+            }
+        }
+        return triples;
+    }
 }
 
 //    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

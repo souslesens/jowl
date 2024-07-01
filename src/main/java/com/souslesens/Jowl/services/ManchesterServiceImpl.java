@@ -3,6 +3,7 @@ package com.souslesens.Jowl.services;
 import com.github.owlcs.ontapi.OntManagers;
 import com.github.owlcs.ontapi.Ontology;
 import com.github.owlcs.ontapi.OntologyManager;
+import com.github.owlcs.ontapi.owlapi.axioms.SubClassOfAxiomImpl;
 import com.souslesens.Jowl.model.exceptions.NoVirtuosoTriplesException;
 import com.souslesens.Jowl.model.exceptions.ParsingAxiomException;
 import com.souslesens.Jowl.model.jenaTripleParser;
@@ -106,7 +107,7 @@ public class ManchesterServiceImpl implements ManchesterService {
             System.out.println(statement);
             jenaTripleParser triple = new jenaTripleParser();
             if (statement.getSubject().isAnon()) {
-                triple.setSubject("_" + statement.getSubject().getId().getLabelString());
+                triple.setSubject("_:" + statement.getSubject().getId().getLabelString());
             } else {
                 triple.setSubject(statement.getSubject().getURI());
             }
@@ -116,7 +117,7 @@ public class ManchesterServiceImpl implements ManchesterService {
 
             // Check if the object is a blank node and modify accordingly
             if (statement.getObject().isAnon()) {
-                triple.setObject("_" + ((Resource) statement.getObject()).getId().getLabelString());
+                triple.setObject("_:" + ((Resource) statement.getObject()).getId().getLabelString());
             } else {
                 triple.setObject(statement.getObject().toString().replace("[OntObject]", ""));
             }
@@ -220,7 +221,7 @@ public class ManchesterServiceImpl implements ManchesterService {
             System.out.println("axiom type: "+axiomType);
             String axiomString = convertToManchesterSyntax(axiom);
             System.out.println("axiom: " + axiomString);
-            manchesterAxioms.add(extractAxiomString(axiomString, axiomType ));
+            manchesterAxioms.add(axiomString);
         }
 
         System.out.println(manchesterAxioms);
@@ -249,7 +250,7 @@ public class ManchesterServiceImpl implements ManchesterService {
         return null;
     }
 
-    public String extractAxiomString(String serializedOntology, String axiomType) {
+    public String extractAxiomString(OWLLogicalAxiom axiom, String serializedOntology, String axiomType) {
         serializedOntology = serializedOntology.replaceAll("\\n", "").replaceAll("\\s+", " ").trim();
         if (axiomType.equals("DisjointUnion")) {
             String searchToken = "DisjointUnionOf:";
@@ -263,7 +264,6 @@ public class ManchesterServiceImpl implements ManchesterService {
                 return serializedOntology.substring(startIndex, endIndex).trim();
             }
         } else if (axiomType.equals(ManchesterOWLSyntax.DISJOINT_WITH.keyword())) {
-
             int startIndex = serializedOntology.indexOf(axiomType);
             if (startIndex != -1) {
                 startIndex += axiomType.length();
@@ -274,6 +274,7 @@ public class ManchesterServiceImpl implements ManchesterService {
                 return serializedOntology.substring(startIndex, endIndex).trim();
             }
         } else if (axiomType.equals(ManchesterOWLSyntax.SUBCLASS_OF.keyword())) {
+            SubClassOfAxiomImpl subclassAxiom = (SubClassOfAxiomImpl) axiom;
             int startIndex = serializedOntology.indexOf(axiomType);
             if (startIndex != -1) {
                 startIndex += axiomType.length();
@@ -281,8 +282,9 @@ public class ManchesterServiceImpl implements ManchesterService {
                 if (endIndex == -1) {
                     endIndex = serializedOntology.length();
                 }
-                return  serializedOntology.substring(startIndex, endIndex).trim();
+                return subclassAxiom.getSubClass().toString() + " " + ManchesterOWLSyntax.SUBCLASS_OF  + " " +   serializedOntology.substring(startIndex, endIndex).trim();
             }
+
         } else if (axiomType.equals(ManchesterOWLSyntax.EQUIVALENT_CLASSES.keyword())) {
             int startIndex = serializedOntology.indexOf(axiomType);
             if (startIndex != -1) {

@@ -9,9 +9,11 @@ import com.souslesens.Jowl.model.exceptions.NoVirtuosoTriplesException;
 import com.souslesens.Jowl.model.exceptions.ParsingAxiomException;
 import com.souslesens.Jowl.model.jenaTripleParser;
 import com.souslesens.Jowl.services.ManchesterService;
+import com.souslesens.Jowl.services.VirtuosoService;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.MalformedChallengeException;
 import org.apache.jena.base.Sys;
+import org.json.JSONException;
 import org.semanticweb.owlapi.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,20 +31,28 @@ public class ManchesterController {
     @Autowired
     ManchesterService serviceManchester;
 
+    @Autowired
+    VirtuosoService serviceVirtuoso;
+
 
     @PostMapping(value="/manchester2triples")
     public ResponseEntity<String> manchester2triple(@RequestBody ManchesterToTriplesInput request) {
 
         String graphName = request.getGraphName();
         String input = request.getInput();
-        boolean saveTriples = request.isSaveTriples(); //si vrai on check la consis globale
+        String classUri = request.getClassUri();
+        String axiomType = request.getAxiomType();
+        boolean saveTriples = request.isSaveTriples();
         boolean checkConsistency = request.isCheckConsistency();
-        int parametersCount = countParams(graphName);
 
         if (input == null || input.isEmpty()) {
             return ResponseEntity.badRequest().body("Manchester Syntax Input should be provided");
         } else if (graphName == null || graphName.isEmpty()) {
             return ResponseEntity.badRequest().body("Graph Name should be provided");
+        } else if (classUri == null || classUri.isEmpty()) {
+            return ResponseEntity.badRequest().body("Class URI should be provided");
+        } else if (axiomType == null || axiomType.isEmpty()) {
+            return ResponseEntity.badRequest().body("Axiom Type should be provided");
         }
 
         try {
@@ -53,6 +63,10 @@ public class ManchesterController {
             }
 
             ArrayList<jenaTripleParser> triples = serviceManchester.getTriples(axiom);
+
+            if (saveTriples) {
+                serviceVirtuoso.saveTriples(graphName, classUri, axiomType, triples);
+            }
             return ResponseEntity.ok().body(triples.toString());
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
@@ -63,6 +77,17 @@ public class ManchesterController {
         } catch (NoVirtuosoTriplesException e) {
             e.printStackTrace();
             return ResponseEntity.status(404).body(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new RuntimeException(e);
+        } catch (MalformedChallengeException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error while parsing results from triple store");
         }
     }
 
@@ -71,7 +96,6 @@ public class ManchesterController {
 
         String graphName = request.getGraphName();
         String input = request.getInput();
-        int parametersCount = countParams(graphName);
         if (input == null || input.isEmpty()) {
             return ResponseEntity.badRequest().body("Manchester Syntax Input should be provided");
         } else if (graphName == null || graphName.isEmpty()) {
