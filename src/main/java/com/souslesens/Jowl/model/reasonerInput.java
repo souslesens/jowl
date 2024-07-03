@@ -1,9 +1,9 @@
 package com.souslesens.Jowl.model;
 
 public class reasonerInput {
-	private String filePath;
-	private String url;
-	private String ontologyContentEncoded64;
+	private final String filePath;
+	private final String url;
+	private final String ontologyContentEncoded64;
 	
 	public reasonerInput(String filePath , String url, String ontologyContentEncoded64) {
 		this.filePath = filePath;

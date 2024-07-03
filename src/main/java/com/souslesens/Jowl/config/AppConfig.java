@@ -20,11 +20,11 @@ public class AppConfig {
         return instance;
     }
     @Value("${virtuoso.endpoint}")
-    private String virtuosoEndpoint;
+    private final String virtuosoEndpoint;
     @Value("${virtuoso.user}")
-    private String virtuosoUser;
+    private final String virtuosoUser;
     @Value("${virtuoso.password}")
-    private String virtuosoPassword;
+    private final String virtuosoPassword;
 
     public String getVirtuosoEndpoint() {
         return virtuosoEndpoint;

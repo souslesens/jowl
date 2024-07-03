@@ -3,11 +3,11 @@ package com.souslesens.Jowl.model;
 import java.util.List;
 
 public class ruleSWRLInputComplex {
-	private String filePath;
-	private String url;
-	private String ontologyContentEncoded64;
-	private List<SWRLTypeEntityVariable> premise;
-	private List<SWRLTypeEntityVariable> conclusion;
+	private final String filePath;
+	private final String url;
+	private final String ontologyContentEncoded64;
+	private final List<SWRLTypeEntityVariable> premise;
+	private final List<SWRLTypeEntityVariable> conclusion;
 	
 	public ruleSWRLInputComplex(String filePath , String url, String ontologyContentEncoded64 ,List<SWRLTypeEntityVariable> premise,List<SWRLTypeEntityVariable> conclusion) {
 		this.filePath = filePath;

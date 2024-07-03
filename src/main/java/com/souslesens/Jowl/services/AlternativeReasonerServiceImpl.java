@@ -76,10 +76,10 @@ public class AlternativeReasonerServiceImpl implements AlternativeReasonerServic
                  return null;
              }
          }
-	        if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+	        if (filePath == null && !Url.isEmpty() && (Url.startsWith("http") || Url.startsWith("ftp"))) {
 	        	
 	        	ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
-	        } else if(filePath.isEmpty() == false && Url == null) {
+	        } else if(!filePath.isEmpty() && Url == null) {
 	        	
 	            ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
 	        } else {
@@ -112,7 +112,7 @@ public class AlternativeReasonerServiceImpl implements AlternativeReasonerServic
         String jsonString = jsonObject.toString();
         return jsonString;
     }
-	 public String getConsistencyAlt(String filePath, String Url, MultipartFile ontologyFile) throws OWLOntologyCreationException, JsonProcessingException,Exception {
+	 public String getConsistencyAlt(String filePath, String Url, MultipartFile ontologyFile) throws Exception {
 	     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 	     OWLOntology ontology = null ;
  		 File inputOntology = null;
@@ -136,10 +136,10 @@ public class AlternativeReasonerServiceImpl implements AlternativeReasonerServic
              }
          }
 	     
-	     if ( filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+	     if ( filePath == null && !Url.isEmpty() && (Url.startsWith("http") || Url.startsWith("ftp"))) {
 	        	
 	        	ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
-	        } else if(filePath.isEmpty() == false && Url == null ) {
+	        } else if(!filePath.isEmpty() && Url == null ) {
 	        	
 	            ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));}
 	        else {
@@ -163,7 +163,7 @@ public class AlternativeReasonerServiceImpl implements AlternativeReasonerServic
 
 	 
 	 @Override
-	 public List<reasonerExtractTriples> getInferencesAlt(String filePath, String url,MultipartFile ontologyFile ) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
+	 public List<reasonerExtractTriples> getInferencesAlt(String filePath, String url,MultipartFile ontologyFile ) throws Exception {
 	     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 	     OWLOntology ontology = null ;
  		 File inputOntology = null;
@@ -184,10 +184,10 @@ public class AlternativeReasonerServiceImpl implements AlternativeReasonerServic
                  return null;
              }
          }
-	        if (filePath == null && url.isEmpty() == false && (url.startsWith("http") || url.startsWith("ftp"))) {
+	        if (filePath == null && !url.isEmpty() && (url.startsWith("http") || url.startsWith("ftp"))) {
 	        	
 	        	ontology = manager.loadOntologyFromOntologyDocument(IRI.create(url));
-	        } else if(filePath.isEmpty() == false && url == null) {
+	        } else if(!filePath.isEmpty() && url == null) {
 	        	
 	            ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
 	        } else {
@@ -232,17 +232,15 @@ public class AlternativeReasonerServiceImpl implements AlternativeReasonerServic
 	            String object = null;
 	            
 	            // Extract subject and object
-	            if (axiom instanceof OWLSubClassOfAxiom) {
-	                OWLSubClassOfAxiom subClassAxiom = (OWLSubClassOfAxiom) axiom;
-	                subject = subClassAxiom.getSubClass().toString();
+	            if (axiom instanceof OWLSubClassOfAxiom subClassAxiom) {
+					subject = subClassAxiom.getSubClass().toString();
 	                object = subClassAxiom.getSuperClass().toString();
 	                predicate = "subClassOf";
 	                if (subject != null && predicate != null && object !=null) {
 	                triplesList.add(new reasonerExtractTriples(subject, predicate, object));
 	                }
-	            } else if (axiom instanceof OWLEquivalentClassesAxiom) {
-	                OWLEquivalentClassesAxiom equivClassesAxiom = (OWLEquivalentClassesAxiom) axiom;
-	                Set<OWLClassExpression> classExpressions = equivClassesAxiom.getClassExpressions();
+	            } else if (axiom instanceof OWLEquivalentClassesAxiom equivClassesAxiom) {
+					Set<OWLClassExpression> classExpressions = equivClassesAxiom.getClassExpressions();
 	                for (OWLClassExpression classExpression : classExpressions) {
 	                    if (!classExpression.isAnonymous()) {
 	                        if (subject == null) {
@@ -257,65 +255,57 @@ public class AlternativeReasonerServiceImpl implements AlternativeReasonerServic
 	    	                
 	                    }
 	                }
-	            } else if (axiom instanceof OWLClassAssertionAxiom) {
-	                OWLClassAssertionAxiom classAssertionAxiom = (OWLClassAssertionAxiom) axiom;
-	                subject = classAssertionAxiom.getIndividual().toStringID();
+	            } else if (axiom instanceof OWLClassAssertionAxiom classAssertionAxiom) {
+					subject = classAssertionAxiom.getIndividual().toStringID();
 	                object = classAssertionAxiom.getClassExpression().toString();
 	                predicate = "type";
 	                if (subject != null && predicate != null && object !=null) {
 	                triplesList.add(new reasonerExtractTriples(subject, predicate, object));
 	                }
-	            } else if (axiom instanceof OWLObjectPropertyAssertionAxiom) {
-	                OWLObjectPropertyAssertionAxiom objectPropertyAssertionAxiom = (OWLObjectPropertyAssertionAxiom) axiom;
-	                subject = objectPropertyAssertionAxiom.getSubject().toStringID();
+	            } else if (axiom instanceof OWLObjectPropertyAssertionAxiom objectPropertyAssertionAxiom) {
+					subject = objectPropertyAssertionAxiom.getSubject().toStringID();
 	                object = objectPropertyAssertionAxiom.getObject().toStringID();
 	                predicate = objectPropertyAssertionAxiom.getProperty().toString();
 	                if (subject != null && predicate != null && object !=null) {
 	                triplesList.add(new reasonerExtractTriples(subject, predicate, object));
 	                }
-	            } else if (axiom instanceof OWLDataPropertyAssertionAxiom) {
-	                OWLDataPropertyAssertionAxiom dataPropertyAssertionAxiom = (OWLDataPropertyAssertionAxiom) axiom;
-	                subject = dataPropertyAssertionAxiom.getSubject().toStringID();
+	            } else if (axiom instanceof OWLDataPropertyAssertionAxiom dataPropertyAssertionAxiom) {
+					subject = dataPropertyAssertionAxiom.getSubject().toStringID();
 	                object = dataPropertyAssertionAxiom.getObject().toString();
 	                predicate = dataPropertyAssertionAxiom.getProperty().toString();
 	                if (subject != null && predicate != null && object !=null) {
 	                triplesList.add(new reasonerExtractTriples(subject, predicate, object));
 	                }
-	            } else if (axiom instanceof OWLAnnotationAssertionAxiom) {
-	                OWLAnnotationAssertionAxiom annotationAssertionAxiom = (OWLAnnotationAssertionAxiom) axiom;
-	                subject = annotationAssertionAxiom.getSubject().toString();
+	            } else if (axiom instanceof OWLAnnotationAssertionAxiom annotationAssertionAxiom) {
+					subject = annotationAssertionAxiom.getSubject().toString();
 	                object = annotationAssertionAxiom.getValue().toString();
 	                predicate = annotationAssertionAxiom.getProperty().toString();
 	                if (subject != null && predicate != null && object !=null) {
 	                triplesList.add(new reasonerExtractTriples(subject, predicate, object));
 	                }
-	            } else if (axiom instanceof OWLObjectPropertyDomainAxiom) {
-	                OWLObjectPropertyDomainAxiom objectPropertyDomainAxiom = (OWLObjectPropertyDomainAxiom) axiom;
-	                subject = objectPropertyDomainAxiom.getProperty().toString();
+	            } else if (axiom instanceof OWLObjectPropertyDomainAxiom objectPropertyDomainAxiom) {
+					subject = objectPropertyDomainAxiom.getProperty().toString();
 	                object = objectPropertyDomainAxiom.getDomain().toString();
 	                predicate = "domain";
 	                if (subject != null && predicate != null && object !=null) {
 	                triplesList.add(new reasonerExtractTriples(subject, predicate, object));
 	                }
-	            } else if (axiom instanceof OWLObjectPropertyRangeAxiom) {
-	                OWLObjectPropertyRangeAxiom objectPropertyRangeAxiom = (OWLObjectPropertyRangeAxiom) axiom;
-	                subject = objectPropertyRangeAxiom.getProperty().toString();
+	            } else if (axiom instanceof OWLObjectPropertyRangeAxiom objectPropertyRangeAxiom) {
+					subject = objectPropertyRangeAxiom.getProperty().toString();
 	                object = objectPropertyRangeAxiom.getRange().toString();
 	                predicate = "range";
 	                if (subject != null && predicate != null && object !=null) {
 	                triplesList.add(new reasonerExtractTriples(subject, predicate, object));
 	                }
-	            } else if (axiom instanceof OWLFunctionalObjectPropertyAxiom) {
-	                OWLFunctionalObjectPropertyAxiom functionalObjectPropertyAxiom = (OWLFunctionalObjectPropertyAxiom) axiom;
-	                subject = functionalObjectPropertyAxiom.getProperty().toString();
+	            } else if (axiom instanceof OWLFunctionalObjectPropertyAxiom functionalObjectPropertyAxiom) {
+					subject = functionalObjectPropertyAxiom.getProperty().toString();
 	                predicate = "functionalProperty";
 	                
 	                if (subject != null && predicate != null) {
 	                triplesList.add(new reasonerExtractTriples(subject, predicate, object));
 	                }
-	            } else if (axiom instanceof OWLDeclarationAxiom) {
-	                OWLDeclarationAxiom declarationAxiom = (OWLDeclarationAxiom) axiom;
-	                if (declarationAxiom.getEntity() instanceof OWLClass) {
+	            } else if (axiom instanceof OWLDeclarationAxiom declarationAxiom) {
+					if (declarationAxiom.getEntity() instanceof OWLClass) {
 	                    subject = declarationAxiom.getEntity().toStringID();
 	                    predicate = "classDeclaration";
 	                    if (subject != null && predicate != null) {

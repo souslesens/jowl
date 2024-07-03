@@ -13,16 +13,16 @@ public interface HermitReasonerService {
 
     String getUnsatisfaisableClasses(String ontologyContentDecoded64) throws Exception;
 
-    String getConsistency(String filePath, String Url) throws OWLOntologyCreationException, JsonProcessingException, Exception;
+    String getConsistency(String filePath, String Url) throws Exception;
 
     String getConsistency(String ontologyContentDecoded64)
-            throws OWLOntologyCreationException, JsonProcessingException, Exception;
+            throws Exception;
 
     boolean getConsistency(OWLOntology ontology);
 
-    String getInferences(String filePath, String Url) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
+    String getInferences(String filePath, String Url) throws Exception;
 
     String getInferences(String ontologyContentDecoded64)
-            throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
+            throws Exception;
 
 }

@@ -88,7 +88,7 @@ public class JenaServiceImpl implements JenaService {
  	                RDFNode objectNode = statement.getObject();
 
  	                if (objectNode.isResource()) {
- 	                    objectStr = "<" + objectNode.toString() + ">";
+ 	                    objectStr = "<" + objectNode + ">";
  	                } else {
  	                    objectStr = "'" + objectNode.toString().replaceAll("'", "") + "'";
  	                    objectStr = objectStr.replaceAll("\n", "");

@@ -84,9 +84,9 @@ public class ReasonerServiceImpl implements ReasonerService {
 		
 		OWLOntology ontology = null;
 		try {
-		    if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+		    if (filePath == null && !Url.isEmpty() && (Url.startsWith("http") || Url.startsWith("ftp"))) {
 		        ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
-		    } else if (filePath.isEmpty() == false && Url == null) {
+		    } else if (!filePath.isEmpty() && Url == null) {
 		        ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
 		    }
 		} catch (OWLOntologyCreationException e) {
@@ -122,7 +122,7 @@ public class ReasonerServiceImpl implements ReasonerService {
 
 	@Override
 	public String postInferencesContent(String ontologyContentDecoded64, List<String> ListOfValues)
-			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
+			throws Exception {
 
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		InputStream instream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
@@ -209,8 +209,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredObjectPropertyCharacteristicAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredObjectPropertyCharacteristicAxiomGenerator());
-                	generatorAdded = true;;
-                }else if (value.contentEquals("InferredPropertyAssertionGenerator()") && !generatorAdded) {
+                	generatorAdded = true;
+				}else if (value.contentEquals("InferredPropertyAssertionGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredPropertyAssertionGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("CustomInferredComplementOfAxiomGenerator()") && !generatorAdded) {
@@ -321,7 +321,7 @@ public class ReasonerServiceImpl implements ReasonerService {
 
 	@Override
 	public String postConsistencyContent(String ontologyContentDecoded64)
-			throws OWLOntologyCreationException, JsonProcessingException, Exception {
+			throws Exception {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		InputStream instream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
 		//set silent imports
@@ -353,13 +353,13 @@ public class ReasonerServiceImpl implements ReasonerService {
 
 	@Override
 	public String postInferences(String filePath, String url,List<String> ListOfValues)
-			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
+			throws Exception {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology ontology = null;
 		try {
-		    if (filePath == null && url.isEmpty() == false && (url.startsWith("http") || url.startsWith("ftp"))) {
+		    if (filePath == null && !url.isEmpty() && (url.startsWith("http") || url.startsWith("ftp"))) {
 		        ontology = manager.loadOntologyFromOntologyDocument(IRI.create(url));
-		    } else if (filePath.isEmpty() == false && url == null) {
+		    } else if (!filePath.isEmpty() && url == null) {
 		        ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
 		    }
 		} catch (OWLOntologyCreationException e) {
@@ -433,8 +433,8 @@ public class ReasonerServiceImpl implements ReasonerService {
                 	generatorAdded = true;
                 }else if (value.contentEquals("InferredObjectPropertyCharacteristicAxiomGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredObjectPropertyCharacteristicAxiomGenerator());
-                	generatorAdded = true;;
-                }else if (value.contentEquals("InferredPropertyAssertionGenerator()") && !generatorAdded) {
+                	generatorAdded = true;
+				}else if (value.contentEquals("InferredPropertyAssertionGenerator()") && !generatorAdded) {
                 	iog.addGenerator( new InferredPropertyAssertionGenerator());
                 	generatorAdded = true;
                 }else if (value.contentEquals("CustomInferredComplementOfAxiomGenerator()") && !generatorAdded) {
@@ -493,9 +493,9 @@ public class ReasonerServiceImpl implements ReasonerService {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology ontology = null;
 		try {
-		    if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+		    if (filePath == null && !Url.isEmpty() && (Url.startsWith("http") || Url.startsWith("ftp"))) {
 		        ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
-		    } else if (filePath.isEmpty() == false && Url == null) {
+		    } else if (!filePath.isEmpty() && Url == null) {
 		        ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
 		    }
 		} catch (OWLOntologyCreationException e) {
@@ -531,13 +531,13 @@ public class ReasonerServiceImpl implements ReasonerService {
 
 	@Override
 	public String postConsistency(String filePath, String Url)
-			throws OWLOntologyCreationException, JsonProcessingException, Exception {
+			throws Exception {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology ontology = null;
 		try {
-		    if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+		    if (filePath == null && !Url.isEmpty() && (Url.startsWith("http") || Url.startsWith("ftp"))) {
 		        ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
-		    } else if (filePath.isEmpty() == false && Url == null) {
+		    } else if (!filePath.isEmpty() && Url == null) {
 		        ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
 		    }
 		} catch (OWLOntologyCreationException e) {
@@ -560,13 +560,13 @@ public class ReasonerServiceImpl implements ReasonerService {
 	// END
 	@Override
 	public String getConsistency(String filePath, String Url)
-			throws OWLOntologyCreationException, JsonProcessingException, Exception {
+			throws Exception {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology ontology = null;
 		try {
-		    if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+		    if (filePath == null && !Url.isEmpty() && (Url.startsWith("http") || Url.startsWith("ftp"))) {
 		        ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
-		    } else if (filePath.isEmpty() == false && Url == null) {
+		    } else if (!filePath.isEmpty() && Url == null) {
 		        ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
 		    }
 		} catch (OWLOntologyCreationException e) {
@@ -588,13 +588,13 @@ public class ReasonerServiceImpl implements ReasonerService {
 
 	@Override
 	public String getInferences(String filePath, String url)
-			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
+			throws Exception {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology ontology = null;
 		try {
-		    if (filePath == null && url.isEmpty() == false && (url.startsWith("http") || url.startsWith("ftp"))) {
+		    if (filePath == null && !url.isEmpty() && (url.startsWith("http") || url.startsWith("ftp"))) {
 		        ontology = manager.loadOntologyFromOntologyDocument(IRI.create(url));
-		    } else if (filePath.isEmpty() == false && url == null) {
+		    } else if (!filePath.isEmpty() && url == null) {
 		        ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
 		    }
 		} catch (OWLOntologyCreationException e) {
@@ -773,8 +773,7 @@ public class ReasonerServiceImpl implements ReasonerService {
 		protected void addAxioms(OWLClass cls, OWLReasoner reasoner, OWLDataFactory dataFactory,
 				Set<OWLSubClassOfAxiom> result) {
 			for (OWLClassExpression superClass : reasoner.getEquivalentClasses(cls).getEntities()) {
-				if (superClass.isAnonymous() && superClass instanceof OWLObjectSomeValuesFrom) {
-					OWLObjectSomeValuesFrom someValuesFrom = (OWLObjectSomeValuesFrom) superClass;
+				if (superClass.isAnonymous() && superClass instanceof OWLObjectSomeValuesFrom someValuesFrom) {
 					OWLClassExpression filler = someValuesFrom.getFiller();
 					if (!filler.isAnonymous()) {
 						OWLSubClassOfAxiom axiom = dataFactory.getOWLSubClassOfAxiom(cls, someValuesFrom);
@@ -800,8 +799,7 @@ public class ReasonerServiceImpl implements ReasonerService {
 		protected void addAxioms(OWLClass cls, OWLReasoner reasoner, OWLDataFactory dataFactory,
 				Set<OWLSubClassOfAxiom> resultAxiom) {
 			for (OWLClassExpression equivalentClass : reasoner.getEquivalentClasses(cls).getEntities()) {
-				if (equivalentClass.isAnonymous() && equivalentClass instanceof OWLObjectHasValue) {
-					OWLObjectHasValue owlHasValue = (OWLObjectHasValue) equivalentClass;
+				if (equivalentClass.isAnonymous() && equivalentClass instanceof OWLObjectHasValue owlHasValue) {
 					OWLSubClassOfAxiom axiom = dataFactory.getOWLSubClassOfAxiom(cls, owlHasValue);
 					resultAxiom.add(axiom);
 				}

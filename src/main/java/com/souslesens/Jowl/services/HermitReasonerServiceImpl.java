@@ -26,9 +26,9 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         OWLOntology ontology = null;
         try {
-            if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+            if (filePath == null && !Url.isEmpty() && (Url.startsWith("http") || Url.startsWith("ftp"))) {
                 ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
-            } else if (filePath.isEmpty() == false && Url == null) {
+            } else if (!filePath.isEmpty() && Url == null) {
                 ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
             }
         } catch (OWLOntologyCreationException e) {
@@ -81,9 +81,9 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         OWLOntology ontology = null;
         try {
-            if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+            if (filePath == null && !Url.isEmpty() && (Url.startsWith("http") || Url.startsWith("ftp"))) {
                 ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
-            } else if (filePath.isEmpty() == false && Url == null) {
+            } else if (!filePath.isEmpty() && Url == null) {
                 ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
             }
         } catch (OWLOntologyCreationException e) {
@@ -97,7 +97,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
 
     @Override
     public String getConsistency(String ontologyContentDecoded64)
-            throws OWLOntologyCreationException, JsonProcessingException, Exception {
+            throws Exception {
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         InputStream instream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
         //set silent imports
@@ -131,9 +131,9 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         OWLOntology ontology = null;
         try {
-            if (filePath == null && Url.isEmpty() == false && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+            if (filePath == null && !Url.isEmpty() && (Url.startsWith("http") || Url.startsWith("ftp"))) {
                 ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
-            } else if (filePath.isEmpty() == false && Url == null) {
+            } else if (!filePath.isEmpty() && Url == null) {
                 ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
             }
         } catch (OWLOntologyCreationException e) {
@@ -166,7 +166,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
 
     @Override
     public String getInferences(String ontologyContentDecoded64)
-            throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
+            throws Exception {
 
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         InputStream instream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());

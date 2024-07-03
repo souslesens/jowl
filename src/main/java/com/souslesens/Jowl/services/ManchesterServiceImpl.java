@@ -11,6 +11,9 @@ import com.souslesens.Jowl.model.jenaTripleParser;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.MalformedChallengeException;
 import org.apache.jena.rdf.model.*;
+import org.apache.jena.rdf.model.impl.LiteralImpl;
+import org.apache.jena.rdf.model.impl.PropertyImpl;
+import org.apache.jena.rdf.model.impl.ResourceImpl;
 import org.apache.jena.vocabulary.OWL;
 import org.apache.jena.vocabulary.RDFS;
 import org.json.JSONArray;
@@ -61,8 +64,8 @@ public class ManchesterServiceImpl implements ManchesterService {
 
         OWLDataFactory dataFactory = owlManager.getOWLDataFactory();
         ShortFormProvider sfp =
-                new AnnotationValueShortFormProvider(Arrays.asList(dataFactory.getRDFSLabel()),
-                        Collections.<OWLAnnotationProperty, List<String>>emptyMap(), owlManager);
+                new AnnotationValueShortFormProvider(Collections.singletonList(dataFactory.getRDFSLabel()),
+                        Collections.emptyMap(), owlManager);
         BidirectionalShortFormProvider shortFormProvider =
                 new BidirectionalShortFormProviderAdapter(owlManager.getOntologies(), sfp);
 
@@ -230,6 +233,69 @@ public class ManchesterServiceImpl implements ManchesterService {
         return String.valueOf(manchesterAxioms);
     }
 
+    @Override
+    public String triplesToManchester(String axiomGraphName) throws AuthenticationException, MalformedChallengeException, IOException, URISyntaxException {
+
+
+        //fetch from sparql virtuoso triples of ns type of the uris, inject them into the ontology then inject the original triples into the ontolgoy also
+
+        String queryString = "SELECT ?subject ?predicate ?object WHERE { GRAPH <" + axiomGraphName + "> { ?subject ?predicate ?object . } }";
+        System.out.println(queryString);
+
+
+        JSONArray triples = virtuosoService.querySparql(queryString).getJSONArray("bindings");
+
+
+        System.out.println(triples);
+        //Ontology o = virtuosoService.readOntologyFromVirtuoso(graphName);
+
+        OntologyManager m = OntManagers.createManager();
+        Ontology o = m.createOntology(IRI.create(axiomGraphName));
+
+        System.out.println("axiom count:" + o.getAxiomCount());
+
+//        for (int i = 0; i < typeTriples.length(); i++) {
+//            JSONObject triple = typeTriples.getJSONObject(i);
+//            Resource subjectResource = ResourceFactory.createResource(triple.getJSONObject("subject").getString("value"));
+//            Property predicateProperty = ResourceFactory.createProperty(triple.getJSONObject("predicate").getString("value"));
+//            RDFNode objectNode = ResourceFactory.createResource(triple.getJSONObject("object").getString("value"));
+//
+//            o.asGraphModel().add(subjectResource, predicateProperty, objectNode);
+//        }
+        System.out.println("axiom count:" + o.getAxiomCount());
+
+        Map<String, Resource> blankNodeMap = new HashMap<>();
+
+        // Parse results and add to the Jena model
+        for (int i = 0; i < triples.length(); i++) {
+
+            JSONObject triple = triples.getJSONObject(i);
+            Resource subjectResource = ResourceFactory.createResource(triple.getJSONObject("subject").getString("value"));
+            Property predicateProperty = ResourceFactory.createProperty(triple.getJSONObject("predicate").getString("value"));
+            RDFNode objectNode = ResourceFactory.createResource(triple.getJSONObject("object").getString("value"));
+
+            o.asGraphModel().add(subjectResource, predicateProperty, objectNode);
+        }
+
+        System.out.println("axiom count:" + o.getAxiomCount());
+        System.out.println("axiom: " + o.getLogicalAxioms());
+
+        List<String> manchesterAxioms =  new ArrayList<>();
+
+        for (OWLLogicalAxiom axiom: o.getLogicalAxioms()) {
+            String axiomType = getAxiomType(triples);
+            System.out.println("axiom type: "+axiomType);
+            String axiomString = convertToManchesterSyntax(axiom);
+            System.out.println("axiom: " + axiomString);
+            manchesterAxioms.add(axiomString);
+        }
+
+        System.out.println(manchesterAxioms);
+
+
+        return String.valueOf(manchesterAxioms);
+    }
+
     public String convertToManchesterSyntax(OWLAxiom axiom) {
         //OWLOntologyLoaderConfiguration loaderConfig = new OWLOntologyLoaderConfiguration();
         //loaderConfig = loaderConfig.setLoadAnnotationAxioms(false); // Skip loading annotation axioms
@@ -311,6 +377,22 @@ public class ManchesterServiceImpl implements ManchesterService {
                 return ManchesterOWLSyntax.EQUIVALENT_CLASSES.keyword();
             } else
             if (predicateURI.equals(OWL.disjointWith.getURI())) {
+                return ManchesterOWLSyntax.DISJOINT_WITH.keyword();
+            }
+        }
+        return null;
+    }
+
+
+    private String getAxiomType(JSONArray triples) {
+        for (Object obj : triples) {
+            JSONObject triple = (JSONObject) obj;
+            String predicateURI = triple.getJSONObject("predicate").getString("value");
+            if (predicateURI.equals(RDFS.subClassOf.getURI())) {
+                return ManchesterOWLSyntax.SUBCLASS_OF.keyword();
+            } else if (predicateURI.equals(OWL.equivalentClass.getURI())) {
+                return ManchesterOWLSyntax.EQUIVALENT_CLASSES.keyword();
+            } else if (predicateURI.equals(OWL.disjointWith.getURI())) {
                 return ManchesterOWLSyntax.DISJOINT_WITH.keyword();
             }
         }

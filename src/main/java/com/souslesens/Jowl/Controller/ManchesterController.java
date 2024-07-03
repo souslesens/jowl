@@ -127,23 +127,32 @@ public class ManchesterController {
     public ResponseEntity<String> triples2manchester(@RequestBody TriplesToManchesterInput request) {
         String graphName = request.getGraphName();
         jenaTripleParser[] triples = request.getTriples();
-        if (triples == null || triples.length == 0) {
-            return ResponseEntity.badRequest().body("Triples List should be provided");
-        } else if (graphName == null || graphName.isEmpty()) {
-            return ResponseEntity.badRequest().body("Graph Name should be provided");
+        String axiomGraphName = request.getAxiomGraphName();
+        if ((graphName == null || graphName.isEmpty() || triples == null || triples.length == 0)
+                && (axiomGraphName == null || axiomGraphName.isEmpty())) {
+            return ResponseEntity.badRequest().body("Either (graphName and triples) or axiomGraphName must be provided.");
         }
 
-        try {
-            return ResponseEntity.ok(serviceManchester.triplesToManchester(graphName, triples));
-        } catch (OWLOntologyCreationException e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().body("Error while reading ontology From Triple Store");
-        } catch (NoVirtuosoTriplesException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(404).body(e.getMessage());
-        } catch (IOException | URISyntaxException | MalformedChallengeException | AuthenticationException e) {
-            e.printStackTrace();
-            return ResponseEntity.internalServerError().body("Error occurred while querying virtuoso");
+        if (graphName != null && !graphName.isEmpty()) {
+            try {
+                return ResponseEntity.ok(serviceManchester.triplesToManchester(graphName, triples));
+            } catch (OWLOntologyCreationException e) {
+                e.printStackTrace();
+                return ResponseEntity.badRequest().body("Error while reading ontology From Triple Store");
+            } catch (NoVirtuosoTriplesException e) {
+                e.printStackTrace();
+                return ResponseEntity.status(404).body(e.getMessage());
+            } catch (IOException | URISyntaxException | MalformedChallengeException | AuthenticationException e) {
+                e.printStackTrace();
+                return ResponseEntity.internalServerError().body("Error occurred while querying virtuoso");
+            }
+        }  else {
+            try {
+                return ResponseEntity.ok(serviceManchester.triplesToManchester(axiomGraphName));
+            } catch (IOException | URISyntaxException | MalformedChallengeException | AuthenticationException e) {
+                e.printStackTrace();
+                return ResponseEntity.internalServerError().body("Error occurred while querying virtuoso");
+            }
         }
 
     }

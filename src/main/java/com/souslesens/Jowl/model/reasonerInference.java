@@ -1,10 +1,10 @@
 package com.souslesens.Jowl.model;
 
 public class reasonerInference {
-	private String filePath;
-	private String url;
-	private String ontologyContentEncoded64;
-	private String[] predicates;
+	private final String filePath;
+	private final String url;
+	private final String ontologyContentEncoded64;
+	private final String[] predicates;
 	
 	public reasonerInference(String filePath , String url, String ontologyContentEncoded64 ,String[] predicates) {
 		this.filePath = filePath;

@@ -2,14 +2,14 @@ package com.souslesens.Jowl.model;
 
 public class ManchesterToTriplesInput {
 
-    private String graphName;
-    private String input;
+    private final String graphName;
+    private final String input;
 
-    private String classUri;
+    private final String classUri;
 
-    private String axiomType;
-    private boolean saveTriples;
-    private boolean checkConsistency;
+    private final String axiomType;
+    private final boolean saveTriples;
+    private final boolean checkConsistency;
 
 
     public ManchesterToTriplesInput(String graphName, String input, String classUri, String axiomType, Boolean checkConsistency, Boolean saveTriples) {
@@ -18,7 +18,7 @@ public class ManchesterToTriplesInput {
         this.classUri = classUri;
         this.axiomType = axiomType;
         this.saveTriples = (saveTriples != null) ? saveTriples : false;
-        this.checkConsistency = this.saveTriples ? true : ((checkConsistency != null) ? checkConsistency : false);
+        this.checkConsistency = this.saveTriples || ((checkConsistency != null) ? checkConsistency : false);
     }
 
     public String getGraphName() {

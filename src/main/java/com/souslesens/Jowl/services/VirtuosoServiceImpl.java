@@ -42,6 +42,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -57,7 +58,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
 
         final DigestScheme md5Auth = new DigestScheme();
 
-        URI endpoint = new URI(appConfig.getVirtuosoEndpoint() + "?format=json&query=" + URLEncoder.encode(query, "UTF-8"));
+        URI endpoint = new URI(appConfig.getVirtuosoEndpoint() + "?format=json&query=" + URLEncoder.encode(query, StandardCharsets.UTF_8));
         HttpGet request = new HttpGet(endpoint);
         HttpClient client = HttpClientBuilder.create().build();
         HttpResponse authResponse = client.execute(request);
@@ -88,7 +89,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
                         new BasicHttpRequest(HttpGet.METHOD_NAME, endpoint
                                 .getPath()), new HttpClientContext());
 
-                md5Auth.createCnonce();
+                DigestScheme.createCnonce();
                 request.addHeader(solution.getName(), solution.getValue());
                 HttpResponse response = client.execute(request);
 

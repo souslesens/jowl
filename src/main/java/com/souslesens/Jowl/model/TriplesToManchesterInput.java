@@ -2,12 +2,15 @@ package com.souslesens.Jowl.model;
 
 public class TriplesToManchesterInput {
 
-    private String graphName;
-    private jenaTripleParser[] triples;
+    private final String graphName;
+    private final jenaTripleParser[] triples;
 
-    public TriplesToManchesterInput(String graphName, jenaTripleParser[] triples) {
+    private final String axiomGraphName;
+
+    public TriplesToManchesterInput(String graphName, jenaTripleParser[] triples, String axiomGraphName) {
         this.graphName = graphName;
         this.triples = triples;
+        this.axiomGraphName = axiomGraphName;
     }
 
     public String getGraphName() {
@@ -17,6 +20,11 @@ public class TriplesToManchesterInput {
     public jenaTripleParser[] getTriples() {
         return triples;
     }
+
+    public String getAxiomGraphName() {
+        return axiomGraphName;
+    }
+
 }
 
 

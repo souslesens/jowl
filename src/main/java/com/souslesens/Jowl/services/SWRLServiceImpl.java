@@ -4,13 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
 import org.semanticweb.owlapi.io.StreamDocumentSource;
@@ -65,10 +60,10 @@ public class SWRLServiceImpl implements SWRLService {
 		manager.setOntologyLoaderConfiguration(config);
 		OWLOntology ontology = null;
 
-		if (filePath == null && url.isEmpty() == false && (url.startsWith("http") || url.startsWith("ftp"))) {
+		if (filePath == null && !url.isEmpty() && (url.startsWith("http") || url.startsWith("ftp"))) {
 
 			ontology = manager.loadOntologyFromOntologyDocument(IRI.create(url));
-		} else if (filePath.isEmpty() == false && url == null) {
+		} else if (!filePath.isEmpty() && url == null) {
 
 			ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
 		} else {
@@ -128,7 +123,7 @@ public class SWRLServiceImpl implements SWRLService {
 
 	@Override
 	public String SWRLruleReclassificationB64(String ontologyContentDecoded64 ,  String[] reqBodies , String[] reqHead)
-			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
+			throws Exception {
 		try {
 			OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 			InputStream instream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
@@ -137,7 +132,7 @@ public class SWRLServiceImpl implements SWRLService {
 			config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
 			manager.setOntologyLoaderConfiguration(config);
 			OWLOntology ontology = null;
-			System.out.println(instream.toString().isEmpty() == false);
+			System.out.println(!instream.toString().isEmpty());
 			if (instream.available() > 0) {
 				OWLOntologyDocumentSource documentSource = new StreamDocumentSource(instream);
 				ontology = manager.loadOntologyFromOntologyDocument(documentSource);
@@ -200,7 +195,7 @@ public class SWRLServiceImpl implements SWRLService {
 	
 	@Override
 	public String SWRLruleVAB64(String ontologyContentDecoded64 , List<SWRLTypeEntityVariable> reqBodies , List<SWRLTypeEntityVariable> reqHead)
-			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
+			throws Exception {
 		try {
 			OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 			InputStream instream = new ByteArrayInputStream(ontologyContentDecoded64.getBytes());
@@ -389,7 +384,7 @@ public class SWRLServiceImpl implements SWRLService {
 	   	    	        		bodyList.add(bodyElement);
 	   	    	        	}else if(literal.length == 2) {
 	   	    	        		SWRLLiteralArgument LitVarArg = null;
-	   	    	        		List<SWRLDArgument> arguments = new ArrayList<>(Arrays.asList(swrlVar));
+	   	    	        		List<SWRLDArgument> arguments = new ArrayList<>(Collections.singletonList(swrlVar));
 	   	    	        		for (int i = 0; i < literal.length; i++) {
 	   	    	        			OWLLiteral LitVar;
 	   	   	    	        		if(literal[i].matches("\\d+")) {
@@ -430,7 +425,7 @@ public class SWRLServiceImpl implements SWRLService {
 	   	    	        		bodyList.add(bodyElement);
 	   	    	        	}else if(literal.length > 2) {
 	   	    	        		SWRLLiteralArgument LitVarArg = null;
-	   	    	        		List<SWRLDArgument> arguments = new ArrayList<>(Arrays.asList(swrlVar));
+	   	    	        		List<SWRLDArgument> arguments = new ArrayList<>(Collections.singletonList(swrlVar));
 	   	    	        		for (int i = 0; i < literal.length; i++) {
 	   	    	        			OWLLiteral LitVar;
 	   	   	    	        		if(literal[i].matches("\\d+")) {
@@ -578,7 +573,7 @@ public class SWRLServiceImpl implements SWRLService {
 	@Override
 	public String SWRLruleVABUF(String filePath, String url, List<SWRLTypeEntityVariable> reqBodies,
 			List<SWRLTypeEntityVariable> reqHead)
-			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception {
+			throws Exception {
 		try {
 			
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -588,10 +583,10 @@ public class SWRLServiceImpl implements SWRLService {
 		manager.setOntologyLoaderConfiguration(config);
 		OWLOntology ontology = null;
 
-		if (filePath == null && url.isEmpty() == false && (url.startsWith("http") || url.startsWith("ftp"))) {
+		if (filePath == null && !url.isEmpty() && (url.startsWith("http") || url.startsWith("ftp"))) {
 
 			ontology = manager.loadOntologyFromOntologyDocument(IRI.create(url));
-		} else if (filePath.isEmpty() == false && url == null) {
+		} else if (!filePath.isEmpty() && url == null) {
 
 			ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
 		} else {
@@ -773,7 +768,7 @@ public class SWRLServiceImpl implements SWRLService {
    	    	        		bodyList.add(bodyElement);
    	    	        	}else if(literal.length == 2) {
    	    	        		SWRLLiteralArgument LitVarArg = null;
-   	    	        		List<SWRLDArgument> arguments = new ArrayList<>(Arrays.asList(swrlVar));
+   	    	        		List<SWRLDArgument> arguments = new ArrayList<>(Collections.singletonList(swrlVar));
    	    	        		for (int i = 0; i < literal.length; i++) {
    	    	        			OWLLiteral LitVar;
    	   	    	        		if(literal[i].matches("\\d+")) {
@@ -814,7 +809,7 @@ public class SWRLServiceImpl implements SWRLService {
    	    	        		bodyList.add(bodyElement);
    	    	        	}else if(literal.length > 2) {
    	    	        		SWRLLiteralArgument LitVarArg = null;
-   	    	        		List<SWRLDArgument> arguments = new ArrayList<>(Arrays.asList(swrlVar));
+   	    	        		List<SWRLDArgument> arguments = new ArrayList<>(Collections.singletonList(swrlVar));
    	    	        		for (int i = 0; i < literal.length; i++) {
    	    	        			OWLLiteral LitVar;
    	   	    	        		if(literal[i].matches("\\d+")) {
