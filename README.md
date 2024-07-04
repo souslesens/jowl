@@ -391,9 +391,7 @@ __Manchester OWL Syntax's APIS__
 | Method Type | API  | Description |
 | -------- | -------- | -------- |
 | _POST_ | /manchester/manchester2triples | Convert an Axiom written in Manchester OWL Syntax to Triples |
-| -------- | -------- | -------- |
 | _POST_ | /manchester/triples2manchester | Convert a set of triples to Manchester OWL Syntax |
-| -------- | -------- | -------- |
 | _POST_ | /manchester/checkConsistency | Check consistency an axiom written in Manchester OWL Syntax |
 ----------------
 ### Example Of Use For Manchester Part api1
