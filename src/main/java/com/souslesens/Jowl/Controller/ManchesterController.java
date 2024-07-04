@@ -148,6 +148,7 @@ public class ManchesterController {
             }
         }  else {
             try {
+                System.out.println("getting the whole sous graph");
                 return ResponseEntity.ok(serviceManchester.triplesToManchester(axiomGraphName));
             } catch (IOException | URISyntaxException | MalformedChallengeException | AuthenticationException e) {
                 e.printStackTrace();

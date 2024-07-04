@@ -11,9 +11,8 @@ import com.souslesens.Jowl.model.jenaTripleParser;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.MalformedChallengeException;
 import org.apache.jena.rdf.model.*;
-import org.apache.jena.rdf.model.impl.LiteralImpl;
-import org.apache.jena.rdf.model.impl.PropertyImpl;
-import org.apache.jena.rdf.model.impl.ResourceImpl;
+import org.apache.jena.reasoner.Reasoner;
+import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.vocabulary.OWL;
 import org.apache.jena.vocabulary.RDFS;
 import org.json.JSONArray;
@@ -110,7 +109,7 @@ public class ManchesterServiceImpl implements ManchesterService {
             System.out.println(statement);
             jenaTripleParser triple = new jenaTripleParser();
             if (statement.getSubject().isAnon()) {
-                triple.setSubject("_:" + statement.getSubject().getId().getLabelString());
+                triple.setSubject("_" + statement.getSubject().getId().getLabelString());
             } else {
                 triple.setSubject(statement.getSubject().getURI());
             }
@@ -120,7 +119,7 @@ public class ManchesterServiceImpl implements ManchesterService {
 
             // Check if the object is a blank node and modify accordingly
             if (statement.getObject().isAnon()) {
-                triple.setObject("_:" + ((Resource) statement.getObject()).getId().getLabelString());
+                triple.setObject("_" + ((Resource) statement.getObject()).getId().getLabelString());
             } else {
                 triple.setObject(statement.getObject().toString().replace("[OntObject]", ""));
             }
@@ -217,6 +216,13 @@ public class ManchesterServiceImpl implements ManchesterService {
         System.out.println("axiom count:" + o.getAxiomCount());
         System.out.println("axiom: " + o.getLogicalAxioms());
 
+
+        try {
+            m.saveOntology(o, System.out);
+        } catch (OWLOntologyStorageException e) {
+            throw new RuntimeException(e);
+        }
+
         List<String> manchesterAxioms =  new ArrayList<>();
 
         for (OWLLogicalAxiom axiom: o.getLogicalAxioms()) {
@@ -254,15 +260,6 @@ public class ManchesterServiceImpl implements ManchesterService {
 
         System.out.println("axiom count:" + o.getAxiomCount());
 
-//        for (int i = 0; i < typeTriples.length(); i++) {
-//            JSONObject triple = typeTriples.getJSONObject(i);
-//            Resource subjectResource = ResourceFactory.createResource(triple.getJSONObject("subject").getString("value"));
-//            Property predicateProperty = ResourceFactory.createProperty(triple.getJSONObject("predicate").getString("value"));
-//            RDFNode objectNode = ResourceFactory.createResource(triple.getJSONObject("object").getString("value"));
-//
-//            o.asGraphModel().add(subjectResource, predicateProperty, objectNode);
-//        }
-        System.out.println("axiom count:" + o.getAxiomCount());
 
         Map<String, Resource> blankNodeMap = new HashMap<>();
 
@@ -270,19 +267,44 @@ public class ManchesterServiceImpl implements ManchesterService {
         for (int i = 0; i < triples.length(); i++) {
 
             JSONObject triple = triples.getJSONObject(i);
-            Resource subjectResource = ResourceFactory.createResource(triple.getJSONObject("subject").getString("value"));
-            Property predicateProperty = ResourceFactory.createProperty(triple.getJSONObject("predicate").getString("value"));
-            RDFNode objectNode = ResourceFactory.createResource(triple.getJSONObject("object").getString("value"));
 
+            Resource subjectResource;
+            RDFNode objectNode;
+
+            // Handle subject
+            if (triple.getJSONObject("subject").getString("value").startsWith("_")) {
+                subjectResource = blankNodeMap.computeIfAbsent(triple.getJSONObject("subject").getString("value"), k -> ResourceFactory.createResource());
+            } else {
+                subjectResource = ResourceFactory.createResource(triple.getJSONObject("subject").getString("value"));
+            }
+
+            // Handle predicate
+            Property predicateProperty = ResourceFactory.createProperty(triple.getJSONObject("predicate").getString("value"));
+
+            // Handle object
+            if (triple.getJSONObject("object").getString("value").startsWith("_")) {
+                objectNode = blankNodeMap.computeIfAbsent(triple.getJSONObject("object").getString("value"), k -> ResourceFactory.createResource());
+            } else {
+                objectNode = ResourceFactory.createResource(triple.getJSONObject("object").getString("value"));
+            }
+
+            // Add the triple to the model
             o.asGraphModel().add(subjectResource, predicateProperty, objectNode);
         }
 
         System.out.println("axiom count:" + o.getAxiomCount());
         System.out.println("axiom: " + o.getLogicalAxioms());
 
+        try {
+            m.saveOntology(o, System.out);
+        } catch (OWLOntologyStorageException e) {
+            throw new RuntimeException(e);
+        }
+
         List<String> manchesterAxioms =  new ArrayList<>();
 
         for (OWLLogicalAxiom axiom: o.getLogicalAxioms()) {
+            System.out.println(axiom.toString());
             String axiomType = getAxiomType(triples);
             System.out.println("axiom type: "+axiomType);
             String axiomString = convertToManchesterSyntax(axiom);

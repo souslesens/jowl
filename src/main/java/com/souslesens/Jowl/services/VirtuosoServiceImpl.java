@@ -211,7 +211,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
         System.out.println("new graph name: " + newGraphName);
 
         //reformulate blank node uris to an acceptable format by triple store
-        triples = replaceBlankNodesWithURIs(triples);
+        //triples = replaceBlankNodesWithURIs(triples);
 
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("INSERT DATA { GRAPH <" + newGraphName + "> { ");
