@@ -394,7 +394,7 @@ __Manchester OWL Syntax's APIS__
 | _POST_ | /manchester/triples2manchester | Convert a set of triples to Manchester OWL Syntax |
 | _POST_ | /manchester/checkConsistency | Check consistency an axiom written in Manchester OWL Syntax |
 ----------------
-### Example Of Use For Manchester Part api1
+### Example Of Use For Manchester Part api 1
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
@@ -457,7 +457,7 @@ In the body of the request (You click on Body -> Raw -> JSON ), two option of pa
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-Choose a POST Request , you pass this URL http://localhost:9170/manchester/manchester2triples
+Choose a POST Request , you pass this URL http://localhost:9170/manchester/checkConsistency
 
 In the body of the request (You click on Body -> Raw -> JSON ), two parameters should be passed:
 
