@@ -391,8 +391,12 @@ __Manchester OWL Syntax's APIS__
 | Method Type | API  | Description |
 | -------- | -------- | -------- |
 | _POST_ | /manchester/manchester2triples | Convert an Axiom written in Manchester OWL Syntax to Triples |
+| -------- | -------- | -------- |
+| _POST_ | /manchester/triples2manchester | Convert a set of triples to Manchester OWL Syntax |
+| -------- | -------- | -------- |
+| _POST_ | /manchester/checkConsistency | Check consistency an axiom written in Manchester OWL Syntax |
 ----------------
-### Example Of Use For Manchester Part
+### Example Of Use For Manchester Part api1
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
@@ -402,6 +406,65 @@ In the body of the request (You click on Body -> Raw -> JSON ), two parameters s
 
 1. The graph name in virtuoso of the ontology that contains the definition of the classes and properties used in the axiom you want to convert to triples.
 2. The axiom you want to convert to triples.
+3. The class uri (the class that will be on the left side of the axiom).
+4. The axiom type (subCLassOf, EquivalentTo, DisjointUnion, DisjointWIth).
+5. save, boolean to save triples in triple store in the specified graph name.
+6. check, boolean to check consistency(and the ontology with the new axiom) of the axiom while converting it.
+
+```JSON
+    {
+  "graphName":  "https://spec.industrialontologies.org/ontology/core/Core/",
+  "input": " <https://spec.industrialontologies.org/ontology/core/Core/BusinessProcess> SubClassOf: ( <https://spec.industrialontologies.org/ontology/core/Core/prescribedBy> some (<https://spec.industrialontologies.org/ontology/core/Core/PlanSpecification> and ( <http://purl.obolibrary.org/obo/BFO_0000110> some (<https://spec.industrialontologies.org/ontology/core/Core/ObjectiveSpecification> and (<http://purl.obolibrary.org/obo/BFO_0000084> some <https://spec.industrialontologies.org/ontology/core/Core/BusinessOrganization>)))))",
+  "classUri": "https://spec.industrialontologies.org/ontology/core/Core/BusinessProcess",
+  "axiomType": "subclassOf",
+  "saveTriples": true,
+  "checkConsistency": true
+}
+```
+
+----------------
+### Example Of Use For Manchester Part api 2
+
+You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
+
+Choose a POST Request , you pass this URL http://localhost:9170/manchester/triples2manchester
+
+In the body of the request (You click on Body -> Raw -> JSON ), two option of parametres could be passed, the first one is to specify a graphName, and a list of triples (subject, predicate, object). Or as other option we can pass one parameter axiomGraphName and then all triples of that graph will be queried from the triple store and converted to manchester:
+
+## first option
+
+1. The graph name in virtuoso of the ontology that contains the definition of the classes and properties used in the axiom you want to convert to triples.
+2. The triples you want to convert to a manchester syntax.
+
+```JSON
+    {
+    "graphName":  "https://spec.industrialontologies.org/ontology/core/Core/",
+    "triples": [
+        {
+          "subject": "https://spec.industrialontologies.org/ontology/core/Core/BusinessProcess",
+          "predicate": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+          "object": "https://spec.industrialontologies.org/ontology/core/Core/PlanSpecification"
+        }
+      ]
+    }
+```
+## second option
+```JSON
+  {
+    "axiomGraphName": "https://spec.industrialontologies.org/ontology/202401/core/Core/concepts/BusinessProcess/SubClassOf/f388ea9c-f035-46ed-9b94-1f89b991182b/"
+  }
+```
+----------------
+### Example Of Use For Manchester Part api 3
+
+You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
+
+Choose a POST Request , you pass this URL http://localhost:9170/manchester/manchester2triples
+
+In the body of the request (You click on Body -> Raw -> JSON ), two parameters should be passed:
+
+1. The graph name in virtuoso of the ontology that contains the definition of the classes and properties used in the axiom you want to convert to triples.
+2. The axiom you want to check the consistency for.
 
 ```JSON
     {
