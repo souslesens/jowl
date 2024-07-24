@@ -393,6 +393,7 @@ __Manchester OWL Syntax's APIS__
 | _POST_ | /manchester/manchester2triples | Convert an Axiom written in Manchester OWL Syntax to Triples |
 | _POST_ | /manchester/triples2manchester | Convert a set of triples to Manchester OWL Syntax |
 | _POST_ | /manchester/checkConsistency | Check consistency an axiom written in Manchester OWL Syntax |
+| _POST_ | /manchester/getClassAxioms | Retrieve all the axioms for a certain class in manchester and/or triple format |
 ----------------
 ### Example Of Use For Manchester Part api 1
 
@@ -472,6 +473,31 @@ In the body of the request (You click on Body -> Raw -> JSON ), two parameters s
 ```
 
 ----------------
+### Example Of Use For Manchester Part api 1
+
+You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
+
+Choose a POST Request , you pass this URL http://localhost:9170/manchester/manchester2triples
+
+In the body of the request (You click on Body -> Raw -> JSON ), two parameters should be passed:
+
+1. The graph name in virtuoso of the ontology that contains the definition of the classes and properties used in the axiom you want to convert to triples.
+2. The class uri of the class we want to retrieve its axioms.
+3. Tthe axiom type (subCLassOf, EquivalentTo, DisjointWIth or empty for all).
+4. manchetserFormat, boolean to specify that the axioms should be returned in manchester format.
+5. tripleFormat, boolean to specify that the axioms should be returned in triples format.
+
+```JSON
+    {
+  "graphName":  "https://spec.industrialontologies.org/ontology/core/Core/",
+  "classUri": "https://spec.industrialontologies.org/ontology/core/Core/BusinessProcess",
+  "axiomType": "subclassOf",
+  "manchetserFormat": true,
+  "tripleFormat": true
+}
+```
+----------------
+
 
 ### Useful encoders to encode the TEXT
 
