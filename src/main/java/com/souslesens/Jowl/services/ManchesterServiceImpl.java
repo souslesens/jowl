@@ -22,6 +22,7 @@ import org.semanticweb.owlapi.expression.ShortFormEntityChecker;
 import org.semanticweb.owlapi.formats.ManchesterOWLSyntaxOntologyFormat;
 import org.semanticweb.owlapi.io.StringDocumentTarget;
 import org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax;
+import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
 import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxPrefixNameShortFormProvider;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.util.AnnotationValueShortFormProvider;
@@ -39,6 +40,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ManchesterServiceImpl implements ManchesterService {
@@ -316,6 +318,61 @@ public class ManchesterServiceImpl implements ManchesterService {
 
 
         return String.valueOf(manchesterAxioms);
+    }
+
+    @Override
+    public String getClassAxioms(String graphName, String classUri, String axiomType, boolean manchesterFormat, boolean triplesFormat) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
+        OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
+        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName);
+
+        if (owlOntology == null) {
+            System.out.println("Error reading ontology from Virtuoso");
+            return null;
+        }
+        System.out.println("Ontology: " + owlOntology);
+
+        //depending on axiom type look for axioms of the class uri with that axiom type, if axiom type is null or empty then look for all axiom
+        IRI classIRI = IRI.create(classUri);
+        OWLClass owlClass = owlManager.getOWLDataFactory().getOWLClass(classIRI);
+        Set<OWLAxiom> axioms;
+
+        // Depending on axiom type look for axioms of the class URI with that axiom type, if axiom type is null or empty then look for all axioms
+        if (axiomType == null || axiomType.isEmpty()) {
+            axioms = owlOntology.axioms(owlClass).collect(Collectors.toSet());
+        }else {
+            switch (axiomType.toLowerCase()) {
+                case "subclassof":
+                    axioms = owlOntology.subClassAxiomsForSubClass(owlClass).collect(Collectors.toSet());
+                    break;
+                case "equivalentclass":
+                    axioms = owlOntology.equivalentClassesAxioms(owlClass).collect(Collectors.toSet());
+                    break;
+                case "disjointwith":
+                    axioms = owlOntology.disjointClassesAxioms(owlClass).collect(Collectors.toSet());
+                    break;
+                // Add other cases as needed
+                default:
+                    System.out.println("Unknown or unsupported axiom type: " + axiomType);
+                    return null;
+            }
+        }
+        ManchesterOWLSyntaxOWLObjectRendererImpl rend = new ManchesterOWLSyntaxOWLObjectRendererImpl();
+        ArrayList<String> manchesterResult = new ArrayList<>();
+        ArrayList<ArrayList<jenaTripleParser>> triplesResult = new ArrayList<>();
+        for (OWLAxiom axiom : axioms) {
+            if (manchesterFormat) {
+                manchesterResult.add(rend.render(axiom));
+            }
+            if (triplesFormat) {
+                triplesResult.add(getTriples(axiom));
+            }
+        }
+
+        JSONObject result = new JSONObject();
+        result.put("manchester", manchesterResult);
+        result.put("triples", triplesResult);
+
+        return result.toString();
     }
 
     public String convertToManchesterSyntax(OWLAxiom axiom) {

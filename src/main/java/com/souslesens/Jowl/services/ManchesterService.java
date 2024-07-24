@@ -24,4 +24,6 @@ public interface ManchesterService {
 
     String triplesToManchester(String axiomGraphName) throws AuthenticationException, MalformedChallengeException, IOException, URISyntaxException;
 
+    String getClassAxioms(String graphName, String classUri, String axiomType, boolean manchesterFormat, boolean triplesFormat) throws OWLOntologyCreationException, NoVirtuosoTriplesException;
+
 }
