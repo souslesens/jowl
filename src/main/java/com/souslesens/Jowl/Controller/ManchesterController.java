@@ -3,6 +3,7 @@ package com.souslesens.Jowl.Controller;
 import com.github.owlcs.ontapi.OntManagers;
 import com.github.owlcs.ontapi.Ontology;
 import com.github.owlcs.ontapi.OntologyManager;
+import com.souslesens.Jowl.model.GetClassAxiomsInput;
 import com.souslesens.Jowl.model.ManchesterToTriplesInput;
 import com.souslesens.Jowl.model.TriplesToManchesterInput;
 import com.souslesens.Jowl.model.exceptions.NoVirtuosoTriplesException;
@@ -13,7 +14,9 @@ import com.souslesens.Jowl.services.VirtuosoService;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.MalformedChallengeException;
 import org.apache.jena.base.Sys;
+import org.apache.jena.vocabulary.RDFS;
 import org.json.JSONException;
+import org.openrdf.model.vocabulary.OWL;
 import org.semanticweb.owlapi.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -156,6 +159,38 @@ public class ManchesterController {
             }
         }
 
+    }
+
+    @PostMapping(value="/getClassAxioms")
+    public ResponseEntity<String> getClassAxioms(@RequestBody GetClassAxiomsInput request) {
+        String graphName = request.getGraphName();
+        String classUri = request.getClassUri();
+        String axiomType = request.getAxiomType();
+        boolean triplesFormat = request.isTriplesFormat();
+        boolean manchesterFormat = request.isManchesterFormat();
+
+        if (graphName == null) {
+            return ResponseEntity.status(400).body("graph name is required");
+        } else if (classUri == null) {
+            return ResponseEntity.status(400).body("class uri is required");
+        } else if (!triplesFormat && !manchesterFormat) {
+            return ResponseEntity.status(400).body("at least one format should be specified manchester format or triples");
+       }  else if (!(axiomType.isEmpty() || axiomType.equals("subclassof") || axiomType.equals("equivalentclass")
+               || axiomType.equals("disjointwith") )) {
+            return ResponseEntity.status(400).body("axiom type should be speicfied as one the follwoing: subclassof, equivalentclass, disjointwith  or be leaved empty for all" );
+       }
+
+
+
+        try {
+            return ResponseEntity.ok(serviceManchester.getClassAxioms(graphName, classUri, axiomType, manchesterFormat, triplesFormat));
+        }  catch (OWLOntologyCreationException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error while creating the ontology");
+        } catch (NoVirtuosoTriplesException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
     }
 
     private int countParams(Object... parameters) {
