@@ -1,0 +1,882 @@
+[
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "ComputingProcess",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/ComputingProcess"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "PieceOfEquipment",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/PieceOfEquipment"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "MaterialLocationChangeProcess",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MaterialLocationChangeProcess"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "BFO_0000030",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000030"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "MaterialProduct",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MaterialProduct"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "BFO_0000182",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000182"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "ObjectiveSpecification",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/ObjectiveSpecification"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "MeasurementCapability",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MeasurementCapability"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "BFO_0000145",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000145"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "PhysicalLocationIdentifier",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/PhysicalLocationIdentifier"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "MaintainableMaterialItemRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MaintainableMaterialItemRole"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "Capability",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/Capability"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "LossOfRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/LossOfRole"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "InformationContentEntity",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/InformationContentEntity"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "BFO_0000027",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000027"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "RequirementSpecification",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/RequirementSpecification"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "DesignativeInformationContentEntity",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/DesignativeInformationContentEntity"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "ManufacturingProcess",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/ManufacturingProcess"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "CommercialServiceAgreement",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/CommercialServiceAgreement"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "CommercialService",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/CommercialService"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "ProcuringBusinessProcess",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/ProcuringBusinessProcess"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "CommercialServiceSpecification",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/CommercialServiceSpecification"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000026",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000026"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000035",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000035"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "AgentRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/AgentRole"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "BusinessFunction",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/BusinessFunction"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000016",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000016"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000018",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000018"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000148",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000148"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "AssemblyProcess",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/AssemblyProcess"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "Event",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/Event"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "EquipmentRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/EquipmentRole"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "DescriptiveInformationContentEntity",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/DescriptiveInformationContentEntity"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000015",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000015"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "BuyerRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/BuyerRole"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "Identifier",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/Identifier"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "MaterialComponentRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MaterialComponentRole"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000147",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000147"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "Buyer",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/Buyer"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "ActionSpecification",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/ActionSpecification"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000038",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000038"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "GroupOfAgents",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/GroupOfAgents"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "TemporalDurationValueExpression",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/TemporalDurationValueExpression"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000023",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000023"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "GroupOfPersons",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/GroupOfPersons"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "BFO_0000203",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000203"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "System",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/System"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "MeasurementInformationContentEntity",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MeasurementInformationContentEntity"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "CustomerRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/CustomerRole"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "BFO_0000202",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000202"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000002",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000002"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000029",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000029"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "Agreement",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/Agreement"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "BillOfMaterial",
+    "class": "https://spec.industrialontologies.org/ontology/202401/core/Core/BillOfMaterial"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "Assembly",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/Assembly"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "SupplyingBusinessProcess",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/SupplyingBusinessProcess"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000011",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000011"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "MaintainableMaterialItem",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MaintainableMaterialItem"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "MaterialComponent",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MaterialComponent"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "Person",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/Person"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "PlannedProcess",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/PlannedProcess"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "ServiceProviderRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/ServiceProviderRole"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000020",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000020"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "OrganizedGroupOfAgents",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/OrganizedGroupOfAgents"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "Supplier",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/Supplier"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "DirectiveInformationContentEntity",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/DirectiveInformationContentEntity"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "BFO_0000034",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000034"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "Organization",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/Organization"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "EngineeredSystem",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/EngineeredSystem"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000004",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000004"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "SellingBusinessProcess",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/SellingBusinessProcess"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "ServiceProvider",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/ServiceProvider"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "Customer",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/Customer"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "MaterialArtifact",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MaterialArtifact"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000141",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000141"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "TemporalInstantValueExpression",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/TemporalInstantValueExpression"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "MaterialResourceRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MaterialResourceRole"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "MaterialResource",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MaterialResource"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "DesignSpecification",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/DesignSpecification"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000146",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000146"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "SupplierRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/SupplierRole"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "DesignedFunction",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/DesignedFunction"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000031",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000031"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000017",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000017"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "Algorithm",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/Algorithm"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "Manufacturer",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/Manufacturer"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "PlanSpecification",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/PlanSpecification"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "MeasuredValueExpression",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MeasuredValueExpression"
+  },
+  {
+    "axiomTypes": [],
+    "label": "BFO_0000001",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000001"
+  },
+  {
+    "axiomTypes": [],
+    "label": "MaturityLevel",
+    "class": "https://spec.industrialontologies.org/ontology/core/meta/AnnotationVocabulary/MaturityLevel"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "Agent",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/Agent"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000028",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000028"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000006",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000006"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "RawMaterial",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/RawMaterial"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "BusinessOrganization",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/BusinessOrganization"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "ProcessCharacteristic",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/ProcessCharacteristic"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "MaterialState",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MaterialState"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "MeasurementProcess",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MeasurementProcess"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000142",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000142"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000019",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000019"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "OrganizationIdentifier",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/OrganizationIdentifier"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "EncodedAlgorithm",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/EncodedAlgorithm"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000009",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000009"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "ValueExpression",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/ValueExpression"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "RawMaterialRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/RawMaterialRole"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "BuyingBusinessProcess",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/BuyingBusinessProcess"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "MaterialProductRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/MaterialProductRole"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "ManufacturerRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/ManufacturerRole"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000003",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000003"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000008",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000008"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000140",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000140"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "GainOfRole",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/GainOfRole"
+  },
+  {
+    "axiomTypes": [
+      "EquivalentClasses",
+      "SubClassOf"
+    ],
+    "label": "ProductProductionProcess",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/ProductProductionProcess"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "BFO_0000024",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000024"
+  },
+  {
+    "axiomTypes": [
+      "DisjointClasses",
+      "SubClassOf"
+    ],
+    "label": "BFO_0000040",
+    "class": "http://purl.obolibrary.org/obo/BFO_0000040"
+  },
+  {
+    "axiomTypes": [
+      "SubClassOf"
+    ],
+    "label": "BusinessProcess",
+    "class": "https://spec.industrialontologies.org/ontology/core/Core/BusinessProcess"
+  },
+  {
+    "axiomTypes": [],
+    "label": "Thing",
+    "class": "http://www.w3.org/2002/07/owl#Thing"
+  }
+]
