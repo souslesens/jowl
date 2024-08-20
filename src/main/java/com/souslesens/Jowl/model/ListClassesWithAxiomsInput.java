@@ -5,6 +5,8 @@ public class ListClassesWithAxiomsInput {
     private final String graphName;
     private final String axiomType;
 
+    private final boolean complex;
+
     public String getGraphName() {
         return graphName;
     }
@@ -13,9 +15,14 @@ public class ListClassesWithAxiomsInput {
         return axiomType;
     }
 
-    public ListClassesWithAxiomsInput(String graphName, String axiomType) {
+    public boolean isComplex() {
+        return complex;
+    }
+
+    public ListClassesWithAxiomsInput(String graphName, String axiomType, Boolean complex) {
         this.graphName = graphName;
-        this.axiomType = axiomType;
+        this.axiomType = (axiomType != null) ? axiomType.toLowerCase() : "";
+        this.complex = (complex != null) ? complex : false;
     }
 }
 

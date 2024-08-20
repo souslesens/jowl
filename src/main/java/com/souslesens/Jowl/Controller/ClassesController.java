@@ -21,13 +21,18 @@ public class ClassesController {
     @PostMapping(value="/listClassesWithAxioms")
     public ResponseEntity<String> listClassesWithAxioms(@RequestBody ListClassesWithAxiomsInput request ) {
         String graphName = request.getGraphName();
+        String axiomType = request.getAxiomType();
+        boolean complexAxioms = request.isComplex();
 
         if (graphName == null || graphName.isEmpty()) {
             return ResponseEntity.badRequest().body("Graph Name should be provided");
+        } else if (!(axiomType.isEmpty() || axiomType.equals("subclassof") || axiomType.equals("equivalentclasses")
+                || axiomType.equals("disjointwith") )) {
+            return ResponseEntity.status(400).body("axiom type should be speicfied as one the follwoing: subclassof, equivalentclasses, disjointwith  or be leaved empty for all" );
         }
 
         try {
-            return ResponseEntity.ok(classesService.listClassesWithAxioms(graphName).toString());
+            return ResponseEntity.ok(classesService.listClassesWithAxioms(graphName, axiomType, complexAxioms).toString());
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error while creating the ontology");
