@@ -31,7 +31,7 @@ public class ClassesServiceImpl implements ClassesService{
             classObject.put("class", owlClass.getIRI().toString());
 
             // Fetching class label if available
-            String classLabel = owlClass.getIRI().getShortForm(); // Simplified: retrieve actual label from ontology if needed
+            String classLabel = owlClass.getIRI().getShortForm();
             classObject.put("label", classLabel);
 
             Set<String> axiomTypesSet = new HashSet<>();
@@ -39,17 +39,9 @@ public class ClassesServiceImpl implements ClassesService{
 
             boolean hasComplexAxiom = false;
 
-            System.out.println("treating class " + owlClass.getIRI().toString());
-            System.out.println("axiom type " + axiomType);
-
-
             for (OWLClassAxiom axiom : axioms) {
 
                 String currentAxiomType = axiom.getAxiomType().getName();
-                System.out.println("current axiom type " + axiomType);
-                System.out.println("axiom " + axiom.toString());
-                System.out.println("classes count in axioms " + axiom.getClassesInSignature().size());
-                System.out.println("complex " + isComplex(axiom));
                 if (axiomType == null || axiomType.isEmpty() || axiomType.equalsIgnoreCase(currentAxiomType)) {
 
                     // Check for complexity
