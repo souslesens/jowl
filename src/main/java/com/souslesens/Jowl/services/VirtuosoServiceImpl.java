@@ -31,7 +31,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.semanticweb.owlapi.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.apache.http.impl.auth.DigestScheme;
 
@@ -44,7 +43,6 @@ import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Set;
 
 @Service
 public class VirtuosoServiceImpl implements VirtuosoService {
@@ -114,14 +112,35 @@ public class VirtuosoServiceImpl implements VirtuosoService {
     }
 
     @Override
-    public Ontology readOntologyFromVirtuoso(String graphName) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
+    public Ontology readOntologyFromVirtuoso(String graphName, boolean bringCreatedAxioms) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
 
-        JSONArray triples = null;
+        JSONArray triples = new JSONArray();
 
         try {
-            System.out.println("querying sparql");
-            triples = getTriplesVirtuosoSparql(graphName);
-            if (triples == null || triples.length() == 0)
+
+            if (bringCreatedAxioms){
+                System.out.println("querying graphnames");
+                JSONArray graphNames = getGraphNamesVirtuosoSparql(graphName);
+
+                System.out.println(graphNames);
+
+                for (int i = 0; i < graphNames.length(); i++) {
+                    String matchedGraphName = graphNames.getJSONObject(i).getJSONObject("graph").getString("value");
+                    System.out.println("Fetching triples from graph: " + matchedGraphName);
+
+                    JSONArray graphTriples = getTriplesVirtuosoSparql(matchedGraphName);
+                    System.out.println(graphTriples);
+                    if (graphTriples != null && graphTriples.length() > 0) {
+                        for (int j = 0; j < graphTriples.length(); j++) {
+                            triples.put(graphTriples.get(j));
+                        }
+                    }
+                }
+            } else {
+                System.out.println("querying sparql");
+                triples = getTriplesVirtuosoSparql(graphName);
+            }
+            if (triples.length() == 0)
                 throw new NoVirtuosoTriplesException("No triples found in the graph " + graphName);
         } catch (IOException | URISyntaxException | MalformedChallengeException | AuthenticationException e) {
             throw new RuntimeException(e);
@@ -140,19 +159,19 @@ public class VirtuosoServiceImpl implements VirtuosoService {
             String objectType = triple.getJSONObject("object").getString("type");
 
             Resource subject;
-            if (subjectType.equals("uri")) {
+            if (subjectType.equals("uri") && !subjectValue.startsWith("_") ) {
                 subject = ResourceFactory.createResource(subjectValue);
-            } else if (subjectType.equals("bnode") || subjectValue.startsWith("nodeID://")) {
-                subject = o.asGraphModel().createResource(new AnonId(subjectValue.replace("nodeID://", "")));
+            } else if (subjectType.equals("bnode") || subjectValue.startsWith("nodeID://") || subjectValue.startsWith("_") ) {
+                subject = o.asGraphModel().createResource(new AnonId(subjectValue));
             } else {
                 throw new IllegalArgumentException("Unexpected subject type: " + subjectType);
             }
 
             Resource object;
-            if (objectType.equals("uri")) {
+            if (objectType.equals("uri") && !objectValue.startsWith("_") ) {
                 object = ResourceFactory.createResource(objectValue);
-            } else if (objectType.equals("bnode") || objectValue.startsWith("nodeID://")) {
-                object = o.asGraphModel().createResource(new AnonId(objectValue.replace("nodeID://", "")));
+            } else if (objectType.equals("bnode") || objectValue.startsWith("nodeID://") || objectValue.startsWith("_")) {
+                object = o.asGraphModel().createResource(new AnonId(objectValue));
             } else {
                 throw new IllegalArgumentException("Unexpected object type: " + objectType);
             }
@@ -267,6 +286,16 @@ public class VirtuosoServiceImpl implements VirtuosoService {
             }
         }
         return triples;
+    }
+
+    private JSONArray getGraphNamesVirtuosoSparql(String baseGraphName) throws IOException, URISyntaxException, AuthenticationException, MalformedChallengeException {
+        // Your code to execute the SPARQL query to retrieve graph names
+        // Use the following SPARQL query:
+        String sparqlQuery = "SELECT DISTINCT ?graph WHERE { GRAPH ?graph { ?s ?p ?o } "
+                + "FILTER(CONTAINS(STR(?graph), \"" + baseGraphName + "\")) }";
+
+        // Return the graph names as a JSONArray
+        return querySparql(sparqlQuery).getJSONArray("bindings");
     }
 }
 
