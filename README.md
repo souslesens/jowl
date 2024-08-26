@@ -473,7 +473,37 @@ In the body of the request (You click on Body -> Raw -> JSON ), two parameters s
 ```
 
 ----------------
-### Example Of Use For Manchester Part api 1
+### Example Of Use For Manchester Part api 4
+
+You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
+
+Choose a POST Request , you pass this URL http://localhost:9170/manchester/getClassAxioms
+
+In the body of the request (You click on Body -> Raw -> JSON ), two parameters should be passed:
+
+1. The graph name in virtuoso of the ontology that contains the definition of the classes and properties used in the axiom you want to convert to triples.
+2. The class uri of the class we want to retrieve its axioms.
+3. The axiom type (subCLassOf, EquivalentTo, DisjointWIth or empty for all).
+4. manchetserFormat, boolean to specify that the axioms should be returned in manchester format.
+5. triplesFormat, boolean to specify that the axioms should be returned in triples format.
+
+```JSON
+    {
+  "graphName":  "https://spec.industrialontologies.org/ontology/core/Core/",
+  "classUri": "https://spec.industrialontologies.org/ontology/core/Core/BusinessProcess",
+  "axiomType": "subclassOf",
+  "manchetserFormat": true,
+  "triplesFormat": true
+}
+```
+----------------
+
+__Classes's APIS__
+| Method Type | API  | Description |
+| -------- | -------- | -------- |
+| _POST_ | /classes/listClassesWithAxioms | List classes with their labels and the relations of the axiom they have |
+----------------
+### Example Of Use For Classes Part api 1
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
@@ -482,22 +512,18 @@ Choose a POST Request , you pass this URL http://localhost:9170/manchester/manch
 In the body of the request (You click on Body -> Raw -> JSON ), two parameters should be passed:
 
 1. The graph name in virtuoso of the ontology that contains the definition of the classes and properties used in the axiom you want to convert to triples.
-2. The class uri of the class we want to retrieve its axioms.
-3. Tthe axiom type (subCLassOf, EquivalentTo, DisjointWIth or empty for all).
-4. manchetserFormat, boolean to specify that the axioms should be returned in manchester format.
-5. tripleFormat, boolean to specify that the axioms should be returned in triples format.
+4. The axiom type (subCLassOf, EquivalentTo, DisjointWIth), or leave empty for all types.
+5. complex, boolean to get only the classes that has complex axioms.
 
 ```JSON
     {
   "graphName":  "https://spec.industrialontologies.org/ontology/core/Core/",
-  "classUri": "https://spec.industrialontologies.org/ontology/core/Core/BusinessProcess",
   "axiomType": "subclassOf",
-  "manchetserFormat": true,
-  "tripleFormat": true
+  "complex": true
 }
 ```
-----------------
 
+----------------
 
 ### Useful encoders to encode the TEXT
 

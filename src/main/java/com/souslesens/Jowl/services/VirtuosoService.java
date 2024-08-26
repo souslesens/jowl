@@ -8,20 +8,17 @@ import org.apache.http.auth.MalformedChallengeException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Set;
 
 public interface VirtuosoService {
 
     JSONObject querySparql(String query) throws IOException, URISyntaxException, MalformedChallengeException, AuthenticationException;
 
-    Ontology readOntologyFromVirtuoso(String graphName) throws OWLOntologyCreationException, NoVirtuosoTriplesException;
+    Ontology readOntologyFromVirtuoso(String graphName, boolean bringCreatedAxioms) throws OWLOntologyCreationException, NoVirtuosoTriplesException;
 
     JSONArray getTriplesVirtuosoSparql(String graphName) throws MalformedChallengeException, URISyntaxException, IOException, AuthenticationException;
 
