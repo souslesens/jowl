@@ -17,6 +17,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class HermitReasonerServiceImpl implements HermitReasonerService {
@@ -150,9 +152,16 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         OWLDataFactory dataFactory = manager.getOWLDataFactory();
         generator.fillOntology(dataFactory, inferredOntology);
 
+        // Filter out original axioms and keep only inferred ones
+        Set<OWLAxiom> originalAxioms = ontology.getAxioms();
+        Set<OWLAxiom> inferredAxioms = new HashSet<>(inferredOntology.getAxioms());
+        System.out.println(inferredAxioms.size());
+        inferredAxioms.removeAll(originalAxioms);
+        System.out.println(inferredAxioms.size());
+
         StringBuilder sb = new StringBuilder();
         // Add the inferred axioms to the list
-        for (OWLAxiom axiom : inferredOntology.getAxioms()) {
+        for (OWLAxiom axiom : inferredAxioms) {
             sb.append(axiom.toString());
 
         }
@@ -194,9 +203,15 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         OWLDataFactory dataFactory = manager.getOWLDataFactory();
         generator.fillOntology(dataFactory, inferredOntology);
 
+        Set<OWLAxiom> originalAxioms = ontology.getAxioms();
+        Set<OWLAxiom> inferredAxioms = new HashSet<>(inferredOntology.getAxioms());
+        System.out.println(inferredAxioms.size());
+        inferredAxioms.removeAll(originalAxioms);
+        System.out.println(inferredAxioms.size());
+
         StringBuilder sb = new StringBuilder();
         // Add the inferred axioms to the list
-        for (OWLAxiom axiom : inferredOntology.getAxioms()) {
+        for (OWLAxiom axiom : inferredAxioms) {
             sb.append(axiom.toString());
 
         }
