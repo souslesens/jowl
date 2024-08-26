@@ -483,9 +483,9 @@ In the body of the request (You click on Body -> Raw -> JSON ), two parameters s
 
 1. The graph name in virtuoso of the ontology that contains the definition of the classes and properties used in the axiom you want to convert to triples.
 2. The class uri of the class we want to retrieve its axioms.
-3. Tthe axiom type (subCLassOf, EquivalentTo, DisjointWIth or empty for all).
+3. The axiom type (subCLassOf, EquivalentTo, DisjointWIth or empty for all).
 4. manchetserFormat, boolean to specify that the axioms should be returned in manchester format.
-5. tripleFormat, boolean to specify that the axioms should be returned in triples format.
+5. triplesFormat, boolean to specify that the axioms should be returned in triples format.
 
 ```JSON
     {
@@ -493,7 +493,7 @@ In the body of the request (You click on Body -> Raw -> JSON ), two parameters s
   "classUri": "https://spec.industrialontologies.org/ontology/core/Core/BusinessProcess",
   "axiomType": "subclassOf",
   "manchetserFormat": true,
-  "tripleFormat": true
+  "triplesFormat": true
 }
 ```
 ----------------

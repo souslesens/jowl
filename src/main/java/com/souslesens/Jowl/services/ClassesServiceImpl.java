@@ -22,7 +22,7 @@ public class ClassesServiceImpl implements ClassesService{
     public JSONArray listClassesWithAxioms(String graphName, String axiomType, boolean complexAxioms) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
 
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
-        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName);
+        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
 
         JSONArray result  = new JSONArray();
 

@@ -139,7 +139,7 @@ public class ManchesterController {
         if (graphName != null && !graphName.isEmpty()) {
             try {
                 return ResponseEntity.ok(serviceManchester.triplesToManchester(graphName, triples));
-            } catch (OWLOntologyCreationException e) {
+            } catch (OWLOntologyCreationException | OWLOntologyStorageException e) {
                 e.printStackTrace();
                 return ResponseEntity.badRequest().body("Error while reading ontology From Triple Store");
             } catch (NoVirtuosoTriplesException e) {
@@ -179,8 +179,6 @@ public class ManchesterController {
                || axiomType.equals("disjointwith") )) {
             return ResponseEntity.status(400).body("axiom type should be speicfied as one the follwoing: subclassof, equivalentclass, disjointwith  or be leaved empty for all" );
        }
-
-
 
         try {
             return ResponseEntity.ok(serviceManchester.getClassAxioms(graphName, classUri, axiomType, manchesterFormat, triplesFormat));

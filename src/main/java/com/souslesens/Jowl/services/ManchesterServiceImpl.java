@@ -11,8 +11,6 @@ import com.souslesens.Jowl.model.jenaTripleParser;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.MalformedChallengeException;
 import org.apache.jena.rdf.model.*;
-import org.apache.jena.reasoner.Reasoner;
-import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.vocabulary.OWL;
 import org.apache.jena.vocabulary.RDFS;
 import org.json.JSONArray;
@@ -23,7 +21,6 @@ import org.semanticweb.owlapi.formats.ManchesterOWLSyntaxOntologyFormat;
 import org.semanticweb.owlapi.io.StringDocumentTarget;
 import org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax;
 import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
-import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxPrefixNameShortFormProvider;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.util.AnnotationValueShortFormProvider;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProvider;
@@ -34,10 +31,7 @@ import org.semanticweb.owlapi.util.mansyntax.ManchesterOWLSyntaxParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -55,7 +49,7 @@ public class ManchesterServiceImpl implements ManchesterService {
     public OWLAxiom parseStringToAxiom(String graphName, String input) throws OWLOntologyCreationException, ParsingAxiomException, NoVirtuosoTriplesException {
 
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
-        OWLOntology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName);
+        OWLOntology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
 
         if (owlOntology == null) {
             System.out.println("Error reading ontology from Virtuoso");
@@ -133,7 +127,7 @@ public class ManchesterServiceImpl implements ManchesterService {
 
     @Override
     public boolean checkManchesterAxiomConsistency(String graphName, OWLAxiom axiom) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
-        OWLOntology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName);
+        OWLOntology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
 
         if (owlOntology == null) {
             System.out.println("Error reading ontology from Virtuoso");
@@ -147,7 +141,7 @@ public class ManchesterServiceImpl implements ManchesterService {
     }
 
     @Override
-    public String triplesToManchester(String graphName, jenaTripleParser[] triples) throws OWLOntologyCreationException, NoVirtuosoTriplesException, AuthenticationException, MalformedChallengeException, IOException, URISyntaxException {
+    public String triplesToManchester(String graphName, jenaTripleParser[] triples) throws OWLOntologyCreationException, NoVirtuosoTriplesException, AuthenticationException, MalformedChallengeException, IOException, URISyntaxException, OWLOntologyStorageException {
 
         Set<String> uris = new HashSet<>();
 
@@ -219,11 +213,8 @@ public class ManchesterServiceImpl implements ManchesterService {
         System.out.println("axiom: " + o.getLogicalAxioms());
 
 
-        try {
-            m.saveOntology(o, System.out);
-        } catch (OWLOntologyStorageException e) {
-            throw new RuntimeException(e);
-        }
+        m.saveOntology(o, System.out);
+
 
         List<String> manchesterAxioms =  new ArrayList<>();
 
@@ -323,7 +314,7 @@ public class ManchesterServiceImpl implements ManchesterService {
     @Override
     public String getClassAxioms(String graphName, String classUri, String axiomType, boolean manchesterFormat, boolean triplesFormat) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
-        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName);
+        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, true);
 
         if (owlOntology == null) {
             System.out.println("Error reading ontology from Virtuoso");
@@ -369,8 +360,10 @@ public class ManchesterServiceImpl implements ManchesterService {
         }
 
         JSONObject result = new JSONObject();
-        result.put("manchester", manchesterResult);
-        result.put("triples", triplesResult);
+        if (triplesFormat)
+            result.put("triples", triplesResult);
+        if (manchesterFormat)
+            result.put("manchester", manchesterResult);
 
         return result.toString();
     }
