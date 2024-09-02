@@ -81,7 +81,6 @@ public class VirtuosoServiceImpl implements VirtuosoService {
                 NameRegistrar.register("www-authenticate", authResponse.getHeaders("WWW-Authenticate")[0]);
                 md5Auth.processChallenge(challenge);
 
-                System.out.println(appConfig.getVirtuosoUser() + appConfig.getVirtuosoPassword());
                 final Header solution = md5Auth.authenticate(
                         new UsernamePasswordCredentials(appConfig.getVirtuosoUser(), appConfig.getVirtuosoPassword()),
                         new BasicHttpRequest(HttpGet.METHOD_NAME, endpoint
@@ -129,7 +128,6 @@ public class VirtuosoServiceImpl implements VirtuosoService {
                     System.out.println("Fetching triples from graph: " + matchedGraphName);
 
                     JSONArray graphTriples = getTriplesVirtuosoSparql(matchedGraphName);
-                    System.out.println(graphTriples);
                     if (graphTriples != null && graphTriples.length() > 0) {
                         for (int j = 0; j < graphTriples.length(); j++) {
                             triples.put(graphTriples.get(j));
@@ -143,6 +141,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
             if (triples.length() == 0)
                 throw new NoVirtuosoTriplesException("No triples found in the graph " + graphName);
         } catch (IOException | URISyntaxException | MalformedChallengeException | AuthenticationException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
 
