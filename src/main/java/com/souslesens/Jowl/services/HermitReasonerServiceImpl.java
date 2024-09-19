@@ -143,6 +143,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         OWLOntology ontology = null;
         try {
             if (filePath == null && graphName == null && !Url.isEmpty() && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+                System.out.println("reading ontology from url");
                 ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
             } else if (graphName == null && !filePath.isEmpty() && Url == null) {
                 ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
@@ -153,6 +154,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
             e.printStackTrace();
             return e.getMessage();
         }
+        System.out.println("configuring reasoner");
         Configuration config = new Configuration();
         Reasoner hermit = new Reasoner(config, ontology);
         hermit.precomputeInferences(InferenceType.values());
@@ -251,11 +253,6 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
                     generator.addGenerator(new CustomInferredComplementOfAxiomGenerator()); // Generate owl:ComplementOf
 
                     break;
-                }else {
-                    break;
-                }
-                if (generatorAdded) {
-                    continue;
                 }
 
 
@@ -265,23 +262,32 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
             }
         }
 
+        System.out.println("generators added");
+
 
         OWLOntology inferredOntology = manager.createOntology();
         OWLDataFactory dataFactory = manager.getOWLDataFactory();
         generator.fillOntology(dataFactory, inferredOntology);
 
         // Filter out original axioms and keep only inferred ones
+        System.out.println("hey1");
         Set<OWLAxiom> originalAxioms = ontology.getAxioms();
+        System.out.println("hey2");
         Set<OWLAxiom> inferredAxioms = new HashSet<>(inferredOntology.getAxioms());
+        System.out.println("hey3");
         System.out.println(inferredAxioms.size());
+        System.out.println("hey4");
         inferredAxioms.removeAll(originalAxioms);
+        System.out.println("hey5");
         System.out.println(inferredAxioms.size());
 
         StringBuilder sb = new StringBuilder();
         // Add the inferred axioms to the list
+        System.out.println("hey6");
         for (OWLAxiom axiom : inferredAxioms) {
             sb.append(axiom.toString());
         }
+        System.out.println("hey7");
         String axiomsString = sb.toString();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("inference", axiomsString);

@@ -7,7 +7,6 @@ import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.MalformedChallengeException;
 import org.semanticweb.owlapi.model.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -25,5 +24,7 @@ public interface ManchesterService {
     String triplesToManchester(String axiomGraphName) throws AuthenticationException, MalformedChallengeException, IOException, URISyntaxException;
 
     String getClassAxioms(String graphName, String classUri, String axiomType, boolean manchesterFormat, boolean triplesFormat) throws OWLOntologyCreationException, NoVirtuosoTriplesException;
+
+    boolean checkTriplesConsistency(String graphName, ArrayList<jenaTripleParser> triples, boolean saveTriples) throws OWLOntologyCreationException, NoVirtuosoTriplesException, AuthenticationException, MalformedChallengeException, IOException, URISyntaxException;
 
 }
