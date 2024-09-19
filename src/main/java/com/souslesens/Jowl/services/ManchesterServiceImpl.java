@@ -471,4 +471,58 @@ public class ManchesterServiceImpl implements ManchesterService {
         return null;
     }
 
+    public boolean checkTriplesConsistency(String graphName, ArrayList<jenaTripleParser> triples, boolean saveTriples) throws OWLOntologyCreationException, NoVirtuosoTriplesException, AuthenticationException, MalformedChallengeException, IOException, URISyntaxException {
+        Ontology o = virtuosoService.readOntologyFromVirtuoso(graphName, true);
+
+
+
+        System.out.println(triples);
+        System.out.println(triples.get(0).getSubject());
+        System.out.println(o.axioms().count());
+        System.out.println(o.asGraphModel().size());
+
+
+        Map<String, Resource> blankNodeMap = new HashMap<>();
+
+        for (jenaTripleParser triple : triples) {
+            Resource subjectResource;
+            RDFNode objectNode;
+
+            // Handle subject
+            if (triple.getSubject().startsWith("_")) {
+                subjectResource = blankNodeMap.computeIfAbsent(triple.getSubject(), k -> ResourceFactory.createResource());
+            } else {
+                subjectResource = ResourceFactory.createResource(triple.getSubject());
+            }
+
+            // Handle predicate
+            Property predicateProperty = ResourceFactory.createProperty(triple.getPredicate());
+
+            // Handle object
+            if (triple.getObject().startsWith("_")) {
+                objectNode = blankNodeMap.computeIfAbsent(triple.getObject(), k -> ResourceFactory.createResource());
+            } else {
+                objectNode = ResourceFactory.createResource(triple.getObject());
+            }
+
+            System.out.println(subjectResource.getURI());
+            System.out.println(predicateProperty.getURI());
+            System.out.println(objectNode.toString());
+
+            // Add the triple to the model
+            o.asGraphModel().add(subjectResource, predicateProperty, objectNode);
+        }
+
+
+        if (saveTriples && hermitReasonerService.getConsistency(o) ) {
+            virtuosoService.saveTriples(graphName, null, null, triples );
+        }
+
+
+        System.out.println();
+
+        return hermitReasonerService.getConsistency(o);
+
+    }
+
 }

@@ -216,17 +216,23 @@ public class VirtuosoServiceImpl implements VirtuosoService {
         for (jenaTripleParser triple : triplesList) {
             triples.add(new jenaTripleParser(triple.getSubject(), triple.getPredicate(), triple.getObject()));
         }
-        String uuid = java.util.UUID.randomUUID().toString(); // Generates a unique UUID
-        //getting last part of classUri
-        String[] parts = classUri.split("[#/]");
-        String classLastPart = parts[parts.length - 1];
+
+        String newGraphName = "";
+        if (classUri != null && !classUri.isEmpty()) {
+            String uuid = java.util.UUID.randomUUID().toString(); // Generates a unique UUID
+            //getting last part of classUri
+            String[] parts = classUri.split("[#/]");
+            String classLastPart = parts[parts.length - 1];
 
 
-        String newGraphName = graphName + "concepts/" + classLastPart + "/" + axiomType + "/" + uuid + "/";
-        //create new graph
-        String createGraphQuery = "CREATE GRAPH <" + newGraphName + ">";
-        querySparql(createGraphQuery);
-        System.out.println("new graph name: " + newGraphName);
+            newGraphName = graphName + "concepts/" + classLastPart + "/" + axiomType + "/" + uuid + "/";
+            //create new graph
+            String createGraphQuery = "CREATE GRAPH <" + newGraphName + ">";
+            querySparql(createGraphQuery);
+            System.out.println("new graph name: " + newGraphName);
+        } else {
+            newGraphName = graphName;
+        }
 
         //reformulate blank node uris to an acceptable format by triple store
         //triples = replaceBlankNodesWithURIs(triples);
