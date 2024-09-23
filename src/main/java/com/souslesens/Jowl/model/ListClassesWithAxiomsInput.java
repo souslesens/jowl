@@ -22,7 +22,7 @@ public class ListClassesWithAxiomsInput {
     public ListClassesWithAxiomsInput(String graphName, String axiomType, Boolean complex) {
         this.graphName = graphName;
         this.axiomType = (axiomType != null) ? axiomType.toLowerCase() : "";
-        this.complex = (complex != null) ? complex : false;
+        this.complex = (complex != null) ? complex : true;
     }
 }
 
