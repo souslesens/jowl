@@ -37,8 +37,8 @@ docker run -d -p 9170:9170 jowl
 ```
 
 ----------------
-### Build only Jowl (without virtuoso) without Docker
-in case you already have a virtuoso instance running in your machine (server or local pc), you only need to run the Jowl container:
+### Build a development instance of Jowl without Docker
+in case you already have a virtuoso instance running in your machine (server or local pc), you only need to run the Jowl container (if no follow the above instructions to build a virtuoso container):
 
 1. inside the application.properties file, you need to specify the virtuoso endpoint
 
@@ -50,7 +50,6 @@ VIRTUOSO_ENDPOINT_URL=http://localhost:8890/sparql
 ```
 mvn spring-boot:run
 ```
-
 ----------------
 
 ### If you don't have docker installed
@@ -60,6 +59,8 @@ Refer to the
 ----------------
 ### API Documentation
 After successfully downloading the project and running it, here's the API that you can use
+
+Note that after running the App a swagger documentation will be available at http://localhost:9170/swagger-ui/index.html
 
 __Base URL__ : http://localhost:9170
 
@@ -403,21 +404,22 @@ You pick Body -> Raw -> JSON
 
 ----------------
 
-__Manchester OWL Syntax's APIS__
+__Axioms APIS__
 | Method Type | API  | Description |
 | -------- | -------- | -------- |
-| _POST_ | /manchester/manchester2triples | Convert an Axiom written in Manchester OWL Syntax to Triples |
-| _POST_ | /manchester/triples2manchester | Convert a set of triples to Manchester OWL Syntax |
-| _POST_ | /manchester/checkConsistency | Check consistency an axiom written in Manchester OWL Syntax |
-| _POST_ | /manchester/getClassAxioms | Retrieve all the axioms for a certain class in manchester and/or triple format |
-| _POST_ | /manchester/checkTriplesConsistency | check a consistency of an axiom(s) in a triple format |
-| _POST_ | /manchester/saveTriples | save a set of triples into the triplestore (virtuoso) |
+| _POST_ | /axioms/manchester2triples | Convert an Axiom written in Manchester OWL Syntax to Triples |
+| _POST_ | /axioms/triples2manchester | Convert a set of triples to Manchester OWL Syntax |
+| _POST_ | /axioms/checkConsistency | Check consistency an axiom written in Manchester OWL Syntax |
+| _POST_ | /axioms/getClassAxioms | Retrieve all the axioms for a certain class in axioms and/or triple format |
+| _POST_ | /axioms/checkTriplesConsistency | check a consistency of an axiom(s) in a triple format |
+| _POST_ | /axioms/saveTriples | save a set of triples into the triplestore (virtuoso) |
+| _POST_ | /classes/listClassesWithAxioms | List classes with their labels and the relations of the axiom they have |
 ----------------
-### Example Of Use For Manchester Part api 1
+### Example Of Use For Axioms Part api 1
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-Choose a POST Request , you pass this URL http://localhost:9170/manchester/manchester2triples
+Choose a POST Request , you pass this URL http://localhost:9170/axioms/manchester2triples
 
 In the body of the request (You click on Body -> Raw -> JSON ), two parameters should be passed:
 
@@ -440,11 +442,11 @@ In the body of the request (You click on Body -> Raw -> JSON ), two parameters s
 ```
 
 ----------------
-### Example Of Use For Manchester Part api 2
+### Example Of Use For Axioms Part api 2
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-Choose a POST Request , you pass this URL http://localhost:9170/manchester/triples2manchester
+Choose a POST Request , you pass this URL http://localhost:9170/axioms/triples2manchester
 
 In the body of the request (You click on Body -> Raw -> JSON ), two option of parametres could be passed, the first one is to specify a graphName, and a list of triples (subject, predicate, object). Or as other option we can pass one parameter axiomGraphName and then all triples of that graph will be queried from the triple store and converted to manchester:
 
@@ -472,11 +474,11 @@ In the body of the request (You click on Body -> Raw -> JSON ), two option of pa
   }
 ```
 ----------------
-### Example Of Use For Manchester Part api 3
+### Example Of Use For Axioms Part api 3
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-Choose a POST Request , you pass this URL http://localhost:9170/manchester/checkConsistency
+Choose a POST Request , you pass this URL http://localhost:9170/axioms/checkConsistency
 
 In the body of the request (You click on Body -> Raw -> JSON ), two parameters should be passed:
 
@@ -491,11 +493,11 @@ In the body of the request (You click on Body -> Raw -> JSON ), two parameters s
 ```
 
 ----------------
-### Example Of Use For Manchester Part api 4
+### Example Of Use For Axioms Part api 4
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-Choose a POST Request , you pass this URL http://localhost:9170/manchester/getClassAxioms
+Choose a POST Request , you pass this URL http://localhost:9170/axioms/getClassAxioms
 
 In the body of the request (You click on Body -> Raw -> JSON ), two parameters should be passed:
 
@@ -516,11 +518,11 @@ In the body of the request (You click on Body -> Raw -> JSON ), two parameters s
 ```
 ----------------
 
-### Example Of Use For Manchester Part api 5
+### Example Of Use For Axioms Part api 5
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-Choose a POST Request , you pass this URL http://localhost:9170/manchester/checkTriplesConsistency
+Choose a POST Request , you pass this URL http://localhost:9170/axioms/checkTriplesConsistency
 
 In the body of the request (You click on Body -> Raw -> JSON ), two parameters should be passed:
 
@@ -541,11 +543,11 @@ In the body of the request (You click on Body -> Raw -> JSON ), two parameters s
 ```
 ----------------
 
-### Example Of Use For Manchester Part api 6
+### Example Of Use For Axioms Part api 6
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-Choose a POST Request , you pass this URL http://localhost:9170/manchester/saveTriples
+Choose a POST Request , you pass this URL http://localhost:9170/axioms/saveTriples
 
 In the body of the request (You click on Body -> Raw -> JSON ), two parameters should be passed:
 
@@ -565,22 +567,17 @@ In the body of the request (You click on Body -> Raw -> JSON ), two parameters s
 }
 ```
 ----------------
-__Classes's APIS__
-| Method Type | API  | Description |
-| -------- | -------- | -------- |
-| _POST_ | /classes/listClassesWithAxioms | List classes with their labels and the relations of the axiom they have |
-----------------
-### Example Of Use For Classes Part api 1
+### Example Of Use For Axioms Part api 7
 
 You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
 
-Choose a POST Request , you pass this URL http://localhost:9170/manchester/manchester2triples
+Choose a POST Request , you pass this URL http://localhost:9170/axioms/manchester2triples
 
 In the body of the request (You click on Body -> Raw -> JSON ), two parameters should be passed:
 
 1. The graph name in virtuoso of the ontology that contains the definition of the classes and properties used in the axiom you want to convert to triples.
 4. The axiom type (subCLassOf, EquivalentTo, DisjointWIth), or leave empty for all types.
-5. complex, boolean to get only the classes that has complex axioms.
+5. complex, boolean to get only the classes that has complex axioms (default true).
 
 ```JSON
     {
@@ -589,8 +586,8 @@ In the body of the request (You click on Body -> Raw -> JSON ), two parameters s
   "complex": true
 }
 ```
-
 ----------------
+
 
 ### Useful encoders to encode the TEXT
 
