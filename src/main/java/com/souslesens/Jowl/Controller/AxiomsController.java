@@ -3,7 +3,7 @@ package com.souslesens.Jowl.Controller;
 import com.souslesens.Jowl.model.*;
 import com.souslesens.Jowl.model.exceptions.NoVirtuosoTriplesException;
 import com.souslesens.Jowl.model.exceptions.ParsingAxiomException;
-import com.souslesens.Jowl.services.ManchesterService;
+import com.souslesens.Jowl.services.AxiomsService;
 import com.souslesens.Jowl.services.VirtuosoService;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.MalformedChallengeException;
@@ -18,11 +18,11 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(value="/manchester")
-public class ManchesterController {
+@RequestMapping(value="/axioms")
+public class AxiomsController {
 
     @Autowired
-    ManchesterService serviceManchester;
+    AxiomsService axiomsService;
 
     @Autowired
     VirtuosoService serviceVirtuoso;
@@ -49,13 +49,13 @@ public class ManchesterController {
         }
 
         try {
-            OWLAxiom axiom = serviceManchester.parseStringToAxiom(graphName, input);
+            OWLAxiom axiom = axiomsService.parseStringToAxiom(graphName, input);
             System.out.print("graphName: " + graphName + " input: " + input + " axiom: " + axiom);
             if (axiom == null) {
                 return ResponseEntity.badRequest().body("Error parsing axiom");
             }
 
-            ArrayList<jenaTripleParser> triples = serviceManchester.getTriples(axiom);
+            ArrayList<jenaTripleParser> triples = axiomsService.getTriples(axiom);
 
             if (saveTriples) {
                 serviceVirtuoso.saveTriples(graphName, classUri, axiomType, triples);
@@ -96,13 +96,13 @@ public class ManchesterController {
         }
 
         try {
-            OWLAxiom axiom = serviceManchester.parseStringToAxiom(graphName, input);
+            OWLAxiom axiom = axiomsService.parseStringToAxiom(graphName, input);
             System.out.print("graphName: " + graphName + " input: " + input + " axiom: " + axiom);
             if (axiom == null) {
                 return ResponseEntity.badRequest().body("Error parsing axiom");
             }
 
-            return serviceManchester.checkManchesterAxiomConsistency(graphName, axiom) ? ResponseEntity.ok().body("true") : ResponseEntity.status(422).body("false");
+            return axiomsService.checkManchesterAxiomConsistency(graphName, axiom) ? ResponseEntity.ok().body("true") : ResponseEntity.status(422).body("false");
 
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
@@ -128,7 +128,7 @@ public class ManchesterController {
 
         if (graphName != null && !graphName.isEmpty()) {
             try {
-                return ResponseEntity.ok(serviceManchester.triplesToManchester(graphName, triples));
+                return ResponseEntity.ok(axiomsService.triplesToManchester(graphName, triples));
             } catch (OWLOntologyCreationException | OWLOntologyStorageException e) {
                 e.printStackTrace();
                 return ResponseEntity.badRequest().body("Error while reading ontology From Triple Store");
@@ -142,7 +142,7 @@ public class ManchesterController {
         }  else {
             try {
                 System.out.println("getting the whole sous graph");
-                return ResponseEntity.ok(serviceManchester.triplesToManchester(axiomGraphName));
+                return ResponseEntity.ok(axiomsService.triplesToManchester(axiomGraphName));
             } catch (IOException | URISyntaxException | MalformedChallengeException | AuthenticationException e) {
                 e.printStackTrace();
                 return ResponseEntity.internalServerError().body("Error occurred while querying virtuoso");
@@ -171,7 +171,7 @@ public class ManchesterController {
        }
 
         try {
-            return ResponseEntity.ok(serviceManchester.getClassAxioms(graphName, classUri, axiomType, manchesterFormat, triplesFormat));
+            return ResponseEntity.ok(axiomsService.getClassAxioms(graphName, classUri, axiomType, manchesterFormat, triplesFormat));
         }  catch (OWLOntologyCreationException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error while creating the ontology");
@@ -202,7 +202,7 @@ public class ManchesterController {
         }
 
         try {
-            return serviceManchester.checkTriplesConsistency(graphName, triples, false) ? ResponseEntity.ok().body("true") : ResponseEntity.status(422).body("false");
+            return axiomsService.checkTriplesConsistency(graphName, triples, false) ? ResponseEntity.ok().body("true") : ResponseEntity.status(422).body("false");
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Error while reading ontology From Triple Store");
@@ -225,7 +225,7 @@ public class ManchesterController {
         }
 
         try {
-            return serviceManchester.checkTriplesConsistency(graphName, triples, true) ? ResponseEntity.ok().body("triples saved successfully") : ResponseEntity.status(422).body("the triples are not consistent with the ontology, cannot save");
+            return axiomsService.checkTriplesConsistency(graphName, triples, true) ? ResponseEntity.ok().body("triples saved successfully") : ResponseEntity.status(422).body("the triples are not consistent with the ontology, cannot save");
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Error while reading ontology From Triple Store");
@@ -237,5 +237,32 @@ public class ManchesterController {
 
     }
 
+    @PostMapping(value="/listClassesWithAxioms")
+    public ResponseEntity<String> listClassesWithAxioms(@RequestBody ListClassesWithAxiomsInput request ) {
+        String graphName = request.getGraphName();
+        String axiomType = request.getAxiomType();
+        boolean complexAxioms = request.isComplex();
+
+        if (graphName == null || graphName.isEmpty()) {
+            return ResponseEntity.badRequest().body("Graph Name should be provided");
+        } else if (!(axiomType.isEmpty() || axiomType.equals("subclassof") || axiomType.equals("equivalentclasses")
+                || axiomType.equals("disjointwith") )) {
+            return ResponseEntity.status(400).body("axiom type should be speicfied as one the follwoing: subclassof, equivalentclasses, disjointwith  or be leaved empty for all" );
+        }
+
+        try {
+            return ResponseEntity.ok(axiomsService.listClassesWithAxioms(graphName, axiomType, complexAxioms).toString());
+        } catch (OWLOntologyCreationException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error while creating the ontology");
+        } catch (NoVirtuosoTriplesException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+
 
     }
+
+
+
+}

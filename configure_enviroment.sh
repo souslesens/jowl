@@ -10,6 +10,7 @@ fi
 
 # Update application.properties
 {
+    echo "server.port=$SERVER_PORT"
     echo "virtuoso.password=$VIRTUOSO_PASSWORD"
     echo "virtuoso.user=$VIRTUOSO_USER"
     echo "virtuoso.endpoint=$VIRTUOSO_ENDPOINT"

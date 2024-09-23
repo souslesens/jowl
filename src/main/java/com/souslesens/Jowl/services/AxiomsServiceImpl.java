@@ -37,7 +37,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class ManchesterServiceImpl implements ManchesterService {
+public class AxiomsServiceImpl implements AxiomsService {
 
     @Autowired
     VirtuosoService virtuosoService;
@@ -523,6 +523,69 @@ public class ManchesterServiceImpl implements ManchesterService {
 
         return hermitReasonerService.getConsistency(o);
 
+    }
+
+    @Override
+    public JSONArray listClassesWithAxioms(String graphName, String axiomType, boolean complexAxioms) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
+
+        OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
+        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, true);
+
+        JSONArray result  = new JSONArray();
+
+        for (OWLClass owlClass : owlOntology.getClassesInSignature()) {
+            JSONObject classObject = new JSONObject();
+            classObject.put("class", owlClass.getIRI().toString());
+
+            // Fetching class label if available
+            String classLabel = owlClass.getIRI().getShortForm();
+            classObject.put("label", classLabel);
+
+            Set<String> axiomTypesSet = new HashSet<>();
+            Set<OWLClassAxiom> axioms = owlOntology.getAxioms(owlClass);
+
+            boolean hasComplexAxiom = false;
+
+            for (OWLClassAxiom axiom : axioms) {
+
+                String currentAxiomType = axiom.getAxiomType().getName();
+                if (axiomType == null || axiomType.isEmpty() || axiomType.equalsIgnoreCase(currentAxiomType)) {
+                    if (!complexAxioms) {
+                        if (!isComplex(axiom)) {
+                            axiomTypesSet.add(currentAxiomType);
+                        }
+                    } else {
+                        // If complexAxioms is false, just add the axiom type
+                        axiomTypesSet.add(currentAxiomType);
+                    }
+                }
+            }
+            JSONArray axiomsArray = new JSONArray(axiomTypesSet);
+            classObject.put("axiomTypes", axiomsArray);
+            result.put(classObject);
+
+        }
+        return result;
+    }
+
+    public static boolean isComplex(OWLClassAxiom axiom) {
+        if (axiom instanceof OWLSubClassOfAxiom) {
+            OWLSubClassOfAxiom subClassAxiom = (OWLSubClassOfAxiom) axiom;
+            // Check if the superclass is complex
+            return !subClassAxiom.getSuperClass().isOWLClass(); // returns true if the superclass is a complex expression
+        } else if (axiom instanceof OWLEquivalentClassesAxiom) {
+            OWLEquivalentClassesAxiom equivalentAxiom = (OWLEquivalentClassesAxiom) axiom;
+            // Check if there are more than two classes or if any are complex
+            return equivalentAxiom.getClassExpressions().stream()
+                    .anyMatch(expr -> !expr.isOWLClass()); // returns true if any class expression is complex
+        } else if (axiom instanceof OWLDisjointClassesAxiom) {
+            OWLDisjointClassesAxiom disjointAxiom = (OWLDisjointClassesAxiom) axiom;
+            // Check if there are more than two classes or if any are complex
+            return disjointAxiom.getClassExpressions().size() > 2 ||
+                    disjointAxiom.getClassExpressions().stream()
+                            .anyMatch(expr -> !expr.isOWLClass()); // returns true if any class expression is complex
+        }
+        return false; // Default to non-complex for unsupported types
     }
 
 }
