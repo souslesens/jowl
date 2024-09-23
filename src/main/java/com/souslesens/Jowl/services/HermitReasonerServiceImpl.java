@@ -270,24 +270,24 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         generator.fillOntology(dataFactory, inferredOntology);
 
         // Filter out original axioms and keep only inferred ones
-        System.out.println("hey1");
+
         Set<OWLAxiom> originalAxioms = ontology.getAxioms();
-        System.out.println("hey2");
+
         Set<OWLAxiom> inferredAxioms = new HashSet<>(inferredOntology.getAxioms());
-        System.out.println("hey3");
+
         System.out.println(inferredAxioms.size());
-        System.out.println("hey4");
+
         inferredAxioms.removeAll(originalAxioms);
-        System.out.println("hey5");
+
         System.out.println(inferredAxioms.size());
 
         StringBuilder sb = new StringBuilder();
         // Add the inferred axioms to the list
-        System.out.println("hey6");
+
         for (OWLAxiom axiom : inferredAxioms) {
             sb.append(axiom.toString());
         }
-        System.out.println("hey7");
+
         String axiomsString = sb.toString();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("inference", axiomsString);

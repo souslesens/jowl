@@ -22,7 +22,7 @@ public class ClassesServiceImpl implements ClassesService{
     public JSONArray listClassesWithAxioms(String graphName, String axiomType, boolean complexAxioms) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
 
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
-        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
+        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, true);
 
         JSONArray result  = new JSONArray();
 
@@ -43,24 +43,20 @@ public class ClassesServiceImpl implements ClassesService{
 
                 String currentAxiomType = axiom.getAxiomType().getName();
                 if (axiomType == null || axiomType.isEmpty() || axiomType.equalsIgnoreCase(currentAxiomType)) {
-
-                    // Check for complexity
-                    if (complexAxioms && !hasComplexAxiom) {
-                        if (isComplex(axiom)) {
+                    if (!complexAxioms) {
+                        if (!isComplex(axiom)) {
                             axiomTypesSet.add(currentAxiomType);
-                            hasComplexAxiom = true;
-                        } else {
-                            // Skip this class if complexAxioms is true and this axiom is not complex
-                            hasComplexAxiom = false;
                         }
+                    } else {
+                        // If complexAxioms is false, just add the axiom type
+                        axiomTypesSet.add(currentAxiomType);
                     }
                 }
             }
-            if ((!complexAxioms || hasComplexAxiom) && !axiomTypesSet.isEmpty()) {
                 JSONArray axiomsArray = new JSONArray(axiomTypesSet);
                 classObject.put("axiomTypes", axiomsArray);
                 result.put(classObject);
-            }
+
         }
         return result;
     }
