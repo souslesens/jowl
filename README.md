@@ -71,13 +71,13 @@ __Reasoning's APIS__
 | _GET_ | /reasoner/test | Testing if the server is running or not |
 | _GET_ | /reasoner/consistency?filePath=<YOUR_FILE_NAME> | Checking if the passed ontology file is consistent or not |
 | _GET_ | /reasoner/consistency?url=<YOUR_URL_HERE> | Checking if the passed ontology URL is consistent or not |
-| _GET_ | /reasoner/consistency?graphName=<YOUR_GRAPHNAME_HERE> | Checking if the passed ontology URL is consistent or not |
+| _GET_ | /reasoner/consistency?graphName=<YOUR_GRAPHNAME_HERE> | Checking if the passed ontology graph name is consistent or not |
 | _GET_ | /reasoner/unsatisfiable?filePath=<YOUR_FILE_NAME> | Checking if the passed ontology file has an unsatifiable classes |
 | _GET_ | /reasoner/unsatisfiable?url=<YOUR_URL_HERE> | Checking if the passed ontology URL has an unsatifiable classes |
-| _GET_ | /reasoner/unsatisfiable?graphName=<YOUR_GRAPHNAME_HERE> | Checking if the passed ontology URL has an unsatifiable classes |
+| _GET_ | /reasoner/unsatisfiable?graphName=<YOUR_GRAPHNAME_HERE> | Checking if the passed ontology graph name has an unsatifiable classes |
 | _GET_ | /reasoner/inference?filePath=<YOUR_FILE_NAME> | Generating Inferences from a file |
 | _GET_ | /reasoner/inference?url=<YOUR_URL_HERE> | Generating Inferences from an URL |
-| _GET_ | /reasoner/inference?graphName=<YOUR_GRAPHNAME_HERE> | Generating Inferences from an URL |
+| _GET_ | /reasoner/inference?graphName=<YOUR_GRAPHNAME_HERE> | Generating Inferences from a triple store using a graph name |
 | _GET_ | /reasoner/parametres | Get all the predicates associated with their class name |
 | _POST_ | /reasoner/consistency | Checking if the passed ontology file is consistent or not : can work with any input  (File , URL , Text, graphName) |
 | _POST_ | /reasoner/unsatisfiable | Checking if the passed ontology file has an unsatifiable classes : can work with any input  (File , URL , Text, graphName) |
