@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @RestController
-@RequestMapping("/hermit")
+@RequestMapping({"/reasoner", "/hermit"})
 public class HermitReasonerController {
 
     @Autowired

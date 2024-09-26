@@ -231,7 +231,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
                     generatorAdded = true;
                 }else if (value.contentEquals("All")) {
                     generator.addGenerator(new CustomInferredEquivalentClassesAxiomGenerator() );
-                    generator.addGenerator(new ReasonerServiceImpl.CustomSameIndividualAxiomGenerator());
+                    generator.addGenerator(new CustomSameIndividualAxiomGenerator());
                     generator.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator());
                     generator.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
                     generator.addGenerator(new CustomInferredUnionOfAxiomGenerator());
@@ -392,7 +392,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
                     generatorAdded = true;
                 }else if (value.contentEquals("All")) {
                     generator.addGenerator(new CustomInferredEquivalentClassesAxiomGenerator() );
-                    generator.addGenerator(new ReasonerServiceImpl.CustomSameIndividualAxiomGenerator());
+                    generator.addGenerator(new CustomSameIndividualAxiomGenerator());
                     generator.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator());
                     generator.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
                     generator.addGenerator(new CustomInferredUnionOfAxiomGenerator());
