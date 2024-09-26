@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        JAVA_OPTS: -Xms${XMS:-512m} -Xmx${XMX:-4g}
     image: jowl:latest
     container_name: jowl
     restart: always
