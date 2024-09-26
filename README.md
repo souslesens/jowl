@@ -5,6 +5,23 @@ checking consistency / satisfaisability and computeinference.
 we used Pellet and OWLAPI for developement of this application.</summary>
 This application will be in docker and we will provide a full documentation to run it.
 
+### Seting Up the enviremement variables
+in the terminal run the following command
+```
+cp .env.sample .env
+```
+
+open the file with you favorite text editor (or run ```nano .env``` in terminal), set up the needed variables
+
+| variable name       | Description                                                                  |
+|---------------------|------------------------------------------------------------------------------|
+| _SERVER_PORT_       | set up the port that the app will be available on (default to 9170)          |
+| _XMS_               | minimum memory that will be consumed by the app (default to 512m)            |
+| _XMX_               | maximum memory that will be consumed by the app (default to 512m)            |
+| _VIRTUOSO_ENDPOINT_ | the sparql endpoint of the virtuoso instance that jowl will communicate with |
+| _VIRTUOSO_USER_     | if the sparql endpoint is protected, you need to specify here the username   |
+| _VIRTUOSO_PASSWORD_ | if the sparql endpoint is protected, you need to specify here the password   |
+
 ### One Command : To Build && Run The application Via Docker-Compose (Jowl + Virtuoso)
 ```
 docker-compose up

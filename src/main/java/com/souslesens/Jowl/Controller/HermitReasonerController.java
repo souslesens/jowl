@@ -1,6 +1,7 @@
 package com.souslesens.Jowl.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.souslesens.Jowl.model.parametresInputInference;
 import com.souslesens.Jowl.model.reasonerInference;
 import com.souslesens.Jowl.model.reasonerInput;
 import com.souslesens.Jowl.services.HermitReasonerService;
@@ -214,6 +215,75 @@ public class HermitReasonerController {
                 // Here if we use the Encoded Content
             }
             return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    //Post API For STRING
+    @GetMapping("/parametres")
+    public ResponseEntity<?> retrieveParameteresInferenceMethod() {
+        Map<String, String> hashMap = new HashMap<>();
+        // Add key-value pairs to the HashMap
+        hashMap.put("equivalentClass", "CustomInferredEquivalentClassesAxiomGenerator()"); // Covers owl:equivalentClass Inferences
+        hashMap.put("sameIndividual", "CustomSameIndividualAxiomGenerator()"); // Covers Owl SameAs
+        hashMap.put("IntersectionOf", "CustomInferredIntersectionOfAxiomGenerator()"); // Covers Owl:Intersection:Of Inferences
+        hashMap.put("UnionOf", "CustomInferredUnionOfAxiomGenerator()"); // Covers Owl:UnionOf inferences
+        hashMap.put("DisjointClasses", "CustomInferredDisjointClassesAxiomGenerator()"); // Covers Owl:DisjointClasses Inferences
+        hashMap.put("differentIndividual","CustomInferredDifferentIndividualAxiomGenerator()" );
+        hashMap.put("HasValue", "CustomInferredHasValueAxiomGenerator()"); // Covers owl:hasValue restriction
+        hashMap.put("InverseObjectProperties", "CustomInferredInverseObjectPropertiesAxiomGenerator()"); // Covers Inveerse object properties // if property A relates individual x to individual y, then property B relates individual y to individual x
+        hashMap.put("AllValuesFrom", "CustomInferredAllValuesFromAxiomGenerator()"); // Cover Owl:allValuesFrom
+        hashMap.put("SomeValuesFrom", "CustomInferredSameValueSomeValuesFromAxiomGenerator()"); // Cover Owl:someValuesFrom
+        hashMap.put("DomainAndRange", "CustomInferredDomainAndRangeAxiomGenerator()"); // Cover Domain and Range
+        hashMap.put("ClassAssertion", "InferredClassAssertionAxiomGenerator()");
+        hashMap.put("SubClass", "InferredSubClassAxiomGenerator()"); // Covers Rdfs:SubClass
+        hashMap.put("DataPropertyCharacteristic", "InferredDataPropertyCharacteristicAxiomGenerator()");
+        hashMap.put("EquivalentDataProperty", "InferredEquivalentDataPropertiesAxiomGenerator()");
+        hashMap.put("EquivalentObjectProperty", "InferredEquivalentObjectPropertyAxiomGenerator()");
+        hashMap.put("SubObjectProperty", "InferredSubObjectPropertyAxiomGenerator()");
+        hashMap.put("SubDataPropertyOfAxiom", "InferredSubDataPropertyAxiomGenerator()");
+        hashMap.put("ObjectPropertyCharacteristic", "InferredObjectPropertyCharacteristicAxiomGenerator()"); // FunctionalObjectProperty/InverseFunctionalObjectProperty/SymmetricObjectProperty/AsymmetricObjectProperty/ReflexiveObjectProperty/IrreflexiveObjectProperty/TransitiveObjectProperty
+        hashMap.put("SubDataPropertyOfAxiom", "InferredPropertyAssertionGenerator()"); // This Covers both OWLObjectPropertyAssertionAxiom and OWLDataPropertyAssertionAxiom
+        hashMap.put("ComplementOf", "CustomInferredComplementOfAxiomGenerator()"); // Cover OwlComplementOf
+        hashMap.put("All_OWL", "All"); // Covers Evreything
+        try {
+
+
+            return ResponseEntity.ok(hashMap);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+
+    //Post API For STRING To use Parametere AS boolean
+    @PostMapping("/parametres")
+    public ResponseEntity<?> retrieveParameteresInference(@RequestBody(required = false) parametresInputInference request) {
+
+        Boolean equivalentClass = request.getEquivalentClass();
+        Boolean sameIndividual = request.getSameIndividual();
+        Boolean IntersectionOf = request.getIntersectionOf();
+        Boolean UnionOf = request.getUnionOf();
+        Boolean DisjointClasses  = request.getDisjointClasses();
+        Boolean differentIndividual = request.getDifferentIndividual();
+        Boolean HasValue = request.getHasValue();
+        Boolean InverseObjectProperties = request.getInverseObjectProperties();
+        Boolean AllValuesFrom = request.getAllValuesFrom();
+        Boolean SomeValuesFrom = request.getSomeValuesFrom();
+        Boolean DomainAndRange  = request.getDomainAndRange();
+
+        int parametersCount = countNumberOfParametres(equivalentClass, sameIndividual, IntersectionOf,UnionOf,DisjointClasses,differentIndividual,HasValue,InverseObjectProperties,AllValuesFrom,SomeValuesFrom,DomainAndRange);
+        if (parametersCount == 0) {
+            return ResponseEntity.badRequest().body("At least one of params should be provided");
+        } else if (parametersCount > 11) {
+            return ResponseEntity.badRequest().body("paramateres u provided are more than u should pass");
+        }
+        try {
+
+            List<parametresInputInference> parametresInference = new LinkedList<>();
+            parametresInference.add(new parametresInputInference(equivalentClass, sameIndividual, IntersectionOf,UnionOf,DisjointClasses,differentIndividual,HasValue,InverseObjectProperties,AllValuesFrom,SomeValuesFrom,DomainAndRange));
+            return ResponseEntity.ok(parametresInference);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
