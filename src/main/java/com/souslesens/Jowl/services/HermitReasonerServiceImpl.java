@@ -139,16 +139,20 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
 
     @Override
     public String getInferences(String filePath, String Url, List<String> ListOfValues, String graphName) throws Exception {
+        Long start = System.currentTimeMillis();
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         OWLOntology ontology = null;
         try {
             if (filePath == null && graphName == null && !Url.isEmpty() && (Url.startsWith("http") || Url.startsWith("ftp"))) {
-                System.out.println("reading ontology from url");
+                Long startTime = System.currentTimeMillis();
                 ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
+                System.out.println("readin onto from url: " + (System.currentTimeMillis() - startTime));
             } else if (graphName == null && !filePath.isEmpty() && Url == null) {
                 ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
             } else {
+                Long startTime = System.currentTimeMillis();
                 ontology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
+                System.out.println("readin onto from virtuoso: " + (System.currentTimeMillis() - startTime));
             }
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
@@ -157,7 +161,10 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         System.out.println("configuring reasoner");
         Configuration config = new Configuration();
         Reasoner hermit = new Reasoner(config, ontology);
+
+        Long startTime = System.currentTimeMillis();
         hermit.precomputeInferences(InferenceType.values());
+        System.out.println("precomputing inferences : " + (System.currentTimeMillis() - startTime));
 
         InferredOntologyGenerator generator = new InferredOntologyGenerator(hermit);
 
@@ -267,7 +274,10 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
 
         OWLOntology inferredOntology = manager.createOntology();
         OWLDataFactory dataFactory = manager.getOWLDataFactory();
+
+        startTime = System.currentTimeMillis();
         generator.fillOntology(dataFactory, inferredOntology);
+        System.out.println("filling ontology : " + (System.currentTimeMillis() - startTime));
 
         // Filter out original axioms and keep only inferred ones
 
@@ -292,6 +302,8 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("inference", axiomsString);
 
+        System.out.println("operation total time: " + (System.currentTimeMillis() - start));
+        System.currentTimeMillis();
         return jsonObject.toString();
 
     }
