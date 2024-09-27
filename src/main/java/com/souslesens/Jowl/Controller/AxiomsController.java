@@ -8,6 +8,7 @@ import com.souslesens.Jowl.services.VirtuosoService;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.MalformedChallengeException;
 import org.json.JSONException;
+import org.semanticweb.HermiT.datatypes.datetime.DateTime;
 import org.semanticweb.owlapi.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -153,6 +154,8 @@ public class AxiomsController {
 
     @PostMapping(value="/getClassAxioms")
     public ResponseEntity<String> getClassAxioms(@RequestBody GetClassAxiomsInput request) {
+        Long starttime = System.currentTimeMillis();
+
         String graphName = request.getGraphName();
         String classUri = request.getClassUri();
         String axiomType = request.getAxiomType();
@@ -171,7 +174,9 @@ public class AxiomsController {
        }
 
         try {
-            return ResponseEntity.ok(axiomsService.getClassAxioms(graphName, classUri, axiomType, manchesterFormat, triplesFormat));
+            String result = axiomsService.getClassAxioms(graphName, classUri, axiomType, manchesterFormat, triplesFormat);
+            System.out.println("durrée totale" + (System.currentTimeMillis() - starttime));
+            return ResponseEntity.ok(result);
         }  catch (OWLOntologyCreationException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error while creating the ontology");

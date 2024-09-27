@@ -314,7 +314,10 @@ public class AxiomsServiceImpl implements AxiomsService {
     @Override
     public String getClassAxioms(String graphName, String classUri, String axiomType, boolean manchesterFormat, boolean triplesFormat) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
-        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, true);
+        Long starttime = System.currentTimeMillis();
+        //Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
+        OWLOntology owlOntology = owlManager.loadOntologyFromOntologyDocument(IRI.create("https://spec.industrialontologies.org/ontology/core/Core/"));
+        System.out.println("read ontology from virtuoso" + (System.currentTimeMillis() - starttime));
 
         if (owlOntology == null) {
             System.out.println("Error reading ontology from Virtuoso");
@@ -327,6 +330,7 @@ public class AxiomsServiceImpl implements AxiomsService {
         OWLClass owlClass = owlManager.getOWLDataFactory().getOWLClass(classIRI);
         Set<OWLAxiom> axioms;
 
+        starttime = System.currentTimeMillis();
         // Depending on axiom type look for axioms of the class URI with that axiom type, if axiom type is null or empty then look for all axioms
         if (axiomType == null || axiomType.isEmpty()) {
             axioms = owlOntology.axioms(owlClass).collect(Collectors.toSet());
@@ -347,9 +351,12 @@ public class AxiomsServiceImpl implements AxiomsService {
                     return null;
             }
         }
+        System.out.println("collect axioms" + (System.currentTimeMillis() - starttime));
+
         ManchesterOWLSyntaxOWLObjectRendererImpl rend = new ManchesterOWLSyntaxOWLObjectRendererImpl();
         ArrayList<String> manchesterResult = new ArrayList<>();
         ArrayList<ArrayList<jenaTripleParser>> triplesResult = new ArrayList<>();
+        starttime = System.currentTimeMillis();
         for (OWLAxiom axiom : axioms) {
             if (manchesterFormat) {
                 manchesterResult.add(rend.render(axiom));
@@ -358,6 +365,7 @@ public class AxiomsServiceImpl implements AxiomsService {
                 triplesResult.add(getTriples(axiom));
             }
         }
+        System.out.println("manchester syntax" + (System.currentTimeMillis() - starttime));
 
         JSONObject result = new JSONObject();
         if (triplesFormat)
@@ -472,7 +480,7 @@ public class AxiomsServiceImpl implements AxiomsService {
     }
 
     public boolean checkTriplesConsistency(String graphName, ArrayList<jenaTripleParser> triples, boolean saveTriples) throws OWLOntologyCreationException, NoVirtuosoTriplesException, AuthenticationException, MalformedChallengeException, IOException, URISyntaxException {
-        Ontology o = virtuosoService.readOntologyFromVirtuoso(graphName, true);
+        Ontology o = virtuosoService.readOntologyFromVirtuoso(graphName, false);
 
 
 
@@ -529,7 +537,7 @@ public class AxiomsServiceImpl implements AxiomsService {
     public JSONArray listClassesWithAxioms(String graphName, String axiomType, boolean complexAxioms) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
 
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
-        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, true);
+        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
 
         JSONArray result  = new JSONArray();
 

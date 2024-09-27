@@ -38,7 +38,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
             } else if (grapheName == null && !filePath.isEmpty() && Url == null) {
                 ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
             } else {
-                ontology = virtuosoService.readOntologyFromVirtuoso(grapheName, true);
+                ontology = virtuosoService.readOntologyFromVirtuoso(grapheName, false);
             }
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
@@ -95,7 +95,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
             } else if (graphName == null && !filePath.isEmpty() && Url == null) {
                 ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
             } else {
-                ontology = virtuosoService.readOntologyFromVirtuoso(graphName, true);
+                ontology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
             }
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
@@ -148,7 +148,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
             } else if (graphName == null && !filePath.isEmpty() && Url == null) {
                 ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
             } else {
-                ontology = virtuosoService.readOntologyFromVirtuoso(graphName, true);
+                ontology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
             }
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();

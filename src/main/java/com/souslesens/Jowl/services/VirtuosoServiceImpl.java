@@ -217,28 +217,28 @@ public class VirtuosoServiceImpl implements VirtuosoService {
             triples.add(new jenaTripleParser(triple.getSubject(), triple.getPredicate(), triple.getObject()));
         }
 
-        String newGraphName = "";
-        if (classUri != null && !classUri.isEmpty()) {
-            String uuid = java.util.UUID.randomUUID().toString(); // Generates a unique UUID
-            //getting last part of classUri
-            String[] parts = classUri.split("[#/]");
-            String classLastPart = parts[parts.length - 1];
-
-
-            newGraphName = graphName + "concepts/" + classLastPart + "/" + axiomType + "/" + uuid + "/";
-            //create new graph
-            String createGraphQuery = "CREATE GRAPH <" + newGraphName + ">";
-            querySparql(createGraphQuery);
-            System.out.println("new graph name: " + newGraphName);
-        } else {
-            newGraphName = graphName;
-        }
+//        String newGraphName = "";
+//        if (classUri != null && !classUri.isEmpty()) {
+//            String uuid = java.util.UUID.randomUUID().toString(); // Generates a unique UUID
+//            //getting last part of classUri
+//            String[] parts = classUri.split("[#/]");
+//            String classLastPart = parts[parts.length - 1];
+//
+//
+//            newGraphName = graphName + "concepts/" + classLastPart + "/" + axiomType + "/" + uuid + "/";
+//            //create new graph
+//            String createGraphQuery = "CREATE GRAPH <" + newGraphName + ">";
+//            querySparql(createGraphQuery);
+//            System.out.println("new graph name: " + newGraphName);
+//        } else {
+//            newGraphName = graphName;
+//        }
 
         //reformulate blank node uris to an acceptable format by triple store
         //triples = replaceBlankNodesWithURIs(triples);
 
         StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("INSERT DATA { GRAPH <" + newGraphName + "> { ");
+        queryBuilder.append("INSERT DATA { GRAPH <" + graphName + "> { ");
 
         // Loop through the triples and add them to the query
         for (jenaTripleParser triple : triples) {
