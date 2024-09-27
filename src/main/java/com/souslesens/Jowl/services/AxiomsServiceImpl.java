@@ -315,8 +315,7 @@ public class AxiomsServiceImpl implements AxiomsService {
     public String getClassAxioms(String graphName, String classUri, String axiomType, boolean manchesterFormat, boolean triplesFormat) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
         Long starttime = System.currentTimeMillis();
-        //Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
-        OWLOntology owlOntology = owlManager.loadOntologyFromOntologyDocument(IRI.create("https://spec.industrialontologies.org/ontology/core/Core/"));
+        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
         System.out.println("read ontology from virtuoso" + (System.currentTimeMillis() - starttime));
 
         if (owlOntology == null) {
