@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  jowl:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAVA_OPTS: -Xms${XMS:-512m} -Xmx${XMX:-4g}
+    image: jowl:latest
+    container_name: jowl
+    restart: always
+    ports:
+      - ${SERVER_PORT:-9170}:9170
+    environment:
+      - VIRTUOSO_USER=${VIRTUOSO_USER}
+      - VIRTUOSO_PASSWORD=${VIRTUOSO_PASSWORD}
+      - VIRTUOSO_ENDPOINT=${VIRTUOSO_ENDPOINT}
+    networks:
+      - slsdev
+
+  virtuoso:
+    image: askomics/virtuoso:7.2.7
+    container_name: virtuoso
+    environment:
+      DBA_PASSWORD: ${VIRTUOSO_PASSWORD}
+      SPARQL_UPDATE: "true"
+    ports:
+      - "8890:8890"
+    volumes:
+      - ../data/virtuoso:/data
+    networks:
+      - slsdev
+
+networks:
+  slsdev:
+    driver: bridge
+    labels:
+        - "com.docker.compose.project=slsdev"
