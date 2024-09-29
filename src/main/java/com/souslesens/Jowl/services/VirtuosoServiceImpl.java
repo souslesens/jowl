@@ -61,7 +61,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
 
 
         URI endpoint = new URI(appConfig.getVirtuosoEndpoint() + "?format=json&query=" + URLEncoder.encode(query, StandardCharsets.UTF_8));
-        endpoint=new URI("https://sls.kg-alliance.org/virtuoso/sparql" + "?format=json&query=" + URLEncoder.encode(query, StandardCharsets.UTF_8));
+    //    endpoint=new URI("https://sls.kg-alliance.org/virtuoso/sparql" + "?format=json&query=" + URLEncoder.encode(query, StandardCharsets.UTF_8));
 
 
 
