@@ -292,6 +292,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
             System.out.println("fillOntology  :" + (System.currentTimeMillis() - startTime));
             // Filter out original axioms and keep only inferred ones
             ReasonerOntologyCache.put(graphName, inferredOntology);
+
         }
         System.out.println("startAxioms  :" + (System.currentTimeMillis() - startTime));
         Set<OWLAxiom> originalAxioms = ontology.getAxioms();
