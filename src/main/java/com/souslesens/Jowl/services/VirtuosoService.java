@@ -20,6 +20,8 @@ public interface VirtuosoService {
 
     Ontology readOntologyFromVirtuoso(String graphName, boolean bringCreatedAxioms) throws OWLOntologyCreationException, NoVirtuosoTriplesException;
 
+    Ontology getOntology(String graphName) throws OWLOntologyCreationException, NoVirtuosoTriplesException;
+
     JSONArray getTriplesVirtuosoSparql(String graphName) throws MalformedChallengeException, URISyntaxException, IOException, AuthenticationException;
 
     boolean saveTriples(String graphName,String classUri, String axiomType, ArrayList<jenaTripleParser> triples) throws AuthenticationException, MalformedChallengeException, IOException, URISyntaxException, JSONException;

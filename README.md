@@ -629,8 +629,37 @@ In the body of the request (You click on Body -> Raw -> JSON ), two parameters s
   "complex": true
 }
 ```
+
 ----------------
 
+__Cache APIS__
+| Method Type | API  | Description |
+| -------- | -------- | -------- |
+| _DELETE_ | /cache/evictAll | clear all the ontologies in the cache |
+| _DELETE_ | /cache | clear the caching of a certing ontology via soecifying its corresponding graph name |
+----------------
+### Example Of Use For Cache Part api 1
+
+You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
+
+Choose a POST Request , you pass this URL http://localhost:9170/cache/evictAll
+
+The response should be with a 200 status code, with a body that sais:
+```All caches cleared.```
+
+----------------
+### Example Of Use For Cache Part api 2
+
+You open for example Postman ( You don't you know postman ? : [Postman](https://www.postman.com/) )
+
+Choose a POST Request , you pass this URL http://localhost:9170/cache
+
+In the params of the request (You click on params), specify a pram with the name ```graphName```
+
+the response should be with a status 200, with a body that sais:
+```Cache for graphName '<graphName>' evicted.```
+
+----------------
 
 ### Useful encoders to encode the TEXT
 

@@ -31,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.semanticweb.owlapi.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.apache.http.impl.auth.DigestScheme;
 
@@ -49,6 +50,13 @@ public class VirtuosoServiceImpl implements VirtuosoService {
 
     @Autowired
     private AppConfig appConfig;
+
+    @Override
+    @Cacheable(value = "ontologyCache", key = "#graphName")
+    public Ontology getOntology(String graphName) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
+        // Logic to load the ontology from Virtuoso or another source
+        return readOntologyFromVirtuoso(graphName, false);
+    }
 
     @Override
     public JSONObject querySparql(String query) throws IOException, URISyntaxException, MalformedChallengeException, AuthenticationException, JSONException {

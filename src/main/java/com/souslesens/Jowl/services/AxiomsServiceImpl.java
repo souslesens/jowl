@@ -49,7 +49,8 @@ public class AxiomsServiceImpl implements AxiomsService {
     public OWLAxiom parseStringToAxiom(String graphName, String input) throws OWLOntologyCreationException, ParsingAxiomException, NoVirtuosoTriplesException {
 
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
-        OWLOntology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
+
+        OWLOntology owlOntology = virtuosoService.getOntology(graphName);
 
         if (owlOntology == null) {
             System.out.println("Error reading ontology from Virtuoso");
@@ -127,7 +128,7 @@ public class AxiomsServiceImpl implements AxiomsService {
 
     @Override
     public boolean checkManchesterAxiomConsistency(String graphName, OWLAxiom axiom) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
-        OWLOntology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
+        OWLOntology owlOntology = virtuosoService.getOntology(graphName);
 
         if (owlOntology == null) {
             System.out.println("Error reading ontology from Virtuoso");
@@ -315,7 +316,7 @@ public class AxiomsServiceImpl implements AxiomsService {
     public String getClassAxioms(String graphName, String classUri, String axiomType, boolean manchesterFormat, boolean triplesFormat) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
         Long starttime = System.currentTimeMillis();
-        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
+        Ontology owlOntology = virtuosoService.getOntology(graphName);
         System.out.println("read ontology from virtuoso" + (System.currentTimeMillis() - starttime));
 
         if (owlOntology == null) {
@@ -479,7 +480,7 @@ public class AxiomsServiceImpl implements AxiomsService {
     }
 
     public boolean checkTriplesConsistency(String graphName, ArrayList<jenaTripleParser> triples, boolean saveTriples) throws OWLOntologyCreationException, NoVirtuosoTriplesException, AuthenticationException, MalformedChallengeException, IOException, URISyntaxException {
-        Ontology o = virtuosoService.readOntologyFromVirtuoso(graphName, false);
+        Ontology o = virtuosoService.getOntology(graphName);
 
 
 
@@ -536,7 +537,7 @@ public class AxiomsServiceImpl implements AxiomsService {
     public JSONArray listClassesWithAxioms(String graphName, String axiomType, boolean complexAxioms) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
 
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
-        Ontology owlOntology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
+        Ontology owlOntology = virtuosoService.getOntology(graphName);
 
         JSONArray result  = new JSONArray();
 

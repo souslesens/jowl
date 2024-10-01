@@ -29,16 +29,16 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
     VirtuosoService virtuosoService;
 
     @Override
-    public String getUnsatisfaisableClasses(String filePath, String Url, String grapheName) throws Exception {
+    public String getUnsatisfaisableClasses(String filePath, String Url, String graphName) throws Exception {
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         OWLOntology ontology = null;
         try {
-            if (filePath == null && grapheName == null && !Url.isEmpty() && (Url.startsWith("http") || Url.startsWith("ftp"))) {
+            if (filePath == null && graphName == null && !Url.isEmpty() && (Url.startsWith("http") || Url.startsWith("ftp"))) {
                 ontology = manager.loadOntologyFromOntologyDocument(IRI.create(Url));
-            } else if (grapheName == null && !filePath.isEmpty() && Url == null) {
+            } else if (graphName == null && !filePath.isEmpty() && Url == null) {
                 ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
             } else {
-                ontology = virtuosoService.readOntologyFromVirtuoso(grapheName, false);
+                ontology = virtuosoService.getOntology(graphName);
             }
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
@@ -52,6 +52,8 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("unsatisfiable", iriStrings);
+
+        hermit.dispose();
         return jsonObject.toString();
 
     }
@@ -82,6 +84,8 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("unsatisfiable", iriStrings);
+
+        hermit.dispose();
         return jsonObject.toString();
     }
 
@@ -95,7 +99,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
             } else if (graphName == null && !filePath.isEmpty() && Url == null) {
                 ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
             } else {
-                ontology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
+                ontology = virtuosoService.getOntology(graphName);
             }
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
@@ -103,7 +107,9 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         }
         Configuration config = new Configuration();
         Reasoner hermit = new Reasoner(config, ontology);
-        return (new JSONObject()).put("Consistency", hermit.isConsistent()).toString();
+        boolean consis = hermit.isConsistent();
+        hermit.isConsistent();
+        return (new JSONObject()).put("Consistency", consis).toString();
     }
 
     @Override
@@ -127,14 +133,18 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         }
         Configuration c = new Configuration();
         Reasoner hermit = new Reasoner(c, ontology);
-        return (new JSONObject()).put("Consistency", hermit.isConsistent()).toString();
+        boolean consis = hermit.isConsistent();
+        hermit.isConsistent();
+        return (new JSONObject()).put("Consistency", consis).toString();
     }
 
     @Override
     public boolean getConsistency(OWLOntology ontology) {
 
         Reasoner hermit = new Reasoner(new Configuration(), ontology);
-        return hermit.isConsistent();
+        boolean consis = hermit.isConsistent();
+        hermit.isConsistent();
+        return consis;
     }
 
     @Override
@@ -151,7 +161,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
                 ontology = manager.loadOntologyFromOntologyDocument(new File(filePath));
             } else {
                 Long startTime = System.currentTimeMillis();
-                ontology = virtuosoService.readOntologyFromVirtuoso(graphName, false);
+                ontology = virtuosoService.getOntology(graphName);
                 System.out.println("readin onto from virtuoso: " + (System.currentTimeMillis() - startTime));
             }
         } catch (OWLOntologyCreationException e) {
@@ -301,6 +311,8 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         String axiomsString = sb.toString();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("inference", axiomsString);
+
+        hermit.dispose();
 
         System.out.println("operation total time: " + (System.currentTimeMillis() - start));
         System.currentTimeMillis();
@@ -459,6 +471,8 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         String axiomsString = sb.toString();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("inference", axiomsString);
+
+        hermit.dispose();
 
         return jsonObject.toString();
 
