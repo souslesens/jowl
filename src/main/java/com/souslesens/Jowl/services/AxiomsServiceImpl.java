@@ -17,7 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.expression.ShortFormEntityChecker;
-import org.semanticweb.owlapi.formats.ManchesterOWLSyntaxOntologyFormat;
+import org.semanticweb.owlapi.formats.ManchesterSyntaxDocumentFormat;
 import org.semanticweb.owlapi.io.StringDocumentTarget;
 import org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax;
 import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
@@ -379,7 +379,7 @@ public class AxiomsServiceImpl implements AxiomsService {
     public String convertToManchesterSyntax(OWLAxiom axiom) {
         //OWLOntologyLoaderConfiguration loaderConfig = new OWLOntologyLoaderConfiguration();
         //loaderConfig = loaderConfig.setLoadAnnotationAxioms(false); // Skip loading annotation axioms
-        ManchesterOWLSyntaxOntologyFormat format = new ManchesterOWLSyntaxOntologyFormat();
+        ManchesterSyntaxDocumentFormat format = new ManchesterSyntaxDocumentFormat();
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         OWLOntology ontology;
 
