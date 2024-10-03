@@ -177,87 +177,8 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         hermit.precomputeInferences(InferenceType.values());
         System.out.println("precomputing inferences : " + (System.currentTimeMillis() - startTime));
 
-        List<InferredAxiomGenerator<? extends OWLAxiom>> generators = new ArrayList<>();
 
-        for (String value : ListOfValues) {
-            try {
-                if (value.contentEquals("CustomInferredIntersectionOfAxiomGenerator()")  ) {
-                    generators.add( new CustomInferredIntersectionOfAxiomGenerator());
-                }else if (value.contentEquals("CustomInferredEquivalentClassesAxiomGenerator()") ) {
-                    //generator.addGenerator( new CustomInferredEquivalentClassesAxiomGenerator());
-                    generators.add(new InferredEquivalentClassAxiomGenerator());
-                }else if (value.contentEquals("CustomSameIndividualAxiomGenerator()") ) {
-                    generators.add( new CustomSameIndividualAxiomGenerator());
-                }else if (value.contentEquals("CustomInferredUnionOfAxiomGenerator()") ) {
-                    generators.add( new CustomInferredUnionOfAxiomGenerator());
-                }else if (value.contentEquals("CustomInferredDisjointClassesAxiomGenerator()") ) {
-                    generators.add( new CustomInferredDisjointClassesAxiomGenerator());
-                }else if (value.contentEquals("CustomInferredDifferentIndividualAxiomGenerator()") ) {
-                    generators.add( new CustomInferredDifferentIndividualAxiomGenerator());
-                }else if (value.contentEquals("CustomInferredHasValueAxiomGenerator()") ) {
-                    generators.add( new CustomInferredHasValueAxiomGenerator());
-                }else if (value.contentEquals("CustomInferredInverseObjectPropertiesAxiomGenerator()")) {
-                    generators.add( new CustomInferredInverseObjectPropertiesAxiomGenerator());
-                }else if (value.contentEquals("CustomInferredAllValuesFromAxiomGenerator()")) {
-                    generators.add( new CustomInferredAllValuesFromAxiomGenerator());
-                }else if (value.contentEquals("CustomInferredSameValueSomeValuesFromAxiomGenerator()") ) {
-                    generators.add( new CustomInferredSameValueSomeValuesFromAxiomGenerator());
-                }else if (value.contentEquals("CustomInferredDomainAndRangeAxiomGenerator()") )  {
-                    generators.add( new CustomInferredDomainAndRangeAxiomGenerator());
-                }else if (value.contentEquals("InferredClassAssertionAxiomGenerator()")) {
-                    generators.add( new InferredClassAssertionAxiomGenerator());
-                }else if (value.contentEquals("InferredSubClassAxiomGenerator()")) {
-                    generators.add(new InferredSubClassAxiomGenerator());
-                }else if (value.contentEquals("InferredDataPropertyCharacteristicAxiomGenerator()")) {
-                    generators.add( new InferredDataPropertyCharacteristicAxiomGenerator());
-                }else if (value.contentEquals("InferredEquivalentDataPropertiesAxiomGenerator()")) {
-                    generators.add( new InferredEquivalentDataPropertiesAxiomGenerator());
-                }else if (value.contentEquals("InferredEquivalentObjectPropertyAxiomGenerator()")) {
-                    generators.add( new InferredEquivalentObjectPropertyAxiomGenerator());
-                }else if (value.contentEquals("InferredSubObjectPropertyAxiomGenerator()") ) {
-                    generators.add( new InferredSubObjectPropertyAxiomGenerator());
-                }else if (value.contentEquals("InferredSubDataPropertyAxiomGenerator()")) {
-                    generators.add( new InferredSubDataPropertyAxiomGenerator());
-                }else if (value.contentEquals("InferredObjectPropertyCharacteristicAxiomGenerator()")) {
-                    generators.add( new InferredObjectPropertyCharacteristicAxiomGenerator());
-                }else if (value.contentEquals("InferredPropertyAssertionGenerator()")) {
-                    generators.add( new InferredPropertyAssertionGenerator());
-                }else if (value.contentEquals("CustomInferredComplementOfAxiomGenerator()")) {
-                    generators.add( new CustomInferredComplementOfAxiomGenerator());
-                }else if (value.contentEquals("All")) {
-                    generators.add(new CustomInferredEquivalentClassesAxiomGenerator() );
-                    generators.add(new CustomSameIndividualAxiomGenerator());
-                    generators.add(new CustomInferredDifferentIndividualAxiomGenerator());
-                    generators.add(new CustomInferredIntersectionOfAxiomGenerator());
-                    generators.add(new CustomInferredUnionOfAxiomGenerator());
-                    generators.add(new CustomInferredDisjointClassesAxiomGenerator());
-                    generators.add(new CustomInferredHasValueAxiomGenerator());
-                    generators.add(new CustomInferredInverseObjectPropertiesAxiomGenerator() );
-                    generators.add(new CustomInferredAllValuesFromAxiomGenerator());
-                    generators.add(new CustomInferredSameValueSomeValuesFromAxiomGenerator());
-                    generators.add(new CustomInferredDomainAndRangeAxiomGenerator());
-                    generators.add( new InferredSubClassAxiomGenerator());
-                    generators.add( new InferredClassAssertionAxiomGenerator());
-                    generators.add( new InferredDataPropertyCharacteristicAxiomGenerator());
-                    generators.add( new InferredEquivalentDataPropertiesAxiomGenerator());
-                    generators.add( new InferredEquivalentObjectPropertyAxiomGenerator());
-                    generators.add( new InferredSubObjectPropertyAxiomGenerator());
-                    generators.add( new InferredSubDataPropertyAxiomGenerator());
-                    generators.add( new InferredObjectPropertyCharacteristicAxiomGenerator());
-                    generators.add( new InferredPropertyAssertionGenerator());
-                    generators.add(new CustomInferredComplementOfAxiomGenerator());
-
-                    break;
-                }
-
-
-
-            } catch (Exception e) {
-                e.printStackTrace(); // Handle any exceptions that may occur
-            }
-        }
-
-        InferredOntologyGenerator generator = new InferredOntologyGenerator(hermit, generators);
+        InferredOntologyGenerator generator = configureAxiomGenerator(hermit, ListOfValues);
 
         System.out.println("generators added");
 
@@ -322,113 +243,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         Reasoner hermit = new Reasoner(c, ontology);
         hermit.precomputeInferences(InferenceType.values());
 
-        InferredOntologyGenerator generator = new InferredOntologyGenerator(hermit);
-
-        for (String value : ListOfValues) {
-            try {
-                boolean generatorAdded = false;
-                if (value.contentEquals("CustomInferredIntersectionOfAxiomGenerator()")   && !generatorAdded ) {
-                    generator.addGenerator( new CustomInferredIntersectionOfAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("CustomInferredEquivalentClassesAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new CustomInferredEquivalentClassesAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("CustomSameIndividualAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new CustomSameIndividualAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("CustomInferredUnionOfAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new CustomInferredUnionOfAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("CustomInferredDisjointClassesAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new CustomInferredDisjointClassesAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("CustomInferredDifferentIndividualAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new CustomInferredDifferentIndividualAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("CustomInferredHasValueAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new CustomInferredHasValueAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("CustomInferredInverseObjectPropertiesAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new CustomInferredInverseObjectPropertiesAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("CustomInferredAllValuesFromAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new CustomInferredAllValuesFromAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("CustomInferredSameValueSomeValuesFromAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new CustomInferredSameValueSomeValuesFromAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("CustomInferredDomainAndRangeAxiomGenerator()") && !generatorAdded)  {
-                    generator.addGenerator( new CustomInferredDomainAndRangeAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("InferredClassAssertionAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new InferredClassAssertionAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("InferredSubClassAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new InferredSubClassAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("InferredDataPropertyCharacteristicAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new InferredDataPropertyCharacteristicAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("InferredEquivalentDataPropertiesAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new InferredEquivalentDataPropertiesAxiomGenerator());
-                    generatorAdded = true;
-
-                }else if (value.contentEquals("InferredEquivalentObjectPropertyAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new InferredEquivalentObjectPropertyAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("InferredSubObjectPropertyAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new InferredSubObjectPropertyAxiomGenerator());
-                    generatorAdded = true;
-
-                }else if (value.contentEquals("InferredSubDataPropertyAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new InferredSubDataPropertyAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("InferredObjectPropertyCharacteristicAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new InferredObjectPropertyCharacteristicAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("InferredPropertyAssertionGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new InferredPropertyAssertionGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("CustomInferredComplementOfAxiomGenerator()") && !generatorAdded) {
-                    generator.addGenerator( new CustomInferredComplementOfAxiomGenerator());
-                    generatorAdded = true;
-                }else if (value.contentEquals("All")) {
-                    generator.addGenerator(new CustomInferredEquivalentClassesAxiomGenerator() );
-                    generator.addGenerator(new CustomSameIndividualAxiomGenerator());
-                    generator.addGenerator(new CustomInferredDifferentIndividualAxiomGenerator());
-                    generator.addGenerator(new CustomInferredIntersectionOfAxiomGenerator());
-                    generator.addGenerator(new CustomInferredUnionOfAxiomGenerator());
-                    generator.addGenerator(new CustomInferredDisjointClassesAxiomGenerator());
-                    generator.addGenerator(new CustomInferredHasValueAxiomGenerator());
-                    generator.addGenerator(new CustomInferredInverseObjectPropertiesAxiomGenerator() );
-                    generator.addGenerator(new CustomInferredAllValuesFromAxiomGenerator());
-                    generator.addGenerator(new CustomInferredSameValueSomeValuesFromAxiomGenerator());
-                    generator.addGenerator(new CustomInferredDomainAndRangeAxiomGenerator());
-                    generator.addGenerator( new InferredSubClassAxiomGenerator());
-                    generator.addGenerator( new InferredClassAssertionAxiomGenerator());
-                    generator.addGenerator( new InferredDataPropertyCharacteristicAxiomGenerator());
-                    generator.addGenerator( new InferredEquivalentDataPropertiesAxiomGenerator());
-                    generator.addGenerator( new InferredEquivalentObjectPropertyAxiomGenerator());
-                    generator.addGenerator( new InferredSubObjectPropertyAxiomGenerator());
-                    generator.addGenerator( new InferredSubDataPropertyAxiomGenerator());
-                    generator.addGenerator( new InferredObjectPropertyCharacteristicAxiomGenerator());
-                    generator.addGenerator( new InferredPropertyAssertionGenerator());
-                    generator.addGenerator(new CustomInferredComplementOfAxiomGenerator()); // Generate owl:ComplementOf
-
-                    break;
-                }else {
-                    break;
-                }
-                if (generatorAdded) {
-                    continue;
-                }
-
-
-
-            } catch (Exception e) {
-                e.printStackTrace(); // Handle any exceptions that may occur
-            }
-        }
+        InferredOntologyGenerator generator = configureAxiomGenerator(hermit, ListOfValues);
 
         OWLOntology inferredOntology = manager.createOntology();
         OWLDataFactory dataFactory = manager.getOWLDataFactory();
@@ -436,9 +251,7 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
 
         Set<OWLAxiom> originalAxioms = ontology.getAxioms();
         Set<OWLAxiom> inferredAxioms = new HashSet<>(inferredOntology.getAxioms());
-        System.out.println(inferredAxioms.size());
         inferredAxioms.removeAll(originalAxioms);
-        System.out.println(inferredAxioms.size());
 
         StringBuilder sb = new StringBuilder();
         // Add the inferred axioms to the list
@@ -831,6 +644,71 @@ public class HermitReasonerServiceImpl implements HermitReasonerService {
         public CustomInferredOntologyGenerator(OWLReasoner reasoner) {
             super(reasoner);
         }
+    }
+
+    private InferredOntologyGenerator configureAxiomGenerator(Reasoner reasoner, List<String> listOfValues) {
+        List<InferredAxiomGenerator<? extends OWLAxiom>> generators = new ArrayList<>();
+        for (String value : listOfValues) {
+            try {
+                if (value.contentEquals("CustomInferredIntersectionOfAxiomGenerator()")  ) {
+                    generators.add( new CustomInferredIntersectionOfAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredEquivalentClassesAxiomGenerator()") ) {
+                    //generator.addGenerator( new CustomInferredEquivalentClassesAxiomGenerator());
+                    generators.add(new InferredEquivalentClassAxiomGenerator());
+                }else if (value.contentEquals("CustomSameIndividualAxiomGenerator()") ) {
+                    generators.add( new CustomSameIndividualAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredUnionOfAxiomGenerator()") ) {
+                    generators.add( new CustomInferredUnionOfAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredDisjointClassesAxiomGenerator()") ) {
+                    generators.add( new CustomInferredDisjointClassesAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredDifferentIndividualAxiomGenerator()") ) {
+                    generators.add( new CustomInferredDifferentIndividualAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredHasValueAxiomGenerator()") ) {
+                    generators.add( new CustomInferredHasValueAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredInverseObjectPropertiesAxiomGenerator()")) {
+                    generators.add( new CustomInferredInverseObjectPropertiesAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredAllValuesFromAxiomGenerator()")) {
+                    generators.add( new CustomInferredAllValuesFromAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredSameValueSomeValuesFromAxiomGenerator()") ) {
+                    generators.add( new CustomInferredSameValueSomeValuesFromAxiomGenerator());
+                }else if (value.contentEquals("CustomInferredDomainAndRangeAxiomGenerator()") )  {
+                    generators.add( new CustomInferredDomainAndRangeAxiomGenerator());
+                }else if (value.contentEquals("InferredClassAssertionAxiomGenerator()")) {
+                    generators.add( new InferredClassAssertionAxiomGenerator());
+                }else if (value.contentEquals("InferredSubClassAxiomGenerator()")) {
+                    generators.add(new InferredSubClassAxiomGenerator());
+                }else if (value.contentEquals("InferredDataPropertyCharacteristicAxiomGenerator()")) {
+                    generators.add( new InferredDataPropertyCharacteristicAxiomGenerator());
+                }else if (value.contentEquals("InferredEquivalentDataPropertiesAxiomGenerator()")) {
+                    generators.add( new InferredEquivalentDataPropertiesAxiomGenerator());
+                }else if (value.contentEquals("InferredEquivalentObjectPropertyAxiomGenerator()")) {
+                    generators.add( new InferredEquivalentObjectPropertyAxiomGenerator());
+                }else if (value.contentEquals("InferredSubObjectPropertyAxiomGenerator()") ) {
+                    generators.add( new InferredSubObjectPropertyAxiomGenerator());
+                }else if (value.contentEquals("InferredSubDataPropertyAxiomGenerator()")) {
+                    generators.add( new InferredSubDataPropertyAxiomGenerator());
+                }else if (value.contentEquals("InferredObjectPropertyCharacteristicAxiomGenerator()")) {
+                    generators.add( new InferredObjectPropertyCharacteristicAxiomGenerator());
+                }else if (value.contentEquals("InferredPropertyAssertionGenerator()")) {
+                    generators.add( new InferredPropertyAssertionGenerator());
+                }else if (value.contentEquals("CustomInferredComplementOfAxiomGenerator()")) {
+                    generators.add( new CustomInferredComplementOfAxiomGenerator());
+                }else if (value.contentEquals("All")) {
+                    generators.add(new InferredEquivalentClassAxiomGenerator() );
+                    generators.add( new InferredSubClassAxiomGenerator());
+                    generators.add(new CustomInferredComplementOfAxiomGenerator());
+                    generators.add( new CustomInferredDisjointClassesAxiomGenerator());
+
+                    break;
+                }
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace(); // Handle any exceptions that may occur
+            }
+        }
+        return new InferredOntologyGenerator(reasoner, generators);
     }
 
 }
