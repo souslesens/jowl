@@ -185,8 +185,14 @@ public class VirtuosoServiceImpl implements VirtuosoService {
 
             if (predicate.equals("http://www.w3.org/2002/07/owl#imports")) {
                 if (object.isResource()) {
-                    Ontology importedOntology = m.loadOntology(IRI.create((object).getURI()));
-                    o.asGraphModel().add(importedOntology.asGraphModel());
+                    IRI ontologyIRI = IRI.create(object.getURI());
+
+                    if (m.contains(ontologyIRI)) {
+                        System.out.println("Ontology already loaded: " + ontologyIRI);
+                    } else {
+                        Ontology importedOntology = m.loadOntology(ontologyIRI);
+                        o.asGraphModel().add(importedOntology.asGraphModel());
+                    }
                 }
             }
 
