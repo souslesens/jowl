@@ -56,7 +56,7 @@ public class AxiomsServiceImpl implements AxiomsService {
             System.out.println("Error reading ontology from Virtuoso");
             return null;
         }
-        System.out.println("Ontology: " + owlOntology);
+       // System.out.println("Ontology: " + owlOntology);
 
         OWLDataFactory dataFactory = owlManager.getOWLDataFactory();
         ShortFormProvider sfp =
@@ -157,11 +157,14 @@ public class AxiomsServiceImpl implements AxiomsService {
         queryBuilder.append("SELECT ?subject ?predicate ?object WHERE { GRAPH <").append(graphName).append("> { ?subject ?predicate ?object . VALUES ?subject {");
 
         for (String uri : uris) {
-            queryBuilder.append(" <").append(uri).append(">");
+            if (!uri.startsWith("\""))
+                queryBuilder.append(" <").append(uri).append(">");
         }
         queryBuilder.append(" } FILTER(?predicate = <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>) }}");
 
         String queryString = queryBuilder.toString();
+
+        System.out.println("----------------queryString");
         System.out.println(queryString);
 
 
@@ -217,11 +220,11 @@ public class AxiomsServiceImpl implements AxiomsService {
         m.saveOntology(o, System.out);
 
 
-        List<String> manchesterAxioms =  new ArrayList<>();
+        List<String> manchesterAxioms = new ArrayList<>();
 
-        for (OWLLogicalAxiom axiom: o.getLogicalAxioms()) {
+        for (OWLLogicalAxiom axiom : o.getLogicalAxioms()) {
             String axiomType = getAxiomType(triples);
-            System.out.println("axiom type: "+axiomType);
+            System.out.println("axiom type: " + axiomType);
             String axiomString = convertToManchesterSyntax(axiom);
             System.out.println("axiom: " + axiomString);
             manchesterAxioms.add(axiomString);
@@ -295,12 +298,12 @@ public class AxiomsServiceImpl implements AxiomsService {
             throw new RuntimeException(e);
         }
 
-        List<String> manchesterAxioms =  new ArrayList<>();
+        List<String> manchesterAxioms = new ArrayList<>();
 
-        for (OWLLogicalAxiom axiom: o.getLogicalAxioms()) {
+        for (OWLLogicalAxiom axiom : o.getLogicalAxioms()) {
             System.out.println(axiom.toString());
             String axiomType = getAxiomType(triples);
-            System.out.println("axiom type: "+axiomType);
+            System.out.println("axiom type: " + axiomType);
             String axiomString = convertToManchesterSyntax(axiom);
             System.out.println("axiom: " + axiomString);
             manchesterAxioms.add(axiomString);
@@ -334,7 +337,7 @@ public class AxiomsServiceImpl implements AxiomsService {
         // Depending on axiom type look for axioms of the class URI with that axiom type, if axiom type is null or empty then look for all axioms
         if (axiomType == null || axiomType.isEmpty()) {
             axioms = owlOntology.axioms(owlClass).collect(Collectors.toSet());
-        }else {
+        } else {
             switch (axiomType.toLowerCase()) {
                 case "subclassof":
                     axioms = owlOntology.subClassAxiomsForSubClass(owlClass).collect(Collectors.toSet());
@@ -428,7 +431,7 @@ public class AxiomsServiceImpl implements AxiomsService {
                 if (endIndex == -1) {
                     endIndex = serializedOntology.length();
                 }
-                return subclassAxiom.getSubClass().toString() + " " + ManchesterOWLSyntax.SUBCLASS_OF  + " " +   serializedOntology.substring(startIndex, endIndex).trim();
+                return subclassAxiom.getSubClass().toString() + " " + ManchesterOWLSyntax.SUBCLASS_OF + " " + serializedOntology.substring(startIndex, endIndex).trim();
             }
 
         } else if (axiomType.equals(ManchesterOWLSyntax.EQUIVALENT_CLASSES.keyword())) {
@@ -448,15 +451,13 @@ public class AxiomsServiceImpl implements AxiomsService {
     }
 
     private String getAxiomType(jenaTripleParser[] triples) {
-        for (jenaTripleParser tripleParser: triples ) {
+        for (jenaTripleParser tripleParser : triples) {
             String predicateURI = tripleParser.getPredicate();
             if (predicateURI.equals(RDFS.subClassOf.getURI())) {
                 return ManchesterOWLSyntax.SUBCLASS_OF.keyword();
-            } else
-            if (predicateURI.equals(OWL.equivalentClass.getURI())) {
+            } else if (predicateURI.equals(OWL.equivalentClass.getURI())) {
                 return ManchesterOWLSyntax.EQUIVALENT_CLASSES.keyword();
-            } else
-            if (predicateURI.equals(OWL.disjointWith.getURI())) {
+            } else if (predicateURI.equals(OWL.disjointWith.getURI())) {
                 return ManchesterOWLSyntax.DISJOINT_WITH.keyword();
             }
         }
@@ -481,7 +482,6 @@ public class AxiomsServiceImpl implements AxiomsService {
 
     public boolean checkTriplesConsistency(String graphName, ArrayList<jenaTripleParser> triples, boolean saveTriples) throws OWLOntologyCreationException, NoVirtuosoTriplesException, AuthenticationException, MalformedChallengeException, IOException, URISyntaxException {
         Ontology o = virtuosoService.getOntology(graphName);
-
 
 
         System.out.println(triples);
@@ -522,8 +522,8 @@ public class AxiomsServiceImpl implements AxiomsService {
         }
 
 
-        if (saveTriples && hermitReasonerService.getConsistency(o) ) {
-            virtuosoService.saveTriples(graphName, null, null, triples );
+        if (saveTriples && hermitReasonerService.getConsistency(o)) {
+            virtuosoService.saveTriples(graphName, null, null, triples);
         }
 
 
@@ -539,7 +539,7 @@ public class AxiomsServiceImpl implements AxiomsService {
         OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
         Ontology owlOntology = virtuosoService.getOntology(graphName);
 
-        JSONArray result  = new JSONArray();
+        JSONArray result = new JSONArray();
 
         for (OWLClass owlClass : owlOntology.getClassesInSignature()) {
             JSONObject classObject = new JSONObject();
