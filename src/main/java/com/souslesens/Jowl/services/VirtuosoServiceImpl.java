@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import com.github.owlcs.ontapi.OntManagers;
 import com.github.owlcs.ontapi.Ontology;
 import com.github.owlcs.ontapi.OntologyManager;
+import com.google.common.collect.Multimaps;
 import com.souslesens.Jowl.config.AppConfig;
 import com.souslesens.Jowl.model.exceptions.NoVirtuosoTriplesException;
 
@@ -48,6 +49,27 @@ import java.util.ArrayList;
 @Service
 public class VirtuosoServiceImpl implements VirtuosoService {
 
+    public static void main(String[] args) {
+
+        VirtuosoServiceImpl processor = new VirtuosoServiceImpl();
+        try {
+            String graphName = "http://purl.obolibrary.org/obo/vo.owl";
+            String query = "SELECT ?subject ?predicate ?object WHERE { GRAPH <" + graphName + "> { ?subject ?predicate ?object . FILTER(isIRI(?object) || isBlank(?object)) } }";
+
+            JSONObject data = processor.querySparql(query);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        } catch (URISyntaxException ex) {
+            throw new RuntimeException(ex);
+        } catch (MalformedChallengeException ex) {
+            throw new RuntimeException(ex);
+        } catch (AuthenticationException ex) {
+            throw new RuntimeException(ex);
+
+        }
+
+    }
+
     @Autowired
     private AppConfig appConfig;
 
@@ -61,61 +83,90 @@ public class VirtuosoServiceImpl implements VirtuosoService {
     @Override
     public JSONObject querySparql(String query) throws IOException, URISyntaxException, MalformedChallengeException, AuthenticationException, JSONException {
 
+        String endPoint ="https://sls.kg-alliance.org/virtuoso/sparql"; // "http://51.178.139.80:8890/sparql";
+        String login = "sba";
+        String password = "sls#209";
+
 
         final DigestScheme md5Auth = new DigestScheme();
 
-        URI endpoint = new URI(appConfig.getVirtuosoEndpoint() + "?format=json&query=" + URLEncoder.encode(query, StandardCharsets.UTF_8));
-        HttpGet request = new HttpGet(endpoint);
-        HttpClient client = HttpClientBuilder.create().build();
-        HttpResponse authResponse = client.execute(request);
+        int offset = 0;
+        int limit = 10000;
+        int linesInbatch = 0;
+        StringBuffer result = new StringBuffer();
+        do {
 
+            String query2 = query + " offset " + offset + " limit " + limit;
+            // query += " offset " + offset + " limit " + limit;
+            offset += limit;
+            // URI endpoint = new URI(appConfig.getVirtuosoEndpoint() + "?format=json&query=" + URLEncoder.encode(query2, StandardCharsets.UTF_8));
+            URI endpoint = new URI(endPoint + "?format=json&query=" + URLEncoder.encode(query2, StandardCharsets.UTF_8));
 
-        if (authResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-
-            BufferedReader rd = new BufferedReader(new InputStreamReader(authResponse.getEntity().getContent()));
-            StringBuffer result = new StringBuffer();
+           // System.out.println("----- endpoint " + endpoint);
+            HttpGet request = new HttpGet(endpoint);
+            HttpClient client = HttpClientBuilder.create().build();
+            HttpResponse authResponse = client.execute(request);
 
             String line = "";
-            while ((line = rd.readLine()) != null) {
-                result.append(line);
-            }
+            linesInbatch = 0;
+
+            if (authResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+
+                BufferedReader rd = new BufferedReader(new InputStreamReader(authResponse.getEntity().getContent()));
 
 
-            return new JSONObject(result.toString()).getJSONObject("results");
-
-        } else if (authResponse.getStatusLine().getStatusCode() == HttpStatus.SC_UNAUTHORIZED) {
-            if (authResponse.containsHeader("WWW-Authenticate")) {
-                final Header challenge = authResponse.getHeaders("WWW-Authenticate")[0];
-                NameRegistrar.register("www-authenticate", authResponse.getHeaders("WWW-Authenticate")[0]);
-                md5Auth.processChallenge(challenge);
-
-                final Header solution = md5Auth.authenticate(
-                        new UsernamePasswordCredentials(appConfig.getVirtuosoUser(), appConfig.getVirtuosoPassword()),
-                        new BasicHttpRequest(HttpGet.METHOD_NAME, endpoint
-                                .getPath()), new HttpClientContext());
-
-                DigestScheme.createCnonce();
-                request.addHeader(solution.getName(), solution.getValue());
-                HttpResponse response = client.execute(request);
-
-                BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                StringBuffer result = new StringBuffer();
-
-                String line = "";
                 while ((line = rd.readLine()) != null) {
+                    linesInbatch += 1;
                     result.append(line);
                 }
 
-                return new JSONObject(result.toString()).getJSONObject("results");
 
+                //    return new JSONObject(result.toString()).getJSONObject("results");
+
+            } else if (authResponse.getStatusLine().getStatusCode() == HttpStatus.SC_UNAUTHORIZED) {
+                if (authResponse.containsHeader("WWW-Authenticate")) {
+                    final Header challenge = authResponse.getHeaders("WWW-Authenticate")[0];
+                    NameRegistrar.register("www-authenticate", authResponse.getHeaders("WWW-Authenticate")[0]);
+                    md5Auth.processChallenge(challenge);
+
+                    final Header solution = md5Auth.authenticate(
+                            //new UsernamePasswordCredentials(appConfig.getVirtuosoUser(), appConfig.getVirtuosoPassword()),
+                            new UsernamePasswordCredentials(login, password),
+
+                            new BasicHttpRequest(HttpGet.METHOD_NAME, endpoint
+                                    .getPath()), new HttpClientContext());
+
+                    DigestScheme.createCnonce();
+                    request.addHeader(solution.getName(), solution.getValue());
+                    HttpResponse response = client.execute(request);
+                    Object str= response.getEntity().getContent();
+                    BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+                    //  StringBuffer result = new StringBuffer();
+
+
+                    while ((line = rd.readLine()) != null) {
+
+                        linesInbatch += 1;
+                        result.append(line);
+                    }
+
+
+                   // System.out.println("----------linesInbatch" + linesInbatch);
+                   // System.out.println("----------Result" + result.length());
+                    // return new JSONObject(result.toString()).getJSONObject("results");
+
+                } else {
+                    throw new Error("Web-service responded with Http 401, " +
+                            "but didn't send us a usable WWW-Authenticate header.");
+                }
             } else {
-                throw new Error("Web-service responded with Http 401, " +
-                        "but didn't send us a usable WWW-Authenticate header.");
+                throw new Error("Didn't get an Http 401 " +
+                        "like we were expecting, instead we got:" + authResponse.getStatusLine().getStatusCode());
             }
-        } else {
-            throw new Error("Didn't get an Http 401 " +
-                    "like we were expecting, instead we got:" + authResponse.getStatusLine().getStatusCode());
         }
+        while (linesInbatch >= limit);
+
+        return new JSONObject(result.toString()).getJSONObject("results");
     }
 
     @Override
@@ -125,7 +176,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
 
         try {
 
-            if (bringCreatedAxioms){
+            if (bringCreatedAxioms) {
                 System.out.println("querying graphnames");
                 JSONArray graphNames = getGraphNamesVirtuosoSparql(graphName);
 
@@ -137,6 +188,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
 
                     JSONArray graphTriples = getTriplesVirtuosoSparql(matchedGraphName);
                     if (graphTriples != null && graphTriples.length() > 0) {
+
                         for (int j = 0; j < graphTriples.length(); j++) {
                             triples.put(graphTriples.get(j));
                         }
@@ -155,7 +207,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
 
         OntologyManager m = OntManagers.createManager();
         Ontology o = m.createOntology(IRI.create(graphName));
-
+        System.out.println("---------------triples found" + triples.length());
         for (int i = 0; i < triples.length(); i++) {
             JSONObject triple = triples.getJSONObject(i);
             String subjectValue = triple.getJSONObject("subject").getString("value");
@@ -166,16 +218,16 @@ public class VirtuosoServiceImpl implements VirtuosoService {
             String objectType = triple.getJSONObject("object").getString("type");
 
             Resource subject;
-            if (subjectType.equals("uri") && !subjectValue.startsWith("_") ) {
+            if (subjectType.equals("uri") && !subjectValue.startsWith("_")) {
                 subject = ResourceFactory.createResource(subjectValue);
-            } else if (subjectType.equals("bnode") || subjectValue.startsWith("nodeID://") || subjectValue.startsWith("_") ) {
+            } else if (subjectType.equals("bnode") || subjectValue.startsWith("nodeID://") || subjectValue.startsWith("_")) {
                 subject = o.asGraphModel().createResource(new AnonId(subjectValue));
             } else {
                 throw new IllegalArgumentException("Unexpected subject type: " + subjectType);
             }
 
             Resource object;
-            if (objectType.equals("uri") && !objectValue.startsWith("_") ) {
+            if (objectType.equals("uri") && !objectValue.startsWith("_")) {
                 object = ResourceFactory.createResource(objectValue);
             } else if (objectType.equals("bnode") || objectValue.startsWith("nodeID://") || objectValue.startsWith("_")) {
                 object = o.asGraphModel().createResource(new AnonId(objectValue));
@@ -219,14 +271,18 @@ public class VirtuosoServiceImpl implements VirtuosoService {
         String query = "SELECT ?subject ?predicate ?object WHERE { GRAPH <" + graphName + "> { ?subject ?predicate ?object . FILTER(isIRI(?object) || isBlank(?object)) } }";
         //String query = "SELECT ?subject ?predicate ?object WHERE {?subject ?predicate ?object} LIMIT 10";
 
-        return querySparql(query).getJSONArray("bindings");
+
+        JSONArray result = querySparql(query).getJSONArray("bindings");
+        System.out.println("------------    result  -------------" + result.length());
+        return result;
+
 
     }
 
     @Override
     public boolean saveTriples(String graphName, String classUri, String axiomType, ArrayList<jenaTripleParser> triplesList) throws AuthenticationException, JSONException, MalformedChallengeException, IOException, URISyntaxException {
 
-        ArrayList<jenaTripleParser> triples =  new ArrayList<>();
+        ArrayList<jenaTripleParser> triples = new ArrayList<>();
         for (jenaTripleParser triple : triplesList) {
             triples.add(new jenaTripleParser(triple.getSubject(), triple.getPredicate(), triple.getObject()));
         }
