@@ -24,6 +24,8 @@ public class ListClassesWithAxiomsInput {
         this.axiomType = (axiomType != null) ? axiomType.toLowerCase() : "";
         this.complex = (complex != null) ? complex : true;
     }
+
+
 }
 
 

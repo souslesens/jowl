@@ -268,6 +268,25 @@ public class AxiomsController {
 
     }
 
+    @PostMapping(value="/getAllAxioms")
+    public ResponseEntity<String> getAllAxioms(@RequestBody ListClassesWithAxiomsInput request ) {
+        String graphName = request.getGraphName();
+
+
+        if (graphName == null || graphName.isEmpty()) {
+            return ResponseEntity.badRequest().body("Graph Name should be provided");
+        }
+
+        try {
+            return ResponseEntity.ok(axiomsService.getAllAxioms(graphName).toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error while creating the ontology");
+        }
+
+
+    }
+
 
 
 }

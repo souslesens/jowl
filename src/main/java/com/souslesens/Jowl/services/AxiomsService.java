@@ -30,4 +30,8 @@ public interface AxiomsService {
 
     JSONArray listClassesWithAxioms(String graphName, String axiomType, boolean complexAxioms) throws OWLOntologyCreationException, NoVirtuosoTriplesException;
 
+    String getClassAxioms(String graphName) throws Exception;
+
+    String getAllAxioms(String graphName) throws Exception;
+
 }

@@ -1,6 +1,6 @@
 package com.souslesens.Jowl.services;
 
-import java.io.BufferedReader;
+import java.io.*;
 
 import com.github.owlcs.ontapi.OntManagers;
 import com.github.owlcs.ontapi.Ontology;
@@ -9,6 +9,7 @@ import com.google.common.collect.Multimaps;
 import com.souslesens.Jowl.config.AppConfig;
 import com.souslesens.Jowl.model.exceptions.NoVirtuosoTriplesException;
 
+import com.souslesens.Jowl.model.exceptions.ParsingAxiomException;
 import com.souslesens.Jowl.model.jenaTripleParser;
 import org.apache.http.Header;
 import org.apache.http.auth.AuthenticationException;
@@ -30,15 +31,24 @@ import org.apache.jena.rdf.model.AnonId;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.semanticweb.owlapi.expression.ShortFormEntityChecker;
+import org.semanticweb.owlapi.formats.NTriplesDocumentFormat;
+import org.semanticweb.owlapi.formats.TurtleDocumentFormat;
+import org.semanticweb.owlapi.io.StringDocumentTarget;
+import org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntaxParserImpl;
 import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.rdf.model.RDFGraph;
+import org.semanticweb.owlapi.util.AnnotationValueShortFormProvider;
+import org.semanticweb.owlapi.util.BidirectionalShortFormProvider;
+import org.semanticweb.owlapi.util.BidirectionalShortFormProviderAdapter;
+import org.semanticweb.owlapi.util.ShortFormProvider;
+import org.semanticweb.owlapi.util.mansyntax.ManchesterOWLSyntaxParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.apache.http.impl.auth.DigestScheme;
 
 
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -46,29 +56,50 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+
+import org.apache.http.util.EntityUtils;
+
+
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.*;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
+
 @Service
 public class VirtuosoServiceImpl implements VirtuosoService {
 
     public static void main(String[] args) {
+        if (false) {
 
-        VirtuosoServiceImpl processor = new VirtuosoServiceImpl();
-        try {
-            String graphName = "http://purl.obolibrary.org/obo/vo.owl";
-            String query = "SELECT ?subject ?predicate ?object WHERE { GRAPH <" + graphName + "> { ?subject ?predicate ?object . FILTER(isIRI(?object) || isBlank(?object)) } }";
 
-            JSONObject data = processor.querySparql(query);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        } catch (URISyntaxException ex) {
-            throw new RuntimeException(ex);
-        } catch (MalformedChallengeException ex) {
-            throw new RuntimeException(ex);
-        } catch (AuthenticationException ex) {
-            throw new RuntimeException(ex);
 
+
+            VirtuosoServiceImpl processor = new VirtuosoServiceImpl();
+            try {
+                String graphName = "http://purl.obolibrary.org/obo/vo3.owl/";
+                //  graphName="https://spec.industrialontologies.org/ontology/202401/core/Core/";
+                String query = "SELECT ?subject ?predicate ?object WHERE { GRAPH <" + graphName + "> { ?subject ?predicate ?object . FILTER(isIRI(?object) || isBlank(?object)) } }";
+
+                JSONObject data = processor.querySparql(query);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (URISyntaxException ex) {
+                throw new RuntimeException(ex);
+            } catch (MalformedChallengeException ex) {
+                throw new RuntimeException(ex);
+            } catch (AuthenticationException ex) {
+                throw new RuntimeException(ex);
+
+            }
         }
 
     }
+
+
+
 
     @Autowired
     private AppConfig appConfig;
@@ -83,8 +114,10 @@ public class VirtuosoServiceImpl implements VirtuosoService {
     @Override
     public JSONObject querySparql(String query) throws IOException, URISyntaxException, MalformedChallengeException, AuthenticationException, JSONException {
 
-        String endPoint ="https://sls.kg-alliance.org/virtuoso/sparql"; // "http://51.178.139.80:8890/sparql";
-        String login = "sba";
+
+        //for debug stests only
+        String endPoint = "http://51.178.139.80:8890/sparql";//"https://sls.kg-alliance.org/virtuoso/sparql"; //
+        String login = "dba";
         String password = "sls#209";
 
 
@@ -92,9 +125,14 @@ public class VirtuosoServiceImpl implements VirtuosoService {
 
         int offset = 0;
         int limit = 10000;
-        int linesInbatch = 0;
-        StringBuffer result = new StringBuffer();
-        do {
+        int linesInbatch = 1;
+
+
+        JSONObject json = new JSONObject();
+        JSONArray bindingsJson = new JSONArray();
+
+     //   while (linesInbatch >0) {
+            while ( bindingsJson.length()<350000){
 
             String query2 = query + " offset " + offset + " limit " + limit;
             // query += " offset " + offset + " limit " + limit;
@@ -102,7 +140,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
             // URI endpoint = new URI(appConfig.getVirtuosoEndpoint() + "?format=json&query=" + URLEncoder.encode(query2, StandardCharsets.UTF_8));
             URI endpoint = new URI(endPoint + "?format=json&query=" + URLEncoder.encode(query2, StandardCharsets.UTF_8));
 
-           // System.out.println("----- endpoint " + endpoint);
+            // System.out.println("----- endpoint " + endpoint);
             HttpGet request = new HttpGet(endpoint);
             HttpClient client = HttpClientBuilder.create().build();
             HttpResponse authResponse = client.execute(request);
@@ -112,12 +150,13 @@ public class VirtuosoServiceImpl implements VirtuosoService {
 
             if (authResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 
-                BufferedReader rd = new BufferedReader(new InputStreamReader(authResponse.getEntity().getContent()));
 
-
-                while ((line = rd.readLine()) != null) {
-                    linesInbatch += 1;
-                    result.append(line);
+                String jsonString = EntityUtils.toString(authResponse.getEntity());
+                JSONObject json2 = new JSONObject(jsonString);
+                JSONArray bindings = json2.getJSONObject("results").getJSONArray("bindings");
+                linesInbatch = bindings.length();
+                for (int j = 0; j < bindings.length(); j++) {
+                    bindingsJson.put(bindings.getJSONObject(j));
                 }
 
 
@@ -130,7 +169,7 @@ public class VirtuosoServiceImpl implements VirtuosoService {
                     md5Auth.processChallenge(challenge);
 
                     final Header solution = md5Auth.authenticate(
-                            //new UsernamePasswordCredentials(appConfig.getVirtuosoUser(), appConfig.getVirtuosoPassword()),
+                            //   new UsernamePasswordCredentials(appConfig.getVirtuosoUser(), appConfig.getVirtuosoPassword()),
                             new UsernamePasswordCredentials(login, password),
 
                             new BasicHttpRequest(HttpGet.METHOD_NAME, endpoint
@@ -139,21 +178,17 @@ public class VirtuosoServiceImpl implements VirtuosoService {
                     DigestScheme.createCnonce();
                     request.addHeader(solution.getName(), solution.getValue());
                     HttpResponse response = client.execute(request);
-                    Object str= response.getEntity().getContent();
-                    BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                    //  StringBuffer result = new StringBuffer();
 
 
-                    while ((line = rd.readLine()) != null) {
+                    String jsonString = EntityUtils.toString(response.getEntity());
+                    JSONObject json2 = new JSONObject(jsonString);
+                    JSONArray bindings = json2.getJSONObject("results").getJSONArray("bindings");
 
-                        linesInbatch += 1;
-                        result.append(line);
+                    linesInbatch = bindings.length();
+                    for (int j = 0; j < bindings.length(); j++) {
+                        bindingsJson.put(bindings.getJSONObject(j));
                     }
 
-
-                   // System.out.println("----------linesInbatch" + linesInbatch);
-                   // System.out.println("----------Result" + result.length());
-                    // return new JSONObject(result.toString()).getJSONObject("results");
 
                 } else {
                     throw new Error("Web-service responded with Http 401, " +
@@ -163,16 +198,32 @@ public class VirtuosoServiceImpl implements VirtuosoService {
                 throw new Error("Didn't get an Http 401 " +
                         "like we were expecting, instead we got:" + authResponse.getStatusLine().getStatusCode());
             }
-        }
-        while (linesInbatch >= limit);
 
-        return new JSONObject(result.toString()).getJSONObject("results");
+            System.out.println("linesInbatch" +linesInbatch);
+            if( bindingsJson.length()>220000)
+                System.out.println("total length" + bindingsJson.length());
+        }
+
+
+
+       // while (linesInbatch >= limit);
+
+
+
+        System.out.println("total length" + bindingsJson.length());
+
+        JSONObject resultJson = new JSONObject();
+        resultJson.put("bindings", bindingsJson);
+        return resultJson;
+        // return new JSONObject(result.toString()).getJSONObject("results");
     }
 
     @Override
     public Ontology readOntologyFromVirtuoso(String graphName, boolean bringCreatedAxioms) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
 
         JSONArray triples = new JSONArray();
+
+
 
         try {
 
@@ -251,8 +302,14 @@ public class VirtuosoServiceImpl implements VirtuosoService {
         }
 
         if (o.axioms().findAny().isPresent()) {
-            System.out.println(o.axioms().count());
-            return o;
+            try {
+                System.out.println(o.axioms().count());
+                return o;
+            } catch (Exception e) {
+                System.out.println(e);
+                return null;
+            }
+
         }
 
         System.out.println("Error reading ontology from Virtuoso");

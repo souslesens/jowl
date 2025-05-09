@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.expression.ShortFormEntityChecker;
 import org.semanticweb.owlapi.formats.ManchesterSyntaxDocumentFormat;
+import org.semanticweb.owlapi.formats.NTriplesDocumentFormat;
 import org.semanticweb.owlapi.io.StringDocumentTarget;
 import org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax;
 import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
@@ -31,6 +32,7 @@ import org.semanticweb.owlapi.util.mansyntax.ManchesterOWLSyntaxParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -39,7 +41,20 @@ import java.util.stream.Collectors;
 @Service
 public class AxiomsServiceImpl implements AxiomsService {
 
-    @Autowired
+    public static void main(String[] args) {
+        if (true) {
+            try {
+                AxiomsServiceImpl axiomService=new AxiomsServiceImpl();
+                String graphName="https://spec.industrialontologies.org/ontology/202401/core/Core/";
+                graphName="http://purl.obolibrary.org/obo/vo.owl";
+                axiomService.getAllAxioms(graphName);
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
+        }
+    }
+
+            @Autowired
     VirtuosoService virtuosoService;
 
     @Autowired
@@ -576,6 +591,11 @@ public class AxiomsServiceImpl implements AxiomsService {
         return result;
     }
 
+    @Override
+    public String getClassAxioms(String graphName) throws Exception {
+        return "";
+    }
+
     public static boolean isComplex(OWLClassAxiom axiom) {
         if (axiom instanceof OWLSubClassOfAxiom) {
             OWLSubClassOfAxiom subClassAxiom = (OWLSubClassOfAxiom) axiom;
@@ -595,5 +615,93 @@ public class AxiomsServiceImpl implements AxiomsService {
         }
         return false; // Default to non-complex for unsupported types
     }
+
+
+    public  String getAllAxioms(String graphName) throws Exception {
+
+
+
+
+        VirtuosoService virtuoso=new VirtuosoServiceImpl ();
+
+        OWLOntology baseOntology =   virtuoso.getOntology(graphName);
+
+        OWLOntologyManager manager = OntManagers.createManager();
+
+     //   File ontologyFile = new File("C:\\Users\\claud\\Downloads\\VaccineOntologyP.rdf");
+     //   String ontologyPath = "C:\\Users\\claud\\Downloads\\IOF-CORE-202401_.nt";
+
+        String axiomsTriples="";
+        try {
+            if (true) {
+              //  if (true ontologyFile.exists()) {
+
+           //     OWLOntology baseOntology2 = manager.loadOntologyFromOntologyDocument(ontologyFile);
+
+
+
+
+
+             /*    OWLDataFactory dataFactory = manager.getOWLDataFactory();
+
+
+               OWLOntology OWLOntology = manager.loadOntology(IRI.create("http://www.w3.org/2002/07/owl"));
+
+                OWLOntology RDFSontology = manager.loadOntology(IRI.create("http://www.w3.org/2000/01/rdf-schema#"));
+
+                OWLOntology RDFOntology = manager.loadOntology(IRI.create("http://www.w3.org/1999/02/22-rdf-syntax-ns#"));
+
+                IRI importIRI = RDFSontology.getOntologyID().getOntologyIRI().orElseThrow();
+                OWLImportsDeclaration importDeclaration = dataFactory.getOWLImportsDeclaration(importIRI);
+                manager.applyChange(new AddImport(baseOntology, importDeclaration));
+                manager.makeLoadImportRequest(importDeclaration);
+
+                IRI importIRI2 = RDFOntology.getOntologyID().getOntologyIRI().orElseThrow();
+
+                OWLImportsDeclaration importDeclaration2 = dataFactory.getOWLImportsDeclaration(importIRI2);
+                manager.applyChange(new AddImport(baseOntology, importDeclaration2));
+
+                manager.makeLoadImportRequest(importDeclaration2);
+
+
+              IRI importIRI3 = OWLOntology.getOntologyID().getOntologyIRI().orElseThrow();
+                OWLImportsDeclaration importDeclaration3 = dataFactory.getOWLImportsDeclaration(importIRI3);
+                manager.applyChange(new AddImport(baseOntology, importDeclaration3));
+                manager.makeLoadImportRequest(importDeclaration3);*/
+
+
+                // Verify: List all axioms in base + imported ontologies
+                //   baseOntology.importsClosure().flatMap(o -> o.axioms()).forEach(System.out::println);
+
+
+                // Get all axioms
+                Set<OWLAxiom> axioms = baseOntology.getAxioms();
+
+                IRI ontologyIRI = IRI.create("http://example.org/myontology");
+
+                OWLOntology outPutOntology = manager.loadOntologyFromOntologyDocument(new File("C:\\Users\\claud\\Downloads\\xxx.owl"));
+
+
+                for (OWLAxiom axiom : axioms) {
+                    //  System.out.println(axiom.getAxiomType());
+                    if (axiom.getAxiomType().toString() == "EquivalentClasses") {
+                        //   System.out.println(axiom.getClassesInSignature().toString());
+                        manager.addAxiom(outPutOntology, axiom);
+                        //  System.out.println("Axiom:" + axiom);
+                    }
+                }
+                StringDocumentTarget target = new StringDocumentTarget();
+                manager.saveOntology(outPutOntology, new NTriplesDocumentFormat(), target);
+
+                // System.out.println(target.toString());
+
+                axiomsTriples= target.toString();
+            }
+        } catch (Exception e) {
+            throw new Exception(e.toString());
+        }
+        return  axiomsTriples;
+    }
+
 
 }
