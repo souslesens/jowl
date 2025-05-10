@@ -32,6 +32,6 @@ public interface AxiomsService {
 
     String getClassAxioms(String graphName) throws Exception;
 
-    String getAllAxioms(String graphName) throws Exception;
+    String getAllAxioms(String graphName,boolean reload) throws Exception;
 
 }

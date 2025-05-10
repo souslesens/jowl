@@ -1,21 +1,28 @@
 package com.souslesens.Jowl.model;
 
-public class getAllAxioms {
+public class GetAllAxiomsInput {
 
     private final String graphName;
     private final boolean reload;
 
+
     public String getGraphName() {
         return graphName;
     }
-    public boolean getReload(){
+
+
+
+    public boolean isReload() {
         return reload;
     }
 
-    public getAllAxioms(String graphName,boolean reload) {
+    public GetAllAxiomsInput(String graphName,  Boolean reload) {
         this.graphName = graphName;
-        this.reload = reload;
+        this.reload =  (reload != null) ? reload : true;
+
     }
+
+
 
 }
 

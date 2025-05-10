@@ -47,7 +47,8 @@ public class AxiomsServiceImpl implements AxiomsService {
                 AxiomsServiceImpl axiomService=new AxiomsServiceImpl();
                 String graphName="https://spec.industrialontologies.org/ontology/202401/core/Core/";
                 graphName="http://purl.obolibrary.org/obo/vo.owl";
-                axiomService.getAllAxioms(graphName);
+               String source="VaccineOntology";
+                axiomService.getAllAxioms(source,true);
             } catch (Exception e) {
                 System.out.println(e.toString());
             }
@@ -617,30 +618,35 @@ public class AxiomsServiceImpl implements AxiomsService {
     }
 
 
-    public  String getAllAxioms(String graphName) throws Exception {
 
 
 
+    public  String getAllAxioms(String sourceName,boolean reload) throws Exception {
 
-        VirtuosoService virtuoso=new VirtuosoServiceImpl ();
 
-        OWLOntology baseOntology =   virtuoso.getOntology(graphName);
-
+        OWLOntology baseOntology = null;
         OWLOntologyManager manager = OntManagers.createManager();
 
-     //   File ontologyFile = new File("C:\\Users\\claud\\Downloads\\VaccineOntologyP.rdf");
-     //   String ontologyPath = "C:\\Users\\claud\\Downloads\\IOF-CORE-202401_.nt";
 
         String axiomsTriples="";
+        String dir="C:\\Users\\claud\\Downloads\\";
+
+        String ontologyFilePath=dir+sourceName+".nt";
+
         try {
             if (true) {
-              //  if (true ontologyFile.exists()) {
+                File file=new File(ontologyFilePath);
+                if (reload && file.exists()) {
+                    file.delete();
+                }
+                if (reload || ! file.exists()) {
 
-           //     OWLOntology baseOntology2 = manager.loadOntologyFromOntologyDocument(ontologyFile);
 
+                    VirtuosoServiceImpl virtuoso = new VirtuosoServiceImpl();
 
-
-
+                    virtuoso.loadOntologyFromSLS(sourceName,ontologyFilePath);
+                }
+                baseOntology = manager.loadOntologyFromOntologyDocument(file);
 
              /*    OWLDataFactory dataFactory = manager.getOWLDataFactory();
 

@@ -4,7 +4,6 @@ public class ListClassesWithAxiomsInput {
 
     private final String graphName;
     private final String axiomType;
-
     private final boolean complex;
 
     public String getGraphName() {
@@ -24,6 +23,7 @@ public class ListClassesWithAxiomsInput {
         this.axiomType = (axiomType != null) ? axiomType.toLowerCase() : "";
         this.complex = (complex != null) ? complex : true;
     }
+
 
 
 }

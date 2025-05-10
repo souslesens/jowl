@@ -75,8 +75,6 @@ public class VirtuosoServiceImpl implements VirtuosoService {
         if (false) {
 
 
-
-
             VirtuosoServiceImpl processor = new VirtuosoServiceImpl();
             try {
                 String graphName = "http://purl.obolibrary.org/obo/vo3.owl/";
@@ -99,8 +97,6 @@ public class VirtuosoServiceImpl implements VirtuosoService {
     }
 
 
-
-
     @Autowired
     private AppConfig appConfig;
 
@@ -108,7 +104,35 @@ public class VirtuosoServiceImpl implements VirtuosoService {
     @Cacheable(value = "ontologyCache", key = "#graphName")
     public Ontology getOntology(String graphName) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
         // Logic to load the ontology from Virtuoso or another source
+
+
         return readOntologyFromVirtuoso(graphName, false);
+    }
+
+
+    public void loadOntologyFromSLS(String sourceName, String filePath) {
+
+        System.out.println("----- loadsource " + sourceName);
+        System.out.println("----- filePath " + filePath);
+
+        String query = "http://localhost:3010/api/v1/rdf/graph?source=" + sourceName + "&limit=10000000&offset=0";
+        try {
+            URI endpoint = new URI(query);
+            HttpGet request = new HttpGet(endpoint);
+            HttpClient client = HttpClientBuilder.create().build();
+            HttpResponse authResponse = client.execute(request);
+            String data = EntityUtils.toString(authResponse.getEntity());
+            System.out.println("dataLength----------"+data.length());
+            FileWriter fw = new FileWriter(new File(filePath));
+            fw.write(data);
+            fw.close();
+
+
+        } catch (Exception e) {
+
+        }
+
+
     }
 
     @Override
@@ -116,7 +140,8 @@ public class VirtuosoServiceImpl implements VirtuosoService {
 
 
         //for debug stests only
-        String endPoint = "http://51.178.139.80:8890/sparql";//"https://sls.kg-alliance.org/virtuoso/sparql"; //
+        String endPoint = "http://51.178.139.80:8890/sparql";
+        endPoint = "https://sls.kg-alliance.org/virtuoso/sparql"; //
         String login = "dba";
         String password = "sls#209";
 
@@ -131,12 +156,12 @@ public class VirtuosoServiceImpl implements VirtuosoService {
         JSONObject json = new JSONObject();
         JSONArray bindingsJson = new JSONArray();
 
-     //   while (linesInbatch >0) {
-            while ( bindingsJson.length()<350000){
+        while (linesInbatch > 0) {
+            //   while ( bindingsJson.length()<350000){
 
             String query2 = query + " offset " + offset + " limit " + limit;
             // query += " offset " + offset + " limit " + limit;
-            offset += limit;
+            offset = offset + limit;
             // URI endpoint = new URI(appConfig.getVirtuosoEndpoint() + "?format=json&query=" + URLEncoder.encode(query2, StandardCharsets.UTF_8));
             URI endpoint = new URI(endPoint + "?format=json&query=" + URLEncoder.encode(query2, StandardCharsets.UTF_8));
 
@@ -199,15 +224,13 @@ public class VirtuosoServiceImpl implements VirtuosoService {
                         "like we were expecting, instead we got:" + authResponse.getStatusLine().getStatusCode());
             }
 
-            System.out.println("linesInbatch" +linesInbatch);
-            if( bindingsJson.length()>220000)
+            System.out.println("linesInbatch" + linesInbatch);
+            if (bindingsJson.length() >= 220000)
                 System.out.println("total length" + bindingsJson.length());
         }
 
 
-
-       // while (linesInbatch >= limit);
-
+        // while (linesInbatch >= limit);
 
 
         System.out.println("total length" + bindingsJson.length());
@@ -222,7 +245,6 @@ public class VirtuosoServiceImpl implements VirtuosoService {
     public Ontology readOntologyFromVirtuoso(String graphName, boolean bringCreatedAxioms) throws OWLOntologyCreationException, NoVirtuosoTriplesException {
 
         JSONArray triples = new JSONArray();
-
 
 
         try {

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -269,8 +270,9 @@ public class AxiomsController {
     }
 
     @PostMapping(value="/getAllAxioms")
-    public ResponseEntity<String> getAllAxioms(@RequestBody ListClassesWithAxiomsInput request ) {
+    public ResponseEntity<String> getAllAxioms(@RequestBody GetAllAxiomsInput request ) {
         String graphName = request.getGraphName();
+        boolean reload = request.isReload();
 
 
         if (graphName == null || graphName.isEmpty()) {
@@ -278,7 +280,7 @@ public class AxiomsController {
         }
 
         try {
-            return ResponseEntity.ok(axiomsService.getAllAxioms(graphName).toString());
+            return ResponseEntity.ok(axiomsService.getAllAxioms(graphName,reload).toString());
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error while creating the ontology");
