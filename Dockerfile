@@ -27,7 +27,7 @@ RUN mvn -f /home/app/pom.xml clean package -Dmaven.test.skip
 
 ########Run Project########
 # we use a light-weight base image with JAVA17
-FROM openjdk:17-alpine
+FROM amazoncorretto:17
 
 ARG JAR_FILE=target/*.jar
 
