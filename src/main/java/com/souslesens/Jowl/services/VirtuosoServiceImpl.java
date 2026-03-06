@@ -83,10 +83,9 @@ public class VirtuosoServiceImpl implements VirtuosoService {
     @Override
     public JSONObject querySparql(String query) throws IOException, URISyntaxException, MalformedChallengeException, AuthenticationException, JSONException {
 
-        String endPoint ="https://sls.kg-alliance.org/virtuoso/sparql"; // "http://51.178.139.80:8890/sparql";
-        String login = "sba";
-        String password = "sls#209";
-
+        String endPoint = appConfig.getVirtuosoEndpoint();
+        String login = appConfig.getVirtuosoUser();
+        String password = appConfig.getVirtuosoPassword();
 
         final DigestScheme md5Auth = new DigestScheme();
 
