@@ -5,24 +5,24 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AppConfig {
-    @Value("${virtuoso.endpoint:}")
-    private String virtuosoEndpoint;
+  @Value("${virtuoso.endpoint:}")
+  private String virtuosoEndpoint;
 
-    @Value("${virtuoso.user:}")
-    private String virtuosoUser;
+  @Value("${virtuoso.user:}")
+  private String virtuosoUser;
 
-    @Value("${virtuoso.password:}")
-    private String virtuosoPassword;
+  @Value("${virtuoso.password:}")
+  private String virtuosoPassword;
 
-    public String getVirtuosoEndpoint() {
-        return virtuosoEndpoint;
-    }
+  public String getVirtuosoEndpoint() {
+    return virtuosoEndpoint;
+  }
 
-    public String getVirtuosoUser() {
-        return virtuosoUser;
-    }
+  public String getVirtuosoUser() {
+    return virtuosoUser;
+  }
 
-    public String getVirtuosoPassword() {
-        return virtuosoPassword;
-    }
+  public String getVirtuosoPassword() {
+    return virtuosoPassword;
+  }
 }
