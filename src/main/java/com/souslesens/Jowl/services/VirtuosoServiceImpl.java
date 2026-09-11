@@ -16,7 +16,6 @@ import org.apache.http.auth.MalformedChallengeException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.jena.rdf.model.Resource;
-import org.jpos.util.NameRegistrar;
 import org.apache.http.message.BasicHttpRequest;
 
 
@@ -125,7 +124,6 @@ public class VirtuosoServiceImpl implements VirtuosoService {
             } else if (authResponse.getStatusLine().getStatusCode() == HttpStatus.SC_UNAUTHORIZED) {
                 if (authResponse.containsHeader("WWW-Authenticate")) {
                     final Header challenge = authResponse.getHeaders("WWW-Authenticate")[0];
-                    NameRegistrar.register("www-authenticate", authResponse.getHeaders("WWW-Authenticate")[0]);
                     md5Auth.processChallenge(challenge);
 
                     final Header solution = md5Auth.authenticate(
