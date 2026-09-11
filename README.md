@@ -68,6 +68,15 @@ export VIRTUOSO_PASSWORD=dba
 mvn spring-boot:run
 ```
 
+## Changelog
+
+The changelog is generated with [git-cliff](https://git-cliff.org) from
+conventional commits. After adding commits, regenerate it with:
+
+```
+git-cliff -o CHANGELOG.md
+```
+
 ### If you don't have Docker installed
 Refer to the
 [Docker Web Site](https://www.docker.com/products/docker-desktop/)
