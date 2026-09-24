@@ -1,11 +1,8 @@
 package com.souslesens.Jowl.model.exceptions;
 
-public class ParsingAxiomException extends Exception{
+public class ParsingAxiomException extends Exception {
 
-    public ParsingAxiomException(String message) {
-        super(message);
-    }
-
-
-
+  public ParsingAxiomException(String message) {
+    super(message);
+  }
 }

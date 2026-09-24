@@ -1,42 +1,22 @@
-########Maven build ########
+########Maven build########
 FROM maven:3.8.3-openjdk-17 AS build
 
-# we /app as a default working directory
 WORKDIR /home/app
-#copy source
-COPY src ./src
-#copy pom
 COPY pom.xml ./
 
-COPY configure_environment.sh ./
+RUN mvn -B dependency:go-offline
 
+COPY src ./src
 
-# Set executable permissions for the script
-RUN chmod +x configure_environment.sh
+RUN mvn -B clean package -Dmaven.test.skip
 
-# Run the configuration script to update application.properties
-RUN ./configure_environment.sh
-
-## Industry Portal Future Updates Part ## 
-######## Uncomment ###########
-# COPY config/settings.xml /usr/share/maven/conf/settings.xml
-######## Uncomment ###########
-
-#resolve maven dependencies
-RUN mvn -f /home/app/pom.xml clean package -Dmaven.test.skip
-
-########Run Project########
-# we use a light-weight base image with JAVA17
+########Run########
 FROM amazoncorretto:17
 
-ARG JAR_FILE=target/*.jar
-
-ARG JAVA_OPTS
-
-COPY --from=build /home/app/${JAR_FILE} app.jar
+COPY --from=build /home/app/target/*.jar app.jar
 
 EXPOSE 9170
 
-#ENTRYPOINT ["java", "-Xmx4g", "-Xms4g", "-jar", "/app.jar"]  //Expected_update { fix memory issues due to limited heap space.}
-#ENTRYPOINT ["java","-jar","/app.jar"]
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -XX:+PrintFlagsFinal -jar /app.jar"]
+USER 1000:1000
+
+ENTRYPOINT ["java", "-jar", "/app.jar"]

@@ -1,75 +1,83 @@
 # jowl
 
-<summary>Jowl is a spring boot application to expose some reasoning APIS such as 
-checking consistency / satisfaisability and computeinference.
-we used Pellet and OWLAPI for developement of this application.</summary>
-This application will be in docker and we will provide a full documentation to run it.
+Jowl is a Spring Boot application exposing reasoning APIs such as checking
+consistency / satisfiability and computing inference. It is based on Pellet and
+OWLAPI. It is meant to run in Docker.
 
-### Seting Up the enviremement variables
-in the terminal run the following command
+## Configuration
+
+The application is configured through environment variables. Copy the sample
+file and adjust the values if needed:
+
 ```
 cp .env.sample .env
 ```
 
-open the file with you favorite text editor (or run ```nano .env``` in terminal), set up the needed variables
+| Variable            | Description                                                            |
+|---------------------|------------------------------------------------------------------------|
+| `SERVER_PORT`       | Port the app listens on (default `9170`)                              |
+| `XMS`               | Minimum memory for the app (default `512m`)                            |
+| `XMX`               | Maximum memory for the app (default `4g`)                              |
+| `VIRTUOSO_ENDPOINT` | SPARQL endpoint of the Virtuoso instance Jowl talks to                 |
+| `VIRTUOSO_USER`     | Username for the SPARQL endpoint (default `dba`)                       |
+| `VIRTUOSO_PASSWORD` | Password for the SPARQL endpoint (default `dba`)                       |
 
-| variable name       | Description                                                                  |
-|---------------------|------------------------------------------------------------------------------|
-| _SERVER_PORT_       | set up the port that the app will be available on (default to 9170)          |
-| _XMS_               | minimum memory that will be consumed by the app (default to 512m)            |
-| _XMX_               | maximum memory that will be consumed by the app (default to 512m)            |
-| _VIRTUOSO_ENDPOINT_ | the sparql endpoint of the virtuoso instance that jowl will communicate with |
-| _VIRTUOSO_USER_     | if the sparql endpoint is protected, you need to specify here the username   |
-| _VIRTUOSO_PASSWORD_ | if the sparql endpoint is protected, you need to specify here the password   |
+## Run with Docker Compose (Jowl + Virtuoso)
 
-### One Command : To Build && Run The application Via Docker-Compose (Jowl + Virtuoso)
 ```
 docker-compose up
 ```
-this command will build and run two containers (Jowl and Virtuoso) and link them together.
 
-----------------
-### Build only Jowl (without virtuoso) Via Docker
-in case you already have a virtuoso instance running in your machine (server or local pc), you only need to run the Jowl container:
+This builds and runs two containers (Jowl and Virtuoso) linked together. With
+no configuration it uses the bundled Virtuoso (`http://virtuoso:8890/sparql`)
+with the default `dba` credentials.
 
-1. inside the application.properties file, you need to specify the virtuoso endpoint
+## Run Jowl alone with Docker
 
-```
-VIRTUOSO_ENDPOINT_URL=http://localhost:8890/sparql
-```
+If you already have a Virtuoso instance, build and run only the Jowl container,
+passing the Virtuoso settings as environment variables:
 
-2. build the Jowl container
 ```
 docker build -t jowl .
+docker run -p 9170:9170 \
+  -e VIRTUOSO_ENDPOINT=http://localhost:8890/sparql \
+  -e VIRTUOSO_USER=dba \
+  -e VIRTUOSO_PASSWORD=dba \
+  jowl
 ```
 
-3. run the Jowl container
-```
-docker run -p 9170:9170 jowl
-```
-
- or to Run The Application in the background
-```
-docker run -d -p 9170:9170 jowl
-```
-
-----------------
-### Build a development instance of Jowl without Docker
-in case you already have a virtuoso instance running in your machine (server or local pc), you only need to run the Jowl container (if no follow the above instructions to build a virtuoso container):
-
-1. inside the application.properties file, you need to specify the virtuoso endpoint
+To run it in the background:
 
 ```
-VIRTUOSO_ENDPOINT_URL=http://localhost:8890/sparql
+docker run -d -p 9170:9170 \
+  -e VIRTUOSO_ENDPOINT=http://localhost:8890/sparql \
+  -e VIRTUOSO_USER=dba \
+  -e VIRTUOSO_PASSWORD=dba \
+  jowl
 ```
 
-2. compile & run the Jowl spring app
+## Run without Docker (development)
+
+Provided a Virtuoso instance is available, compile and run the Spring app with
+the Virtuoso settings exported as environment variables:
+
 ```
+export VIRTUOSO_ENDPOINT=http://localhost:8890/sparql
+export VIRTUOSO_USER=dba
+export VIRTUOSO_PASSWORD=dba
 mvn spring-boot:run
 ```
-----------------
 
-### If you don't have docker installed
+## Changelog
+
+The changelog is generated with [git-cliff](https://git-cliff.org) from
+conventional commits. After adding commits, regenerate it with:
+
+```
+git-cliff -o CHANGELOG.md
+```
+
+### If you don't have Docker installed
 Refer to the
 [Docker Web Site](https://www.docker.com/products/docker-desktop/)
 

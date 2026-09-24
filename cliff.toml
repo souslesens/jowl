@@ -1,0 +1,9 @@
+[changelog]
+header = "# Changelog\n\nAll notable changes to this project will be documented in this file.\n"
+template = """
+{% for group, commits in commits | group_by(attribute="group") %}
+### {{ group | upper_first }}
+{% for commit in commits %}
+- {% if commit.scope %}**{{ commit.scope }}:** {% endif %}{{ commit.message | upper_first }}{% endfor %}
+{% endfor %}
+"""

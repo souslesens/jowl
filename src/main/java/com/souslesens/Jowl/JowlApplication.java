@@ -11,15 +11,13 @@ import org.springframework.context.annotation.Bean;
 @EnableCaching
 public class JowlApplication {
 
-	public static void main(String[] args) {
-		System.getenv("SERVER_PORT");
-		SpringApplication.run(JowlApplication.class, args);
-	}
+  public static void main(String[] args) {
+    System.getenv("SERVER_PORT");
+    SpringApplication.run(JowlApplication.class, args);
+  }
 
-	@Bean
-	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
-		return args -> {
-		};
-	}
-
+  @Bean
+  public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+    return args -> {};
+  }
 }

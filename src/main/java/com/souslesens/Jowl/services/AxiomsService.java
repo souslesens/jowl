@@ -3,31 +3,53 @@ package com.souslesens.Jowl.services;
 import com.souslesens.Jowl.model.exceptions.NoVirtuosoTriplesException;
 import com.souslesens.Jowl.model.exceptions.ParsingAxiomException;
 import com.souslesens.Jowl.model.jenaTripleParser;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.MalformedChallengeException;
 import org.json.JSONArray;
 import org.semanticweb.owlapi.model.*;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-
 public interface AxiomsService {
 
-    OWLAxiom parseStringToAxiom(String graphName, String input) throws OWLOntologyCreationException, ParsingAxiomException, NoVirtuosoTriplesException;
+  OWLAxiom parseStringToAxiom(String graphName, String input)
+      throws OWLOntologyCreationException, ParsingAxiomException, NoVirtuosoTriplesException;
 
-    ArrayList<jenaTripleParser> getTriples(OWLAxiom axiom);
+  ArrayList<jenaTripleParser> getTriples(OWLAxiom axiom);
 
-    boolean checkManchesterAxiomConsistency(String graphName, OWLAxiom axiom) throws OWLOntologyCreationException, NoVirtuosoTriplesException;
+  boolean checkManchesterAxiomConsistency(String graphName, OWLAxiom axiom)
+      throws OWLOntologyCreationException, NoVirtuosoTriplesException;
 
-    String triplesToManchester(String graphName, jenaTripleParser[] triples) throws OWLOntologyCreationException, NoVirtuosoTriplesException, AuthenticationException, MalformedChallengeException, IOException, URISyntaxException, OWLOntologyStorageException;
+  String triplesToManchester(String graphName, jenaTripleParser[] triples)
+      throws OWLOntologyCreationException,
+          NoVirtuosoTriplesException,
+          AuthenticationException,
+          MalformedChallengeException,
+          IOException,
+          URISyntaxException,
+          OWLOntologyStorageException;
 
-    String triplesToManchester(String axiomGraphName) throws AuthenticationException, MalformedChallengeException, IOException, URISyntaxException;
+  String triplesToManchester(String axiomGraphName)
+      throws AuthenticationException, MalformedChallengeException, IOException, URISyntaxException;
 
-    String getClassAxioms(String graphName, String classUri, String axiomType, boolean manchesterFormat, boolean triplesFormat) throws OWLOntologyCreationException, NoVirtuosoTriplesException;
+  String getClassAxioms(
+      String graphName,
+      String classUri,
+      String axiomType,
+      boolean manchesterFormat,
+      boolean triplesFormat)
+      throws OWLOntologyCreationException, NoVirtuosoTriplesException;
 
-    boolean checkTriplesConsistency(String graphName, ArrayList<jenaTripleParser> triples, boolean saveTriples) throws OWLOntologyCreationException, NoVirtuosoTriplesException, AuthenticationException, MalformedChallengeException, IOException, URISyntaxException;
+  boolean checkTriplesConsistency(
+      String graphName, ArrayList<jenaTripleParser> triples, boolean saveTriples)
+      throws OWLOntologyCreationException,
+          NoVirtuosoTriplesException,
+          AuthenticationException,
+          MalformedChallengeException,
+          IOException,
+          URISyntaxException;
 
-    JSONArray listClassesWithAxioms(String graphName, String axiomType, boolean complexAxioms) throws OWLOntologyCreationException, NoVirtuosoTriplesException;
-
+  JSONArray listClassesWithAxioms(String graphName, String axiomType, boolean complexAxioms)
+      throws OWLOntologyCreationException, NoVirtuosoTriplesException;
 }
